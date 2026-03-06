@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-06T08:51:17Z",
+  "updated": "2026-03-06T09:51:34Z",
   "data": {
     "sp": {
       "price": 6830.71,
@@ -17,148 +17,148 @@
       "src": "GHA"
     },
     "inr": {
-      "price": 91.67,
-      "chgPct": -0.07,
-      "src": "GHA"
-    },
-    "crude": {
-      "price": 81.62,
-      "chgPct": 1.96,
-      "src": "GHA"
-    },
-    "gold": {
-      "price": 5116.2,
-      "chgPct": -0.41,
-      "src": "GHA"
-    },
-    "silver": {
-      "price": 84.43,
+      "price": 91.71,
       "chgPct": -0.03,
       "src": "GHA"
     },
+    "crude": {
+      "price": 84.0,
+      "chgPct": 4.93,
+      "src": "GHA"
+    },
+    "gold": {
+      "price": 5102.0,
+      "chgPct": -0.69,
+      "src": "GHA"
+    },
+    "silver": {
+      "price": 82.93,
+      "chgPct": -1.81,
+      "src": "GHA"
+    },
     "n50": {
-      "price": 24607.95,
-      "chgPct": -0.52,
+      "price": 24451.75,
+      "chgPct": -1.15,
       "src": "GHA"
     },
     "bn": {
-      "price": 58279.65,
-      "chgPct": -1.17,
+      "price": 57786.4,
+      "chgPct": -2.01,
       "src": "GHA"
     },
     "sx": {
-      "price": 79299.41,
-      "chgPct": -0.9,
+      "price": 78918.79,
+      "chgPct": -1.37,
       "src": "GHA"
     },
     "fn": {
-      "price": 26851.75,
-      "chgPct": -1.32,
+      "price": 26651.8,
+      "chgPct": -2.06,
       "src": "GHA"
     },
     "vix": {
-      "price": 18.96,
-      "chgPct": 6.44,
+      "price": 19.8,
+      "chgPct": 11.16,
       "src": "GHA"
     },
     "t_RELIANCE": {
-      "price": 1412.7,
-      "chgPct": 1.9,
+      "price": 1404.0,
+      "chgPct": 1.27,
       "src": "GHA"
     },
     "t_HDFCBANK": {
-      "price": 862.7,
-      "chgPct": -1.42,
+      "price": 856.7,
+      "chgPct": -2.1,
       "src": "GHA"
     },
     "t_ICICIBANK": {
-      "price": 1318.8,
-      "chgPct": -2.86,
+      "price": 1314.2,
+      "chgPct": -3.2,
       "src": "GHA"
     },
     "t_INFY": {
-      "price": 1312.7,
-      "chgPct": 0.53,
+      "price": 1308.6,
+      "chgPct": 0.21,
       "src": "GHA"
     },
     "t_TCS": {
-      "price": 2567.6,
-      "chgPct": -0.43,
+      "price": 2558.5,
+      "chgPct": -0.79,
       "src": "GHA"
     },
     "t_AIRTEL": {
-      "price": 1882.1,
-      "chgPct": -1.31,
+      "price": 1871.9,
+      "chgPct": -1.84,
       "src": "GHA"
     },
     "t_ITC": {
-      "price": 310.45,
-      "chgPct": -0.34,
+      "price": 309.8,
+      "chgPct": -0.55,
       "src": "GHA"
     },
     "t_SBI": {
-      "price": 1152.7,
-      "chgPct": -1.5,
+      "price": 1141.9,
+      "chgPct": -2.43,
       "src": "GHA"
     },
     "t_KOTAK": {
-      "price": 402.35,
-      "chgPct": -0.98,
+      "price": 400.05,
+      "chgPct": -1.55,
       "src": "GHA"
     },
     "t_LT": {
-      "price": 3976.2,
-      "chgPct": -1.55,
+      "price": 3953.2,
+      "chgPct": -2.12,
       "src": "GHA"
     },
     "u_AAPL": {
       "price": 260.29,
-      "chgPct": -0.98,
+      "chgPct": 0.02,
       "src": "GHA"
     },
     "u_MSFT": {
       "price": 410.68,
-      "chgPct": 0.98,
+      "chgPct": -0.1,
       "src": "GHA"
     },
     "u_NVDA": {
       "price": 183.34,
-      "chgPct": 0.11,
+      "chgPct": 0.68,
       "src": "GHA"
     },
     "u_AMZN": {
       "price": 218.94,
-      "chgPct": 1.13,
+      "chgPct": -0.09,
       "src": "GHA"
     },
     "u_GOOGL": {
       "price": 300.88,
-      "chgPct": -0.84,
+      "chgPct": -0.11,
       "src": "GHA"
     },
     "u_META": {
       "price": 660.57,
-      "chgPct": -0.98,
+      "chgPct": -0.09,
       "src": "GHA"
     },
     "u_TSLA": {
       "price": 405.55,
-      "chgPct": -0.02,
+      "chgPct": 0.02,
       "src": "GHA"
     },
     "u_BRK": {
       "price": 500.4,
-      "chgPct": 2.75,
+      "chgPct": -0.05,
       "src": "GHA"
     },
     "u_JPM": {
       "price": 293.55,
-      "chgPct": -1.94,
+      "chgPct": -0.15,
       "src": "GHA"
     },
     "u_UNH": {
       "price": 288.77,
-      "chgPct": -0.88,
+      "chgPct": -0.06,
       "src": "GHA"
     }
   },
