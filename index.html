@@ -275,10 +275,10 @@ footer{
 #viewer.open{display:flex}
 #vbar{background:rgba(0,0,0,.95);border-bottom:1px solid rgba(77,159,255,.3);padding:6px 12px;display:flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;flex-shrink:0;box-shadow:0 0 20px rgba(77,159,255,.1);position:relative;z-index:501;}
 #vtitle{color:var(--cyan);font-weight:700;font-size:12px;text-shadow:0 0 12px rgba(77,159,255,.5);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-#vopen{padding:7px 14px;font-size:11px;letter-spacing:2px;font-family:'Space Mono',monospace;text-transform:uppercase;border:2px solid #00d4ff;color:#ffffff;background:rgba(0,180,255,.3);cursor:pointer;transition:all .2s;touch-action:manipulation;border-radius:4px;font-weight:700;text-shadow:0 0 8px #00d4ff,0 0 16px #00d4ff;box-shadow:0 0 16px rgba(0,212,255,.6),0 0 32px rgba(0,212,255,.3),inset 0 0 12px rgba(0,212,255,.15);}
-#vopen:hover{background:rgba(0,212,255,.5);box-shadow:0 0 24px rgba(0,212,255,.9),0 0 48px rgba(0,212,255,.5),inset 0 0 20px rgba(0,212,255,.2);transform:scale(1.04);}
-#vclose{padding:7px 14px;font-size:11px;letter-spacing:2px;font-family:'Space Mono',monospace;text-transform:uppercase;border:2px solid #00ff9d;color:#ffffff;background:rgba(0,200,120,.3);cursor:pointer;transition:all .2s;border-radius:4px;touch-action:manipulation;font-weight:700;text-shadow:0 0 8px #00ff9d,0 0 16px #00ff9d;box-shadow:0 0 16px rgba(0,255,157,.6),0 0 32px rgba(0,255,157,.3),inset 0 0 12px rgba(0,255,157,.15);}
-#vclose:hover{background:rgba(0,255,157,.45);box-shadow:0 0 24px rgba(0,255,157,.9),0 0 48px rgba(0,255,157,.5),inset 0 0 20px rgba(0,255,157,.2);transform:scale(1.04);}
+#vopen{padding:5px 10px;font-size:10px;letter-spacing:2px;font-family:'Space Mono',monospace;text-transform:uppercase;border:1px solid rgba(77,159,255,.3);color:var(--cyan);background:rgba(77,159,255,.05);cursor:pointer;transition:background .15s;touch-action:manipulation;border-radius:3px;}
+#vopen:hover{background:rgba(77,159,255,.12)}
+#vclose{padding:5px 12px;font-size:10px;letter-spacing:2px;font-family:'Space Mono',monospace;text-transform:uppercase;border:1px solid rgba(16,185,129,.4);color:var(--grn);background:rgba(16,185,129,.05);cursor:pointer;transition:background .15s;border-radius:3px;touch-action:manipulation;}
+#vclose:hover{background:rgba(16,185,129,.15)}
 #vframe-wrap{flex:1;width:100%;background:#000;position:relative;overflow:hidden;}
 #vload{position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;pointer-events:none;transition:opacity .4s;}
 #vload.hidden{opacity:0}
@@ -471,8 +471,8 @@ footer{
 
 <!-- ══ STATS ══ -->
 <div class="stats">
-  <div class="sb" style="--sc:#4d9fff;--sg:'10'">
-    <div class="l">Nodes Online</div><div class="v">10</div>
+  <div class="sb" style="--sc:#4d9fff;--sg:'9'">
+    <div class="l">Nodes Online</div><div class="v">9</div>
     <div class="s">All dashboards active</div>
   </div>
   <div class="sb" style="--sc:#10b981;--sg:'IN'">
@@ -494,7 +494,7 @@ footer{
 <div class="sec">
   <div class="sec-bar"></div>
   <div class="sec-txt">▶ Select Dashboard Node</div>
-  <div class="sec-bdg">10/10 ONLINE</div>
+  <div class="sec-bdg">9/9 ONLINE</div>
 </div>
 
 <!-- ══ GROUPED PODS ══ -->
@@ -542,7 +542,6 @@ footer{
           </div>
         </a>
         <a class="sc-card" href="https://krishnateja08.github.io/Alphascreener/" onclick="go(event,'AlphaScreener')" style="--cc:#4d9fff;">
-          <div class="new-badge">NEW</div>
           <div class="brk"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
@@ -582,7 +581,7 @@ footer{
           <div class="sc-head-name" style="color:#34d399;text-shadow:0 0 12px rgba(16,185,129,.4);">OPTIONS COMMAND</div>
         </div>
         <div class="sc-head-right">
-          <div class="sc-head-status"><span class="dot"></span>4 NODES ONLINE</div>
+          <div class="sc-head-status"><span class="dot"></span>3 NODES ONLINE</div>
           <div class="sc-head-nodes">NSE · DERIVATIVES</div>
         </div>
       </div>
@@ -605,23 +604,7 @@ footer{
             </div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/Nifty-1HR_Track/" onclick="go(event,'Nifty 1HR Track')" style="--cc:#34d399;">
-          <div class="brk"></div>
-          <div class="sc-card-inner">
-            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div>
-            <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">⏱️</div><div class="sc-card-ring" style="border-color:rgba(16,185,129,.4);animation-delay:-3s;"></div></div>
-              <div class="sc-card-label">INTRADAY</div>
-            </div>
-            <div class="sc-card-name" style="color:#34d399;text-shadow:0 0 10px rgba(16,185,129,.3);">Nifty 1HR Track</div>
-            <div class="sc-card-desc">Hourly Nifty movement tracking — intraday trend analysis and short-term momentum signals.</div>
-            <div class="sc-card-footer" style="border-top-color:rgba(16,185,129,.1);">
-              <span class="sc-card-tag" style="border-color:rgba(16,185,129,.15);">NSE · INTRADAY</span>
-              <div class="sc-card-btn" style="color:#22cc22;"><div class="sc-card-btn-line" style="background:#22cc22;"></div>LAUNCH</div>
-            </div>
-          </div>
-        </a>
+
         <a class="sc-card" href="https://krishnateja08.github.io/optionstrategybuilder/" onclick="go(event,'Strategy Builder')" style="--cc:#34d399;">
           <div class="brk"></div>
           <div class="sc-card-inner">
@@ -641,7 +624,6 @@ footer{
         </a>
         <!-- ↓ NEW CARD: S/R Strike Planner -->
         <a class="sc-card" href="https://krishnateja08.github.io/Strategic_Nodes/" onclick="go(event,'S/R Strike Planner')" style="--cc:#34d399;">
-          <div class="new-badge">NEW</div>
           <div class="brk"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);"></div>
