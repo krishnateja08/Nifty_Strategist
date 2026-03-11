@@ -233,11 +233,11 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .sc-card-inner{position:relative;z-index:2;padding:16px 16px 14px;}
 
 /* top accent line */
-.sc-card-topbar{height:2px;margin:-16px -16px 14px;background:linear-gradient(90deg,var(--cc,var(--cyan)),transparent 70%);box-shadow:0 0 10px var(--cc,var(--cyan));opacity:.75;transition:opacity .2s;}
+.sc-card-topbar{height:2px;margin:-16px -16px 14px;background:linear-gradient(90deg,var(--cc,var(--cyan)),transparent 70%);opacity:.6;transition:opacity .2s;}
 .sc-card:hover .sc-card-topbar{opacity:1;}
 
 /* glow orb */
-.sc-card-glow{position:absolute;top:-30px;right:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(var(--cc,rgba(77,159,255,.07)),transparent 70%);pointer-events:none;z-index:1;}
+.sc-card-glow{position:absolute;top:-20px;right:-20px;width:90px;height:90px;border-radius:50%;background:radial-gradient(rgba(77,159,255,.04),transparent 70%);pointer-events:none;z-index:1;opacity:.5;}
 
 /* icon + chip row */
 .sc-card-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
@@ -256,11 +256,10 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 
 .sc-card-label{
   font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:2px;
-  color:var(--cc,rgba(120,180,255,.8));
-  border:1px solid var(--cc,rgba(77,159,255,.25));
+  color:rgba(140,185,255,.75);
+  border:1px solid rgba(77,159,255,.2);
   padding:2px 7px;border-radius:2px;
   background:rgba(77,159,255,.04);
-  text-shadow:0 0 8px currentColor;
 }
 
 /* pulse dot */
@@ -609,7 +608,6 @@ footer{
         </a>
         <a class="sc-card" href="https://krishnateja08.github.io/Alphascreener/" onclick="go(event,'AlphaScreener')" style="--cc:#4d9fff;">
           <div class="corner-tl" style="border-color:#4d9fff;"></div><div class="corner-br" style="border-color:#4d9fff;"></div>
-          <div class="new-badge">NEW</div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
             <div class="sc-card-top">
@@ -677,25 +675,7 @@ footer{
             </div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/Nifty-1HR_Track/" onclick="go(event,'Nifty 1HR Track')" style="--cc:#34d399;">
-          <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
-          <div class="sc-card-inner">
-            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);;box-shadow:0 0 10px #34d399;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div>
-            <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">⏱️
-              <div class="sc-card-pulse"></div>
-            </div></div>
-              <div class="sc-card-label">INTRADAY</div>
-            </div>
-            <div class="sc-card-name" style="color:#34d399;text-shadow:0 0 10px rgba(16,185,129,.3);">Nifty 1HR Track</div>
-            <div class="sc-card-desc">Hourly Nifty movement tracking — intraday trend analysis and short-term momentum signals.</div>
-            <div class="sc-card-footer" style="border-top-color:rgba(16,185,129,.1);">
-              <span class="sc-card-tag" style="border-color:rgba(16,185,129,.15);">NSE · INTRADAY</span>
-              <div class="sc-card-btn" style="color:#22cc22;"><div class="sc-card-btn-line" style="background:#22cc22;"></div>LAUNCH</div>
-            </div>
-          </div>
-        </a>
+
         <a class="sc-card" href="https://krishnateja08.github.io/optionstrategybuilder/" onclick="go(event,'Strategy Builder')" style="--cc:#34d399;">
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
           <div class="sc-card-inner">
@@ -718,7 +698,6 @@ footer{
         <!-- ↓ NEW CARD: S/R Strike Planner -->
         <a class="sc-card" href="https://krishnateja08.github.io/Strategic_Nodes/" onclick="go(event,'S/R Strike Planner')" style="--cc:#34d399;">
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
-          <div class="new-badge">NEW</div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);;box-shadow:0 0 10px #34d399;"></div>
             <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div>
