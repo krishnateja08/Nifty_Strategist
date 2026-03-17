@@ -162,7 +162,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .mbar-src{position:absolute;bottom:2px;left:6px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;opacity:.25;}
 .mbar-updated{position:absolute;top:3px;right:6px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;color:rgba(77,159,255,.2);z-index:2;}
 
-/* ══ TICKER — Style 1: Bloomberg Dark Pills ══ */
+/* ══ TICKER ══ */
 .tkr{
   background:#06102a;
   border-top:1px solid rgba(56,189,248,.25);
@@ -174,17 +174,8 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .tkr::after{right:0;background:linear-gradient(-90deg,#08102a,transparent)}
 .tkr-t{display:inline-flex;align-items:center;animation:tscroll 150s linear infinite}
 @keyframes tscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.ti{
-  display:inline-flex;align-items:center;
-  padding:0 6px;font-family:'Space Mono',monospace;
-}
-.ti-inner{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:4px;
-  padding:4px 11px;
-}
+.ti{display:inline-flex;align-items:center;padding:0 6px;font-family:'Space Mono',monospace;}
+.ti-inner{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:4px 11px;}
 .ti .s{color:#7dd3fc;font-size:10px;letter-spacing:1.5px;font-weight:700;}
 .ti .tv{color:#f0f9ff;font-size:13px;font-weight:700;letter-spacing:.3px;}
 .up{color:#00e5a0;font-size:11px;font-weight:700;}
@@ -221,7 +212,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .sc-head-status{font-family:'Space Mono',monospace;font-size:10px;color:#4ade80;display:flex;align-items:center;gap:4px;justify-content:flex-end;}
 .sc-head-nodes{font-size:10px;color:rgba(180,215,255,.95);margin-top:2px;font-family:'Space Mono',monospace;letter-spacing:1px;}
 
-/* ══ CARDS — Style A: Holographic Terminal ══ */
+/* ══ CARDS ══ */
 .sc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:14px;}
 .sc-cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px;}
 
@@ -230,109 +221,45 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   background:linear-gradient(135deg,rgba(13,24,56,.98) 0%,rgba(10,18,44,.99) 100%);
   border:1px solid rgba(96,165,250,.15);
   transition:transform .25s,box-shadow .25s,border-color .25s;
-  text-decoration:none;color:inherit;display:block;
-  padding:0;
+  text-decoration:none;color:inherit;display:block;padding:0;
 }
 .sc-card:hover{
   transform:translateY(-4px);
   border-color:var(--cc,rgba(96,165,250,.45));
   box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 0 1px var(--cc,rgba(77,159,255,.3)),0 0 24px rgba(77,159,255,.06);
 }
-
-/* corner brackets */
 .sc-card .corner-tl,.sc-card .corner-br{position:absolute;width:11px;height:11px;border-color:var(--cc,rgba(77,159,255,.5));border-style:solid;opacity:.55;z-index:4;transition:opacity .2s,width .2s,height .2s;}
 .sc-card .corner-tl{top:7px;left:7px;border-width:1px 0 0 1px;}
 .sc-card .corner-br{bottom:7px;right:7px;border-width:0 1px 1px 0;}
 .sc-card:hover .corner-tl,.sc-card:hover .corner-br{opacity:1;width:14px;height:14px;}
-
 .sc-card-inner{position:relative;z-index:2;padding:16px 16px 14px;}
-
-/* top accent line */
 .sc-card-topbar{height:2px;margin:-16px -16px 14px;background:linear-gradient(90deg,var(--cc,var(--cyan)),transparent 70%);opacity:.6;transition:opacity .2s;}
 .sc-card:hover .sc-card-topbar{opacity:1;}
-
-/* glow orb */
 .sc-card-glow{position:absolute;top:-20px;right:-20px;width:90px;height:90px;border-radius:50%;background:radial-gradient(rgba(77,159,255,.04),transparent 70%);pointer-events:none;z-index:1;opacity:.5;}
-
-/* icon + chip row */
 .sc-card-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.sc-card-ico-wrap{
-  width:36px;height:36px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,.03);
-  border:1px solid var(--cc,rgba(77,159,255,.28));
-  border-radius:7px;
-  box-shadow:0 0 12px rgba(96,165,250,.05),inset 0 0 8px rgba(96,165,250,.03);
-  position:relative;overflow:hidden;
-}
+.sc-card-ico-wrap{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--cc,rgba(77,159,255,.28));border-radius:7px;box-shadow:0 0 12px rgba(96,165,250,.05),inset 0 0 8px rgba(96,165,250,.03);position:relative;overflow:hidden;}
 .sc-card-ico-wrap::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.06),transparent 60%);}
 .sc-card-ico{font-size:17px;position:relative;z-index:1;}
-.sc-card-ring{display:none;}/* hide old spinner ring */
-
-.sc-card-label{
-  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:2px;
-  color:rgba(140,185,255,.75);
-  border:1px solid rgba(77,159,255,.2);
-  padding:2px 7px;border-radius:2px;
-  background:rgba(77,159,255,.04);
-}
-
-/* pulse dot */
-.sc-card-pulse{
-  width:5px;height:5px;border-radius:50%;
-  background:var(--cc,var(--cyan));
-  box-shadow:0 0 6px currentColor;
-  animation:pdotA 2s ease-in-out infinite;
-  margin-left:auto;flex-shrink:0;
-}
+.sc-card-ring{display:none;}
+.sc-card-label{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:2px;color:rgba(140,185,255,.75);border:1px solid rgba(77,159,255,.2);padding:2px 7px;border-radius:2px;background:rgba(77,159,255,.04);}
+.sc-card-pulse{width:5px;height:5px;border-radius:50%;background:var(--cc,var(--cyan));box-shadow:0 0 6px currentColor;animation:pdotA 2s ease-in-out infinite;margin-left:auto;flex-shrink:0;}
 @keyframes pdotA{0%,100%{opacity:1}50%{opacity:.15}}
-
-.sc-card-name{
-  font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;
-  letter-spacing:.2px;color:#e8f4ff;
-  margin-bottom:7px;line-height:1.25;
-}
+.sc-card-name{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:.2px;color:#e8f4ff;margin-bottom:7px;line-height:1.25;}
 .sc-card-desc{font-size:12px;color:rgba(148,186,255,.6);line-height:1.6;margin-bottom:12px;}
-
-.sc-card-footer{
-  display:flex;align-items:center;justify-content:space-between;
-  border-top:1px solid rgba(96,165,250,.09);padding-top:10px;
-}
-.sc-card-tag{
-  font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:1.5px;
-  padding:2px 7px;border:1px solid rgba(96,165,250,.15);
-  color:rgba(148,186,255,.5);border-radius:2px;
-}
-.sc-card-btn{
-  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;
-  color:var(--cc,var(--cyan));display:flex;align-items:center;gap:6px;
-  text-shadow:0 0 10px currentColor;transition:gap .18s;
-}
-.sc-card-btn-line{
-  width:16px;height:1px;
-  background:var(--cc,var(--cyan));
-  box-shadow:0 0 6px currentColor;transition:width .18s;
-}
+.sc-card-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(96,165,250,.09);padding-top:10px;}
+.sc-card-tag{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:1.5px;padding:2px 7px;border:1px solid rgba(96,165,250,.15);color:rgba(148,186,255,.5);border-radius:2px;}
+.sc-card-btn{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--cc,var(--cyan));display:flex;align-items:center;gap:6px;text-shadow:0 0 10px currentColor;transition:gap .18s;}
+.sc-card-btn-line{width:16px;height:1px;background:var(--cc,var(--cyan));box-shadow:0 0 6px currentColor;transition:width .18s;}
 .sc-card:hover .sc-card-btn{gap:10px;}
 .sc-card:hover .sc-card-btn-line{width:26px;}
-
 .new-badge{position:absolute;top:8px;right:8px;z-index:10;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#fff;background:var(--grn);padding:2px 6px;box-shadow:0 0 10px rgba(16,185,129,.6);border-radius:2px;animation:newbadge 2s ease-in-out infinite;}
 @keyframes newbadge{0%,100%{box-shadow:0 0 10px rgba(16,185,129,.6)}50%{box-shadow:0 0 20px rgba(16,185,129,.9),0 0 35px rgba(16,185,129,.4)}}
 @keyframes rpl{0%{transform:scale(0);opacity:.35}100%{transform:scale(4);opacity:0}}
 .rpl{position:absolute;width:60px;height:60px;border-radius:50%;background:rgba(77,159,255,.12);pointer-events:none;animation:rpl .55s ease-out forwards;transform-origin:center;z-index:5;}
-@keyframes scanmove{0%{background-position:0 -40px}100%{background-position:0 200px}}
 
 /* ══ FOOTER ══ */
-footer{
-  background:rgba(8,15,40,.95);border-top:1px solid var(--bc);
-  padding:0;
-  font-family:'Space Mono',monospace;
-  box-shadow:0 0 20px rgba(77,159,255,.05);
-}
-.footer-bottom{
-  padding:7px 14px;
-  display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;
-}
+footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;font-family:'Space Mono',monospace;box-shadow:0 0 20px rgba(77,159,255,.05);}
+.footer-bottom{padding:7px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;}
 .fl{font-size:10px;color:rgba(150,205,255,.85);letter-spacing:1.5px;text-transform:uppercase}
 .fl span{color:var(--cyan);text-shadow:0 0 8px rgba(77,159,255,.4)}
 .fr{font-size:10px;color:rgba(150,205,255,.7);letter-spacing:1px}
@@ -342,8 +269,7 @@ footer{
   font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;
   color:#fff;background:rgba(96,165,250,.85);border:none;cursor:pointer;border-radius:4px;
   box-shadow:0 0 20px rgba(96,165,250,.5),0 0 40px rgba(96,165,250,.2);
-  animation:floatpulse 2s ease-in-out infinite;transition:transform .15s;
-  touch-action:manipulation;}
+  animation:floatpulse 2s ease-in-out infinite;transition:transform .15s;touch-action:manipulation;}
 #floatback:hover{transform:scale(1.06)}
 #floatback.visible{display:flex}
 @keyframes floatpulse{
@@ -429,7 +355,7 @@ footer{
     <div class="logo">📊</div>
     <div>
       <div class="bname">NIFTY Indian <span>Markets HUB</span></div>
-      <div class="bsub">Intelligence Hub · 10 Nodes Active</div>
+      <div class="bsub">Intelligence Hub · 11 Nodes Active</div>
     </div>
   </div>
 
@@ -545,8 +471,8 @@ footer{
 
 <!-- ══ STATS ══ -->
 <div class="stats">
-  <div class="sb" style="--sc:#4d9fff;--sg:'10'">
-    <div class="l">Nodes Online</div><div class="v">10</div>
+  <div class="sb" style="--sc:#4d9fff;--sg:'11'">
+    <div class="l">Nodes Online</div><div class="v">11</div>
     <div class="s">All dashboards active</div>
   </div>
   <div class="sb" style="--sc:#10b981;--sg:'IN'">
@@ -568,7 +494,7 @@ footer{
 <div class="sec">
   <div class="sec-bar"></div>
   <div class="sec-txt">▶ Select Dashboard Node</div>
-  <div class="sec-bdg">10/10 ONLINE</div>
+  <div class="sec-bdg">11/11 ONLINE</div>
 </div>
 
 <!-- ══ GROUPED PODS ══ -->
@@ -594,9 +520,7 @@ footer{
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">📈
-              <div class="sc-card-pulse"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap"><div class="sc-card-ico">📈<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">ANALYSIS</div>
               <div class="sc-card-pulse"></div>
             </div>
@@ -610,9 +534,7 @@ footer{
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🔍
-              <div class="sc-card-pulse"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🔍<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">SCANNER</div>
               <div class="sc-card-pulse"></div>
             </div>
@@ -626,9 +548,7 @@ footer{
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🎛️
-              <div class="sc-card-pulse"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🎛️<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">SCREENER</div>
             </div>
             <div class="sc-card-name">AlphaScreener</div>
@@ -641,9 +561,7 @@ footer{
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🏛️
-              <div class="sc-card-pulse"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🏛️<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">INSTITUTIONAL</div>
             </div>
             <div class="sc-card-name">FII / DII Pulse</div>
@@ -655,7 +573,7 @@ footer{
     </div>
   </div>
 
-  <!-- GROUP 2 — OPTIONS & DERIVATIVES DESK (4 NODES) -->
+  <!-- GROUP 2 — OPTIONS & DERIVATIVES DESK -->
   <div class="sc-group" style="--ga:rgba(16,185,129,.2);--gb:rgba(16,185,129,.04);--gc:#10b981;">
     <div class="sc-inner">
       <div class="sc-head" style="background:linear-gradient(90deg,rgba(6,13,30,.99),rgba(6,13,30,.85));">
@@ -665,23 +583,18 @@ footer{
           <div class="sc-head-name" style="color:#34d399;text-shadow:0 0 12px rgba(16,185,129,.4);">OPTIONS COMMAND</div>
         </div>
         <div class="sc-head-right">
-          <!-- ✅ Updated node count: 3 → 4 -->
           <div class="sc-head-status"><span class="dot"></span>4 NODES ONLINE</div>
           <div class="sc-head-nodes">NSE · DERIVATIVES</div>
         </div>
       </div>
       <div class="sc-cards-4">
-
-        <!-- CARD 1: Nifty Option Chain -->
         <a class="sc-card" href="https://krishnateja08.github.io/Nifty_option_chain/" onclick="go(event,'Nifty Option Chain')" style="--cc:#34d399;">
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
             <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.08),transparent 70%);"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">⛓️
-              <div class="sc-card-pulse"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap"><div class="sc-card-ico">⛓️<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">OPTIONS</div>
             </div>
             <div class="sc-card-name" style="color:#34d399;text-shadow:0 0 10px rgba(16,185,129,.3);">Nifty Option Chain</div>
@@ -692,17 +605,13 @@ footer{
             </div>
           </div>
         </a>
-
-        <!-- ✅ NEW CARD 2: Bank / Finance Option Chain -->
         <a class="sc-card" href="https://krishnateja08.github.io/BankNifty_options/" onclick="go(event,'Bank/Finance Option Chain')" style="--cc:#34d399;">
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
             <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.08),transparent 70%);"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🏦
-              <div class="sc-card-pulse"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🏦<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">BANK · FIN OPT</div>
             </div>
             <div class="sc-card-name" style="color:#34d399;text-shadow:0 0 10px rgba(16,185,129,.3);">Bank/Finance Option Chain</div>
@@ -713,17 +622,13 @@ footer{
             </div>
           </div>
         </a>
-
-        <!-- CARD 3: Option Strategy Builder -->
         <a class="sc-card" href="https://krishnateja08.github.io/optionstrategybuilder/" onclick="go(event,'Strategy Builder')" style="--cc:#34d399;">
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
             <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🧮
-              <div class="sc-card-pulse"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🧮<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">STRATEGY</div>
             </div>
             <div class="sc-card-name" style="color:#34d399;text-shadow:0 0 10px rgba(16,185,129,.3);">Option Strategy Builder</div>
@@ -734,17 +639,13 @@ footer{
             </div>
           </div>
         </a>
-
-        <!-- CARD 4: S/R Strike Planner -->
         <a class="sc-card" href="https://krishnateja08.github.io/Strategic_Nodes/" onclick="go(event,'S/R Strike Planner')" style="--cc:#34d399;">
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
             <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🎯
-              <div class="sc-card-pulse"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🎯<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">S/R LEVELS</div>
             </div>
             <div class="sc-card-name" style="color:#34d399;text-shadow:0 0 10px rgba(16,185,129,.3);">S/R Strike Planner</div>
@@ -755,7 +656,6 @@ footer{
             </div>
           </div>
         </a>
-
       </div>
     </div>
   </div>
@@ -781,9 +681,7 @@ footer{
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#6688ff,transparent);box-shadow:0 0 10px #6688ff;"></div>
             <div class="sc-card-glow" style="background:radial-gradient(rgba(51,68,204,.08),transparent 70%);"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🗽
-              <div class="sc-card-pulse"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🗽<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">GLOBAL</div>
             </div>
             <div class="sc-card-name" style="color:#6688ff;text-shadow:0 0 10px rgba(51,68,204,.3);">USA S&amp;P 500 Review</div>
@@ -800,9 +698,7 @@ footer{
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#ffd080,transparent);box-shadow:0 0 10px #ffd080;"></div>
             <div class="sc-card-glow" style="background:radial-gradient(rgba(255,208,128,.07),transparent 70%);"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🌍
-              <div class="sc-card-pulse"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap"><div class="sc-card-ico">🌍<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">INTELLIGENCE</div>
             </div>
             <div class="sc-card-name" style="color:#ffd080;text-shadow:0 0 10px rgba(255,208,128,.3);">Global Market News</div>
@@ -819,9 +715,7 @@ footer{
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#a78bfa,transparent);box-shadow:0 0 10px #a78bfa;"></div>
             <div class="sc-card-glow" style="background:radial-gradient(rgba(167,139,250,.08),transparent 70%);"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap" style="border-color:rgba(167,139,250,.35);"><div class="sc-card-ico">📰
-              <div class="sc-card-pulse" style="background:#a78bfa;"></div>
-            </div></div>
+              <div class="sc-card-ico-wrap" style="border-color:rgba(167,139,250,.35);"><div class="sc-card-ico">📰<div class="sc-card-pulse" style="background:#a78bfa;"></div></div></div>
               <div class="sc-card-label" style="border-color:rgba(167,139,250,.25);color:rgba(167,139,250,.85);">NEWS · AI</div>
               <div class="sc-card-pulse" style="background:#a78bfa;"></div>
             </div>
@@ -837,12 +731,59 @@ footer{
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════════════════════════
+       GROUP 4 — GUIDES & EDUCATION
+       To add more guides: copy any sc-card block below,
+       update href / onclick name / icon / label / desc / tag,
+       bump the "X GUIDE(S) ONLINE" count in sc-head-status,
+       and switch .sc-cards → .sc-cards-4 when you have 4+ guides.
+  ══════════════════════════════════════════════════════════ -->
+  <div class="sc-group" style="--ga:rgba(251,191,36,.18);--gb:rgba(251,191,36,.04);--gc:#fbbf24;">
+    <div class="sc-inner">
+      <div class="sc-head" style="background:linear-gradient(90deg,rgba(6,13,30,.99),rgba(6,13,30,.85));">
+        <div class="sc-head-hex" style="border-color:#fbbf24;box-shadow:0 0 14px rgba(251,191,36,.25);background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(251,191,36,.04));">📚</div>
+        <div class="sc-head-info">
+          <div class="sc-head-tag">GROUP 04 // GUIDES &amp; EDUCATION</div>
+          <div class="sc-head-name" style="color:#fbbf24;text-shadow:0 0 12px rgba(251,191,36,.4);">KNOWLEDGE BASE</div>
+        </div>
+        <div class="sc-head-right">
+          <div class="sc-head-status"><span class="dot"></span>1 GUIDE ONLINE</div>
+          <div class="sc-head-nodes">LEARN · MASTER</div>
+        </div>
+      </div>
+      <div class="sc-cards">
+
+        <!-- GUIDE CARD: Options Greeks Guide -->
+        <a class="sc-card" href="./options_greeks_guide.html" onclick="go(event,'Options Greeks Guide')" style="--cc:#fbbf24;">
+          <div class="new-badge">NEW</div>
+          <div class="corner-tl" style="border-color:#fbbf24;"></div><div class="corner-br" style="border-color:#fbbf24;"></div>
+          <div class="sc-card-inner">
+            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#fbbf24,transparent);box-shadow:0 0 10px #fbbf24;"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div>
+            <div class="sc-card-top">
+              <div class="sc-card-ico-wrap" style="border-color:rgba(251,191,36,.35);"><div class="sc-card-ico">🔬<div class="sc-card-pulse" style="background:#fbbf24;"></div></div></div>
+              <div class="sc-card-label" style="border-color:rgba(251,191,36,.25);color:rgba(251,191,36,.85);">GREEKS · GUIDE</div>
+              <div class="sc-card-pulse" style="background:#fbbf24;"></div>
+            </div>
+            <div class="sc-card-name" style="color:#fbbf24;text-shadow:0 0 10px rgba(251,191,36,.3);">Options Greeks Guide</div>
+            <div class="sc-card-desc">Master Δ Delta, Θ Theta, ν Vega &amp; Γ Gamma — real Nifty examples, P&amp;L impact and practical trading insights.</div>
+            <div class="sc-card-footer" style="border-top-color:rgba(251,191,36,.1);">
+              <span class="sc-card-tag" style="border-color:rgba(251,191,36,.2);color:rgba(251,191,36,.6);">OPTIONS · GREEKS</span>
+              <div class="sc-card-btn" style="color:#fbbf24;"><div class="sc-card-btn-line" style="background:#fbbf24;"></div>READ</div>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-bottom">
-    <div class="fl"><span>NIFTY INDIAN MARKETS HUB</span> // DEEP_NAVY v3.0 // 9_NODES_ACTIVE</div>
+    <div class="fl"><span>NIFTY INDIAN MARKETS HUB</span> // DEEP_NAVY v3.1 // 11_NODES_ACTIVE</div>
     <div class="fr">SELECT_NODE → OPEN // BACK → RETURN_TO_HUB</div>
   </div>
 </footer>
