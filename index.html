@@ -215,6 +215,17 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 /* ══ CARDS ══ */
 .sc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:14px;}
 .sc-cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px;}
+.sc-cards-5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:12px;}
+.sc-cards-5 .sc-card-inner{padding:13px 13px 12px;}
+.sc-cards-5 .sc-card-topbar{margin:-13px -13px 11px;}
+.sc-cards-5 .sc-card-name{font-size:13px;margin-bottom:5px;}
+.sc-cards-5 .sc-card-desc{font-size:11px;margin-bottom:10px;line-height:1.5;}
+.sc-cards-5 .sc-card-ico-wrap{width:30px;height:30px;}
+.sc-cards-5 .sc-card-ico{font-size:14px;}
+.sc-cards-5 .sc-card-top{margin-bottom:10px;gap:7px;}
+@media(max-width:1300px){.sc-cards-5{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){.sc-cards-5,.sc-cards-4{grid-template-columns:repeat(2,1fr);}.sc-cards{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.sc-cards-5,.sc-cards-4,.sc-cards{grid-template-columns:1fr;}}
 
 .sc-card{
   position:relative;border-radius:8px;overflow:hidden;cursor:pointer;
@@ -514,7 +525,7 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
           <div class="sc-head-nodes">NSE · INDIA MARKETS</div>
         </div>
       </div>
-      <div class="sc-cards-4">
+      <div class="sc-cards-5">
         <a class="sc-card" href="https://krishnateja08.github.io/Nifty_50_Stock_Analyzer/" onclick="go(event,'Nifty Stocks Analyzer')" style="--cc:#60a5fa;">
           <div class="corner-tl"></div><div class="corner-br"></div>
           <div class="sc-card-inner">
