@@ -898,8 +898,10 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
 <script>
 /* ══ IST Clock ══ */
 function tick(){
+  var el=document.getElementById('ct');
+  if(!el)return;
   var t=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
-  document.getElementById('ct').textContent=t;
+  el.textContent=t;
 }
 tick();setInterval(tick,1000);
 
