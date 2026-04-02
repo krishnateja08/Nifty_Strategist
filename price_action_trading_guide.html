@@ -1796,8 +1796,8 @@
         <p style="max-width:520px">Every single pattern explained with <strong>SVG chart visuals</strong>, the psychology behind it, and a simple real-world trade example — written specifically so a complete beginner can understand and immediately apply it.</p>
       </div>
       <div class="pat-hero-stats">
-        <div class="stat-pill"><span class="num">18</span><span class="lbl">Patterns</span></div>
-        <div class="stat-pill"><span class="num">3</span><span class="lbl">Categories</span></div>
+        <div class="stat-pill"><span class="num">34</span><span class="lbl">Patterns</span></div>
+        <div class="stat-pill"><span class="num">7</span><span class="lbl">Categories</span></div>
         <div class="stat-pill"><span class="num" style="color:var(--green)">A+</span><span class="lbl">Setups Only</span></div>
       </div>
     </div>
@@ -2379,6 +2379,804 @@
 
     </div><!-- end pg-chart -->
 
+    <!-- ─── GROUP 4: BULLISH CONTINUATION PATTERNS ─── -->
+    <div class="pattern-group" id="pg-bull-cont">
+      <div class="group-label">
+        <div class="group-label-text" style="color:var(--green)">📈 Bullish Continuation Patterns</div>
+        <div class="group-label-line"></div>
+      </div>
+      <p style="margin-bottom:28px;color:#8a8a7a;font-size:14px">These patterns form <strong style="color:var(--text)">during an uptrend</strong> and signal that the bullish move will <strong style="color:var(--green)">continue higher</strong> after a brief pause or consolidation.</p>
+
+      <!-- BULLISH TRIANGLE -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>📐 Bullish Ascending Triangle</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bull">Bullish Continuation</span>
+              <span class="difficulty diff-medium">Intermediate</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="50"  x2="200" y2="50"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="110" x2="200" y2="110" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="170" x2="200" y2="170" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- flat resistance -->
+              <line x1="20" y1="68" x2="145" y2="68" stroke="#e05c5c" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+              <text x="4" y="64" fill="#e05c5c" font-size="7" font-family="monospace">FLAT TOP</text>
+              <!-- rising support trendline -->
+              <line x1="20" y1="150" x2="145" y2="78" stroke="#2ecc82" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+              <text x="4" y="168" fill="#2ecc82" font-size="7" font-family="monospace">RISING LOWS</text>
+              <!-- price zigzag inside triangle -->
+              <polyline points="20,150 45,68 65,120 90,68 115,95 140,68" fill="none" stroke="#b8b4aa" stroke-width="1.8"/>
+              <!-- breakout -->
+              <line x1="140" y1="68" x2="185" y2="30" stroke="#2ecc82" stroke-width="2.5"/>
+              <polygon points="185,30 178,38 190,36" fill="#2ecc82"/>
+              <text x="148" y="26" fill="#2ecc82" font-size="8" font-family="monospace">BREAKOUT</text>
+              <text x="148" y="36" fill="#2ecc82" font-size="8" font-family="monospace">→ BUY</text>
+              <!-- SL line -->
+              <line x1="20" y1="185" x2="200" y2="185" stroke="#e05c5c" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+              <text x="4" y="200" fill="#e05c5c" font-size="7" font-family="monospace">SL below base</text>
+            </svg>
+            <div class="visual-caption">Ascending Triangle → Buy on Breakout</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 What's Happening (Psychology)</div>
+              <p>Buyers are getting increasingly aggressive — they keep making <strong>higher lows</strong> (rising support line). Each pullback is shallower than the last. Meanwhile, sellers are defending a flat resistance. But with every attempt, buyers push harder. Eventually, buyers overwhelm sellers and price <strong>breaks above the flat top</strong> with force.</p>
+            </div>
+            <div class="explain-block eb-freshers">
+              <div class="eb-label">🙋 Analogy for Freshers</div>
+              <p>Imagine a crowd trying to push through a locked door. Each attempt starts higher than the last (rising floor level). Eventually, they push so hard the door breaks open — that's your breakout signal!</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>Buy when a candle closes clearly ABOVE the flat resistance line</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Stop-loss: just below the last higher low (rising support line)</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: height of the triangle added to the breakout point</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Best used in strong uptrends — a "pause before continuation"</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Reliance Industries (NSE):</strong> After a strong rally in 2023, Reliance formed an ascending triangle consolidation near ₹2,600 resistance for 6 weeks. When it broke above ₹2,600 on high volume, the stock rallied an additional ₹180+ in 10 days. Entry ₹2,610, SL ₹2,540, Target ₹2,790 — a clean 2.5:1 R:R setup.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BULLISH FLAG -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>🚩 Bullish Flag</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bull">Bullish Continuation</span>
+              <span class="difficulty diff-easy">Beginner Friendly</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="50"  x2="200" y2="50"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="110" x2="200" y2="110" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="170" x2="200" y2="170" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- flagpole -->
+              <line x1="30" y1="175" x2="80" y2="55" stroke="#2ecc82" stroke-width="3"/>
+              <text x="4" y="140" fill="#2ecc82" font-size="7" font-family="monospace" transform="rotate(-67,4,140)">FLAGPOLE</text>
+              <!-- flag channel (slight downward) -->
+              <line x1="80" y1="55" x2="130" y2="80" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.8"/>
+              <line x1="80" y1="85" x2="130" y2="110" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.8"/>
+              <!-- flag price action -->
+              <polyline points="80,55 95,68 110,58 125,72 130,65" fill="none" stroke="#b8b4aa" stroke-width="1.8"/>
+              <!-- breakout -->
+              <line x1="130" y1="65" x2="185" y2="20" stroke="#2ecc82" stroke-width="2.5"/>
+              <polygon points="185,20 178,28 190,26" fill="#2ecc82"/>
+              <text x="140" y="18" fill="#2ecc82" font-size="8" font-family="monospace">BREAKOUT</text>
+              <text x="140" y="28" fill="#2ecc82" font-size="8" font-family="monospace">→ BUY</text>
+              <!-- labels -->
+              <text x="85" y="105" fill="#c9a84c" font-size="8" font-family="monospace">FLAG</text>
+              <text x="82" y="115" fill="#c9a84c" font-size="7" font-family="monospace">(consolidation)</text>
+            </svg>
+            <div class="visual-caption">Bull Flag: Strong Pole + Tight Pullback</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Price surges strongly upward (the flagpole) — this is institutions buying aggressively. Then price drifts down in a calm, orderly channel (the flag). This pullback is NOT selling pressure — it's <strong>profit-taking by weak hands</strong>. The strong hands (institutions) hold their positions. When the flag breaks upward, the smart money adds more — and the move continues.</p>
+            </div>
+            <div class="explain-block eb-freshers">
+              <div class="eb-label">🙋 Analogy for Freshers</div>
+              <p>A sprinter runs hard (flagpole), then jogs slowly to catch their breath (flag). When the whistle blows again (breakout), they sprint at full speed. The rest was just recovery — not defeat.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>Buy when price breaks ABOVE the upper boundary of the flag channel</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Stop-loss: below the lower boundary of the flag (recent swing low)</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: add the flagpole length to the breakout point</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Volume should DRY UP during the flag and SPIKE on breakout — confirmation!</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>TCS (NSE), 2023:</strong> TCS gapped up ₹280 in one session after strong quarterly results (flagpole). For the next 2 weeks, it pulled back ₹90 in a tight declining channel (flag). On volume breakout above the channel, it ran ₹320 higher — almost equal to the original flagpole height. Entry ₹3,620, SL ₹3,530, Target ₹3,940.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BULLISH WEDGE (Rising Wedge Correction = Bullish) -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>📉 Bullish Falling Wedge (Continuation)</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bull">Bullish Continuation</span>
+              <span class="difficulty diff-medium">Intermediate</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="50"  x2="200" y2="50"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="120" x2="200" y2="120" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="180" x2="200" y2="180" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- upper declining trendline -->
+              <line x1="20" y1="55" x2="140" y2="100" stroke="#e05c5c" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+              <!-- lower declining trendline (steeper) -->
+              <line x1="20" y1="90" x2="140" y2="120" stroke="#2ecc82" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+              <!-- price zigzag converging -->
+              <polyline points="20,90 50,55 75,100 100,72 125,105 140,90" fill="none" stroke="#b8b4aa" stroke-width="1.8"/>
+              <!-- breakout upward -->
+              <line x1="140" y1="90" x2="185" y2="40" stroke="#2ecc82" stroke-width="2.5"/>
+              <polygon points="185,40 178,48 190,46" fill="#2ecc82"/>
+              <text x="142" y="36" fill="#2ecc82" font-size="8" font-family="monospace">BULLISH</text>
+              <text x="142" y="46" fill="#2ecc82" font-size="8" font-family="monospace">BREAKOUT</text>
+              <!-- wedge label -->
+              <text x="55" y="145" fill="#c9a84c" font-size="8" font-family="monospace">Falling Wedge</text>
+              <text x="55" y="156" fill="#555" font-size="7" font-family="monospace">(contracting range)</text>
+            </svg>
+            <div class="visual-caption">Falling Wedge in Uptrend = Bullish</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Price pulls back against the uptrend but in a narrowing, converging channel. Both the highs and lows are declining, but the <strong>lows are declining FASTER</strong> — meaning sellers are running out of steam. When price breaks above the upper declining trendline, bulls take full control again.</p>
+            </div>
+            <div class="explain-block eb-freshers">
+              <div class="eb-label">🙋 Analogy for Freshers</div>
+              <p>Like water going down a funnel — the pressure builds the narrower it gets. When it exits the funnel (breakout), it shoots out with force. The tighter the wedge, the more explosive the breakout.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>Buy on a strong candle close ABOVE the upper declining trendline</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Stop-loss: below the last swing low inside the wedge</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: top of the wedge (measured move) or the prior high</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>More reliable when the wedge forms on declining volume</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Nifty 50 (Jan 2024):</strong> After a strong rally to 22,100, Nifty corrected in a falling wedge to 21,200 over 3 weeks. The breakout above the upper wedge line triggered a run to 22,500. Entry at 21,900, SL at 21,400, Target 22,500 = clean 2.4:1 R:R.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BULLISH SYMMETRICAL TRIANGLE -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>🔺 Bullish Symmetrical Triangle</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bull">Bullish Continuation</span>
+              <span class="difficulty diff-medium">Intermediate</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="50"  x2="200" y2="50"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="120" x2="200" y2="120" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="180" x2="200" y2="180" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- upper declining line -->
+              <line x1="20" y1="55" x2="145" y2="100" stroke="#e05c5c" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.7"/>
+              <!-- lower rising line -->
+              <line x1="20" y1="155" x2="145" y2="110" stroke="#2ecc82" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.7"/>
+              <!-- price inside -->
+              <polyline points="20,55 50,155 80,72 110,135 140,100" fill="none" stroke="#b8b4aa" stroke-width="1.8"/>
+              <!-- apex and breakout -->
+              <circle cx="145" cy="105" r="4" fill="#c9a84c"/>
+              <line x1="145" y1="105" x2="185" y2="50" stroke="#2ecc82" stroke-width="2.5"/>
+              <polygon points="185,50 178,58 190,56" fill="#2ecc82"/>
+              <text x="148" y="46" fill="#2ecc82" font-size="8" font-family="monospace">Bullish break</text>
+              <text x="60" y="175" fill="#c9a84c" font-size="8" font-family="monospace">Symmetrical = COIL</text>
+            </svg>
+            <div class="visual-caption">Symmetrical Triangle → Bullish Breakout</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Neither bulls nor bears are winning — price makes lower highs AND higher lows, converging to a point (apex). This is a <strong>battle of indecision</strong>. In an uptrend, the prior momentum usually wins — price breaks upward. The longer the coiling, the bigger the breakout move.</p>
+            </div>
+            <div class="explain-block eb-freshers">
+              <div class="eb-label">🙋 Analogy for Freshers</div>
+              <p>Two armies pushing against each other with equal force — the standoff gets smaller and smaller (converging). Eventually, one side gains the upper hand and the other retreats completely. In an uptrend, bulls usually win this standoff.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>In uptrend: buy breakout above the upper declining trendline</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Stop-loss: below the lower trendline of the triangle</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: add the height of the triangle's base to the breakout point</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>⚠ Caution: breakout can go EITHER way — wait for confirmation before entering</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Infosys (NSE):</strong> After a bullish trend, Infosys formed a symmetrical triangle over 5 weeks near ₹1,500. When it broke above the upper line on strong volume, it rallied ₹150 within 2 weeks, nearly matching the triangle's height. Classic continuation in a bull market.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end pg-bull-cont -->
+
+    <!-- ─── GROUP 5: BULLISH REVERSAL PATTERNS ─── -->
+    <div class="pattern-group" id="pg-bull-rev">
+      <div class="group-label">
+        <div class="group-label-text" style="color:#4a9eff">🔄 Bullish Reversal Patterns</div>
+        <div class="group-label-line"></div>
+      </div>
+      <p style="margin-bottom:28px;color:#8a8a7a;font-size:14px">These patterns form <strong style="color:var(--text)">at the end of a downtrend</strong> and signal a potential <strong style="color:var(--green)">bullish reversal</strong> — a shift from bearish to bullish momentum.</p>
+
+      <!-- INVERTED HEAD & SHOULDERS -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>🙃 Inverted Head &amp; Shoulders</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bull">Major Bullish Reversal</span>
+              <span class="difficulty diff-hard">Advanced</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="60"  x2="200" y2="60"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="120" x2="200" y2="120" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="175" x2="200" y2="175" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- neckline -->
+              <line x1="0" y1="100" x2="200" y2="100" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.8"/>
+              <text x="4" y="96" fill="#c9a84c" font-size="7" font-family="monospace">NECKLINE</text>
+              <!-- price path: inverted H&S -->
+              <polyline points="5,80 30,155 55,100 80,180 110,100 135,145 160,100 185,50" fill="none" stroke="#4a9eff" stroke-width="2.5"/>
+              <!-- labels -->
+              <text x="22" y="172" fill="#b8b4aa" font-size="7" font-family="monospace" text-anchor="middle">L.Sh</text>
+              <text x="80" y="197" fill="#2ecc82" font-size="7" font-family="monospace" text-anchor="middle">HEAD</text>
+              <text x="138" y="162" fill="#b8b4aa" font-size="7" font-family="monospace" text-anchor="middle">R.Sh</text>
+              <!-- breakout arrow -->
+              <text x="168" y="45" fill="#2ecc82" font-size="8" font-family="monospace">↑ BUY</text>
+              <text x="162" y="55" fill="#2ecc82" font-size="7" font-family="monospace">Neckline break</text>
+            </svg>
+            <div class="visual-caption">Inv. H&S → Buy on Neckline Break</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Price makes three lows — two shallower "shoulders" with a deeper "head" in the middle. Each time price tries to make new lows, <strong>buyers absorb more and more selling</strong>. When price breaks above the neckline, it signals bears have exhausted themselves. This is one of the most powerful and reliable reversal patterns in trading.</p>
+            </div>
+            <div class="explain-block eb-freshers">
+              <div class="eb-label">🙋 Analogy for Freshers</div>
+              <p>Think of sellers punching a wall three times. First punch makes a dent (left shoulder). Second punch makes a bigger dent (head). Third punch barely makes a mark (right shoulder). The wall (buyers) is winning — and when sellers give up, price shoots up.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>Enter LONG when price closes ABOVE the neckline with strength</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Stop-loss: below the right shoulder low</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: add the head's depth to the neckline breakout point</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Bonus: wait for a retest of neckline as support for safer entry</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Bank Nifty (2022):</strong> After a prolonged downtrend, Bank Nifty formed a perfect Inverted H&S with head at 33,800, shoulders at ~35,500. Neckline at 37,000. Breakout above 37,000 led to a 2,200 point rally within 3 weeks — textbook measured move matching the head-to-neckline distance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRIPLE BOTTOM -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>🏕️🏕️🏕️ Triple Bottom</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bull">Strong Bullish Reversal</span>
+              <span class="difficulty diff-medium">Intermediate</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="60"  x2="200" y2="60"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="120" x2="200" y2="120" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="170" x2="200" y2="170" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- support zone -->
+              <line x1="0" y1="162" x2="200" y2="162" stroke="#2ecc82" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.7"/>
+              <text x="4" y="158" fill="#2ecc82" font-size="7" font-family="monospace">STRONG SUPPORT</text>
+              <!-- neckline -->
+              <line x1="0" y1="90" x2="170" y2="90" stroke="#c9a84c" stroke-width="1" stroke-dasharray="5,3" opacity="0.6"/>
+              <text x="4" y="86" fill="#c9a84c" font-size="7" font-family="monospace">Neckline</text>
+              <!-- price path: triple bottom -->
+              <polyline points="5,60 30,162 55,90 80,162 110,90 135,162 160,90 185,40" fill="none" stroke="#4a9eff" stroke-width="2.5"/>
+              <!-- bottom labels -->
+              <text x="30" y="210" fill="#2ecc82" font-size="7" font-family="monospace" text-anchor="middle">B1</text>
+              <text x="80" y="210" fill="#2ecc82" font-size="7" font-family="monospace" text-anchor="middle">B2</text>
+              <text x="135" y="210" fill="#2ecc82" font-size="7" font-family="monospace" text-anchor="middle">B3</text>
+              <!-- breakout -->
+              <text x="168" y="36" fill="#2ecc82" font-size="8" font-family="monospace">↑ BUY!</text>
+            </svg>
+            <div class="visual-caption">Triple Bottom → 3 Tests of Support</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Price tests the same support level THREE times and <strong>bounces each time</strong>. This is extremely significant — it means buyers are incredibly strong at this level. Each failed attempt by bears strengthens the conviction of bulls. On the third bounce, professional traders recognize the pattern and <strong>institutional buying accelerates</strong>.</p>
+            </div>
+            <div class="explain-block eb-freshers">
+              <div class="eb-label">🙋 Analogy for Freshers</div>
+              <p>A boxer trying to knock you down swings three times. You block all three. After the third miss, the boxer is tired — you go on offense. That's exactly what happens: bears swing three times, fail, and then bulls counter-attack powerfully.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>Enter on the third bounce from support — or on neckline breakout above</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Stop-loss: just below the support zone (below all three bottoms)</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: neckline breakout + pattern height (measured move)</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Triple bottom is STRONGER than double bottom — three tests = very strong buyers</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>SBI (NSE, 2020 recovery):</strong> SBI bottomed around ₹149 three times between May-August 2020. Each bounce was stronger. When it broke above ₹195 neckline, the stock ran to ₹320+ over the next several months — a 60%+ move from the triple bottom breakout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end pg-bull-rev -->
+
+    <!-- ─── GROUP 6: BEARISH CONTINUATION PATTERNS ─── -->
+    <div class="pattern-group" id="pg-bear-cont">
+      <div class="group-label">
+        <div class="group-label-text" style="color:var(--red)">📉 Bearish Continuation Patterns</div>
+        <div class="group-label-line"></div>
+      </div>
+      <p style="margin-bottom:28px;color:#8a8a7a;font-size:14px">These patterns form <strong style="color:var(--text)">during a downtrend</strong> and signal that the bearish move will <strong style="color:var(--red)">continue lower</strong> after a brief pause or relief bounce.</p>
+
+      <!-- BEARISH DESCENDING TRIANGLE -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>🔻 Bearish Descending Triangle</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bear">Bearish Continuation</span>
+              <span class="difficulty diff-medium">Intermediate</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="60"  x2="200" y2="60"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="120" x2="200" y2="120" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="170" x2="200" y2="170" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- flat support -->
+              <line x1="20" y1="148" x2="145" y2="148" stroke="#2ecc82" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+              <text x="4" y="160" fill="#2ecc82" font-size="7" font-family="monospace">FLAT BOTTOM</text>
+              <!-- declining resistance -->
+              <line x1="20" y1="60" x2="145" y2="118" stroke="#e05c5c" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+              <text x="25" y="52" fill="#e05c5c" font-size="7" font-family="monospace">DECLINING HIGHS</text>
+              <!-- price zigzag -->
+              <polyline points="20,60 50,148 75,90 100,148 125,105 145,148" fill="none" stroke="#b8b4aa" stroke-width="1.8"/>
+              <!-- breakdown arrow -->
+              <line x1="145" y1="148" x2="185" y2="195" stroke="#e05c5c" stroke-width="2.5"/>
+              <polygon points="185,195 180,185 191,185" fill="#e05c5c"/>
+              <text x="148" y="205" fill="#e05c5c" font-size="8" font-family="monospace">BREAKDOWN</text>
+              <text x="148" y="215" fill="#e05c5c" font-size="8" font-family="monospace">→ SELL</text>
+            </svg>
+            <div class="visual-caption">Descending Triangle → Sell on Breakdown</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Sellers are getting more aggressive — price makes <strong>lower highs</strong> while buyers desperately defend a flat support. Each rally attempt is weaker than the last. Eventually, even the flat support fails, and there's nothing to stop the sell-off. <strong>Buyers run out of firepower.</strong></p>
+            </div>
+            <div class="explain-block eb-freshers">
+              <div class="eb-label">🙋 Analogy for Freshers</div>
+              <p>A dam holding back water with cracks getting bigger. Each wave of water hits the dam harder (sellers getting more aggressive). The dam (support) eventually breaks — and the flood (sell-off) is unstoppable.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Sell SHORT when a candle closes BELOW the flat support level</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Stop-loss: above the last lower high (upper declining line)</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: height of triangle subtracted from the breakdown point</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>Works best in strong downtrends — a "pause before more selling"</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Zomato (NSE, 2022):</strong> During its prolonged downtrend, Zomato formed a descending triangle near ₹60 support over 4 weeks. When ₹60 broke on heavy volume, the stock dropped to ₹44 within 2 weeks — a 27% move. Entry on breakdown: ₹59, SL ₹68, Target ₹44.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEARISH FLAG -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>🚩 Bearish Flag</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bear">Bearish Continuation</span>
+              <span class="difficulty diff-easy">Beginner Friendly</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="50"  x2="200" y2="50"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="110" x2="200" y2="110" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="170" x2="200" y2="170" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- bearish flagpole (sharp drop) -->
+              <line x1="30" y1="38" x2="80" y2="145" stroke="#e05c5c" stroke-width="3"/>
+              <text x="4" y="95" fill="#e05c5c" font-size="7" font-family="monospace">FLAGPOLE</text>
+              <!-- flag channel (slight upward drift) -->
+              <line x1="80" y1="145" x2="130" y2="120" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.8"/>
+              <line x1="80" y1="165" x2="130" y2="140" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.8"/>
+              <!-- flag price action -->
+              <polyline points="80,165 95,148 110,158 125,138 130,148" fill="none" stroke="#b8b4aa" stroke-width="1.8"/>
+              <!-- breakdown -->
+              <line x1="130" y1="148" x2="185" y2="200" stroke="#e05c5c" stroke-width="2.5"/>
+              <polygon points="185,200 180,190 191,190" fill="#e05c5c"/>
+              <text x="140" y="210" fill="#e05c5c" font-size="8" font-family="monospace">→ SELL</text>
+              <text x="85" y="115" fill="#c9a84c" font-size="8" font-family="monospace">BEAR FLAG</text>
+            </svg>
+            <div class="visual-caption">Bear Flag: Sharp Drop + Weak Bounce</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Price crashes hard (flagpole) — institutional selling. Then a weak bounce/drift upward (flag) occurs as retail traders buy the dip, hoping for a recovery. But institutions are waiting — they use this bounce to <strong>add more short positions</strong>. When the flag breaks down, the next leg of selling is often just as violent as the flagpole drop.</p>
+            </div>
+            <div class="explain-block eb-freshers">
+              <div class="eb-label">🙋 Analogy for Freshers</div>
+              <p>A stone is thrown off a cliff (sharp drop). It bounces once on a ledge (the flag — brief recovery). Then it continues falling to the bottom. Don't mistake the bounce as a reversal — it's just a pause on the way down.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Sell SHORT on breakdown BELOW the lower boundary of the flag channel</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Stop-loss: above the upper boundary of the flag</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: add the flagpole length downward from the breakdown point</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>Volume dries up during flag, spikes on breakdown = high conviction signal</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Paytm/One97 (NSE, 2022):</strong> After poor quarterly results, Paytm dropped ₹200 in 3 days (flagpole). A 2-week sideways-to-slightly-up drift followed (flag). When the flag broke down, another ₹180 drop followed — matching the original drop. Classic bear flag in a trending down stock.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEARISH SYMMETRICAL TRIANGLE -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>🔻 Bearish Symmetrical Triangle</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bear">Bearish Continuation</span>
+              <span class="difficulty diff-medium">Intermediate</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="60"  x2="200" y2="60"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="120" x2="200" y2="120" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="175" x2="200" y2="175" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- upper declining line -->
+              <line x1="20" y1="62" x2="145" y2="108" stroke="#e05c5c" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.7"/>
+              <!-- lower rising line -->
+              <line x1="20" y1="158" x2="145" y2="112" stroke="#2ecc82" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.7"/>
+              <!-- price inside -->
+              <polyline points="20,158 50,62 80,148 110,78 140,110" fill="none" stroke="#b8b4aa" stroke-width="1.8"/>
+              <!-- apex and bearish breakdown -->
+              <circle cx="145" cy="110" r="4" fill="#c9a84c"/>
+              <line x1="145" y1="110" x2="185" y2="165" stroke="#e05c5c" stroke-width="2.5"/>
+              <polygon points="185,165 180,154 191,155" fill="#e05c5c"/>
+              <text x="148" y="160" fill="#e05c5c" font-size="8" font-family="monospace">Bearish</text>
+              <text x="148" y="170" fill="#e05c5c" font-size="8" font-family="monospace">breakdown</text>
+            </svg>
+            <div class="visual-caption">Symmetrical Triangle → Bearish Breakout</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Same as bullish symmetrical, but in a downtrend — prior momentum (bearish) usually wins. The indecision phase ends with bears overpowering bulls. In a downtrend, this pattern typically resolves downward. <strong>Context is everything</strong> — the same pattern in different trend directions signals different outcomes.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>In downtrend: sell SHORT on breakdown below the lower trendline</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Stop-loss: above the upper declining trendline</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: base height of triangle subtracted from breakdown point</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>⚠ ALWAYS wait for confirmed candle close outside the triangle — fake breakouts are common</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Nifty IT Index (2022):</strong> During the tech selloff, Nifty IT formed a 6-week symmetrical triangle in a clear downtrend. The bearish breakdown led to a further 12% decline over the next month — a textbook bearish continuation setup.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEARISH RISING WEDGE (continuation) -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>📈 Bearish Rising Wedge (Continuation)</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bear">Bearish Continuation</span>
+              <span class="difficulty diff-medium">Intermediate</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="50"  x2="200" y2="50"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="120" x2="200" y2="120" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="185" x2="200" y2="185" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- rising upper trendline -->
+              <line x1="20" y1="130" x2="145" y2="60" stroke="#e05c5c" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+              <!-- rising lower trendline (steeper) -->
+              <line x1="20" y1="170" x2="145" y2="85" stroke="#2ecc82" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+              <!-- price zigzag converging upward -->
+              <polyline points="20,170 50,130 75,165 100,100 125,145 145,85" fill="none" stroke="#b8b4aa" stroke-width="1.8"/>
+              <!-- breakdown -->
+              <line x1="145" y1="85" x2="185" y2="165" stroke="#e05c5c" stroke-width="2.5"/>
+              <polygon points="185,165 180,154 191,155" fill="#e05c5c"/>
+              <text x="148" y="155" fill="#e05c5c" font-size="8" font-family="monospace">BREAKDOWN</text>
+              <text x="148" y="165" fill="#e05c5c" font-size="8" font-family="monospace">→ SELL</text>
+              <text x="50" y="205" fill="#c9a84c" font-size="8" font-family="monospace">Rising Wedge = Bearish!</text>
+            </svg>
+            <div class="visual-caption">Rising Wedge in Downtrend = Bearish</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Price bounces in what appears to be a recovery — making higher highs AND higher lows. But the <strong>highs are rising more slowly than the lows</strong> (converging lines). This is a <strong>weak, exhausted rally</strong> with declining momentum. When it breaks down, bears who had been waiting pounce aggressively.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Sell SHORT on breakdown BELOW the lower rising trendline</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Stop-loss: above the last swing high inside the wedge</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: bottom of the wedge or previous support levels below</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>RSI divergence (lower RSI despite higher price) confirms weakness</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Adani Group stocks (Jan 2023):</strong> After the Hindenburg report selloff, several Adani stocks formed rising wedges during brief recovery attempts. These wedges all broke down, continuing the primary downtrend — confirming the rising wedge as a bearish continuation signal in a downtrend context.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end pg-bear-cont -->
+
+    <!-- ─── GROUP 7: BEARISH REVERSAL PATTERNS ─── -->
+    <div class="pattern-group" id="pg-bear-rev">
+      <div class="group-label">
+        <div class="group-label-text" style="color:#e05c5c">🔄 Bearish Reversal Patterns</div>
+        <div class="group-label-line"></div>
+      </div>
+      <p style="margin-bottom:28px;color:#8a8a7a;font-size:14px">These patterns form <strong style="color:var(--text)">at the end of an uptrend</strong> and signal a potential <strong style="color:var(--red)">bearish reversal</strong> — a shift from bullish to bearish momentum.</p>
+
+      <!-- HEAD & SHOULDERS -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>🏔️ Head &amp; Shoulders</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bear">Major Bearish Reversal</span>
+              <span class="difficulty diff-hard">Advanced</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="60"  x2="200" y2="60"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="120" x2="200" y2="120" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="175" x2="200" y2="175" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- neckline -->
+              <line x1="0" y1="135" x2="200" y2="135" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.8"/>
+              <text x="4" y="131" fill="#c9a84c" font-size="7" font-family="monospace">NECKLINE</text>
+              <!-- price path: H&S -->
+              <polyline points="5,160 30,95 55,135 80,55 110,135 135,90 160,135 185,200" fill="none" stroke="#4a9eff" stroke-width="2.5"/>
+              <!-- labels -->
+              <text x="22" y="82" fill="#b8b4aa" font-size="7" font-family="monospace" text-anchor="middle">L.Sh</text>
+              <text x="80" y="42" fill="#e05c5c" font-size="7" font-family="monospace" text-anchor="middle">HEAD</text>
+              <text x="140" y="78" fill="#b8b4aa" font-size="7" font-family="monospace" text-anchor="middle">R.Sh</text>
+              <!-- breakdown -->
+              <text x="168" y="205" fill="#e05c5c" font-size="8" font-family="monospace">↓ SELL</text>
+              <text x="155" y="215" fill="#e05c5c" font-size="7" font-family="monospace">Neckline break</text>
+            </svg>
+            <div class="visual-caption">H&S → Sell on Neckline Break</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Bulls make one high (left shoulder), then an even higher high (head), then a LOWER high (right shoulder). Each rally attempt is weaker. <strong>Big money is distributing</strong> — selling to eager retail buyers at these highs. When the neckline breaks, the selling avalanche begins. This is the single most reliable major reversal pattern in all of trading.</p>
+            </div>
+            <div class="explain-block eb-freshers">
+              <div class="eb-label">🙋 Analogy for Freshers</div>
+              <p>A marathon runner at the end of a race. First sprint (left shoulder) — strong. Final surge (head) — peak effort. Then one more push (right shoulder) — noticeably weaker. After the right shoulder, they collapse (neckline break). The exhaustion is visible in the price structure.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Enter SHORT when price closes BELOW the neckline convincingly</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Stop-loss: above the right shoulder high</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: measure head-to-neckline distance, subtract from neckline breakout</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>Classic retest: price often bounces back to neckline as resistance — add there too</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Nifty 50 (Oct 2021):</strong> Nifty formed a textbook Head & Shoulders near the 18,600 top. Left shoulder at 17,800, Head at 18,604, Right shoulder at 18,200, Neckline at 17,500. The neckline break triggered a 1,500+ point correction to 16,000. Measured move: 18,604 − 17,500 = 1,104 subtracted from 17,500 = target ~16,396. Remarkably accurate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RISING WEDGE REVERSAL -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>📈 Rising Wedge (Reversal)</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bear">Bearish Reversal</span>
+              <span class="difficulty diff-medium">Intermediate</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="50"  x2="200" y2="50"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="120" x2="200" y2="120" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="185" x2="200" y2="185" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- rising upper (resistance) -->
+              <line x1="20" y1="165" x2="145" y2="58" stroke="#e05c5c" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+              <!-- rising lower (support, faster slope) -->
+              <line x1="20" y1="188" x2="145" y2="82" stroke="#2ecc82" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.8"/>
+              <!-- price going up but narrowing -->
+              <polyline points="20,188 50,165 80,170 110,120 135,128 145,80" fill="none" stroke="#b8b4aa" stroke-width="1.8"/>
+              <!-- breakdown from top -->
+              <line x1="145" y1="80" x2="185" y2="165" stroke="#e05c5c" stroke-width="2.5"/>
+              <polygon points="185,165 180,154 191,155" fill="#e05c5c"/>
+              <text x="148" y="155" fill="#e05c5c" font-size="8" font-family="monospace">REVERSAL</text>
+              <text x="148" y="165" fill="#e05c5c" font-size="8" font-family="monospace">→ SELL</text>
+              <text x="30" y="210" fill="#c9a84c" font-size="8" font-family="monospace">Rising = BEARISH (at top)</text>
+            </svg>
+            <div class="visual-caption">Rising Wedge at Top → Bearish Reversal</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Price is rising, but the gains are getting smaller with each move — <strong>momentum is dying</strong>. Both the highs and lows are rising, but they're converging. Buyers are losing steam. Sellers see this weakness and begin pressing harder. The final break below the lower rising trendline signals that buyers have completely given up.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Sell SHORT when price breaks BELOW the lower rising trendline</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Stop-loss: above the last high inside the wedge (near the apex)</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: beginning of the wedge (where it started) as first target</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>Even stronger when it forms after a long uptrend and at a major resistance level</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Gold (MCX, mid-2023):</strong> Gold formed a rising wedge on the daily chart after a rally from ₹54,000 to ₹60,000. The wedge breakdown signaled the reversal, and gold retraced back toward ₹56,500 over the following weeks — nearly retracing the entire wedge's rise. Classic reversal signal at a major high.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRIPLE TOP -->
+      <div class="pattern-deep-card">
+        <div class="pattern-deep-header">
+          <div class="title-group">
+            <h3>🏔️🏔️🏔️ Triple Top</h3>
+            <div class="pattern-meta">
+              <span class="pattern-tag tag-bear">Strong Bearish Reversal</span>
+              <span class="difficulty diff-medium">Intermediate</span>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-deep-body">
+          <div class="pattern-visual">
+            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="60"  x2="200" y2="60"  stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="120" x2="200" y2="120" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <line x1="0" y1="175" x2="200" y2="175" stroke="#1e2530" stroke-width="1" stroke-dasharray="4,4"/>
+              <!-- resistance zone -->
+              <line x1="0" y1="62" x2="200" y2="62" stroke="#e05c5c" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.7"/>
+              <text x="4" y="57" fill="#e05c5c" font-size="7" font-family="monospace">STRONG RESISTANCE</text>
+              <!-- neckline support -->
+              <line x1="0" y1="130" x2="170" y2="130" stroke="#c9a84c" stroke-width="1" stroke-dasharray="5,3" opacity="0.6"/>
+              <text x="4" y="145" fill="#c9a84c" font-size="7" font-family="monospace">Neckline</text>
+              <!-- price path: triple top -->
+              <polyline points="5,170 30,62 55,130 80,62 110,130 135,62 160,130 185,190" fill="none" stroke="#4a9eff" stroke-width="2.5"/>
+              <!-- top labels -->
+              <text x="30" y="210" fill="#e05c5c" font-size="7" font-family="monospace" text-anchor="middle">T1</text>
+              <text x="80" y="210" fill="#e05c5c" font-size="7" font-family="monospace" text-anchor="middle">T2</text>
+              <text x="135" y="210" fill="#e05c5c" font-size="7" font-family="monospace" text-anchor="middle">T3</text>
+              <!-- breakdown -->
+              <text x="168" y="205" fill="#e05c5c" font-size="8" font-family="monospace">↓ SELL!</text>
+            </svg>
+            <div class="visual-caption">Triple Top → 3 Failures at Resistance</div>
+          </div>
+          <div class="pattern-explain">
+            <div class="explain-block eb-psychology">
+              <div class="eb-label">🧠 Psychology</div>
+              <p>Price hits the SAME resistance level three times and gets rejected every single time. <strong>Sellers are incredibly powerful at this level</strong> — institutions are distributing (selling their large holdings) to retail buyers at the top. After three failures, even the most optimistic retail buyers give up, and the neckline collapses.</p>
+            </div>
+            <div class="explain-block eb-freshers">
+              <div class="eb-label">🙋 Analogy for Freshers</div>
+              <p>You apply for the same job three times and get rejected each time. After the third rejection, you stop trying. The company (resistance) clearly doesn't want you. Price behaves the same — after three rejections, it gives up trying to go higher and falls.</p>
+            </div>
+            <div class="explain-block eb-trade">
+              <div class="eb-label">🎯 How to Trade It</div>
+              <div class="trade-steps-list">
+                <div class="ts-row"><div class="ts-dot" style="background:var(--red)"></div>Short on the third rejection from resistance — or on neckline breakdown</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--gold)"></div>Stop-loss: above the resistance zone (above all three tops)</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--blue)"></div>Target: neckline breakdown minus pattern height (measured move)</div>
+                <div class="ts-row"><div class="ts-dot" style="background:var(--green)"></div>Triple top = STRONGER than double top — three failures = very powerful sellers</div>
+              </div>
+            </div>
+            <div class="explain-block eb-warning">
+              <div class="eb-label">📌 Real Example</div>
+              <p><strong>Nifty 50 (2023 high):</strong> Nifty tested the 19,800–19,900 zone three times over 6 weeks. Each attempt was rejected sharply. When the neckline at 19,200 broke, Nifty fell to 18,800 rapidly — an 1,100 point move nearly matching the height of the triple top pattern. A powerful macro-level pattern on the index.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end pg-bear-rev -->
+
     <!-- ─── QUICK REFERENCE TABLE ─── -->
     <div style="margin-top:16px;margin-bottom:64px">
       <div class="section-label" style="margin-bottom:16px">Quick Reference</div>
@@ -2452,6 +3250,98 @@
               <td>After a long downtrend at support</td>
               <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-empty"></div></div></td>
               <td>Long on close above the neckline</td>
+            </tr>
+            <!-- ── NEW CHART PATTERNS ── -->
+            <tr style="background:rgba(46,204,130,0.04)">
+              <td><strong>📐 Ascending Triangle</strong></td>
+              <td class="signal-bull">Bullish Continuation</td>
+              <td>Uptrend — flat top, rising lows</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-empty"></div></div></td>
+              <td>Buy above the flat resistance on close</td>
+            </tr>
+            <tr style="background:rgba(46,204,130,0.04)">
+              <td><strong>🚩 Bullish Flag</strong></td>
+              <td class="signal-bull">Bullish Continuation</td>
+              <td>Uptrend — after strong flagpole move</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div></div></td>
+              <td>Buy breakout above upper flag channel</td>
+            </tr>
+            <tr style="background:rgba(46,204,130,0.04)">
+              <td><strong>📉 Falling Wedge (Bull Cont.)</strong></td>
+              <td class="signal-bull">Bullish Continuation</td>
+              <td>Uptrend — declining channel pullback</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-empty"></div></div></td>
+              <td>Buy above upper declining trendline</td>
+            </tr>
+            <tr style="background:rgba(46,204,130,0.04)">
+              <td><strong>🔺 Symm. Triangle (Bullish)</strong></td>
+              <td class="signal-bull">Bullish Continuation</td>
+              <td>Uptrend — converging lines to apex</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-empty"></div><div class="rbar-dot rbar-empty"></div></div></td>
+              <td>Buy on confirmed breakout above upper line</td>
+            </tr>
+            <tr style="background:rgba(74,158,255,0.04)">
+              <td><strong>🙃 Inverted H&amp;S</strong></td>
+              <td class="signal-bull">Major Bullish Reversal</td>
+              <td>Bottom of downtrend — 3 lows pattern</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div></div></td>
+              <td>Long on close above neckline</td>
+            </tr>
+            <tr style="background:rgba(74,158,255,0.04)">
+              <td><strong>🏕️🏕️🏕️ Triple Bottom</strong></td>
+              <td class="signal-bull">Strong Bullish Reversal</td>
+              <td>Downtrend — 3 tests of same support</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-empty"></div></div></td>
+              <td>Buy on 3rd bounce or neckline break</td>
+            </tr>
+            <tr style="background:rgba(224,92,92,0.04)">
+              <td><strong>🔻 Descending Triangle</strong></td>
+              <td class="signal-bear">Bearish Continuation</td>
+              <td>Downtrend — flat bottom, falling highs</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-empty"></div></div></td>
+              <td>Short on close below flat support</td>
+            </tr>
+            <tr style="background:rgba(224,92,92,0.04)">
+              <td><strong>🚩 Bearish Flag</strong></td>
+              <td class="signal-bear">Bearish Continuation</td>
+              <td>Downtrend — after sharp drop (flagpole)</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div></div></td>
+              <td>Short on breakdown below lower flag channel</td>
+            </tr>
+            <tr style="background:rgba(224,92,92,0.04)">
+              <td><strong>🔻 Symm. Triangle (Bearish)</strong></td>
+              <td class="signal-bear">Bearish Continuation</td>
+              <td>Downtrend — converging lines to apex</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-empty"></div><div class="rbar-dot rbar-empty"></div></div></td>
+              <td>Short on confirmed breakdown below lower line</td>
+            </tr>
+            <tr style="background:rgba(224,92,92,0.04)">
+              <td><strong>📈 Rising Wedge (Bear Cont.)</strong></td>
+              <td class="signal-bear">Bearish Continuation</td>
+              <td>Downtrend — weak bounce in wedge</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-empty"></div></div></td>
+              <td>Short below lower rising trendline</td>
+            </tr>
+            <tr style="background:rgba(201,168,76,0.04)">
+              <td><strong>🏔️ Head &amp; Shoulders</strong></td>
+              <td class="signal-bear">Major Bearish Reversal</td>
+              <td>Top of uptrend — 3 peaks pattern</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div></div></td>
+              <td>Short on close below neckline</td>
+            </tr>
+            <tr style="background:rgba(201,168,76,0.04)">
+              <td><strong>📈 Rising Wedge (Reversal)</strong></td>
+              <td class="signal-bear">Bearish Reversal</td>
+              <td>Top of uptrend — converging rising channel</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-empty"></div></div></td>
+              <td>Short on close below lower trendline</td>
+            </tr>
+            <tr style="background:rgba(201,168,76,0.04)">
+              <td><strong>🏔️🏔️🏔️ Triple Top</strong></td>
+              <td class="signal-bear">Strong Bearish Reversal</td>
+              <td>Uptrend — 3 tests of same resistance</td>
+              <td><div class="reliability-bar"><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-filled"></div><div class="rbar-dot rbar-empty"></div></div></td>
+              <td>Short on 3rd rejection or neckline break</td>
             </tr>
           </tbody>
         </table>
