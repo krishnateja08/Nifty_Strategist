@@ -1118,6 +1118,150 @@
   .green { color: var(--green); }
   .red   { color: var(--red); }
 
+  /* ════════════════════════════════════
+     LEFT SIDEBAR — TABLE OF CONTENTS
+  ════════════════════════════════════ */
+  #sidebar {
+    position: fixed;
+    top: 57px; /* below tab-nav */
+    left: 0;
+    width: 230px;
+    height: calc(100vh - 57px);
+    background: rgba(10,12,15,0.97);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 90;
+    transition: transform 0.3s ease;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  #sidebar-toggle {
+    position: fixed;
+    top: 68px;
+    left: 230px;
+    z-index: 91;
+    width: 22px;
+    height: 48px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.3s ease, background 0.2s;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  #sidebar-toggle:hover { background: var(--surface2); color: var(--gold); }
+
+  body.sidebar-collapsed #sidebar { transform: translateX(-230px); }
+  body.sidebar-collapsed #sidebar-toggle { left: 0; }
+  body.sidebar-collapsed .page-content { margin-left: 0; }
+
+  .sidebar-header {
+    padding: 16px 16px 10px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(10,12,15,0.99);
+    z-index: 2;
+  }
+  .sidebar-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .sidebar-tab-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+
+  .sidebar-section {
+    display: none;
+    flex-direction: column;
+    padding: 8px 0 12px;
+  }
+  .sidebar-section.active { display: flex; }
+
+  .sidebar-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 10px 16px 4px;
+    opacity: 0.8;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 16px 6px 14px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    line-height: 1.4;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    background: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    text-align: left;
+    width: 100%;
+  }
+  .sidebar-link:hover {
+    color: var(--text);
+    border-left-color: var(--border);
+    background: rgba(255,255,255,0.03);
+  }
+  .sidebar-link.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+  .sidebar-link .sl-icon {
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 1px;
+  }
+  .sidebar-link .sl-text { flex: 1; }
+  .sidebar-link.sub {
+    padding-left: 30px;
+    font-size: 11.5px;
+    color: #6a6a5a;
+  }
+  .sidebar-link.sub:hover { color: var(--muted); }
+  .sidebar-link.sub.active { color: var(--gold); }
+
+  /* shift main content right */
+  .page-content {
+    margin-left: 230px;
+    transition: margin-left 0.3s ease;
+  }
+
+  @media(max-width: 900px) {
+    #sidebar { transform: translateX(-230px); }
+    #sidebar-toggle { left: 0; }
+    .page-content { margin-left: 0; }
+    body.sidebar-open #sidebar { transform: translateX(0); }
+    body.sidebar-open #sidebar-toggle { left: 230px; }
+  }
+
   .two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1141,6 +1285,111 @@
 </style>
 </head>
 <body>
+
+<!-- ═══════════════ LEFT SIDEBAR ═══════════════ -->
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">📋 Contents</div>
+    <div class="sidebar-tab-label" id="sidebar-tab-name">Full Guide</div>
+  </div>
+
+  <!-- GUIDE TOC -->
+  <div class="sidebar-section active" id="stoc-guide">
+    <div class="sidebar-group-label">Chapters</div>
+    <button class="sidebar-link" onclick="scrollToSection('sec-what')"><span class="sl-icon">01</span><span class="sl-text">What is Price Action?</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('sec-candles')"><span class="sl-icon">02</span><span class="sl-text">Reading Candlesticks</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('sec-sr')"><span class="sl-icon">03</span><span class="sl-text">Support &amp; Resistance</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('sec-patterns-intro')"><span class="sl-icon">04</span><span class="sl-text">High-Probability Patterns</span></button>
+    <button class="sidebar-link sub" onclick="scrollToSection('sec-patterns-intro')"><span class="sl-icon">↳</span><span class="sl-text">Pin Bar / Hammer</span></button>
+    <button class="sidebar-link sub" onclick="scrollToSection('sec-patterns-intro')"><span class="sl-icon">↳</span><span class="sl-text">Engulfing, Doji, Inside Bar</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('sec-trend')"><span class="sl-icon">05</span><span class="sl-text">Trend Structure</span></button>
+    <button class="sidebar-link sub" onclick="scrollToSection('sec-trend')"><span class="sl-icon">↳</span><span class="sl-text">Uptrend / Downtrend</span></button>
+    <button class="sidebar-link sub" onclick="scrollToSection('sec-trend')"><span class="sl-icon">↳</span><span class="sl-text">Change of Character</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('sec-entry')"><span class="sl-icon">06</span><span class="sl-text">Entry, Stop-Loss &amp; Targets</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('sec-mtf')"><span class="sl-icon">07</span><span class="sl-text">Multi-Timeframe Analysis</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('sec-checklist')"><span class="sl-icon">08</span><span class="sl-text">Pre-Trade Checklist</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('sec-mistakes')"><span class="sl-icon">09</span><span class="sl-text">Common Mistakes</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('sec-roadmap')"><span class="sl-icon">✦</span><span class="sl-text">Your Trading Roadmap</span></button>
+  </div>
+
+  <!-- PATTERNS TOC -->
+  <div class="sidebar-section" id="stoc-patterns">
+    <div class="sidebar-group-label">Single Candle</div>
+    <button class="sidebar-link" onclick="scrollToSection('pat-hammer')"><span class="sl-icon">🔨</span><span class="sl-text">Hammer</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-shooting')"><span class="sl-icon">🌠</span><span class="sl-text">Shooting Star</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-doji')"><span class="sl-icon">✝️</span><span class="sl-text">Doji</span></button>
+    <div class="sidebar-group-label">Two-Candle</div>
+    <button class="sidebar-link" onclick="scrollToSection('pat-bull-eng')"><span class="sl-icon">🟢</span><span class="sl-text">Bullish Engulfing</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-bear-eng')"><span class="sl-icon">🔴</span><span class="sl-text">Bearish Engulfing</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-inside')"><span class="sl-icon">📦</span><span class="sl-text">Inside Bar</span></button>
+    <div class="sidebar-group-label">Chart Patterns</div>
+    <button class="sidebar-link" onclick="scrollToSection('pat-double-top')"><span class="sl-icon">🏔️</span><span class="sl-text">Double Top</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-double-bot')"><span class="sl-icon">🏕️</span><span class="sl-text">Double Bottom</span></button>
+    <div class="sidebar-group-label" style="color:var(--green)">📈 Bull Continuation</div>
+    <button class="sidebar-link" onclick="scrollToSection('pat-asc-tri')"><span class="sl-icon">📐</span><span class="sl-text">Ascending Triangle</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-bull-flag')"><span class="sl-icon">🚩</span><span class="sl-text">Bullish Flag</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-fall-wedge')"><span class="sl-icon">📉</span><span class="sl-text">Falling Wedge</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-bull-sym')"><span class="sl-icon">🔺</span><span class="sl-text">Symmetrical Triangle</span></button>
+    <div class="sidebar-group-label" style="color:#4a9eff">🔄 Bull Reversal</div>
+    <button class="sidebar-link" onclick="scrollToSection('pat-inv-hs')"><span class="sl-icon">🙃</span><span class="sl-text">Inverted H&amp;S</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-triple-bot')"><span class="sl-icon">🏕️</span><span class="sl-text">Triple Bottom</span></button>
+    <div class="sidebar-group-label" style="color:var(--red)">📉 Bear Continuation</div>
+    <button class="sidebar-link" onclick="scrollToSection('pat-desc-tri')"><span class="sl-icon">🔻</span><span class="sl-text">Descending Triangle</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-bear-flag')"><span class="sl-icon">🚩</span><span class="sl-text">Bearish Flag</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-bear-sym')"><span class="sl-icon">🔻</span><span class="sl-text">Symm. Triangle (Bear)</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-rise-wedge-cont')"><span class="sl-icon">📈</span><span class="sl-text">Rising Wedge (Cont.)</span></button>
+    <div class="sidebar-group-label" style="color:#e05c5c">🔄 Bear Reversal</div>
+    <button class="sidebar-link" onclick="scrollToSection('pat-hs')"><span class="sl-icon">🏔️</span><span class="sl-text">Head &amp; Shoulders</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-rise-wedge-rev')"><span class="sl-icon">📈</span><span class="sl-text">Rising Wedge (Reversal)</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('pat-triple-top')"><span class="sl-icon">🏔️</span><span class="sl-text">Triple Top</span></button>
+    <div class="sidebar-group-label">Reference</div>
+    <button class="sidebar-link" onclick="scrollToSection('pat-qr')"><span class="sl-icon">📊</span><span class="sl-text">Quick Reference Table</span></button>
+  </div>
+
+  <!-- SETUPS TOC -->
+  <div class="sidebar-section" id="stoc-setups">
+    <div class="sidebar-group-label">Trade Setups</div>
+    <button class="sidebar-link" onclick="scrollToSection('setup-1')"><span class="sl-icon">①</span><span class="sl-text">Pin Bar Bounce at Support</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('setup-2')"><span class="sl-icon">②</span><span class="sl-text">Bearish Engulfing at Resistance</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('setup-3')"><span class="sl-icon">③</span><span class="sl-text">Inside Bar Breakout</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('setup-4')"><span class="sl-icon">④</span><span class="sl-text">Double Bottom Breakout</span></button>
+  </div>
+
+  <!-- PSYCHOLOGY TOC -->
+  <div class="sidebar-section" id="stoc-psychology">
+    <div class="sidebar-group-label">Mental Game</div>
+    <button class="sidebar-link" onclick="scrollToSection('psych-truth')"><span class="sl-icon">💡</span><span class="sl-text">The Hard Truth</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('psych-enemies')"><span class="sl-icon">⚔️</span><span class="sl-text">6 Emotional Enemies</span></button>
+    <button class="sidebar-link sub" onclick="scrollToSection('psych-enemies')"><span class="sl-icon">↳</span><span class="sl-text">Fear of Loss</span></button>
+    <button class="sidebar-link sub" onclick="scrollToSection('psych-enemies')"><span class="sl-icon">↳</span><span class="sl-text">Greed / FOMO</span></button>
+    <button class="sidebar-link sub" onclick="scrollToSection('psych-enemies')"><span class="sl-icon">↳</span><span class="sl-text">Revenge Trading</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('psych-mindset')"><span class="sl-icon">🧠</span><span class="sl-text">Loser vs Winner Mindset</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('psych-routine')"><span class="sl-icon">⏰</span><span class="sl-text">Daily Trading Routine</span></button>
+  </div>
+
+  <!-- JOURNAL TOC -->
+  <div class="sidebar-section" id="stoc-journal">
+    <div class="sidebar-group-label">Journal</div>
+    <button class="sidebar-link" onclick="scrollToSection('jour-stats')"><span class="sl-icon">📊</span><span class="sl-text">Performance Stats</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('jour-log')"><span class="sl-icon">📝</span><span class="sl-text">Log New Trade</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('jour-history')"><span class="sl-icon">📋</span><span class="sl-text">Trade History</span></button>
+  </div>
+
+  <!-- CALCULATOR TOC -->
+  <div class="sidebar-section" id="stoc-calculator">
+    <div class="sidebar-group-label">Risk Calculator</div>
+    <button class="sidebar-link" onclick="scrollToSection('calc-inputs')"><span class="sl-icon">🔢</span><span class="sl-text">Trade Parameters</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('calc-results')"><span class="sl-icon">📊</span><span class="sl-text">Position Size Results</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('calc-scenario')"><span class="sl-icon">📈</span><span class="sl-text">Win Rate Scenarios</span></button>
+    <button class="sidebar-link" onclick="scrollToSection('calc-rules')"><span class="sl-icon">📏</span><span class="sl-text">Golden Rules</span></button>
+  </div>
+</aside>
+
+<!-- Toggle button -->
+<button id="sidebar-toggle" onclick="toggleSidebar()" title="Toggle Sidebar">◀</button>
+
+<!-- ═══════════════ PAGE CONTENT WRAPPER ═══════════════ -->
+<div class="page-content">
 
 <!-- ═══════════════ TAB NAVIGATION ═══════════════ -->
 <nav class="tab-nav" id="mainTabNav">
@@ -1173,7 +1422,7 @@
 </section>
 
 <!-- ═══════════════ WHAT IS PRICE ACTION ═══════════════ -->
-<section>
+<section id="sec-what">
   <div class="container">
     <div class="section-label">Chapter 01</div>
     <h2>What is <em style="font-style:italic;color:var(--gold)">Price Action</em>?</h2>
@@ -1276,7 +1525,7 @@
 <hr class="divider">
 
 <!-- ═══════════════ CANDLESTICKS ═══════════════ -->
-<section>
+<section id="sec-candles">
   <div class="container">
     <div class="section-label">Chapter 02</div>
     <h2>Reading <em style="font-style:italic;color:var(--gold)">Candlesticks</em></h2>
@@ -1342,7 +1591,7 @@
 <hr class="divider">
 
 <!-- ═══════════════ SUPPORT & RESISTANCE ═══════════════ -->
-<section>
+<section id="sec-sr">
   <div class="container">
     <div class="section-label">Chapter 03</div>
     <h2>Support &amp; <em style="font-style:italic;color:var(--gold)">Resistance</em></h2>
@@ -1382,7 +1631,7 @@
 <hr class="divider">
 
 <!-- ═══════════════ KEY PATTERNS ═══════════════ -->
-<section>
+<section id="sec-patterns-intro">
   <div class="container">
     <div class="section-label">Chapter 04</div>
     <h2>High-Probability <em style="font-style:italic;color:var(--gold)">Patterns</em></h2>
@@ -1498,7 +1747,7 @@
 <hr class="divider">
 
 <!-- ═══════════════ TREND ANALYSIS ═══════════════ -->
-<section>
+<section id="sec-trend">
   <div class="container">
     <div class="section-label">Chapter 05</div>
     <h2>Understanding <em style="font-style:italic;color:var(--gold)">Trend Structure</em></h2>
@@ -1560,7 +1809,7 @@
 <hr class="divider">
 
 <!-- ═══════════════ ENTRY, STOP, TARGET ═══════════════ -->
-<section>
+<section id="sec-entry">
   <div class="container">
     <div class="section-label">Chapter 06</div>
     <h2>Entry, Stop-Loss &amp; <em style="font-style:italic;color:var(--gold)">Targets</em></h2>
@@ -1613,7 +1862,7 @@
 <hr class="divider">
 
 <!-- ═══════════════ MULTI-TIMEFRAME ═══════════════ -->
-<section>
+<section id="sec-mtf">
   <div class="container">
     <div class="section-label">Chapter 07</div>
     <h2>Multi-Timeframe <em style="font-style:italic;color:var(--gold)">Analysis</em></h2>
@@ -1654,7 +1903,7 @@
 <hr class="divider">
 
 <!-- ═══════════════ TRADING CHECKLIST ═══════════════ -->
-<section>
+<section id="sec-checklist">
   <div class="container">
     <div class="section-label">Chapter 08</div>
     <h2>The Pre-Trade <em style="font-style:italic;color:var(--gold)">Checklist</em></h2>
@@ -1695,7 +1944,7 @@
 <hr class="divider">
 
 <!-- ═══════════════ COMMON MISTAKES ═══════════════ -->
-<section>
+<section id="sec-mistakes">
   <div class="container">
     <div class="section-label">Chapter 09</div>
     <h2>Common Beginner <em style="font-style:italic;color:var(--gold)">Mistakes</em></h2>
@@ -1748,7 +1997,7 @@
 <hr class="divider">
 
 <!-- ═══════════════ FINAL SUMMARY ═══════════════ -->
-<section>
+<section id="sec-roadmap">
   <div class="container">
     <div class="section-label">Summary</div>
     <h2>Your Price Action <em style="font-style:italic;color:var(--gold)">Roadmap</em></h2>
@@ -1810,7 +2059,7 @@
       </div>
 
       <!-- 1. HAMMER -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-hammer">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🔨 Hammer</h3>
@@ -1890,7 +2139,7 @@
       </div>
 
       <!-- 2. SHOOTING STAR -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-shooting">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🌠 Shooting Star</h3>
@@ -1969,7 +2218,7 @@
       </div>
 
       <!-- 3. DOJI -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-doji">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>✝️ Doji</h3>
@@ -2044,7 +2293,7 @@
       </div>
 
       <!-- 4. BULLISH ENGULFING -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-bull-eng">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🟢 Bullish Engulfing</h3>
@@ -2117,7 +2366,7 @@
       </div>
 
       <!-- 5. BEARISH ENGULFING -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-bear-eng">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🔴 Bearish Engulfing</h3>
@@ -2182,7 +2431,7 @@
       </div>
 
       <!-- 6. INSIDE BAR -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-inside">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>📦 Inside Bar</h3>
@@ -2259,7 +2508,7 @@
       </div>
 
       <!-- 7. DOUBLE TOP -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-double-top">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🏔️🏔️ Double Top</h3>
@@ -2320,7 +2569,7 @@
       </div>
 
       <!-- 8. DOUBLE BOTTOM -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-double-bot">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🏕️🏕️ Double Bottom</h3>
@@ -2388,7 +2637,7 @@
       <p style="margin-bottom:28px;color:#8a8a7a;font-size:14px">These patterns form <strong style="color:var(--text)">during an uptrend</strong> and signal that the bullish move will <strong style="color:var(--green)">continue higher</strong> after a brief pause or consolidation.</p>
 
       <!-- BULLISH TRIANGLE -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-asc-tri">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>📐 Bullish Ascending Triangle</h3>
@@ -2450,7 +2699,7 @@
       </div>
 
       <!-- BULLISH FLAG -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-bull-flag">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🚩 Bullish Flag</h3>
@@ -2512,7 +2761,7 @@
       </div>
 
       <!-- BULLISH WEDGE (Rising Wedge Correction = Bullish) -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-fall-wedge">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>📉 Bullish Falling Wedge (Continuation)</h3>
@@ -2572,7 +2821,7 @@
       </div>
 
       <!-- BULLISH SYMMETRICAL TRIANGLE -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-bull-sym">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🔺 Bullish Symmetrical Triangle</h3>
@@ -2640,7 +2889,7 @@
       <p style="margin-bottom:28px;color:#8a8a7a;font-size:14px">These patterns form <strong style="color:var(--text)">at the end of a downtrend</strong> and signal a potential <strong style="color:var(--green)">bullish reversal</strong> — a shift from bearish to bullish momentum.</p>
 
       <!-- INVERTED HEAD & SHOULDERS -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-inv-hs">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🙃 Inverted Head &amp; Shoulders</h3>
@@ -2698,7 +2947,7 @@
       </div>
 
       <!-- TRIPLE BOTTOM -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-triple-bot">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🏕️🏕️🏕️ Triple Bottom</h3>
@@ -2768,7 +3017,7 @@
       <p style="margin-bottom:28px;color:#8a8a7a;font-size:14px">These patterns form <strong style="color:var(--text)">during a downtrend</strong> and signal that the bearish move will <strong style="color:var(--red)">continue lower</strong> after a brief pause or relief bounce.</p>
 
       <!-- BEARISH DESCENDING TRIANGLE -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-desc-tri">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🔻 Bearish Descending Triangle</h3>
@@ -2827,7 +3076,7 @@
       </div>
 
       <!-- BEARISH FLAG -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-bear-flag">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🚩 Bearish Flag</h3>
@@ -2886,7 +3135,7 @@
       </div>
 
       <!-- BEARISH SYMMETRICAL TRIANGLE -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-bear-sym">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🔻 Bearish Symmetrical Triangle</h3>
@@ -2940,7 +3189,7 @@
       </div>
 
       <!-- BEARISH RISING WEDGE (continuation) -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-rise-wedge-cont">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>📈 Bearish Rising Wedge (Continuation)</h3>
@@ -3004,7 +3253,7 @@
       <p style="margin-bottom:28px;color:#8a8a7a;font-size:14px">These patterns form <strong style="color:var(--text)">at the end of an uptrend</strong> and signal a potential <strong style="color:var(--red)">bearish reversal</strong> — a shift from bullish to bearish momentum.</p>
 
       <!-- HEAD & SHOULDERS -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-hs">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🏔️ Head &amp; Shoulders</h3>
@@ -3062,7 +3311,7 @@
       </div>
 
       <!-- RISING WEDGE REVERSAL -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-rise-wedge-rev">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>📈 Rising Wedge (Reversal)</h3>
@@ -3116,7 +3365,7 @@
       </div>
 
       <!-- TRIPLE TOP -->
-      <div class="pattern-deep-card">
+      <div class="pattern-deep-card" id="pat-triple-top">
         <div class="pattern-deep-header">
           <div class="title-group">
             <h3>🏔️🏔️🏔️ Triple Top</h3>
@@ -3178,7 +3427,7 @@
     </div><!-- end pg-bear-rev -->
 
     <!-- ─── QUICK REFERENCE TABLE ─── -->
-    <div style="margin-top:16px;margin-bottom:64px">
+    <div id="pat-qr" style="margin-top:16px;margin-bottom:64px">
       <div class="section-label" style="margin-bottom:16px">Quick Reference</div>
       <h2 style="margin-bottom:8px">All Patterns at a <em style="font-style:italic;color:var(--gold)">Glance</em></h2>
       <p>Use this table as your daily cheat-sheet before entering a trade.</p>
@@ -3368,7 +3617,7 @@
   <p>These are the exact setups professional traders look for every day. Each setup has a clear entry, stop-loss, and target. Study them until you can spot them instantly on any chart.</p>
 
   <!-- SETUP 1: Pin Bar at S/R -->
-  <div class="setup-card" style="margin-top:40px">
+  <div class="setup-card" id="setup-1" style="margin-top:40px">
     <div class="setup-card-header">
       <div style="flex:1">
         <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
@@ -3435,7 +3684,7 @@
   </div>
 
   <!-- SETUP 2: Engulfing at HTF Level -->
-  <div class="setup-card">
+  <div class="setup-card" id="setup-2">
     <div class="setup-card-header">
       <div style="flex:1">
         <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
@@ -3495,7 +3744,7 @@
   </div>
 
   <!-- SETUP 3: Inside Bar Breakout -->
-  <div class="setup-card">
+  <div class="setup-card" id="setup-3">
     <div class="setup-card-header">
       <div style="flex:1">
         <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
@@ -3560,7 +3809,7 @@
   </div>
 
   <!-- SETUP 4: Double Bottom -->
-  <div class="setup-card">
+  <div class="setup-card" id="setup-4">
     <div class="setup-card-header">
       <div style="flex:1">
         <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
@@ -3636,14 +3885,14 @@
   <h2>Trading <em style="font-style:italic;color:var(--gold)">Psychology</em></h2>
   <p>90% of traders lose money. Most have the right strategy — they fail on execution. Trading psychology is <strong>the final, hardest frontier</strong> that separates consistent winners from everyone else.</p>
 
-  <div class="psych-hero" style="margin-top:36px">
+  <div class="psych-hero" id="psych-truth" style="margin-top:36px">
     <div style="font-size:48px;margin-bottom:16px">🧠</div>
     <h3 style="font-size:28px;margin-bottom:12px">The Hard Truth About Trading</h3>
     <p style="max-width:620px;margin:0 auto;color:#b0aca4">Your brain was <strong>NOT designed for trading</strong>. Every instinct you have — fear, greed, hope — works against you in the markets. Trading is about systematically overriding your primal brain with disciplined logic.</p>
   </div>
 
   <!-- The 6 Emotional Enemies -->
-  <div class="section-label" style="margin-top:48px">The 6 Emotional Enemies</div>
+  <div class="section-label" id="psych-enemies" style="margin-top:48px">The 6 Emotional Enemies</div>
   <h3 style="font-size:26px;margin-bottom:8px">What destroys traders — <em style="color:var(--red);font-style:italic">and how to fight back</em></h3>
   <div class="emotion-wheel">
     <div class="emotion-card">
@@ -3697,7 +3946,7 @@
   </div>
 
   <!-- Loser vs Winner Mindset -->
-  <div class="section-label" style="margin-top:56px">Mindset Shift</div>
+  <div class="section-label" id="psych-mindset" style="margin-top:56px">Mindset Shift</div>
   <h3 style="font-size:26px;margin-bottom:8px">Loser vs <em style="color:var(--green);font-style:italic">Winner</em> Mindset</h3>
   <div class="mindset-grid">
     <div class="mindset-col bad">
@@ -3721,7 +3970,7 @@
   </div>
 
   <!-- Daily Routine -->
-  <div class="section-label" style="margin-top:56px">The Daily Routine</div>
+  <div class="section-label" id="psych-routine" style="margin-top:56px">The Daily Routine</div>
   <h3 style="font-size:26px;margin-bottom:8px">Build a <em style="color:var(--gold);font-style:italic">Trading Routine</em></h3>
   <p>Professionals don't react to the market — they have a structured routine that removes emotion from the equation.</p>
   <div class="routine-steps">
@@ -3759,7 +4008,7 @@
 <div class="tab-panel" id="tab-journal">
 <section style="padding:60px 0 80px">
 <div class="container">
-  <div class="section-label">Track Your Edge</div>
+  <div class="section-label" id="jour-stats">Track Your Edge</div>
   <h2>Interactive <em style="font-style:italic;color:var(--gold)">Trade Journal</em></h2>
   <p>The single most effective habit of profitable traders. Log every trade, find your patterns, eliminate your mistakes. Your journal is your <strong>data-driven edge</strong>.</p>
 
@@ -3776,7 +4025,7 @@
 
     <!-- Entry Form -->
     <div class="journal-form">
-      <h3>📝 Log New Trade</h3>
+      <h3 id="jour-log">📝 Log New Trade</h3>
       <div class="form-grid">
         <div class="field-group">
           <label>Date</label>
@@ -3853,7 +4102,7 @@
     </div>
 
     <!-- Trade Log -->
-    <div class="section-label" style="margin-bottom:16px">Trade Log</div>
+    <div class="section-label" id="jour-history" style="margin-bottom:16px">Trade Log</div>
     <div class="journal-log-header">
       <span>Date</span><span>Symbol</span><span>Setup</span><span>Direction</span><span>Entry</span><span>Exit</span><span>P&amp;L</span><span>Notes</span>
     </div>
@@ -3873,7 +4122,7 @@
   <h2>Position Size &amp; <em style="font-style:italic;color:var(--gold)">Risk Calculator</em></h2>
   <p>The most important tool in a trader's arsenal. Never enter a trade without knowing <strong>exactly how much you're risking</strong> and how many units to buy.</p>
 
-  <div class="calc-wrap" style="margin-top:40px">
+  <div class="calc-wrap" id="calc-inputs" style="margin-top:40px">
 
     <!-- Main Calculator -->
     <div class="calc-card">
@@ -3909,7 +4158,7 @@
         </div>
       </div>
 
-      <div class="calc-results" id="calcResults">
+      <div class="calc-results" id="calc-results">
         <div class="calc-result-box highlight-result">
           <span class="crb-val" id="r_shares">—</span>
           <span class="crb-lbl">Shares / Units</span>
@@ -3941,7 +4190,7 @@
     </div>
 
     <!-- Win Rate Scenario Table -->
-    <div class="calc-card">
+    <div class="calc-card" id="calc-scenario">
       <h3>📊 Win Rate Scenario Analysis</h3>
       <p style="font-size:14px;margin-bottom:0">Assuming your risk:reward ratio and a series of 20 trades — here's your expected outcome at different win rates. This shows you why a good R:R ratio can be profitable even with a low win rate.</p>
       <table class="scenarios-table" id="scenarioTable">
@@ -3955,7 +4204,7 @@
     </div>
 
     <!-- Key Rules -->
-    <div class="calc-card" style="background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.3)">
+    <div class="calc-card" id="calc-rules" style="background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.3)">
       <h3 style="color:var(--gold)">📏 The Golden Rules of Risk Management</h3>
       <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:4px">
         <li style="display:flex;gap:14px;font-size:14px;color:#a8a49a"><span style="color:var(--gold);font-size:18px;flex-shrink:0">①</span><span><strong style="color:var(--text)">Never risk more than 1-2% per trade.</strong> With a ₹5L account, that's ₹5,000–₹10,000 max risk. Even 10 consecutive losses won't blow your account.</span></li>
@@ -3972,8 +4221,57 @@
 
 <!-- ═══════════════ TAB + JOURNAL SCRIPTS ═══════════════ -->
 <script>
+// ─── SIDEBAR ───
+function toggleSidebar() {
+  const body = document.body;
+  const btn = document.getElementById('sidebar-toggle');
+  const isMobile = window.innerWidth <= 900;
+
+  if (isMobile) {
+    body.classList.toggle('sidebar-open');
+    btn.textContent = body.classList.contains('sidebar-open') ? '◀' : '▶';
+  } else {
+    body.classList.toggle('sidebar-collapsed');
+    btn.textContent = body.classList.contains('sidebar-collapsed') ? '▶' : '◀';
+  }
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const offset = 70;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: 'smooth' });
+
+  // highlight active link
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll(`.sidebar-link[onclick*="${id}"]`).forEach(l => l.classList.add('active'));
+}
+
+
+
+// Scroll spy — highlight sidebar link as user scrolls
+function updateScrollSpy() {
+  const activePanel = document.querySelector('.tab-panel.active');
+  if (!activePanel) return;
+  const sections = activePanel.querySelectorAll('[id]');
+  let current = null;
+  sections.forEach(sec => {
+    const rect = sec.getBoundingClientRect();
+    if (rect.top <= 100) current = sec.id;
+  });
+  if (!current) return;
+  document.querySelectorAll('.sidebar-link').forEach(l => {
+    const onclick = l.getAttribute('onclick') || '';
+    l.classList.toggle('active', onclick.includes("'" + current + "'"));
+  });
+}
+
+window.addEventListener('scroll', updateScrollSpy, { passive: true });
+
 // ─── TAB SWITCHING ───
 function switchTab(tabId) {
+  // Switch tab panels
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   const panel = document.getElementById('tab-' + tabId);
@@ -3982,6 +4280,27 @@ function switchTab(tabId) {
   const btns = document.querySelectorAll('.tab-btn');
   if (btns[map[tabId]]) btns[map[tabId]].classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // ── Update sidebar TOC ──
+  document.querySelectorAll('.sidebar-section').forEach(s => s.classList.remove('active'));
+  const stoc = document.getElementById('stoc-' + tabId);
+  if (stoc) stoc.classList.add('active');
+  // Update sidebar header label
+  const labels = {
+    guide:      '📘 Full Guide',
+    patterns:   '📊 PA Patterns',
+    setups:     '📈 Trade Setups',
+    psychology: '🧠 Psychology',
+    journal:    '📋 Trade Journal',
+    calculator: '🔢 Risk Calculator'
+  };
+  const nameEl = document.getElementById('sidebar-tab-name');
+  if (nameEl) nameEl.textContent = labels[tabId] || '';
+  // Clear active link highlights
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  // Scroll sidebar back to top
+  const sb = document.getElementById('sidebar');
+  if (sb) sb.scrollTop = 0;
 }
 
 // ─── JOURNAL ───
@@ -4155,5 +4474,6 @@ window.addEventListener('load', calcAll);
   </div>
 </footer>
 
+</div><!-- end .page-content -->
 </body>
 </html>
