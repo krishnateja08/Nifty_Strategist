@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Trading Mastery — Pro Trader's Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1e2d47;
+    --gold: #f0b429;
+    --gold2: #fcd34d;
+    --green: #10b981;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+    --cyan: #06b6d4;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --dim: #475569;
+    --accent: #f0b429;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0a0e1a 0%, #0f1e35 50%, #0a0e1a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(240,180,41,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 20%;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(240,180,41,0.15);
+    border: 1px solid rgba(240,180,41,0.4);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 54px);
+    font-weight: 900;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #f0b429, #fcd34d, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+
+  .header p {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .meta-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* NAV TABS */
+  .nav-wrapper {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-tabs {
+    display: flex;
+    overflow-x: auto;
+    padding: 0 24px;
+    gap: 0;
+    scrollbar-width: none;
+  }
+
+  .nav-tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    padding: 16px 22px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  .tab-icon { font-size: 15px; }
+
+  /* CONTENT */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  /* PRO TIP BOX */
+  .pro-tip {
+    background: linear-gradient(135deg, rgba(240,180,41,0.08), rgba(240,180,41,0.03));
+    border: 1px solid rgba(240,180,41,0.25);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .pro-tip strong { color: var(--gold); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 6px; }
+
+  .warning-box {
+    background: rgba(239,68,68,0.06);
+    border: 1px solid rgba(239,68,68,0.2);
+    border-left: 3px solid var(--red);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+
+  .warning-box strong { color: var(--red); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 6px; }
+
+  .success-box {
+    background: rgba(16,185,129,0.06);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-left: 3px solid var(--green);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+
+  .success-box strong { color: var(--green); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 6px; }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .card .tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .tag-beginner { background: rgba(16,185,129,0.15); color: var(--green); }
+  .tag-intermediate { background: rgba(240,180,41,0.15); color: var(--gold); }
+  .tag-advanced { background: rgba(239,68,68,0.15); color: var(--red); }
+
+  /* TABLES */
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  thead {
+    background: var(--surface2);
+  }
+
+  thead th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+  tbody td {
+    padding: 14px 18px;
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  .td-label {
+    font-weight: 600;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .bullish { color: var(--green); font-weight: 600; }
+  .bearish { color: var(--red); font-weight: 600; }
+  .neutral { color: var(--blue); font-weight: 600; }
+
+  /* CANDLE CHART VISUAL */
+  .chart-visual {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .chart-title {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .candle-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .candle-label { font-size: 12px; color: var(--muted); width: 80px; }
+
+  .candle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .wick { width: 2px; background: currentColor; }
+  .body { width: 16px; border-radius: 2px; }
+  .candle-green { color: var(--green); }
+  .candle-red { color: var(--red); }
+  .candle-green .body { background: var(--green); }
+  .candle-red .body { background: var(--red); }
+
+  .candle-desc {
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1;
+  }
+
+  /* INDICATOR METER */
+  .meter-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+
+  .meter-label { font-size: 13px; color: var(--text); width: 120px; }
+
+  .meter-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    min-width: 100px;
+  }
+
+  .meter-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s ease;
+  }
+
+  .meter-val { font-size: 12px; color: var(--muted); font-family: 'DM Mono'; width: 40px; text-align: right; }
+
+  /* STEPS */
+  .steps { margin: 24px 0; }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(240,180,41,0.15);
+    border: 1px solid rgba(240,180,41,0.4);
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'DM Mono';
+  }
+
+  .step-body h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .step-body p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* FORMULA BLOCK */
+  .formula {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--cyan);
+    margin: 12px 0;
+    overflow-x: auto;
+  }
+
+  /* SIGNAL TABLE */
+  .signal-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+
+  .dot-green { background: var(--green); }
+  .dot-red { background: var(--red); }
+  .dot-yellow { background: var(--gold); }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  @media (max-width: 640px) {
+    .two-col { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+
+  .col-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .col-box h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .col-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .col-box ul li {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .col-box ul li:last-child { border-bottom: none; }
+  .col-box ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+
+  /* ROADMAP */
+  .roadmap {
+    position: relative;
+    padding-left: 32px;
+    margin: 24px 0;
+  }
+
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--blue), var(--purple));
+  }
+
+  .roadmap-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+
+  .roadmap-dot {
+    position: absolute;
+    left: -27px;
+    top: 4px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: var(--bg);
+  }
+
+  .roadmap-item h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .roadmap-item p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .phase-1 { border-color: var(--green); }
+  .phase-2 { border-color: var(--gold); }
+  .phase-3 { border-color: var(--blue); }
+  .phase-4 { border-color: var(--purple); }
+  .phase-5 { border-color: var(--red); }
+
+  .phase-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+
+  h2 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--text); margin: 28px 0 12px; }
+  h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 20px 0 8px; }
+  p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 32px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--dim);
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="badge">📈 Pro Trader's Complete Guide</div>
+  <h1>Technical Trading Mastery</h1>
+  <p>A professional breakdown of every topic you need — explained clearly for traders with 1 year of experience, ready to level up.</p>
+  <div class="header-meta">
+    <div class="meta-item"><span class="meta-dot"></span> Live curriculum</div>
+    <div class="meta-item">📚 10 Core Modules</div>
+    <div class="meta-item">⏱️ 6–12 Month Roadmap</div>
+    <div class="meta-item">🎯 Professional Level</div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-wrapper">
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showTab('price-action')"><span class="tab-icon">🕯️</span> Price Action</button>
+    <button class="tab-btn" onclick="showTab('chart-patterns')"><span class="tab-icon">📊</span> Chart Patterns</button>
+    <button class="tab-btn" onclick="showTab('indicators')"><span class="tab-icon">📡</span> Indicators</button>
+    <button class="tab-btn" onclick="showTab('volume')"><span class="tab-icon">📦</span> Volume</button>
+    <button class="tab-btn" onclick="showTab('risk')"><span class="tab-icon">🛡️</span> Risk Management</button>
+    <button class="tab-btn" onclick="showTab('market-structure')"><span class="tab-icon">🏗️</span> Market Structure</button>
+    <button class="tab-btn" onclick="showTab('advanced')"><span class="tab-icon">🔬</span> Advanced Concepts</button>
+    <button class="tab-btn" onclick="showTab('execution')"><span class="tab-icon">⚡</span> Execution</button>
+    <button class="tab-btn" onclick="showTab('psychology')"><span class="tab-icon">🧠</span> Psychology</button>
+    <button class="tab-btn" onclick="showTab('roadmap')"><span class="tab-icon">🗺️</span> Roadmap</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- ===================== PRICE ACTION ===================== -->
+  <div id="price-action" class="tab-panel active">
+    <div class="section-title">🕯️ Price Action</div>
+    <div class="section-sub">The foundation of all technical analysis — reading the raw language of the market</div>
+
+    <p>Before you use any indicator, you must master price action. Price action is simply studying how price moves over time using candlestick charts. Every candlestick tells you a battle between buyers (bulls) and sellers (bears). After 1 year of trading, you should start focusing heavily here — it's where professional discretionary traders live.</p>
+
+    <div class="pro-tip">
+      <strong>💡 Pro Tip</strong>
+      Indicators are derived FROM price — they lag behind. If you can read price action directly, you get signals earlier and cleaner. Spend at least 3 months focusing only on raw candlestick charts before adding indicators back.
+    </div>
+
+    <h2>Candlestick Patterns — Key Ones to Master</h2>
+
+    <div class="chart-visual">
+      <div class="chart-title">Visual Guide — Candlestick Anatomy & Patterns</div>
+
+      <div class="candle-row">
+        <div class="candle-label">Bullish Candle</div>
+        <div class="candle candle-green">
+          <div class="wick" style="height:18px"></div>
+          <div class="body" style="height:30px"></div>
+          <div class="wick" style="height:8px"></div>
+        </div>
+        <div class="candle-desc">Open at bottom, close at top. Green = buyers won the session. Long body = strong buying pressure.</div>
+      </div>
+
+      <div class="candle-row">
+        <div class="candle-label">Bearish Candle</div>
+        <div class="candle candle-red">
+          <div class="wick" style="height:12px"></div>
+          <div class="body" style="height:30px"></div>
+          <div class="wick" style="height:18px"></div>
+        </div>
+        <div class="candle-desc">Open at top, close at bottom. Red = sellers dominated. Long body = heavy selling pressure.</div>
+      </div>
+
+      <div class="candle-row">
+        <div class="candle-label">Doji</div>
+        <div class="candle candle-green">
+          <div class="wick" style="height:22px"></div>
+          <div class="body" style="height:2px"></div>
+          <div class="wick" style="height:22px"></div>
+        </div>
+        <div class="candle-desc">Open ≈ Close. Indecision. Buyers and sellers fought to a draw. Powerful at key support/resistance levels.</div>
+      </div>
+
+      <div class="candle-row">
+        <div class="candle-label">Hammer</div>
+        <div class="candle candle-green">
+          <div class="wick" style="height:4px"></div>
+          <div class="body" style="height:14px"></div>
+          <div class="wick" style="height:38px"></div>
+        </div>
+        <div class="candle-desc">Long lower wick, small body. Sellers pushed price down hard but buyers rejected it. Bullish reversal signal at bottoms.</div>
+      </div>
+
+      <div class="candle-row">
+        <div class="candle-label">Shooting Star</div>
+        <div class="candle candle-red">
+          <div class="wick" style="height:38px"></div>
+          <div class="body" style="height:14px"></div>
+          <div class="wick" style="height:4px"></div>
+        </div>
+        <div class="candle-desc">Long upper wick, small body. Buyers tried to push up but were rejected. Bearish reversal signal at tops.</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Signal</th>
+            <th>Where to Look</th>
+            <th>Reliability</th>
+            <th>Real Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-label">Hammer</td>
+            <td class="bullish">Bullish Reversal</td>
+            <td>At support levels, after downtrend</td>
+            <td>⭐⭐⭐⭐</td>
+            <td>AAPL often forms hammers at 200-day MA during corrections</td>
+          </tr>
+          <tr>
+            <td class="td-label">Engulfing</td>
+            <td class="bullish">Bullish/Bearish</td>
+            <td>End of trends, key S/R zones</td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>Bullish engulfing on SPY at March 2023 lows — led to 10%+ rally</td>
+          </tr>
+          <tr>
+            <td class="td-label">Doji</td>
+            <td class="neutral">Indecision</td>
+            <td>Near resistance, before news</td>
+            <td>⭐⭐⭐</td>
+            <td>Doji on BTC before major breakouts or breakdowns</td>
+          </tr>
+          <tr>
+            <td class="td-label">Shooting Star</td>
+            <td class="bearish">Bearish Reversal</td>
+            <td>At resistance, after uptrend</td>
+            <td>⭐⭐⭐⭐</td>
+            <td>Shooting star at 52-week highs often precedes 5–8% pullbacks</td>
+          </tr>
+          <tr>
+            <td class="td-label">Morning Star</td>
+            <td class="bullish">Strong Bullish</td>
+            <td>Bottom of downtrend, support</td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>3-candle pattern; high win rate when combined with volume spike</td>
+          </tr>
+          <tr>
+            <td class="td-label">Evening Star</td>
+            <td class="bearish">Strong Bearish</td>
+            <td>Top of uptrend, resistance</td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>Common at earnings tops on overextended stocks</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Trends, Support & Resistance</h2>
+    <div class="two-col">
+      <div class="col-box">
+        <h4 style="color: var(--green);">✅ Uptrend Rules</h4>
+        <ul>
+          <li>Price makes Higher Highs (HH) and Higher Lows (HL)</li>
+          <li>Buy dips to support — don't chase breakouts</li>
+          <li>The trend is your friend until it ends</li>
+          <li>50 EMA should be below price in a healthy uptrend</li>
+          <li>Volume should increase on up moves, decrease on pullbacks</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4 style="color: var(--red);">📉 Downtrend Rules</h4>
+        <ul>
+          <li>Price makes Lower Highs (LH) and Lower Lows (LL)</li>
+          <li>Sell rallies to resistance — don't short breakdowns blindly</li>
+          <li>Avoid trying to "catch the falling knife"</li>
+          <li>50 EMA should be above price in a downtrend</li>
+          <li>Volume should surge on down days — confirms selling</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <strong>⚠️ Common Mistake</strong>
+      New traders try to pick tops and bottoms. Don't. Wait for CONFIRMATION of a trend change (a higher low in a downtrend, or a lower high in an uptrend) before switching bias. This alone will save you from many losing trades.
+    </div>
+  </div>
+
+  <!-- ===================== CHART PATTERNS ===================== -->
+  <div id="chart-patterns" class="tab-panel">
+    <div class="section-title">📊 Chart Patterns</div>
+    <div class="section-sub">Multi-candle formations that signal continuation or reversal of trends</div>
+
+    <p>Chart patterns are formations made by price over days, weeks, or months. They show the psychology of market participants — accumulation, distribution, indecision, and conviction. After recognizing these on a chart, you combine them with volume and indicators to confirm trades.</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">🔶</div>
+        <h3>Head & Shoulders</h3>
+        <p>Most reliable reversal pattern. Three peaks — middle is highest (head). Neckline break = confirmation. <strong>Target = distance from head to neckline, projected downward.</strong></p>
+        <span class="tag tag-intermediate">Reversal</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔺</div>
+        <h3>Ascending Triangle</h3>
+        <p>Flat top resistance + rising lows. Buyers are getting more aggressive. Breakout above flat top = strong bullish signal. Volume should surge on breakout.</p>
+        <span class="tag tag-beginner">Continuation</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔻</div>
+        <h3>Descending Triangle</h3>
+        <p>Flat bottom support + lower highs. Sellers dominating. Breakdown below flat support = bearish continuation. High failure rate in bull markets — context matters.</p>
+        <span class="tag tag-beginner">Continuation</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚩</div>
+        <h3>Bull Flag</h3>
+        <p>Sharp move up (pole) → consolidation in a slight downward channel (flag) → breakout. One of the most reliable intraday patterns. The flag should have LOW volume.</p>
+        <span class="tag tag-beginner">Continuation</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">⬆️</div>
+        <h3>Cup & Handle</h3>
+        <p>Rounding bottom (cup) followed by a small pullback (handle) then breakout. Classic long-term pattern on daily/weekly charts. Popularized by William O'Neil.</p>
+        <span class="tag tag-intermediate">Reversal</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">💎</div>
+        <h3>Diamond Top</h3>
+        <p>Rare but powerful reversal. Looks like a diamond shape at market tops. Combination of expanding then contracting volatility. Very reliable when identified correctly.</p>
+        <span class="tag tag-advanced">Reversal</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">📐</div>
+        <h3>Wedge Patterns</h3>
+        <p>Rising wedge = bearish (price rising but losing momentum). Falling wedge = bullish (price falling but selling exhausted). Both indicate compression before a breakout.</p>
+        <span class="tag tag-intermediate">Both</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">↔️</div>
+        <h3>Rectangle / Channel</h3>
+        <p>Price bouncing between horizontal support and resistance. Trade the range OR wait for breakout. Breakouts from long rectangles are very powerful — big moves follow.</p>
+        <span class="tag tag-beginner">Both</span>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Type</th>
+            <th>Timeframe</th>
+            <th>Volume Clue</th>
+            <th>Entry Signal</th>
+            <th>Stop Loss</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-label">Head & Shoulders</td>
+            <td class="bearish">Reversal ↓</td>
+            <td>Daily/Weekly</td>
+            <td>Low on right shoulder</td>
+            <td>Break of neckline</td>
+            <td>Above right shoulder</td>
+          </tr>
+          <tr>
+            <td class="td-label">Bull Flag</td>
+            <td class="bullish">Continuation ↑</td>
+            <td>5min – Daily</td>
+            <td>Low during flag</td>
+            <td>Break above flag top</td>
+            <td>Below flag low</td>
+          </tr>
+          <tr>
+            <td class="td-label">Ascending Triangle</td>
+            <td class="bullish">Continuation ↑</td>
+            <td>Daily</td>
+            <td>Builds during base</td>
+            <td>Break above flat top</td>
+            <td>Below last higher low</td>
+          </tr>
+          <tr>
+            <td class="td-label">Rising Wedge</td>
+            <td class="bearish">Reversal ↓</td>
+            <td>Daily/4H</td>
+            <td>Declining in wedge</td>
+            <td>Break below lower trendline</td>
+            <td>Above wedge top</td>
+          </tr>
+          <tr>
+            <td class="td-label">Cup & Handle</td>
+            <td class="bullish">Reversal ↑</td>
+            <td>Weekly</td>
+            <td>Surge at breakout</td>
+            <td>Break above handle</td>
+            <td>Below handle low</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="success-box">
+      <strong>✅ Pattern Checklist Before Entering</strong>
+      1. Is the pattern on a significant timeframe (not just 1-minute)? &nbsp;2. Is volume confirming the move? &nbsp;3. Is there a clean level to place your stop loss? &nbsp;4. Does the risk/reward justify the trade (minimum 2:1)?
+    </div>
+  </div>
+
+  <!-- ===================== INDICATORS ===================== -->
+  <div id="indicators" class="tab-panel">
+    <div class="section-title">📡 Technical Indicators</div>
+    <div class="section-sub">Tools to quantify momentum, trend, and mean reversion — use them to confirm, not predict</div>
+
+    <p>Indicators are mathematical calculations applied to price and volume data. They are NOT magic — they are tools. The key insight is that <strong>indicators confirm what price is already showing</strong>. Never trade an indicator signal that contradicts the price action trend.</p>
+
+    <div class="warning-box">
+      <strong>⚠️ Indicator Overload Warning</strong>
+      Using 5+ indicators is called "analysis paralysis." Professional traders typically use 2–3 complementary indicators maximum. Pick one trend indicator (e.g., Moving Average) + one momentum indicator (e.g., RSI) + one volume indicator (e.g., OBV). That's enough.
+    </div>
+
+    <h2>Moving Averages (MA)</h2>
+    <p>The single most important indicator to master. Moving averages smooth out price data to show the trend direction.</p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>MA Type</th>
+            <th>How It Works</th>
+            <th>Best For</th>
+            <th>Common Settings</th>
+            <th>Pro Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-label">SMA (Simple)</td>
+            <td>Average of last N closing prices</td>
+            <td>Identifying trend direction</td>
+            <td>50, 100, 200</td>
+            <td>200 SMA = the most watched institutional level on daily charts</td>
+          </tr>
+          <tr>
+            <td class="td-label">EMA (Exponential)</td>
+            <td>Gives more weight to recent prices — reacts faster</td>
+            <td>Entry timing, faster signals</td>
+            <td>9, 21, 50</td>
+            <td>9 EMA is key for momentum traders on intraday charts</td>
+          </tr>
+          <tr>
+            <td class="td-label">VWAP</td>
+            <td>Volume-Weighted Average Price — resets daily</td>
+            <td>Intraday trading, institutional reference</td>
+            <td>Daily VWAP</td>
+            <td>Price above VWAP = bullish intraday bias. Below = bearish bias</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="formula">
+      📐 Golden Cross: 50 SMA crosses ABOVE 200 SMA → Strong Bullish Signal<br>
+      📐 Death Cross: 50 SMA crosses BELOW 200 SMA → Strong Bearish Signal<br>
+      📐 EMA Trend: Price &gt; 9 EMA &gt; 21 EMA &gt; 50 EMA = Strong Uptrend (all aligned)
+    </div>
+
+    <h2>RSI — Relative Strength Index</h2>
+    <p>Measures speed and magnitude of price changes. Oscillates between 0 and 100. One of the most abused indicators — most traders use it wrong.</p>
+
+    <div class="chart-visual">
+      <div class="chart-title">RSI Levels — What They Mean</div>
+      <div class="meter-row"><div class="meter-label">RSI 80+ (Extreme OB)</div><div class="meter-bar"><div class="meter-fill" style="width:80%;background:var(--red)"></div></div><div class="meter-val" style="color:var(--red)">80+</div></div>
+      <div class="meter-row"><div class="meter-label">RSI 70 (Overbought)</div><div class="meter-bar"><div class="meter-fill" style="width:70%;background:var(--red)"></div></div><div class="meter-val" style="color:var(--red)">70</div></div>
+      <div class="meter-row"><div class="meter-label">RSI 50 (Neutral)</div><div class="meter-bar"><div class="meter-fill" style="width:50%;background:var(--blue)"></div></div><div class="meter-val" style="color:var(--blue)">50</div></div>
+      <div class="meter-row"><div class="meter-label">RSI 30 (Oversold)</div><div class="meter-bar"><div class="meter-fill" style="width:30%;background:var(--green)"></div></div><div class="meter-val" style="color:var(--green)">30</div></div>
+      <div class="meter-row"><div class="meter-label">RSI 20- (Extreme OS)</div><div class="meter-bar"><div class="meter-fill" style="width:20%;background:var(--green)"></div></div><div class="meter-val" style="color:var(--green)">20-</div></div>
+    </div>
+
+    <div class="pro-tip">
+      <strong>💡 How Pros Use RSI Differently</strong>
+      In a strong uptrend, RSI 50 acts as support — not RSI 30. RSI can stay "overbought" at 70–80 for weeks in momentum stocks. The real edge is RSI divergence: when price makes a new high but RSI makes a lower high → momentum fading → potential reversal ahead.
+    </div>
+
+    <h2>MACD — Moving Average Convergence Divergence</h2>
+    <div class="formula">
+      MACD Line = 12-period EMA − 26-period EMA<br>
+      Signal Line = 9-period EMA of MACD Line<br>
+      Histogram = MACD Line − Signal Line (shows momentum building or fading)
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>MACD Signal</th><th>What It Means</th><th>How to Use It</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-label">Bullish Crossover</td><td>MACD crosses above Signal Line</td><td>Potential buy signal — confirm with price action and trend</td></tr>
+          <tr><td class="td-label">Bearish Crossover</td><td>MACD crosses below Signal Line</td><td>Potential sell signal — best when below zero line</td></tr>
+          <tr><td class="td-label">Zero Line Cross ↑</td><td>MACD crosses above 0</td><td>Trend turning bullish — more reliable signal than crossover</td></tr>
+          <tr><td class="td-label">Histogram Expanding</td><td>Bars getting larger</td><td>Momentum building — trend likely to continue</td></tr>
+          <tr><td class="td-label">Divergence</td><td>Price vs. MACD diverge</td><td>Most powerful signal — warning of trend exhaustion</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Bollinger Bands</h2>
+    <p>Three lines: a 20-period SMA (middle) with upper and lower bands 2 standard deviations away. They show volatility and potential extremes.</p>
+    <div class="two-col">
+      <div class="col-box">
+        <h4 style="color: var(--gold);">📏 Key Signals</h4>
+        <ul>
+          <li>Bands squeezing together = volatility contraction → big move coming</li>
+          <li>Price touching upper band + reversal candle = potential short setup</li>
+          <li>Price touching lower band + hammer = potential long setup</li>
+          <li>"Riding the band" — strong trends hug the outer band for weeks</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4 style="color: var(--blue);">📌 Pro Settings</h4>
+        <ul>
+          <li>Standard: 20 SMA, 2.0 standard deviation — works for most markets</li>
+          <li>Crypto traders use 20 SMA, 2.5 std dev due to higher volatility</li>
+          <li>Combine with RSI: BB touch + RSI extreme = high probability reversal</li>
+          <li>Combine squeeze with MACD for breakout trades</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== VOLUME ===================== -->
+  <div id="volume" class="tab-panel">
+    <div class="section-title">📦 Volume Analysis</div>
+    <div class="section-sub">Volume is the fuel behind price moves — without it, breakouts fail</div>
+
+    <p>Volume is the number of shares/contracts traded in a period. It's the most important confirmation tool in technical analysis. Price moves on high volume are meaningful. Price moves on low volume are suspect. This is the single most underutilized edge for retail traders.</p>
+
+    <div class="pro-tip">
+      <strong>💡 The Golden Rule</strong>
+      Volume precedes price. Watch for unusual volume BEFORE a big move — it tells you smart money is positioning. If price breaks out without volume, treat it as a false breakout until proven otherwise.
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Scenario</th><th>Price</th><th>Volume</th><th>Interpretation</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-label">Strong Breakout</td>
+            <td class="bullish">↑ Rising</td>
+            <td class="bullish">↑ High (2x avg)</td>
+            <td>Institutions are buying — real breakout</td>
+            <td>Buy with confidence</td>
+          </tr>
+          <tr>
+            <td class="td-label">Weak Breakout</td>
+            <td class="bullish">↑ Rising</td>
+            <td class="bearish">↓ Low</td>
+            <td>Retail chase — likely false breakout</td>
+            <td>Wait or skip the trade</td>
+          </tr>
+          <tr>
+            <td class="td-label">Healthy Pullback</td>
+            <td class="bearish">↓ Falling</td>
+            <td class="bullish">↓ Low volume</td>
+            <td>Weak sellers — buyers still in control</td>
+            <td>Look for buy entry at support</td>
+          </tr>
+          <tr>
+            <td class="td-label">Distribution</td>
+            <td class="bullish">↑ Rising</td>
+            <td class="bearish">↑ High selling</td>
+            <td>Smart money selling into retail buyers</td>
+            <td>Reduce longs, be cautious</td>
+          </tr>
+          <tr>
+            <td class="td-label">Climax Sell-off</td>
+            <td class="bearish">↓ Falling fast</td>
+            <td class="bearish">↑ Panic volume</td>
+            <td>Exhaustion — potential bottom forming</td>
+            <td>Watch for reversal candle before buying</td>
+          </tr>
+          <tr>
+            <td class="td-label">Accumulation</td>
+            <td class="neutral">→ Sideways</td>
+            <td class="bullish">↑ Quiet buying</td>
+            <td>Smart money slowly accumulating</td>
+            <td>Buy breakout above range with volume</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>OBV — On Balance Volume</h2>
+    <p>OBV adds volume on up days and subtracts volume on down days. It's a running total that shows whether money is flowing in or out of an asset.</p>
+    <div class="formula">
+      If Price Closes UP → OBV = Previous OBV + Current Volume<br>
+      If Price Closes DOWN → OBV = Previous OBV − Current Volume<br><br>
+      🔑 OBV rising while price flat = accumulation → breakout likely coming<br>
+      🔑 OBV falling while price flat = distribution → breakdown likely coming
+    </div>
+
+    <h2>VWAP — Volume Weighted Average Price</h2>
+    <p>The single most important intraday indicator. Every institutional desk watches VWAP. It's the average price weighted by volume for the current session.</p>
+    <div class="two-col">
+      <div class="col-box">
+        <h4 style="color: var(--green);">Above VWAP = Bullish</h4>
+        <ul>
+          <li>Institutions are in profit — likely to hold or add</li>
+          <li>Pullbacks to VWAP are buy opportunities in uptrends</li>
+          <li>First test of VWAP from above often holds as support</li>
+          <li>Day traders prefer long trades when price is above VWAP</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4 style="color: var(--red);">Below VWAP = Bearish</h4>
+        <ul>
+          <li>Institutions underwater — they may sell rallies to reduce loss</li>
+          <li>Bounces to VWAP are short opportunities in downtrends</li>
+          <li>First test of VWAP from below often gets rejected</li>
+          <li>Day traders prefer short trades when price is below VWAP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== RISK MANAGEMENT ===================== -->
+  <div id="risk" class="tab-panel">
+    <div class="section-title">🛡️ Risk Management</div>
+    <div class="section-sub">The only topic that separates traders who survive from those who blow up — non-negotiable</div>
+
+    <p>You can be right only 40% of the time and still be profitable if your winners are bigger than your losers. Risk management is the engine that keeps you in the game long enough to let your edge play out. After 1 year of trading, this should be your OBSESSION.</p>
+
+    <div class="warning-box">
+      <strong>⚠️ Reality Check</strong>
+      90% of traders who blow up their accounts do so because of poor risk management — NOT because of bad trade ideas. Having a great setup means nothing if you risk 20% of your account on one trade.
+    </div>
+
+    <h2>Position Sizing — The 1–2% Rule</h2>
+
+    <div class="formula">
+      Risk per Trade = Account Size × Risk % (max 1–2%)<br>
+      Example: $10,000 account × 1% = $100 risk per trade<br><br>
+      Position Size = Risk Amount ÷ (Entry Price − Stop Loss Price)<br>
+      Example: $100 ÷ ($50.00 − $48.50) = $100 ÷ $1.50 = 66 shares
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Account Size</th><th>Risk Per Trade (1%)</th><th>Risk Per Trade (2%)</th><th>Max Open Risk (6%)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-label">$5,000</td><td>$50</td><td>$100</td><td>$300</td></tr>
+          <tr><td class="td-label">$10,000</td><td>$100</td><td>$200</td><td>$600</td></tr>
+          <tr><td class="td-label">$25,000</td><td>$250</td><td>$500</td><td>$1,500</td></tr>
+          <tr><td class="td-label">$50,000</td><td>$500</td><td>$1,000</td><td>$3,000</td></tr>
+          <tr><td class="td-label">$100,000</td><td>$1,000</td><td>$2,000</td><td>$6,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Risk-Reward Ratio (R:R)</h2>
+    <p>Every trade must have a minimum 2:1 risk-reward ratio. That means you target to make at least 2x what you're risking. At 2:1, you only need to be right 34% of the time to break even.</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">❌</div>
+        <h3>1:1 Risk-Reward</h3>
+        <p>Risk $100 to make $100. You need to be right >50% of the time to be profitable. After commissions and fees — very difficult long-term. <strong>Avoid this.</strong></p>
+        <span class="tag tag-advanced">Avoid</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">✅</div>
+        <h3>2:1 Risk-Reward</h3>
+        <p>Risk $100 to make $200. Win rate needed: 34%+. This is the MINIMUM acceptable for most trading strategies. You can be wrong 2 out of 3 trades and still break even.</p>
+        <span class="tag tag-beginner">Minimum</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏆</div>
+        <h3>3:1 Risk-Reward</h3>
+        <p>Risk $100 to make $300. Win rate needed: only 26%+. Elite setups only. These trades come from patient waiting at key levels with high conviction confluence.</p>
+        <span class="tag tag-intermediate">Target</span>
+      </div>
+    </div>
+
+    <h2>Drawdown Management</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Drawdown Level</th><th>Action Required</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-label bullish">Under 5%</td><td>Trade normally</td><td>Normal fluctuation, no adjustment needed</td></tr>
+          <tr><td class="td-label" style="color:var(--gold)">5–10%</td><td>Reduce position size by 50%</td><td>Something is off — recalibrate, reduce exposure</td></tr>
+          <tr><td class="td-label" style="color:var(--gold)">10–15%</td><td>Stop trading, review journal</td><td>Significant drawdown — find the problem before continuing</td></tr>
+          <tr><td class="td-label bearish">15%+</td><td>Full stop. Paper trade only</td><td>Mindset and/or strategy broken — full reset required</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== MARKET STRUCTURE ===================== -->
+  <div id="market-structure" class="tab-panel">
+    <div class="section-title">🏗️ Market Structure</div>
+    <div class="section-sub">Understanding the big picture — timeframes, cycles, and how markets actually move</div>
+
+    <p>Market structure is the study of how price organizes itself over time. Before placing any trade, you need to know: What is the bigger trend? Where are we in the cycle? Only then do you zoom into your trading timeframe.</p>
+
+    <h2>Multi-Timeframe Analysis (MTF)</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Weekly Chart → Determine the Major Trend</h4>
+          <p>This is your map. Is the overall trend up, down, or sideways? Never trade against the weekly trend unless you are very advanced. If weekly is in an uptrend, only look for long setups on lower timeframes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Daily Chart → Find the Setup</h4>
+          <p>This is your planning timeframe. Look for key support/resistance, pattern formations, and indicator alignment. Most swing traders live here. This is where you identify WHERE to trade.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>4-Hour / 1-Hour Chart → Time the Entry</h4>
+          <p>Now zoom in. Use this to find the precise entry point and set your stop loss more accurately. Wait for a trigger candle or mini pattern on this timeframe before entering.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>15-Min / 5-Min → Fine-Tune the Entry (Optional)</h4>
+          <p>Day traders use this level. For swing traders, don't go lower than 1-hour — you'll over-optimize and create noise-driven decisions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Timeframe</th><th>Type of Trader</th><th>Hold Duration</th><th>Key Indicators</th><th>Key Focus</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-label">1-min / 5-min</td><td>Scalper</td><td>Seconds to minutes</td><td>VWAP, Level 2</td><td>Tape reading, momentum</td></tr>
+          <tr><td class="td-label">15-min / 1-hour</td><td>Day Trader</td><td>Minutes to hours</td><td>VWAP, EMA 9/21, RSI</td><td>Intraday S/R, patterns</td></tr>
+          <tr><td class="td-label">4-hour / Daily</td><td>Swing Trader</td><td>Days to weeks</td><td>MA 50/200, MACD, RSI</td><td>Chart patterns, trends</td></tr>
+          <tr><td class="td-label">Daily / Weekly</td><td>Position Trader</td><td>Weeks to months</td><td>MA 200, Fibonaccis</td><td>Macro + technicals combined</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Market Cycles</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">📥</div>
+        <h3>Accumulation Phase</h3>
+        <p>Smart money quietly buying after a downtrend. Price is sideways, volume is low and building. Most retail traders are still bearish. This is where big moves begin.</p>
+        <span class="tag tag-advanced">Identify Early</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <h3>Mark-Up Phase</h3>
+        <p>Uptrend underway. Early retail traders start joining. Volume increasing. This is the best phase to be long — ride the trend, buy pullbacks to moving averages.</p>
+        <span class="tag tag-beginner">Best to Trade Long</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">📤</div>
+        <h3>Distribution Phase</h3>
+        <p>Price at highs, smart money selling into retail euphoria. Price action gets choppy. Often involves fake breakouts above highs that quickly fail. Be cautious here.</p>
+        <span class="tag tag-intermediate">Reduce Exposure</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">📉</div>
+        <h3>Mark-Down Phase</h3>
+        <p>Downtrend. Retail traders holding losses and hoping for recovery. Best to be short or cash. Bounces to moving averages are selling opportunities, not recoveries.</p>
+        <span class="tag tag-advanced">Short or Sideline</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ADVANCED ===================== -->
+  <div id="advanced" class="tab-panel">
+    <div class="section-title">🔬 Advanced Concepts</div>
+    <div class="section-sub">Tools for the experienced trader — add these after mastering the fundamentals</div>
+
+    <p>Only study these after you have a solid foundation in price action, basic patterns, and indicators. These are powerful tools but they can create confusion if learned too early.</p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Concept</th><th>What It Is</th><th>Best Use Case</th><th>Difficulty</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-label">Fibonacci Retracements</td>
+            <td>Key levels (23.6%, 38.2%, 50%, 61.8%) where price often reverses after a move</td>
+            <td>Finding pullback entry levels in trends</td>
+            <td>⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="td-label">Elliott Wave Theory</td>
+            <td>Markets move in 5 waves up and 3 waves down in repeating fractal patterns</td>
+            <td>Big picture trend forecasting</td>
+            <td>⭐⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="td-label">Wyckoff Method</td>
+            <td>Studies accumulation/distribution cycles created by institutional "composite man"</td>
+            <td>Identifying market phase and smart money footprint</td>
+            <td>⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="td-label">Pivot Points</td>
+            <td>Key price levels calculated from previous day/week high, low, and close</td>
+            <td>Intraday support/resistance levels for day traders</td>
+            <td>⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="td-label">Market Profile</td>
+            <td>Shows time spent at each price level (TPO charts) — reveals value area</td>
+            <td>Identifying fair value and range extremes for futures traders</td>
+            <td>⭐⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="td-label">Ichimoku Cloud</td>
+            <td>5 lines showing trend, momentum, and support/resistance in one indicator</td>
+            <td>Trend trading — "cloud" acts as dynamic S/R zone</td>
+            <td>⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td class="td-label">Backtesting</td>
+            <td>Testing your strategy on historical data to validate the edge</td>
+            <td>Verifying your strategy works before risking real money</td>
+            <td>⭐⭐⭐</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Fibonacci — The Most Practical Advanced Tool</h2>
+    <p>Draw Fibonacci from the swing low to swing high (or vice versa). Price tends to find support/resistance at these mathematical levels.</p>
+
+    <div class="formula">
+      Key Fibonacci Levels to Watch:<br>
+      23.6% → Minor pullback level (shallow retracement — strong trend)<br>
+      38.2% → Common in strong trends — often holds as support<br>
+      50.0% → Not a true Fibonacci but psychologically very important<br>
+      61.8% → "The Golden Ratio" — most reliable level. Strong bounce point<br>
+      78.6% → Deep retracement — last chance before a trend reversal<br><br>
+      🔑 Best trades: Fibonacci level + horizontal S/R + moving average = Triple confluence
+    </div>
+
+    <div class="pro-tip">
+      <strong>💡 Wyckoff Method — Why Pros Love It</strong>
+      Richard Wyckoff (1930s) discovered that markets are controlled by a "composite man" — large institutional traders. His method teaches you to follow the FOOTPRINTS of smart money through volume and price structure. Study the Wyckoff accumulation schematic — it explains why assets base before big rallies.
+    </div>
+  </div>
+
+  <!-- ===================== EXECUTION ===================== -->
+  <div id="execution" class="tab-panel">
+    <div class="section-title">⚡ Trade Execution</div>
+    <div class="section-sub">Getting in and out efficiently — the mechanics that affect your actual P&L</div>
+
+    <h2>Order Types — Know These Cold</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Order Type</th><th>How It Works</th><th>When to Use</th><th>Risk</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-label">Market Order</td>
+            <td>Fills immediately at best available price</td>
+            <td>Urgent exits, high-liquidity stocks only</td>
+            <td>Slippage in volatile/illiquid markets</td>
+          </tr>
+          <tr>
+            <td class="td-label">Limit Order</td>
+            <td>Fills only at your specified price or better</td>
+            <td>All planned entries and exits</td>
+            <td>May not fill if price doesn't reach your level</td>
+          </tr>
+          <tr>
+            <td class="td-label">Stop-Limit Order</td>
+            <td>Triggers a limit order when stop price is hit</td>
+            <td>Stop losses on liquid stocks</td>
+            <td>May not fill during fast markets / gaps</td>
+          </tr>
+          <tr>
+            <td class="td-label">Stop-Market Order</td>
+            <td>Triggers a market order when stop price is hit</td>
+            <td>Stop losses when you MUST get out</td>
+            <td>Guaranteed fill but potential slippage</td>
+          </tr>
+          <tr>
+            <td class="td-label">Trailing Stop</td>
+            <td>Stop moves with price, locking in profits as price moves in your favor</td>
+            <td>Riding strong momentum moves</td>
+            <td>Can get stopped out by normal volatility if set too tight</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Entry & Exit Strategies</h2>
+    <div class="two-col">
+      <div class="col-box">
+        <h4 style="color: var(--green);">📥 Entry Strategies</h4>
+        <ul>
+          <li>Wait for candle CLOSE confirmation — not just price touch</li>
+          <li>Enter on retests of breakout levels (reduce risk vs. chasing)</li>
+          <li>Scale in: enter 50% at setup, add 50% on confirmation</li>
+          <li>Pre-plan entries — set limit orders, don't react emotionally</li>
+          <li>Never enter in the last 30 min of a trading session (choppy)</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h4 style="color: var(--red);">📤 Exit Strategies</h4>
+        <ul>
+          <li>Scale out: sell 50% at first target, move stop to breakeven on rest</li>
+          <li>Take partial profits at key resistance levels</li>
+          <li>Never move your stop loss wider — only move it to protect profit</li>
+          <li>Exit if thesis is invalidated — price, not time, triggers exit</li>
+          <li>Have a plan before entry — know exactly when/where you're wrong</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Trade Journal — Non-Negotiable</h2>
+    <p>Every professional trader keeps a journal. It's the single fastest way to improve. Track every trade with these fields:</p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Field</th><th>What to Record</th><th>Why It Matters</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-label">Date & Ticker</td><td>Date, symbol, market</td><td>Identify patterns in your performance by market condition</td></tr>
+          <tr><td class="td-label">Setup</td><td>Pattern / indicator signal that triggered entry</td><td>Identify which setups have your best win rate</td></tr>
+          <tr><td class="td-label">Entry / Exit</td><td>Exact prices, order types used</td><td>Analyze execution quality and slippage</td></tr>
+          <tr><td class="td-label">R:R Planned vs. Actual</td><td>What you planned vs. what happened</td><td>Reveals if you're cutting winners short or letting losers run</td></tr>
+          <tr><td class="td-label">Emotions</td><td>FOMO? Fear? Overconfident?</td><td>Identify psychological patterns sabotaging your performance</td></tr>
+          <tr><td class="td-label">Screenshot</td><td>Chart at entry and exit</td><td>Visual review — the most powerful learning tool</td></tr>
+          <tr><td class="td-label">Lesson</td><td>One takeaway per trade</td><td>Intentional improvement — 1% better each week</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== PSYCHOLOGY ===================== -->
+  <div id="psychology" class="tab-panel">
+    <div class="section-title">🧠 Trading Psychology</div>
+    <div class="section-sub">The final edge — your mindset determines whether all your technical knowledge translates into profit</div>
+
+    <p>You can have the best system in the world and still lose money because of emotions. Fear, greed, FOMO, revenge trading — these are the enemies. Professional traders are not smarter than retail traders. They are more disciplined and emotionally consistent.</p>
+
+    <div class="warning-box">
+      <strong>⚠️ The Brutal Truth</strong>
+      After 1 year of trading, if you've been inconsistent, the problem is almost certainly psychology — not your strategy. You likely know what to do but you're not doing it. The gap between knowing and doing is where most traders fail.
+    </div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">😨</div>
+        <h3>Fear of Missing Out (FOMO)</h3>
+        <p>Chasing trades that have already moved significantly. Entering at the worst possible time — top of the move. There's always another trade. Missing a trade is FREE. Taking a bad trade costs you money.</p>
+        <span class="tag tag-beginner">Most Common</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤬</div>
+        <h3>Revenge Trading</h3>
+        <p>Taking random trades to "win back" money after a loss. This is how small losses become catastrophic losses. If you lose 2 trades in a row, STOP for the day. Walk away. Come back tomorrow.</p>
+        <span class="tag tag-advanced">Most Dangerous</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">💭</div>
+        <h3>Hope Trading</h3>
+        <p>Holding a losing trade because you "hope" it comes back. Hope is not a strategy. If price hit your stop loss level, that's the market telling you the thesis is wrong. Exit.</p>
+        <span class="tag tag-intermediate">Account Killer</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3>Overconfidence</h3>
+        <p>After a winning streak, increasing position size dramatically or taking lower-quality setups. Markets humiliate overconfidence quickly. Keep process consistent regardless of results.</p>
+        <span class="tag tag-intermediate">Common Trap</span>
+      </div>
+    </div>
+
+    <h2>The Professional Trading Mindset Framework</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Think in Probabilities, Not Certainties</h4>
+          <p>No trade is guaranteed. You are playing a probability game. A loss is not a failure if you followed your rules. A win on a rule-breaking trade is actually bad — it reinforces bad behavior.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Separate Process from Outcome</h4>
+          <p>You control your entry, stop loss, position size, and target. You don't control what price does. Judge yourself on whether you followed the plan — not whether you made money on that specific trade.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Develop a Pre-Market Routine</h4>
+          <p>Professional traders prepare every morning: review overnight news, scan for setups, mark key levels, and write out their plan. Winging it leads to emotional decisions. A plan keeps you disciplined.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Embrace Losses as the Cost of Doing Business</h4>
+          <p>Losses are not mistakes — they are the cost of operating your strategy. If your edge has a 60% win rate, 40% of trades will lose. Accept it. The only real mistake is a loss that wasn't planned for in your risk management.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ROADMAP ===================== -->
+  <div id="roadmap" class="tab-panel">
+    <div class="section-title">🗺️ Your Learning Roadmap</div>
+    <div class="section-sub">6–12 month structured plan to go from 1-year trader to consistently profitable professional</div>
+
+    <p>You have 1 year of experience — you have seen real market conditions. Now it's time to build systematically. Don't rush. One month on each phase is a minimum. Stay in the phase until you're consistently applying the skills before moving on.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <div class="roadmap-dot phase-1"></div>
+        <div class="phase-label" style="color:var(--green)">Phase 1 — Month 1–2</div>
+        <h4>Master Candlesticks & Price Action (Foundation)</h4>
+        <p>Study every major candlestick pattern. Spend 2 hours per day on a naked chart with NO indicators. Identify trends, support/resistance, and candle patterns. Read "Japanese Candlestick Charting" by Steve Nison. This phase is boring for experienced traders but absolutely critical.</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot phase-2"></div>
+        <div class="phase-label" style="color:var(--gold)">Phase 2 — Month 2–3</div>
+        <h4>Chart Patterns + Volume Analysis</h4>
+        <p>Learn the top 10 chart patterns with volume confirmation rules. Practice identifying them on historical charts. Start a trade journal NOW even if you're not trading yet — journal your pattern observations. Read "How to Make Money in Stocks" by William O'Neil for pattern mastery.</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot phase-3"></div>
+        <div class="phase-label" style="color:var(--blue)">Phase 3 — Month 3–5</div>
+        <h4>Indicators + Risk Management System</h4>
+        <p>Add moving averages, RSI, and MACD to your charts. But only use them to CONFIRM what price action is showing. Simultaneously build your risk management rules: position sizing formula, max daily loss, max drawdown rules. These rules must be written down. Test live with small size.</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot phase-4"></div>
+        <div class="phase-label" style="color:var(--purple)">Phase 4 — Month 5–8</div>
+        <h4>Build & Backtest Your Trading Strategy</h4>
+        <p>Combine everything into ONE clear strategy with specific rules. Backtest it on at least 100 historical trades. What's the win rate? Average R:R? Max drawdown? A strategy without verified historical edge is gambling. Only advance to live trading with larger size when you have 100+ backtested trades AND 30+ live trades showing consistency.</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot phase-5"></div>
+        <div class="phase-label" style="color:var(--red)">Phase 5 — Month 8–12</div>
+        <h4>Advanced Tools + Psychology Mastery</h4>
+        <p>Add Fibonacci, multi-timeframe analysis, and one advanced concept (Wyckoff or Elliott Wave). Focus heavily on trading psychology. Read "Trading in the Zone" by Mark Douglas — it will change everything. Review your journal weekly. Identify your psychological patterns and build protocols to manage them.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Essential Reading List for Your Level</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Book</th><th>Author</th><th>Focus</th><th>When to Read</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-label">Japanese Candlestick Charting</td><td>Steve Nison</td><td>Candlestick mastery</td><td>Month 1</td></tr>
+          <tr><td class="td-label">How to Make Money in Stocks</td><td>William O'Neil</td><td>Chart patterns, CAN SLIM</td><td>Month 2–3</td></tr>
+          <tr><td class="td-label">Technical Analysis of the Financial Markets</td><td>John Murphy</td><td>Complete technical reference</td><td>Month 1–6 (reference)</td></tr>
+          <tr><td class="td-label">Trading in the Zone</td><td>Mark Douglas</td><td>Trading psychology</td><td>Month 3 (read early!)</td></tr>
+          <tr><td class="td-label">Reminiscences of a Stock Operator</td><td>Edwin Lefèvre</td><td>Market wisdom, mindset</td><td>Any time</td></tr>
+          <tr><td class="td-label">The Wyckoff Methodology</td><td>Rubén Villahermosa</td><td>Smart money structure</td><td>Month 6+</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="success-box">
+      <strong>✅ Final Message from a Pro Trader</strong>
+      The traders who make it aren't the smartest or the ones with the most indicators. They are the ones who are the most consistent, the most disciplined, and the most patient. You already have 1 year of real market experience — that's invaluable. Now systematize what you've learned. Build a rule-based system. Follow it. Track everything. The market rewards patience and process above all else.
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  📈 Technical Trading Mastery Guide &nbsp;·&nbsp; Built for traders with 1 year of experience &nbsp;·&nbsp; Learn systematically, trade consistently
+</div>
+
+<script>
+  function showTab(tabId) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+</body>
+</html>
