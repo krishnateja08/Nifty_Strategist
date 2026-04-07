@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nifty 50 OI Dashboard — Reader's Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0a0e1a;--bg2:#0d1225;--sidebar:#080c18;
+  --cyan:#00e5ff;--cyan2:rgba(0,229,255,0.12);
+  --green:#00e676;--red:#ff5252;--amber:#ffb74d;
+  --txt:rgba(176,190,197,0.92);--txt2:rgba(176,190,197,0.55);
+  --border:rgba(79,195,247,0.12);
+  --accent:#4fc3f7;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);line-height:1.75;overflow-x:hidden;}
+
+/* ═══ SIDEBAR ═══ */
+.sidebar{position:fixed;top:0;left:0;width:280px;height:100vh;background:var(--sidebar);border-right:1px solid var(--border);overflow-y:auto;z-index:100;padding:28px 0 40px;transition:transform .3s;}
+.sidebar::-webkit-scrollbar{width:3px;}.sidebar::-webkit-scrollbar-thumb{background:rgba(79,195,247,0.2);border-radius:4px;}
+.sb-logo{padding:0 24px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sb-logo h2{font-family:'Playfair Display',serif;font-size:18px;color:var(--cyan);letter-spacing:1px;font-weight:700;}
+.sb-logo p{font-size:11px;color:var(--txt2);margin-top:4px;letter-spacing:0.5px;}
+.sb-group{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);padding:16px 24px 6px;text-transform:uppercase;}
+.sb-item{display:block;padding:8px 24px 8px 28px;font-size:13.5px;color:var(--txt2);text-decoration:none;border-left:2px solid transparent;transition:all .15s;}
+.sb-item:hover{color:var(--cyan);background:var(--cyan2);border-left-color:var(--cyan);}
+.sb-item .sb-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(79,195,247,0.35);margin-right:8px;}
+
+/* ═══ MAIN ═══ */
+.main{margin-left:280px;max-width:860px;padding:48px 56px 120px;}
+h1{font-family:'Playfair Display',serif;font-size:38px;color:#e0f7fa;font-weight:900;line-height:1.2;margin-bottom:8px;}
+.subtitle{font-size:14px;color:var(--txt2);margin-bottom:48px;letter-spacing:0.3px;}
+h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--cyan);margin:56px 0 16px;padding-top:24px;border-top:1px solid var(--border);}
+h3{font-size:16px;color:#b2ebf2;margin:28px 0 10px;font-weight:700;}
+p{margin-bottom:14px;}
+.section{scroll-margin-top:32px;}
+
+/* cards */
+.card{background:linear-gradient(135deg,rgba(13,18,37,0.95),rgba(10,14,26,0.98));border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:16px 0 24px;}
+.card-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:10px;text-transform:uppercase;}
+
+/* signal badges */
+.sig{display:inline-block;padding:2px 10px;border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;}
+.sig-buy{background:rgba(0,230,118,0.15);color:#00e676;border:1px solid rgba(0,230,118,0.3);}
+.sig-sell{background:rgba(255,82,82,0.15);color:#ff5252;border:1px solid rgba(255,82,82,0.3);}
+.sig-neu{background:rgba(255,183,77,0.15);color:#ffb74d;border:1px solid rgba(255,183,77,0.3);}
+.sig-cyan{background:var(--cyan2);color:var(--cyan);border:1px solid rgba(0,229,255,0.3);}
+
+/* tables */
+table{width:100%;border-collapse:collapse;margin:14px 0 20px;font-size:13.5px;}
+th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--accent);text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);text-transform:uppercase;}
+td{padding:8px 12px;border-bottom:1px solid rgba(79,195,247,0.06);color:var(--txt);}
+tr:hover td{background:rgba(79,195,247,0.04);}
+
+/* code */
+code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(79,195,247,0.08);padding:2px 7px;border-radius:4px;color:var(--cyan);}
+
+/* key-value */
+.kv{display:flex;gap:8px;margin:4px 0;}
+.kv-k{min-width:140px;color:var(--txt2);font-size:13px;}
+.kv-v{color:var(--txt);font-size:13px;font-weight:500;}
+
+/* highlight boxes */
+.tip{background:rgba(0,229,255,0.06);border-left:3px solid var(--cyan);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:13.5px;}
+.warn{background:rgba(255,183,77,0.06);border-left:3px solid var(--amber);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:13.5px;}
+.danger{background:rgba(255,82,82,0.06);border-left:3px solid var(--red);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:13.5px;}
+
+/* flow diagram */
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0 18px;font-size:13px;}
+.flow-step{background:rgba(79,195,247,0.08);border:1px solid var(--border);padding:6px 14px;border-radius:8px;color:var(--cyan);}
+.flow-arrow{color:var(--txt2);font-size:16px;}
+
+/* mobile */
+.menu-btn{display:none;position:fixed;top:12px;left:12px;z-index:200;width:40px;height:40px;background:var(--sidebar);border:1px solid var(--border);border-radius:8px;color:var(--cyan);font-size:20px;cursor:pointer;align-items:center;justify-content:center;}
+@media(max-width:860px){
+  .sidebar{transform:translateX(-100%);}
+  .sidebar.open{transform:translateX(0);}
+  .menu-btn{display:flex;}
+  .main{margin-left:0;padding:48px 20px 100px;}
+  h1{font-size:28px;}
+}
+</style>
+</head>
+<body>
+
+<button class="menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<!-- ═══ SIDEBAR ═══ -->
+<nav class="sidebar">
+  <div class="sb-logo">
+    <h2>📘 Reader's Guide</h2>
+    <p>Nifty 50 OI Dashboard</p>
+  </div>
+
+  <div class="sb-group">Overview</div>
+  <a class="sb-item" href="#overview"><span class="sb-num">00</span>What This Dashboard Does</a>
+  <a class="sb-item" href="#how-it-runs"><span class="sb-num">01</span>How the Script Runs</a>
+  <a class="sb-item" href="#data-sources"><span class="sb-num">02</span>Data Sources</a>
+
+  <div class="sb-group">Main Analysis Tabs</div>
+  <a class="sb-item" href="#signals"><span class="sb-num">03</span>⚡ Signals &amp; Bias</a>
+  <a class="sb-item" href="#oi-analysis"><span class="sb-num">04</span>📊 OI Analysis</a>
+  <a class="sb-item" href="#key-levels"><span class="sb-num">05</span>📌 Key Levels</a>
+  <a class="sb-item" href="#fiidii"><span class="sb-num">06</span>🏭 FII / DII</a>
+  <a class="sb-item" href="#direction"><span class="sb-num">07</span>🧭 Market Direction</a>
+  <a class="sb-item" href="#technical"><span class="sb-num">08</span>🔍 Technical</a>
+  <a class="sb-item" href="#optchain"><span class="sb-num">09</span>🎯 Option Chain</a>
+
+  <div class="sb-group">Other Tabs</div>
+  <a class="sb-item" href="#heatmap"><span class="sb-num">10</span>🌡️ Nifty 50 Heatmap</a>
+  <a class="sb-item" href="#oi-trend"><span class="sb-num">11</span>📊 Intraday OI Trend</a>
+  <a class="sb-item" href="#weekly-outlook"><span class="sb-num">12</span>📅 Weekly Outlook</a>
+  <a class="sb-item" href="#checklist"><span class="sb-num">13</span>🧠 Strategy Checklist</a>
+  <a class="sb-item" href="#pretrade"><span class="sb-num">14</span>✅ Pre-Trade Checklist</a>
+
+  <div class="sb-group">Deep Dives</div>
+  <a class="sb-item" href="#signal-engine"><span class="sb-num">15</span>Signal Engine Logic</a>
+  <a class="sb-item" href="#pcr-guide"><span class="sb-num">16</span>PCR — How to Read</a>
+  <a class="sb-item" href="#sparkline-guide"><span class="sb-num">17</span>Sparkline Chart Guide</a>
+  <a class="sb-item" href="#momentum-override"><span class="sb-num">18</span>Momentum Override</a>
+  <a class="sb-item" href="#scoring"><span class="sb-num">19</span>Scoring System</a>
+  <a class="sb-item" href="#glossary"><span class="sb-num">20</span>Glossary</a>
+</nav>
+
+<!-- ═══ MAIN CONTENT ═══ -->
+<div class="main">
+
+<h1>Nifty 50 OI &amp; Technical Dashboard</h1>
+<p class="subtitle">A complete guide to reading every tab, chart, signal, and number in your dashboard.</p>
+
+<!-- ─── 00: OVERVIEW ─── -->
+<div class="section" id="overview">
+<h2>00 — What This Dashboard Does</h2>
+<p>This script fetches live data from NSE (option chain), yfinance (price &amp; technicals), and Groww/NSE (FII/DII flows), then generates a single <code>index.html</code> file that serves as your complete intraday trading dashboard for Nifty 50.</p>
+<p>Every time you run the script, it takes a fresh snapshot. The HTML page auto-refreshes when it detects a new run (via <code>latest_report.json</code> timestamp polling every 30 seconds).</p>
+
+<div class="card">
+<div class="card-title">What you get in one glance</div>
+<p>A directional bias (BUY / SELL / NEUTRAL), confidence level, stop-loss, two targets, strategy suggestions, key support/resistance, PCR, RSI, MACD, SMA alignment, FII/DII flows, India VIX, heatmap of all 50 stocks, and a full intraday OI history with sparkline charts.</p>
+</div>
+</div>
+
+<!-- ─── 01: HOW IT RUNS ─── -->
+<div class="section" id="how-it-runs">
+<h2>01 — How the Script Runs</h2>
+<div class="flow">
+  <div class="flow-step">Run script</div><span class="flow-arrow">→</span>
+  <div class="flow-step">Fetch NSE option chain</div><span class="flow-arrow">→</span>
+  <div class="flow-step">Fetch yfinance technicals</div><span class="flow-arrow">→</span>
+  <div class="flow-step">Fetch FII/DII</div><span class="flow-arrow">→</span>
+  <div class="flow-step">Fetch Heatmap</div><span class="flow-arrow">→</span>
+  <div class="flow-step">Log OI snapshot</div><span class="flow-arrow">→</span>
+  <div class="flow-step">Generate HTML</div><span class="flow-arrow">→</span>
+  <div class="flow-step">Send email</div>
+</div>
+<p>The script is meant to be run every 3 minutes via an external cron or scheduler during market hours (9:15 AM – 3:30 PM IST). Each run appends a snapshot to <code>oi_log.json</code>, building up your intraday OI history.</p>
+<div class="tip">💡 <strong>Auto-refresh:</strong> Serve the folder with <code>python -m http.server 8000</code> and open <code>http://localhost:8000</code>. The page polls <code>latest_report.json</code> every 30s and reloads only when the timestamp changes — no flicker, no scroll jump.</div>
+</div>
+
+<!-- ─── 02: DATA SOURCES ─── -->
+<div class="section" id="data-sources">
+<h2>02 — Data Sources</h2>
+<table>
+  <tr><th>Data</th><th>Source</th><th>Method</th></tr>
+  <tr><td>Option Chain (OI, PCR, Max Pain)</td><td>NSE India</td><td>curl_cffi with browser headers</td></tr>
+  <tr><td>Price, RSI, SMA, MACD, Candles</td><td>yfinance (^NSEI)</td><td>1h candles, 5d + daily 1y</td></tr>
+  <tr><td>VWAP</td><td>yfinance (NIFTYBEES.NS)</td><td>1m candles, day-open calibrated</td></tr>
+  <tr><td>FII / DII flows</td><td>Groww API → NSE fallback</td><td>Last 5 trading days</td></tr>
+  <tr><td>Nifty 50 stock data</td><td>yfinance (all 50 tickers)</td><td>5d daily for % change</td></tr>
+  <tr><td>India VIX</td><td>yfinance (^INDIAVIX)</td><td>5d daily</td></tr>
+  <tr><td>Global Bias</td><td>yfinance (^DJI, ^GSPC, ^IXIC)</td><td>Latest % change</td></tr>
+</table>
+</div>
+
+<!-- ─── 03: SIGNALS ─── -->
+<div class="section" id="signals">
+<h2>03 — ⚡ Signals &amp; Bias</h2>
+<p>This is the hero section at the top. It shows your overall trading direction.</p>
+
+<h3>Bias Badges</h3>
+<table>
+  <tr><th>Badge</th><th>Score Range</th><th>Meaning</th></tr>
+  <tr><td><span class="sig sig-buy">STRONG BUY</span></td><td>≥ +3</td><td>Most indicators aligned bullish. High conviction.</td></tr>
+  <tr><td><span class="sig sig-buy">BUY</span></td><td>+1 to +2</td><td>Majority bullish. Moderate conviction.</td></tr>
+  <tr><td><span class="sig sig-buy">WATCH BULL</span></td><td>+2 (with caveats)</td><td>Leaning bullish but not fully confirmed.</td></tr>
+  <tr><td><span class="sig sig-neu">SIDEWAYS</span></td><td>0</td><td>Mixed signals. Avoid directional trades.</td></tr>
+  <tr><td><span class="sig sig-sell">WATCH BEAR</span></td><td>−2 (with caveats)</td><td>Leaning bearish but not fully confirmed.</td></tr>
+  <tr><td><span class="sig sig-sell">SELL</span></td><td>−1 to −2</td><td>Majority bearish. Moderate conviction.</td></tr>
+  <tr><td><span class="sig sig-sell">STRONG SELL</span></td><td>≤ −3</td><td>Most indicators aligned bearish. High conviction.</td></tr>
+</table>
+
+<h3>What Else Is Shown</h3>
+<div class="kv"><span class="kv-k">Confidence</span><span class="kv-v">HIGH / MEDIUM / LOW — based on how many signals agree</span></div>
+<div class="kv"><span class="kv-k">Stop Loss</span><span class="kv-v">Auto-calculated from key support/resistance</span></div>
+<div class="kv"><span class="kv-k">Target 1</span><span class="kv-v">Near-term target from OI walls</span></div>
+<div class="kv"><span class="kv-k">Target 2</span><span class="kv-v">Extended target (CE/PE wall)</span></div>
+<div class="kv"><span class="kv-k">Risk:Reward</span><span class="kv-v">Ratio of potential reward vs stop-loss distance</span></div>
+<div class="kv"><span class="kv-k">Suggested Strategies</span><span class="kv-v">Options strategies with specific strike suggestions</span></div>
+</div>
+
+<!-- ─── 04: OI ANALYSIS ─── -->
+<div class="section" id="oi-analysis">
+<h2>04 — 📊 OI Analysis</h2>
+<p>Three cards showing raw OI change data from the current NSE option chain snapshot:</p>
+
+<div class="card">
+<div class="card-title">The Three OI Cards</div>
+<p><strong>CE OI Change (Total Call OI Δ):</strong> Sum of OI changes across all call strikes. Positive = new call writing (bearish — writers expect price won't go above). Negative = call unwinding (bullish).</p>
+<p><strong>PE OI Change (Total Put OI Δ):</strong> Sum of OI changes across all put strikes. Positive = new put writing (bullish — writers expect price won't fall below). Negative = put unwinding (bearish).</p>
+<p><strong>Net OI Change (CE Δ − PE Δ):</strong> Positive = more call writing than put writing = bearish. Negative = more put writing = bullish.</p>
+</div>
+
+<div class="warn">⚠️ <strong>OI Direction arrow:</strong> The coloured arrow and label ("Net Call Accumulation" = bearish, "Net Put Accumulation" = bullish) is derived from this net OI value and correctly interpreted in the card.</div>
+</div>
+
+<!-- ─── 05: KEY LEVELS ─── -->
+<div class="section" id="key-levels">
+<h2>05 — 📌 Key Levels</h2>
+<p>A candlestick-style chart showing the last 120 bars of 1-hour candles ±200 points from current price, rounded to 25-point intervals. Key levels marked:</p>
+<div class="kv"><span class="kv-k">Support</span><span class="kv-v">Highest put OI strike below spot — strong demand floor</span></div>
+<div class="kv"><span class="kv-k">Resistance</span><span class="kv-v">Highest call OI strike above spot — supply ceiling</span></div>
+<div class="kv"><span class="kv-k">Strong Support</span><span class="kv-v">Next major put OI wall further below</span></div>
+<div class="kv"><span class="kv-k">Strong Resistance</span><span class="kv-v">Next major call OI wall further above</span></div>
+<div class="kv"><span class="kv-k">Max Pain</span><span class="kv-v">Strike where option writers lose least money — price tends to gravitate here near expiry</span></div>
+<p>Volume at support/resistance is also shown as a percentage vs. 20-candle average — high volume near a level means the level is being actively tested.</p>
+</div>
+
+<!-- ─── 06: FII/DII ─── -->
+<div class="section" id="fiidii">
+<h2>06 — 🏭 FII / DII Flows</h2>
+<p>Shows the last 5 trading days of Foreign Institutional Investor (FII) and Domestic Institutional Investor (DII) net buy/sell in cash segment.</p>
+<div class="kv"><span class="kv-k">FII Net Buying</span><span class="kv-v" style="color:#00e676;">Bullish — foreign money entering Indian markets</span></div>
+<div class="kv"><span class="kv-k">FII Net Selling</span><span class="kv-v" style="color:#ff5252;">Bearish — foreign money exiting</span></div>
+<div class="kv"><span class="kv-k">DII Absorbing</span><span class="kv-v">Domestic institutions buying the dip — cushions downside</span></div>
+<p>The insight text below the chart tells you the combined narrative (e.g., "FII selling but DII absorbing").</p>
+</div>
+
+<!-- ─── 07: DIRECTION ─── -->
+<div class="section" id="direction">
+<h2>07 — 🧭 Market Direction</h2>
+<p>A compact holographic widget summarizing the overall market direction using a scoring system across all indicators. Shows the global bias (US markets: Dow, S&P 500, Nasdaq) as an additional input.</p>
+</div>
+
+<!-- ─── 08: TECHNICAL ─── -->
+<div class="section" id="technical">
+<h2>08 — 🔍 Technical Analysis</h2>
+<p>Shows technical indicators calculated from yfinance price data:</p>
+<div class="kv"><span class="kv-k">RSI (14)</span><span class="kv-v">&gt;60 bullish, &lt;40 bearish, 40–60 neutral</span></div>
+<div class="kv"><span class="kv-k">MACD</span><span class="kv-v">MACD line above signal = bullish crossover</span></div>
+<div class="kv"><span class="kv-k">SMA 20/50/200</span><span class="kv-v">Price above all = strong uptrend, below all = downtrend</span></div>
+<div class="kv"><span class="kv-k">India VIX</span><span class="kv-v">&lt;13 = low fear (range-bound), &gt;20 = high fear (volatile), rising = caution</span></div>
+</div>
+
+<!-- ─── 09: OPTION CHAIN ─── -->
+<div class="section" id="optchain">
+<h2>09 — 🎯 Option Chain</h2>
+<p>Visual cards showing:</p>
+<div class="kv"><span class="kv-k">PCR Needle Meter</span><span class="kv-v">Gauge dial from 0 to 2+ — see PCR section below for details</span></div>
+<div class="kv"><span class="kv-k">Max Pain Zone Bar</span><span class="kv-v">Where spot sits relative to max pain strike</span></div>
+<div class="kv"><span class="kv-k">CE/PE OI Battle Bars</span><span class="kv-v">Visual comparison of call vs put OI at each strike</span></div>
+</div>
+
+<!-- ─── 10: HEATMAP ─── -->
+<div class="section" id="heatmap">
+<h2>10 — 🌡️ Nifty 50 Heatmap</h2>
+<p>Color-coded grid of all 50 Nifty stocks by their daily % change. Green = up, red = down, intensity maps to magnitude (capped at ±3%).</p>
+<h3>Market Breadth</h3>
+<p>A donut chart showing Advancing vs Declining stocks. If 35+ stocks are green, it's a broad rally. If only 10 are green, the index may be propped up by 2–3 heavyweights.</p>
+<h3>High Weightage Movers</h3>
+<p>The top 10 stocks by index weight (Reliance, HDFC Bank, ICICI, Infy, TCS, etc.) shown separately — these move the index most. If heavyweights are red while breadth is green, the index may still fall.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- ─── 11: INTRADAY OI TREND — THE BIG ONE ─── -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<div class="section" id="oi-trend">
+<h2>11 — 📊 Intraday OI Trend (Detailed Guide)</h2>
+<p>This is the most data-rich tab. Every time your script runs, it logs a snapshot to <code>oi_log.json</code>. This tab reads that file and builds a time-series view of how OI, signals, and price evolved throughout the day.</p>
+
+<h3>The Two Views: Focus vs Detail</h3>
+<div class="card">
+<div class="card-title">Focus View (Default)</div>
+<p>Shows only the essential columns: Time, Signal, PCR, Spot, Nifty Move %, and the Net OI Diff. Use this for quick scanning during trading hours.</p>
+</div>
+<div class="card">
+<div class="card-title">Detail View</div>
+<p>Adds extra columns: Call OI Δ, Put OI Δ, Diff (numeric), VWAP, Futures Price. Use this when you want to understand <em>why</em> a signal changed.</p>
+</div>
+<div class="tip">💡 Your view choice now persists across auto-refreshes (saved in URL hash). Click Detail once and it stays on Detail until you switch back.</div>
+
+<h3>Time Interval Filters</h3>
+<table>
+  <tr><th>Filter</th><th>What It Shows</th><th>Best For</th></tr>
+  <tr><td><span class="sig sig-cyan">3 MIN</span></td><td>Raw snapshots (one per script run)</td><td>Granular, real-time tracking</td></tr>
+  <tr><td><span class="sig sig-cyan">5 MIN</span></td><td>Grouped into 5-min slots, latest values per slot</td><td>Smoothing out noise</td></tr>
+  <tr><td><span class="sig sig-cyan">15 MIN</span></td><td>Grouped into 15-min slots</td><td>Identifying intraday trends</td></tr>
+  <tr><td><span class="sig sig-cyan">1 HR</span></td><td>Grouped into hourly slots</td><td>Big-picture session view</td></tr>
+</table>
+<div class="warn">⚠️ Grouped intervals (5/15/60 min) use the <strong>latest snapshot</strong> in each time slot — not a sum or average. This prevents inflating cumulative OI values.</div>
+
+<h3>The Sparkline Chart</h3>
+<p>The large chart at the top of this tab is titled <strong>"NET OI DIFF (PE Δ − CE Δ) — INTRADAY SPARKLINE"</strong>.</p>
+
+<div class="card">
+<div class="card-title">How to Read the Sparkline</div>
+<table>
+  <tr><th>Zone</th><th>Color</th><th>Meaning</th></tr>
+  <tr><td>Above zero line</td><td style="color:#10b981;">Green fill</td><td>PE Δ &gt; CE Δ → More put writing → <strong>Bullish</strong> (institutions creating a floor)</td></tr>
+  <tr><td>Below zero line</td><td style="color:#ef4444;">Red fill</td><td>CE Δ &gt; PE Δ → More call writing → <strong>Bearish</strong> (institutions creating a ceiling)</td></tr>
+</table>
+<p>The <strong>yellow/orange line</strong> traces the actual diff value over time. The <strong>green line</strong> is the spot price overlay (on a separate scale). When the green price line rises while the fill is green — that's confirmation. When they diverge, watch for a reversal.</p>
+</div>
+
+<h3>Signal History Bar</h3>
+<p>The thin horizontal bar at the very top of the sparkline area shows every snapshot's signal as a colored segment — green for bullish readings, red for bearish. A long streak of one color means persistent conviction; alternating colors mean choppy/indecisive OI.</p>
+
+<h3>Stat Boxes (Above the Chart)</h3>
+<div class="kv"><span class="kv-k">Latest</span><span class="kv-v">The most recent diff value (PE Δ − CE Δ)</span></div>
+<div class="kv"><span class="kv-k">High</span><span class="kv-v">Peak bullish reading of the day</span></div>
+<div class="kv"><span class="kv-k">Low</span><span class="kv-v">Peak bearish reading of the day</span></div>
+<div class="kv"><span class="kv-k">Signal</span><span class="kv-v">BUY or SELL based on latest diff sign</span></div>
+
+<h3>Table Columns (Detail View)</h3>
+<table>
+  <tr><th>Column</th><th>What It Shows</th></tr>
+  <tr><td>TIME (IST)</td><td>When the snapshot was taken</td></tr>
+  <tr><td>SIGNAL</td><td>OI-derived signal: STRONG BUY, BUY, NEUTRAL, SELL, STRONG SELL</td></tr>
+  <tr><td>CALL OI Δ</td><td>Total change in call OI across all strikes (Detail view only)</td></tr>
+  <tr><td>PUT OI Δ</td><td>Total change in put OI across all strikes (Detail view only)</td></tr>
+  <tr><td>DIFF</td><td>PE Δ − CE Δ. Positive = bullish, negative = bearish (Detail view only)</td></tr>
+  <tr><td>PCR</td><td>Put-Call Ratio at that moment</td></tr>
+  <tr><td>SPOT</td><td>Nifty 50 spot price</td></tr>
+  <tr><td>NIFTY MOVE %</td><td>% change from previous day's close. Green ▲ = up, Red ▼ = down</td></tr>
+  <tr><td>VWAP</td><td>Volume-Weighted Avg Price (from NIFTYBEES ETF, calibrated). Green = spot above VWAP (bullish), Red = below (Detail view only)</td></tr>
+</table>
+
+<h3>How to Use This Tab for Trading</h3>
+<div class="card">
+<div class="card-title">Practical workflow</div>
+<p><strong>1. Check the sparkline first.</strong> Is the fill predominantly green or red? That's your intraday OI bias.</p>
+<p><strong>2. Look at signal consistency.</strong> If the signal has been BUY for the last 5+ readings, OI conviction is strong. If it's flipping every reading, stay out.</p>
+<p><strong>3. Check PCR trend.</strong> PCR steadily rising from 0.8 → 1.2 = put writers gaining confidence = bullish build-up.</p>
+<p><strong>4. Confirm with spot movement.</strong> If signals say BUY but spot is falling — either it's early accumulation (wait) or a false signal (be cautious).</p>
+<p><strong>5. Switch to 15-min or 1-hr</strong> to see the bigger picture if 3-min data is noisy.</p>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- ─── 12: WEEKLY OUTLOOK ─── -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<div class="section" id="weekly-outlook">
+<h2>12 — 📅 Weekly Outlook (Detailed Guide)</h2>
+<p>This tab projects where Nifty might head over the coming week by combining <strong>7 independent methods</strong> and clustering their outputs into high-conviction zones. It does not predict direction — it maps out <em>where price is likely to stall</em> in each scenario.</p>
+
+<h3>Quick Stats Bar</h3>
+<div class="card">
+<div class="card-title">The Six Stats at the Top</div>
+<div class="kv"><span class="kv-k">Spot Price</span><span class="kv-v">Current Nifty 50 price at the time of the last script run</span></div>
+<div class="kv"><span class="kv-k">ATR Weekly</span><span class="kv-v">Average True Range (14-day) scaled to 1 week (×√5). This is how many points Nifty typically moves in a week.</span></div>
+<div class="kv"><span class="kv-k">VIX Range</span><span class="kv-v">India VIX converted to weekly expected move: VIX ÷ √52 × spot. Higher VIX = wider expected range.</span></div>
+<div class="kv"><span class="kv-k">Prev Wk High/Low</span><span class="kv-v">Last week's highest and lowest prices — used to calculate pivot points.</span></div>
+<div class="kv"><span class="kv-k">ATR-14 Daily</span><span class="kv-v">Raw 14-day ATR in points. Useful for setting daily stop-losses.</span></div>
+</div>
+
+<h3>Weekly Scenario Projections</h3>
+<p>Three cards show what to expect in each scenario:</p>
+
+<div class="card">
+<div class="card-title">📈 Bullish Scenario</div>
+<p><strong>Target 1:</strong> The nearest resistance cluster above the current price with the most confluences. This is where an upward move is most likely to pause first.</p>
+<p><strong>Target 2:</strong> The next resistance cluster further above. Price reaching here requires strong momentum.</p>
+<p>Each target shows a <strong>strength badge</strong> (STRONG/MODERATE/WEAK) and <strong>confluence tags</strong> listing which methods agree at that level (e.g., "Pivot R1", "CE Wall", "Fib 38.2%").</p>
+</div>
+
+<div class="card">
+<div class="card-title">📉 Bearish Scenario</div>
+<p><strong>Target 1:</strong> The nearest support cluster below current price. If the market falls, it's likely to find a floor here first.</p>
+<p><strong>Target 2:</strong> Deeper support. A break below Target 1 could send price to this level.</p>
+</div>
+
+<div class="card">
+<div class="card-title">↔️ Sideways Range</div>
+<p>If the market has no clear direction, it's expected to oscillate within this range. Derived from ATR and VIX implied weekly move. Useful for non-directional strategies like Iron Condors and Short Strangles.</p>
+</div>
+
+<h3>Confluence Map (Visual Bar)</h3>
+<p>A horizontal bar showing all clustered levels as dots positioned relative to the current price:</p>
+<div class="kv"><span class="kv-k" style="color:#00e676;">● Green dots</span><span class="kv-v">Support levels (below price)</span></div>
+<div class="kv"><span class="kv-k" style="color:#ff5252;">● Red dots</span><span class="kv-v">Resistance levels (above price)</span></div>
+<div class="kv"><span class="kv-k" style="color:#00e5ff;">● Cyan dot</span><span class="kv-v">Current Nifty spot price</span></div>
+<p>Larger, brighter dots = more confluences at that zone. The dashed box shows the expected sideways range.</p>
+
+<div class="tip">💡 <strong>How to use:</strong> If price is approaching a large bright dot, expect resistance/support there. If there are no large dots nearby in one direction, the move could be explosive.</div>
+
+<h3>Weekly Pivot Points</h3>
+<p>Calculated from the previous week's High, Low, and Close. Three types are available via toggle buttons:</p>
+
+<div class="card">
+<div class="card-title">Pivot Types</div>
+<p><strong>Classic Pivots:</strong> The most widely used by institutional traders. PP is the balance point; R1/R2/R3 are resistance levels; S1/S2/S3 are supports. Best for swing and positional trades.</p>
+<p><strong>Fibonacci Pivots:</strong> Uses the same PP but applies Fibonacci ratios (0.382, 0.618, 1.0) to the previous week's range. Best when you expect price to respect golden-ratio retracement zones.</p>
+<p><strong>Camarilla Pivots:</strong> Tighter levels, best for intraday. R3/S3 are reversal points (price likely bounces), R4/S4 are breakout points (price likely accelerates through).</p>
+</div>
+
+<p>Each row shows the level, its price, and the distance from current spot in both points and percentage.</p>
+
+<h3>Fibonacci Retracement (20-Day Swing)</h3>
+<p>Based on the highest high and lowest low of the last 20 trading days. Shows the classic Fibonacci levels:</p>
+<table>
+  <tr><th>Level</th><th>Meaning</th></tr>
+  <tr><td>23.6%</td><td>Shallow pullback — trend is very strong if price holds here</td></tr>
+  <tr><td>38.2%</td><td>Normal retracement — healthy pullback zone in strong trends</td></tr>
+  <tr><td>50.0%</td><td>Halfway point — psychological and often institutional level</td></tr>
+  <tr><td>61.8%</td><td>Golden ratio — the most-watched Fibonacci level. Strong reversal zone.</td></tr>
+  <tr><td>78.6%</td><td>Deep retracement — if price reaches here, the original trend may be reversing</td></tr>
+</table>
+
+<h3>Level Confluence Clusters</h3>
+<p>This is the most important table. It takes <strong>all levels from all 7 methods</strong>, groups ones within 50 points of each other, and shows them as a single zone.</p>
+
+<div class="card">
+<div class="card-title">How Clustering Works</div>
+<p>The script gathers levels from: Classic Pivots, Fibonacci Pivots, Camarilla Pivots, Fibonacci Retracement, OI Walls (CE/PE max OI, support/resistance), SMA 20/50/200, ATR bounds, and VIX bounds.</p>
+<p>Any levels within 50 points of each other are grouped into one cluster. The cluster's strength depends on how many independent methods contributed:</p>
+<div class="kv"><span class="kv-k"><span class="sig sig-buy">STRONG</span></span><span class="kv-v">3+ methods agree — highest conviction zone. Price is very likely to react here.</span></div>
+<div class="kv"><span class="kv-k"><span class="sig sig-neu">MODERATE</span></span><span class="kv-v">2 methods agree — decent zone, but may not hold under heavy momentum.</span></div>
+<div class="kv"><span class="kv-k"><span class="sig sig-sell">WEAK</span></span><span class="kv-v">Single indicator only — treat as a minor level, not a trading decision on its own.</span></div>
+</div>
+
+<h3>The 7 Methods Used</h3>
+<table>
+  <tr><th>#</th><th>Method</th><th>What It Provides</th><th>Data Source</th></tr>
+  <tr><td>1</td><td>Weekly Pivots (Classic)</td><td>PP, R1–R3, S1–S3</td><td>Previous week H/L/C</td></tr>
+  <tr><td>2</td><td>Weekly Pivots (Fibonacci)</td><td>PP, R1–R3, S1–S3 (golden ratio)</td><td>Previous week H/L/C</td></tr>
+  <tr><td>3</td><td>Weekly Pivots (Camarilla)</td><td>R1–R4, S1–S4</td><td>Previous week Close + range</td></tr>
+  <tr><td>4</td><td>Fibonacci Retracement</td><td>23.6%, 38.2%, 50%, 61.8%, 78.6%</td><td>20-day swing H/L</td></tr>
+  <tr><td>5</td><td>OI Walls</td><td>Max CE OI, Max PE OI, S/R levels, Max Pain</td><td>NSE option chain</td></tr>
+  <tr><td>6</td><td>SMA Zones</td><td>SMA 20, 50, 200 as dynamic S/R</td><td>1-year daily prices</td></tr>
+  <tr><td>7</td><td>ATR / VIX Range</td><td>Expected upper/lower bounds for the week</td><td>14-day ATR + India VIX</td></tr>
+</table>
+
+<h3>How to Use This Tab for Trading</h3>
+<div class="card">
+<div class="card-title">Practical Workflow</div>
+<p><strong>1. Check the current bias</strong> from the Signals tab. If it's BUY → focus on bullish targets. SELL → focus on bearish targets. SIDEWAYS → use the neutral range.</p>
+<p><strong>2. Set your targets</strong> from the scenario card. Use Target 1 for conservative trades, Target 2 for aggressive.</p>
+<p><strong>3. Check confluence strength.</strong> Only trade towards STRONG zones (3+ confluences). WEAK targets are unreliable.</p>
+<p><strong>4. Use the Confluence Map</strong> to visually see where the "walls" are. If you're buying and there's a large red dot just 50 points above, the risk-reward may be poor.</p>
+<p><strong>5. Cross-reference with intraday data.</strong> The weekly outlook gives you the map; the Intraday OI tab tells you where you are on that map right now.</p>
+</div>
+
+<div class="warn">⚠️ <strong>Important:</strong> These are <em>probable zones</em>, not predictions. The market can and will break through any level. Always use stop-losses and confirm with live data before entering trades.</div>
+</div>
+
+<!-- ─── 13: CHECKLIST ─── -->
+<div class="section" id="checklist">
+<h2>13 — 🧠 Strategy Checklist</h2>
+<p>An auto-scored checklist that evaluates 7 indicators and produces a composite score from −7 to +7:</p>
+<table>
+  <tr><th>Indicator</th><th>+1 (Bullish)</th><th>0 (Neutral)</th><th>−1 (Bearish)</th></tr>
+  <tr><td>PCR</td><td>&gt; 1.1</td><td>0.9 – 1.1</td><td>&lt; 0.9</td></tr>
+  <tr><td>RSI (14)</td><td>&gt; 60</td><td>40 – 60</td><td>&lt; 40</td></tr>
+  <tr><td>MACD</td><td>Bullish crossover</td><td>N/A</td><td>Bearish crossover</td></tr>
+  <tr><td>SMA Trend</td><td>Above majority</td><td>Mixed</td><td>Below majority</td></tr>
+  <tr><td>OI Direction</td><td>Net put accumulation</td><td>Neutral</td><td>Net call accumulation</td></tr>
+  <tr><td>Global Bias</td><td>US indices up</td><td>Mixed</td><td>US indices down</td></tr>
+  <tr><td>India VIX</td><td>&lt;13 or falling</td><td>13–20 stable</td><td>&gt;20 or rising fast</td></tr>
+</table>
+<p>The ring gauge and bias label at the top reflect this total score. Below it, each indicator card shows its individual score, value, and reasoning.</p>
+</div>
+
+<!-- ─── 13: PRE-TRADE ─── -->
+<div class="section" id="pretrade">
+<h2>14 — ✅ Pre-Trade Checklist</h2>
+<p>A manual checklist you tick off before entering a trade. Items include confirming bias alignment, checking risk-reward, verifying stop-loss placement, and ensuring you're not trading against FII flow. When all checks pass, the progress bar fills green.</p>
+</div>
+
+<!-- ═══ DEEP DIVES ═══ -->
+
+<!-- ─── 14: SIGNAL ENGINE ─── -->
+<div class="section" id="signal-engine">
+<h2>15 — Signal Engine Logic</h2>
+<p>The OI signal (shown in the Intraday OI table) is generated through a 4-step decision tree:</p>
+
+<div class="card">
+<div class="card-title">Step 1 — Opposite Directions (Clearest Signal)</div>
+<table>
+  <tr><th>CE Δ</th><th>PE Δ</th><th>Signal</th><th>Why</th></tr>
+  <tr><td style="color:#ff5252;">+ve (building)</td><td style="color:#00e676;">−ve (unwinding)</td><td><span class="sig sig-sell">STRONG SELL</span></td><td>New calls + puts leaving = true bearish</td></tr>
+  <tr><td style="color:#00e676;">−ve (unwinding)</td><td style="color:#ff5252;">+ve (building)</td><td><span class="sig sig-buy">STRONG BUY</span></td><td>Calls leaving + new puts = true bullish</td></tr>
+</table>
+</div>
+
+<div class="card">
+<div class="card-title">Step 2 — Both Building (Check Dominance)</div>
+<p>If both CE Δ and PE Δ are positive, whichever side is 1.5× larger dominates:</p>
+<p>PE Δ &gt; CE Δ × 1.5 → <span class="sig sig-buy">BUY</span> &nbsp;|&nbsp; CE Δ &gt; PE Δ × 1.5 → <span class="sig sig-sell">SELL</span></p>
+<p>If neither dominates → falls through to <strong>Step 3</strong> (PCR + VWAP + Trend tiebreaker).</p>
+</div>
+
+<div class="card">
+<div class="card-title">Step 3 — PCR + VWAP + PCR Trend Tiebreaker</div>
+<p>When neither side dominates, the engine uses PCR thresholds combined with whether spot is above/below VWAP, and a 5-reading PCR trend analysis:</p>
+<div class="kv"><span class="kv-k">PCR &gt; 1.5</span><span class="kv-v">STRONG BUY (if above VWAP) or BUY</span></div>
+<div class="kv"><span class="kv-k">PCR 1.1 – 1.5</span><span class="kv-v">BUY if above VWAP, else checks VWAP gap</span></div>
+<div class="kv"><span class="kv-k">PCR 0.9 – 1.1</span><span class="kv-v">Uses PCR trend (rising/falling over last 5 readings) to break tie</span></div>
+<div class="kv"><span class="kv-k">PCR 0.5 – 0.9</span><span class="kv-v">SELL if below VWAP, else checks VWAP gap</span></div>
+<div class="kv"><span class="kv-k">PCR &lt; 0.5</span><span class="kv-v">STRONG SELL (if below VWAP) or SELL</span></div>
+</div>
+
+<div class="card">
+<div class="card-title">Step 4 — Both Unwinding</div>
+<p>If both CE Δ and PE Δ are negative (both sides unwinding), there's no conviction either way → <span class="sig sig-neu">NEUTRAL</span></p>
+</div>
+</div>
+
+<!-- ─── 15: PCR ─── -->
+<div class="section" id="pcr-guide">
+<h2>16 — PCR (Put-Call Ratio) — How to Read</h2>
+<p><code>PCR = Total Put OI ÷ Total Call OI</code></p>
+<table>
+  <tr><th>PCR Range</th><th>Interpretation</th></tr>
+  <tr><td style="color:#00e676;">&gt; 1.5</td><td>Extreme put writing. Institutions building a strong floor. Very bullish.</td></tr>
+  <tr><td style="color:#00e676;">1.1 – 1.5</td><td>More puts than calls. Bullish bias.</td></tr>
+  <tr><td style="color:#ffb74d;">0.9 – 1.1</td><td>Balanced. No clear edge. Use other indicators.</td></tr>
+  <tr><td style="color:#ff5252;">0.5 – 0.9</td><td>More calls than puts. Bearish bias.</td></tr>
+  <tr><td style="color:#ff5252;">&lt; 0.5</td><td>Extreme call writing. Institutions building a ceiling. Very bearish.</td></tr>
+</table>
+<div class="tip">💡 <strong>Common mistake:</strong> High PCR does NOT mean "too many puts = bearish." Option <em>writers</em> (sellers) are the smart money. They write puts when they believe price will stay above. High put writing = bullish floor.</div>
+</div>
+
+<!-- ─── 16: SPARKLINE ─── -->
+<div class="section" id="sparkline-guide">
+<h2>17 — Sparkline Chart — Complete Guide</h2>
+<p>The sparkline plots <code>PE Δ − CE Δ</code> over time as a filled area chart:</p>
+<div class="card">
+<div class="card-title">Reading the Chart</div>
+<p><strong>Green area above zero:</strong> Put writing exceeds call writing. Market is building a bullish floor. The taller the green, the stronger the conviction.</p>
+<p><strong>Red area below zero:</strong> Call writing exceeds put writing. Market is building a bearish ceiling. The deeper the red, the stronger the conviction.</p>
+<p><strong>Crossing the zero line:</strong> Sentiment is flipping. Pay close attention — this is where trend changes begin.</p>
+<p><strong>The yellow/orange line:</strong> Traces the actual diff value. When it's trending consistently in one direction, momentum is building.</p>
+<p><strong>The green price line:</strong> Nifty spot overlay. Compare direction with the fill — convergence = confirmation, divergence = potential reversal.</p>
+</div>
+
+<div class="danger">🔴 <strong>Divergence alert:</strong> If the sparkline is deep green (bullish OI) but the price line is falling — institutions may be wrong OR accumulation is happening before a bounce. Wait for price confirmation before acting.</div>
+</div>
+
+<!-- ─── 17: MOMENTUM OVERRIDE ─── -->
+<div class="section" id="momentum-override">
+<h2>18 — Momentum Override</h2>
+<p>Sometimes OI signals lag during sharp V-shaped reversals. The momentum override catches this:</p>
+<div class="card">
+<div class="card-title">How It Works</div>
+<p>The engine checks the last 4–6 spot price readings. If price has moved <strong>consistently in one direction for 4+ consecutive readings</strong> while the OI signal says the opposite:</p>
+<div class="kv"><span class="kv-k">Hard override (&gt;0.5% move)</span><span class="kv-v">Signal flips entirely (SELL → BUY or vice versa)</span></div>
+<div class="kv"><span class="kv-k">Soft override (0.25–0.5%)</span><span class="kv-v">Signal becomes NEUTRAL (removes false conviction)</span></div>
+<p>This prevents you from holding a stale SELL signal while the market is rallying 100+ points.</p>
+</div>
+</div>
+
+<!-- ─── 18: SCORING ─── -->
+<div class="section" id="scoring">
+<h2>19 — Scoring System</h2>
+<p>The Strategy Checklist uses a simple +1 / 0 / −1 system across 7 indicators. The total ranges from −7 (all bearish) to +7 (all bullish).</p>
+<table>
+  <tr><th>Total Score</th><th>Bias</th><th>Suggested Action</th></tr>
+  <tr><td>+5 to +7</td><td><span class="sig sig-buy">STRONG BUY</span></td><td>Aggressive bullish strategies (Bull Call Spread, Long CE)</td></tr>
+  <tr><td>+3 to +4</td><td><span class="sig sig-buy">BUY</span></td><td>Moderate bullish (Bull Put Spread, Ratio Spread)</td></tr>
+  <tr><td>+1 to +2</td><td><span class="sig sig-buy">WATCH BULL</span></td><td>Wait for confirmation or light bullish</td></tr>
+  <tr><td>0</td><td><span class="sig sig-neu">SIDEWAYS</span></td><td>Non-directional (Straddle, Strangle, Iron Condor)</td></tr>
+  <tr><td>−1 to −2</td><td><span class="sig sig-sell">WATCH BEAR</span></td><td>Wait or light bearish</td></tr>
+  <tr><td>−3 to −4</td><td><span class="sig sig-sell">SELL</span></td><td>Moderate bearish (Bear Call Spread)</td></tr>
+  <tr><td>−5 to −7</td><td><span class="sig sig-sell">STRONG SELL</span></td><td>Aggressive bearish (Long PE, Bear Put Spread)</td></tr>
+</table>
+</div>
+
+<!-- ─── 19: GLOSSARY ─── -->
+<div class="section" id="glossary">
+<h2>20 — Glossary</h2>
+<table>
+  <tr><th>Term</th><th>Meaning</th></tr>
+  <tr><td>OI (Open Interest)</td><td>Total number of outstanding option contracts. Rising OI = new positions. Falling OI = positions closing.</td></tr>
+  <tr><td>CE / PE</td><td>Call / Put option</td></tr>
+  <tr><td>CE Δ / PE Δ</td><td>Change in open interest for calls / puts since previous day</td></tr>
+  <tr><td>PCR</td><td>Put-Call Ratio = Total Put OI ÷ Total Call OI</td></tr>
+  <tr><td>VWAP</td><td>Volume-Weighted Average Price — institutional benchmark. Spot above VWAP = buyers in control.</td></tr>
+  <tr><td>Max Pain</td><td>Strike price where option writers (sellers) lose the least money. Price tends to gravitate here near expiry.</td></tr>
+  <tr><td>RSI</td><td>Relative Strength Index (0–100). &gt;70 overbought, &lt;30 oversold.</td></tr>
+  <tr><td>MACD</td><td>Moving Average Convergence Divergence — momentum indicator. Bullish when MACD crosses above signal line.</td></tr>
+  <tr><td>SMA 20/50/200</td><td>Simple Moving Averages — short/medium/long-term trend indicators.</td></tr>
+  <tr><td>India VIX</td><td>Volatility Index — measures expected market volatility. High = fear, low = complacency.</td></tr>
+  <tr><td>FII / DII</td><td>Foreign / Domestic Institutional Investors</td></tr>
+  <tr><td>ATM</td><td>At-The-Money — strike price nearest to current spot</td></tr>
+  <tr><td>OTM</td><td>Out-of-The-Money — CE above spot or PE below spot</td></tr>
+  <tr><td>Momentum Override</td><td>When price action contradicts OI signal for 4+ readings, the signal is forcibly flipped to match price direction.</td></tr>
+  <tr><td>Pivot Points</td><td>Weekly support/resistance levels calculated from previous week's High, Low, Close. Classic, Fibonacci, and Camarilla are three popular methods.</td></tr>
+  <tr><td>Fibonacci Retracement</td><td>Horizontal lines at 23.6%, 38.2%, 50%, 61.8%, 78.6% of a recent swing. These are natural reversal zones.</td></tr>
+  <tr><td>ATR (Average True Range)</td><td>14-day average of daily High−Low range. Measures volatility. Weekly ATR = daily ATR × √5.</td></tr>
+  <tr><td>Confluence</td><td>When multiple independent methods (pivots, Fibonacci, OI, SMA) produce levels within 50 points of each other. More confluences = stronger zone.</td></tr>
+  <tr><td>Camarilla Pivots</td><td>Tighter pivot levels. R3/S3 are reversal points (expect bounce), R4/S4 are breakout points (expect acceleration).</td></tr>
+</table>
+</div>
+
+<div style="margin-top:80px;padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--txt2);font-size:12px;">
+  Built for the Nifty 50 OI Dashboard &nbsp;·&nbsp; Deep Ocean Theme &nbsp;·&nbsp; Last updated April 2026
+</div>
+
+</div><!-- /main -->
+
+<script>
+// Close mobile sidebar on link click
+document.querySelectorAll('.sb-item').forEach(a => {
+  a.addEventListener('click', () => {
+    document.querySelector('.sidebar').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
