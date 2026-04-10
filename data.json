@@ -1,34 +1,39 @@
 {
-  "updated": "2026-04-10T14:05:39Z",
+  "updated": "2026-04-10T15:08:52Z",
   "data": {
+    "sp": {
+      "price": 6837.71,
+      "chgPct": 0.2,
+      "src": "GHA"
+    },
     "ndq": {
-      "price": 22919.6,
-      "chgPct": 0.43,
+      "price": 22981.73,
+      "chgPct": 0.7,
       "src": "GHA"
     },
     "dji": {
-      "price": 48055.91,
-      "chgPct": -0.26,
+      "price": 48045.19,
+      "chgPct": -0.29,
       "src": "GHA"
     },
     "inr": {
-      "price": 92.87,
-      "chgPct": 0.47,
+      "price": 92.93,
+      "chgPct": 0.53,
       "src": "GHA"
     },
     "crude": {
-      "price": 98.34,
-      "chgPct": 0.56,
+      "price": 98.41,
+      "chgPct": 0.63,
       "src": "GHA"
     },
     "gold": {
-      "price": 4799.6,
-      "chgPct": 0.22,
+      "price": 4802.5,
+      "chgPct": 0.28,
       "src": "GHA"
     },
     "silver": {
-      "price": 76.39,
-      "chgPct": 0.58,
+      "price": 76.47,
+      "chgPct": 0.68,
       "src": "GHA"
     },
     "n50": {
@@ -107,57 +112,55 @@
       "src": "GHA"
     },
     "u_AAPL": {
-      "price": 261.05,
-      "chgPct": 0.41,
+      "price": 261.21,
+      "chgPct": 0.47,
       "src": "GHA"
     },
     "u_MSFT": {
-      "price": 372.45,
-      "chgPct": -0.17,
+      "price": 372.25,
+      "chgPct": -0.23,
       "src": "GHA"
     },
     "u_NVDA": {
-      "price": 186.65,
-      "chgPct": 1.98,
+      "price": 189.1,
+      "chgPct": 3.32,
       "src": "GHA"
     },
     "u_AMZN": {
-      "price": 237.45,
-      "chgPct": 2.02,
+      "price": 240.12,
+      "chgPct": 3.16,
       "src": "GHA"
     },
     "u_GOOGL": {
-      "price": 319.7,
-      "chgPct": 0.37,
+      "price": 319.44,
+      "chgPct": 0.29,
       "src": "GHA"
     },
     "u_META": {
-      "price": 630.91,
-      "chgPct": 0.24,
+      "price": 631.5,
+      "chgPct": 0.33,
       "src": "GHA"
     },
     "u_TSLA": {
-      "price": 346.95,
-      "chgPct": 0.59,
+      "price": 346.91,
+      "chgPct": 0.57,
       "src": "GHA"
     },
     "u_BRK": {
-      "price": 484.48,
-      "chgPct": -0.11,
+      "price": 482.03,
+      "chgPct": -0.61,
       "src": "GHA"
     },
     "u_JPM": {
-      "price": 308.73,
-      "chgPct": -0.38,
+      "price": 309.44,
+      "chgPct": -0.15,
       "src": "GHA"
     },
     "u_UNH": {
-      "price": 308.11,
-      "chgPct": 0.58,
+      "price": 308.74,
+      "chgPct": 0.79,
       "src": "GHA"
     }
   },
-  "errors": [
-    "sp: Too Many Requests. Rate limited. Try after a while."
-  ]
+  "errors": []
 }
