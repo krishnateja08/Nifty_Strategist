@@ -1,11 +1,6 @@
 {
-  "updated": "2026-04-13T03:43:27Z",
+  "updated": "2026-04-13T06:05:26Z",
   "data": {
-    "sp": {
-      "price": 6816.89,
-      "chgPct": -0.11,
-      "src": "GHA"
-    },
     "ndq": {
       "price": 22902.89,
       "chgPct": 0.35,
@@ -17,98 +12,98 @@
       "src": "GHA"
     },
     "inr": {
-      "price": 93.34,
-      "chgPct": 0.32,
+      "price": 93.36,
+      "chgPct": 0.33,
       "src": "GHA"
     },
     "crude": {
-      "price": 104.86,
-      "chgPct": 8.58,
+      "price": 104.48,
+      "chgPct": -0.35,
       "src": "GHA"
     },
     "gold": {
-      "price": 4741.2,
-      "chgPct": -0.62,
+      "price": 4743.0,
+      "chgPct": 0.03,
       "src": "GHA"
     },
     "silver": {
-      "price": 74.39,
-      "chgPct": -2.14,
+      "price": 74.53,
+      "chgPct": 0.07,
       "src": "GHA"
     },
     "n50": {
-      "price": 23589.6,
-      "chgPct": -0.74,
+      "price": 23744.15,
+      "chgPct": -1.28,
       "src": "GHA"
     },
     "bn": {
-      "price": 54646.0,
-      "chgPct": -0.32,
+      "price": 54914.8,
+      "chgPct": -1.81,
       "src": "GHA"
     },
     "sx": {
-      "price": 77550.25,
-      "chgPct": 1.2,
+      "price": 76510.0,
+      "chgPct": -1.34,
       "src": "GHA"
     },
     "fn": {
-      "price": 25645.35,
-      "chgPct": -0.16,
+      "price": 25791.95,
+      "chgPct": -1.6,
       "src": "GHA"
     },
     "vix": {
-      "price": 18.85,
-      "chgPct": -7.48,
+      "price": 20.75,
+      "chgPct": 9.32,
       "src": "GHA"
     },
     "t_RELIANCE": {
-      "price": 1321.2,
-      "chgPct": -0.59,
+      "price": 1319.3,
+      "chgPct": -2.29,
       "src": "GHA"
     },
     "t_HDFCBANK": {
-      "price": 791.5,
-      "chgPct": -0.82,
+      "price": 788.25,
+      "chgPct": -2.75,
       "src": "GHA"
     },
     "t_ICICIBANK": {
-      "price": 1304.9,
-      "chgPct": 1.67,
+      "price": 1320.7,
+      "chgPct": -0.1,
       "src": "GHA"
     },
     "t_INFY": {
-      "price": 1272.0,
-      "chgPct": -4.4,
+      "price": 1273.9,
+      "chgPct": -1.36,
       "src": "GHA"
     },
     "t_TCS": {
-      "price": 2489.9,
-      "chgPct": -3.86,
+      "price": 2485.2,
+      "chgPct": -1.5,
       "src": "GHA"
     },
     "t_AIRTEL": {
-      "price": 1838.0,
-      "chgPct": -1.17,
+      "price": 1871.7,
+      "chgPct": 0.22,
       "src": "GHA"
     },
     "t_ITC": {
-      "price": 300.0,
-      "chgPct": -0.99,
+      "price": 300.2,
+      "chgPct": -1.33,
       "src": "GHA"
     },
     "t_SBI": {
-      "price": 1042.0,
-      "chgPct": 0.15,
+      "price": 1042.35,
+      "chgPct": -2.22,
       "src": "GHA"
     },
     "t_KOTAK": {
-      "price": 367.95,
-      "chgPct": -1.06,
+      "price": 366.15,
+      "chgPct": -2.24,
       "src": "GHA"
     },
     "t_LT": {
-      "price": 3825.0,
-      "chgPct": -1.72,
+      "price": 3928.1,
+      "chgPct": -0.81,
       "src": "GHA"
     },
     "u_AAPL": {
@@ -162,5 +157,7 @@
       "src": "GHA"
     }
   },
-  "errors": []
+  "errors": [
+    "sp: Too Many Requests. Rate limited. Try after a while."
+  ]
 }
