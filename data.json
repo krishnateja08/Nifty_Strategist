@@ -1,6 +1,11 @@
 {
-  "updated": "2026-04-13T06:05:26Z",
+  "updated": "2026-04-13T08:24:15Z",
   "data": {
+    "sp": {
+      "price": 6816.89,
+      "chgPct": -0.11,
+      "src": "GHA"
+    },
     "ndq": {
       "price": 22902.89,
       "chgPct": 0.35,
@@ -12,152 +17,150 @@
       "src": "GHA"
     },
     "inr": {
-      "price": 93.36,
-      "chgPct": 0.33,
+      "price": 93.33,
+      "chgPct": 0.31,
       "src": "GHA"
     },
     "crude": {
-      "price": 104.48,
-      "chgPct": -0.35,
+      "price": 103.94,
+      "chgPct": -0.87,
       "src": "GHA"
     },
     "gold": {
-      "price": 4743.0,
-      "chgPct": 0.03,
+      "price": 4758.1,
+      "chgPct": 0.35,
       "src": "GHA"
     },
     "silver": {
-      "price": 74.53,
-      "chgPct": 0.07,
+      "price": 74.85,
+      "chgPct": 0.5,
       "src": "GHA"
     },
     "n50": {
-      "price": 23744.15,
-      "chgPct": -1.28,
+      "price": 23869.15,
+      "chgPct": -0.76,
       "src": "GHA"
     },
     "bn": {
-      "price": 54914.8,
-      "chgPct": -1.81,
+      "price": 55621.95,
+      "chgPct": -0.55,
       "src": "GHA"
     },
     "sx": {
-      "price": 76510.0,
-      "chgPct": -1.34,
+      "price": 76839.3,
+      "chgPct": -0.92,
       "src": "GHA"
     },
     "fn": {
-      "price": 25791.95,
-      "chgPct": -1.6,
+      "price": 26072.3,
+      "chgPct": -0.53,
       "src": "GHA"
     },
     "vix": {
-      "price": 20.75,
-      "chgPct": 9.32,
+      "price": 20.35,
+      "chgPct": 7.19,
       "src": "GHA"
     },
     "t_RELIANCE": {
-      "price": 1319.3,
-      "chgPct": -2.29,
+      "price": 1316.2,
+      "chgPct": -2.52,
       "src": "GHA"
     },
     "t_HDFCBANK": {
-      "price": 788.25,
-      "chgPct": -2.75,
+      "price": 794.9,
+      "chgPct": -1.92,
       "src": "GHA"
     },
     "t_ICICIBANK": {
-      "price": 1320.7,
-      "chgPct": -0.1,
+      "price": 1347.3,
+      "chgPct": 1.91,
       "src": "GHA"
     },
     "t_INFY": {
-      "price": 1273.9,
-      "chgPct": -1.36,
+      "price": 1273.6,
+      "chgPct": -1.38,
       "src": "GHA"
     },
     "t_TCS": {
-      "price": 2485.2,
-      "chgPct": -1.5,
+      "price": 2479.5,
+      "chgPct": -1.72,
       "src": "GHA"
     },
     "t_AIRTEL": {
-      "price": 1871.7,
-      "chgPct": 0.22,
+      "price": 1882.6,
+      "chgPct": 0.8,
       "src": "GHA"
     },
     "t_ITC": {
-      "price": 300.2,
-      "chgPct": -1.33,
+      "price": 298.8,
+      "chgPct": -1.79,
       "src": "GHA"
     },
     "t_SBI": {
-      "price": 1042.35,
-      "chgPct": -2.22,
+      "price": 1063.5,
+      "chgPct": -0.23,
       "src": "GHA"
     },
     "t_KOTAK": {
-      "price": 366.15,
-      "chgPct": -2.24,
+      "price": 370.9,
+      "chgPct": -0.97,
       "src": "GHA"
     },
     "t_LT": {
-      "price": 3928.1,
-      "chgPct": -0.81,
+      "price": 3967.6,
+      "chgPct": 0.19,
       "src": "GHA"
     },
     "u_AAPL": {
       "price": 260.48,
-      "chgPct": 0.19,
+      "chgPct": -0.2,
       "src": "GHA"
     },
     "u_MSFT": {
       "price": 370.87,
-      "chgPct": -0.6,
+      "chgPct": -0.22,
       "src": "GHA"
     },
     "u_NVDA": {
       "price": 188.63,
-      "chgPct": 3.07,
+      "chgPct": 0.14,
       "src": "GHA"
     },
     "u_AMZN": {
       "price": 238.38,
-      "chgPct": 2.42,
+      "chgPct": -0.03,
       "src": "GHA"
     },
     "u_GOOGL": {
       "price": 317.24,
-      "chgPct": -0.4,
+      "chgPct": -0.18,
       "src": "GHA"
     },
     "u_META": {
       "price": 629.86,
-      "chgPct": 0.07,
+      "chgPct": -0.09,
       "src": "GHA"
     },
     "u_TSLA": {
       "price": 348.95,
-      "chgPct": 1.17,
+      "chgPct": -0.67,
       "src": "GHA"
     },
     "u_BRK": {
       "price": 479.9,
-      "chgPct": -1.05,
+      "chgPct": -0.19,
       "src": "GHA"
     },
     "u_JPM": {
       "price": 309.87,
-      "chgPct": -0.01,
+      "chgPct": -0.03,
       "src": "GHA"
     },
     "u_UNH": {
       "price": 304.33,
-      "chgPct": -0.66,
+      "chgPct": -0.17,
       "src": "GHA"
     }
   },
-  "errors": [
-    "sp: Too Many Requests. Rate limited. Try after a while."
-  ]
+  "errors": []
 }
