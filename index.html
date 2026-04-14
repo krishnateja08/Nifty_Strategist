@@ -145,7 +145,9 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   color:rgba(160,200,255,.5);margin-bottom:4px;
   border-bottom:1px solid rgba(96,165,250,.05);padding-bottom:3px;
 }
-.mbar-row{display:flex;align-items:center;gap:8px;position:relative;z-index:1;padding:2px 0;}
+.mbar-row{display:flex;align-items:center;gap:0;position:relative;z-index:1;padding:2px 0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;}
+.mbar-row::-webkit-scrollbar{display:none;}
+.mbar-sep{width:2px;align-self:stretch;background:linear-gradient(180deg,transparent,rgba(96,165,250,.25),transparent);margin:0 6px;flex-shrink:0;}
 .mbar-label{
   flex-shrink:0;display:flex;align-items:center;gap:7px;
   font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;font-weight:700;
@@ -155,7 +157,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .mbar-label-txt{color:rgba(160,200,255,.85);}
 .mbar-label.india .mbar-label-txt{color:rgba(255,160,0,.9);}
 .mbar-label.global .mbar-label-txt{color:rgba(96,165,250,.95);}
-.mbar-items{flex:1;display:flex;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;gap:10px;padding:3px 0;min-width:0;}
+.mbar-items{display:flex;overflow-x:visible;overflow-y:hidden;scrollbar-width:none;gap:10px;padding:3px 0;min-width:0;flex-shrink:0;}
 .mbar-items::-webkit-scrollbar{display:none;}
 .mbar-item{
   position:relative;flex-shrink:0;display:flex;flex-direction:column;gap:2px;
@@ -361,7 +363,7 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
   .hright{flex-wrap:wrap;}
   .pill{font-size:11px;padding:3px 6px;}
   .mbar{padding:4px 8px;}
-  .mbar-row{flex-wrap:wrap;gap:6px;}
+  .mbar-row{gap:0;}
   .mbar-label{min-width:70px;font-size:11px;}
   .mbar-items{gap:6px;}
   .mbar-item{min-width:110px;padding:3px 7px;}
@@ -458,66 +460,56 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
 <div class="mbar" id="mbar">
   <div class="mbar-updated" id="mbar-ts"></div>
   <div class="mbar-row">
-    <div class="mbar-label india">
-      <div class="mbar-label-flag">🇮🇳</div>
-      <div class="mbar-label-txt">INDIA</div>
-    </div>
-    <div class="mbar-items" id="mbar-india">
+    <div class="mbar-items" id="mbar-india" style="flex:none;">
       <div class="mbar-item" id="mi-n50" style="--ic:#4d9fff;--is:rgba(77,159,255,.3);">
-        <div class="mbar-name">NIFTY 50</div><div class="mbar-val" id="mv-n50">···</div>
+        <div class="mbar-name">🇮🇳 NIFTY 50</div><div class="mbar-val" id="mv-n50">···</div>
         <div class="mbar-chg" id="mc-n50">···</div><div class="mbar-src" id="ms-n50"></div>
       </div>
       <div class="mbar-item" id="mi-bn" style="--ic:#34d399;--is:rgba(16,185,129,.3);">
-        <div class="mbar-name">BANK NIFTY</div><div class="mbar-val" id="mv-bn">···</div>
+        <div class="mbar-name">🇮🇳 BANK NIFTY</div><div class="mbar-val" id="mv-bn">···</div>
         <div class="mbar-chg" id="mc-bn">···</div><div class="mbar-src" id="ms-bn"></div>
       </div>
       <div class="mbar-item is-vix" id="mi-vix" style="--ic:#ffd080;--is:rgba(255,208,128,.3);">
-        <div class="mbar-name">INDIA VIX</div><div class="mbar-val" id="mv-vix">···</div>
+        <div class="mbar-name">🇮🇳 INDIA VIX</div><div class="mbar-val" id="mv-vix">···</div>
         <div class="mbar-chg vix" id="mc-vix">···</div><div class="mbar-src" id="ms-vix"></div>
       </div>
       <div class="mbar-item" id="mi-fn" style="--ic:#10b981;--is:rgba(16,185,129,.3);">
-        <div class="mbar-name">FINNIFTY</div><div class="mbar-val" id="mv-fn">···</div>
+        <div class="mbar-name">🇮🇳 FINNIFTY</div><div class="mbar-val" id="mv-fn">···</div>
         <div class="mbar-chg" id="mc-fn">···</div><div class="mbar-src" id="ms-fn"></div>
       </div>
       <div class="mbar-item" id="mi-sx" style="--ic:rgba(255,153,0,.8);--is:rgba(255,153,0,.2);">
-        <div class="mbar-name">SENSEX</div><div class="mbar-val" id="mv-sx">···</div>
+        <div class="mbar-name">🇮🇳 SENSEX</div><div class="mbar-val" id="mv-sx">···</div>
         <div class="mbar-chg" id="mc-sx">···</div><div class="mbar-src" id="ms-sx"></div>
       </div>
     </div>
-  </div>
-  <div class="mbar-divider"></div>
-  <div class="mbar-row">
-    <div class="mbar-label global">
-      <div class="mbar-label-flag">🌐</div>
-      <div class="mbar-label-txt">GLOBAL</div>
-    </div>
-    <div class="mbar-items" id="mbar-global">
+    <div class="mbar-sep"></div>
+    <div class="mbar-items" id="mbar-global" style="flex:none;">
       <div class="mbar-item" id="mi-sp" style="--ic:#3344cc;--is:rgba(51,68,204,.3);">
-        <div class="mbar-name">S&amp;P 500</div><div class="mbar-val" id="mv-sp">···</div>
+        <div class="mbar-name">🌐 S&amp;P 500</div><div class="mbar-val" id="mv-sp">···</div>
         <div class="mbar-chg" id="mc-sp">···</div><div class="mbar-src" id="ms-sp"></div>
       </div>
       <div class="mbar-item" id="mi-ndq" style="--ic:#6688ff;--is:rgba(102,136,255,.35);">
-        <div class="mbar-name">NASDAQ</div><div class="mbar-val" id="mv-ndq">···</div>
+        <div class="mbar-name">🌐 NASDAQ</div><div class="mbar-val" id="mv-ndq">···</div>
         <div class="mbar-chg" id="mc-ndq">···</div><div class="mbar-src" id="ms-ndq"></div>
       </div>
       <div class="mbar-item" id="mi-dji" style="--ic:#8899ff;--is:rgba(136,153,255,.2);">
-        <div class="mbar-name">DOW JONES</div><div class="mbar-val" id="mv-dji">···</div>
+        <div class="mbar-name">🌐 DOW JONES</div><div class="mbar-val" id="mv-dji">···</div>
         <div class="mbar-chg" id="mc-dji">···</div><div class="mbar-src" id="ms-dji"></div>
       </div>
       <div class="mbar-item" id="mi-inr" style="--ic:#ffd080;--is:rgba(255,208,128,.25);">
-        <div class="mbar-name">USD/INR</div><div class="mbar-val" id="mv-inr">···</div>
+        <div class="mbar-name">💱 USD/INR</div><div class="mbar-val" id="mv-inr">···</div>
         <div class="mbar-chg" id="mc-inr">···</div><div class="mbar-src" id="ms-inr"></div>
       </div>
       <div class="mbar-item" id="mi-crude" style="--ic:rgba(255,160,0,.9);--is:rgba(255,160,0,.25);">
-        <div class="mbar-name">CRUDE OIL</div><div class="mbar-val" id="mv-crude">···</div>
+        <div class="mbar-name">🛢️ CRUDE OIL</div><div class="mbar-val" id="mv-crude">···</div>
         <div class="mbar-chg" id="mc-crude">···</div><div class="mbar-src" id="ms-crude"></div>
       </div>
       <div class="mbar-item" id="mi-gold" style="--ic:#ffd700;--is:rgba(255,215,0,.35);">
-        <div class="mbar-name">GOLD</div><div class="mbar-val" id="mv-gold">···</div>
+        <div class="mbar-name">🥇 GOLD</div><div class="mbar-val" id="mv-gold">···</div>
         <div class="mbar-chg" id="mc-gold">···</div><div class="mbar-src" id="ms-gold"></div>
       </div>
       <div class="mbar-item" id="mi-silver" style="--ic:#c0c0c0;--is:rgba(192,192,192,.3);">
-        <div class="mbar-name">SILVER</div><div class="mbar-val" id="mv-silver">···</div>
+        <div class="mbar-name">🥈 SILVER</div><div class="mbar-val" id="mv-silver">···</div>
         <div class="mbar-chg" id="mc-silver">···</div><div class="mbar-src" id="ms-silver"></div>
       </div>
     </div>
