@@ -351,6 +351,110 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
   .sec{padding:6px 10px;margin:10px 10px 0;}
   .groups{margin:10px 10px 12px;}
 }
+/* ══ FIREBASE AUTH OVERLAY ══ */
+#auth-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg,#0d1b3e 0%,#0a1628 40%,#0d2040 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;
+}
+#auth-overlay::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(rgba(96,165,250,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.025) 1px,transparent 1px);
+  background-size:50px 50px;
+}
+#auth-overlay::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 50% at 50% -5%,rgba(96,165,250,.1) 0%,transparent 55%);
+}
+.auth-box{
+  position:relative;z-index:1;
+  background:rgba(10,20,50,.97);
+  border:1px solid rgba(96,165,250,.25);
+  border-radius:12px;
+  padding:48px 44px 44px;
+  max-width:420px;width:90%;
+  text-align:center;
+  box-shadow:0 0 60px rgba(96,165,250,.08),0 0 120px rgba(96,165,250,.04);
+}
+.auth-logo{
+  width:64px;height:64px;border-radius:50%;margin:0 auto 20px;
+  background:radial-gradient(circle at 35% 35%,rgba(96,165,250,.25),rgba(10,20,50,.8));
+  border:1px solid rgba(96,165,250,.4);
+  display:flex;align-items:center;justify-content:center;font-size:32px;
+  box-shadow:0 0 30px rgba(96,165,250,.2),inset 0 0 20px rgba(96,165,250,.04);
+  animation:hexglow 3s ease-in-out infinite;
+}
+.auth-title{
+  font-family:'Orbitron',monospace;font-size:22px;font-weight:700;letter-spacing:2px;
+  color:#e8f4ff;margin-bottom:6px;
+}
+.auth-title span{color:#60a5fa;text-shadow:0 0 14px rgba(96,165,250,.5);}
+.auth-sub{
+  font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;
+  color:rgba(96,165,250,.55);margin-bottom:36px;
+}
+.auth-divider{
+  height:1px;background:linear-gradient(90deg,transparent,rgba(96,165,250,.2),transparent);
+  margin-bottom:28px;
+}
+#btn-google{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;padding:14px 20px;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(96,165,250,.3);
+  border-radius:8px;cursor:pointer;
+  font-family:'Space Mono',monospace;font-size:14px;letter-spacing:2px;font-weight:700;
+  color:#e8f4ff;
+  transition:all .2s;
+  box-shadow:0 0 16px rgba(96,165,250,.06);
+}
+#btn-google:hover{
+  background:rgba(96,165,250,.12);
+  border-color:rgba(96,165,250,.6);
+  box-shadow:0 0 24px rgba(96,165,250,.2),0 0 48px rgba(96,165,250,.08);
+  transform:translateY(-1px);
+}
+#btn-google .g-icon{
+  width:22px;height:22px;flex-shrink:0;
+  background:white;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+#btn-google .g-icon svg{width:14px;height:14px;}
+#auth-error{
+  margin-top:16px;font-family:'Space Mono',monospace;font-size:12px;
+  color:#f87171;letter-spacing:1px;display:none;
+  background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);
+  padding:8px 12px;border-radius:4px;
+}
+#auth-loading{
+  display:none;flex-direction:column;align-items:center;gap:14px;margin-top:24px;
+}
+#auth-loading .lspinner{width:32px;height:32px;border-radius:50%;border:2px solid rgba(96,165,250,.1);border-top-color:#60a5fa;animation:lspin .8s linear infinite;}
+#auth-loading p{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:rgba(96,165,250,.6);}
+.auth-footer{
+  margin-top:28px;font-family:'Space Mono',monospace;font-size:11px;
+  color:rgba(96,165,250,.3);letter-spacing:1px;line-height:1.7;
+}
+
+/* ══ USER PILL (header) ══ */
+.user-pill{
+  display:flex;align-items:center;gap:7px;
+  font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.5px;
+  border:1px solid rgba(74,222,128,.3);padding:5px 10px;
+  border-radius:3px;background:rgba(16,50,30,.7);color:#4ade80;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.user-pill:hover{background:rgba(16,50,30,.95);box-shadow:0 0 12px rgba(74,222,128,.15);}
+.user-pill img{width:18px;height:18px;border-radius:50%;border:1px solid rgba(74,222,128,.4);}
+.user-pill .user-name{max-width:120px;overflow:hidden;text-overflow:ellipsis;}
+
+@media(max-width:560px){
+  .auth-box{padding:32px 20px 28px;}
+  .auth-title{font-size:17px;}
+  .user-pill .user-name{max-width:70px;}
+}
+
 @media(max-width:560px){
   .tb{padding:4px 8px;gap:6px;}
   .tb-l{font-size:11px;letter-spacing:1px;}
@@ -395,10 +499,109 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
   #floatback{bottom:12px;right:12px;font-size:13px;padding:7px 12px;}
 }
 </style>
+
+<!-- Firebase SDK (v11) -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+    from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+  // ══════════════════════════════════════════════════════════════
+  //  🔥 PASTE YOUR FIREBASE CONFIG HERE
+  //  Firebase Console → Project Settings → General
+  //  → Your apps → </> Web → SDK setup and configuration
+  // ══════════════════════════════════════════════════════════════
+  const firebaseConfig = {
+    apiKey:            "PASTE_YOUR_apiKey_HERE",
+    authDomain:        "PASTE_YOUR_authDomain_HERE",
+    projectId:         "PASTE_YOUR_projectId_HERE",
+    storageBucket:     "PASTE_YOUR_storageBucket_HERE",
+    messagingSenderId: "PASTE_YOUR_messagingSenderId_HERE",
+    appId:             "PASTE_YOUR_appId_HERE"
+  };
+  // ══════════════════════════════════════════════════════════════
+
+  const app      = initializeApp(firebaseConfig);
+  const auth     = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  const overlay    = document.getElementById('auth-overlay');
+  const appDiv     = document.getElementById('app');
+  const btnGoogle  = document.getElementById('btn-google');
+  const authErr    = document.getElementById('auth-error');
+  const authLoad   = document.getElementById('auth-loading');
+  const userAvatar = document.getElementById('user-avatar');
+  const userName   = document.getElementById('user-name');
+
+  // Watch auth state — show/hide overlay automatically
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      overlay.style.display = 'none';
+      appDiv.style.display  = 'flex';
+      if (user.photoURL) { userAvatar.src = user.photoURL; userAvatar.style.display = 'block'; }
+      userName.textContent = (user.displayName
+        ? user.displayName.split(' ')[0]
+        : user.email.split('@')[0]).toUpperCase();
+    } else {
+      overlay.style.display = 'flex';
+      appDiv.style.display  = 'none';
+    }
+  });
+
+  // Google Sign-In via popup
+  btnGoogle.addEventListener('click', async () => {
+    authErr.style.display  = 'none';
+    authLoad.style.display = 'flex';
+    btnGoogle.disabled     = true;
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (err) {
+      authLoad.style.display = 'none';
+      btnGoogle.disabled     = false;
+      authErr.style.display  = 'block';
+      authErr.textContent    = '✕  ' + (err.code === 'auth/popup-closed-by-user'
+        ? 'Popup closed — please try again.'
+        : err.message);
+    }
+  });
+
+  // Sign-Out
+  document.getElementById('btn-signout').addEventListener('click', () => signOut(auth));
+</script>
 </head>
 <body>
+<!-- ══ FIREBASE AUTH OVERLAY ══ -->
+<div id="auth-overlay">
+  <div class="auth-box">
+    <div class="auth-logo">📊</div>
+    <div class="auth-title">NIFTY <span>STRATEGIST</span></div>
+    <div class="auth-sub">INTELLIGENCE HUB // SECURE ACCESS</div>
+    <div class="auth-divider"></div>
+    <button id="btn-google">
+      <span class="g-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+      </span>
+      SIGN IN WITH GOOGLE
+    </button>
+    <div id="auth-error"></div>
+    <div id="auth-loading">
+      <div class="lspinner"></div>
+      <p>AUTHENTICATING...</p>
+    </div>
+    <div class="auth-footer">
+      🔒 SECURED BY FIREBASE AUTH<br>
+      YOUR DATA IS NEVER STORED ON THIS SITE
+    </div>
+  </div>
+</div>
+
 <div id="scan"></div>
-<div id="app">
+<div id="app" style="display:none;">
 
 <!-- ══ TOP BAR ══ -->
 <div class="tb">
@@ -453,6 +656,11 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
   <div class="hright">
     <div class="pill g"><span class="dot"></span>ALL LIVE</div>
     <div class="pill p">NSE · BSE · NYSE</div>
+    <button id="btn-signout" class="user-pill" title="Sign out">
+      <img id="user-avatar" src="" alt="" style="display:none;">
+      <span id="user-name">USER</span>
+      <span style="opacity:.5;font-size:10px;">⏻</span>
+    </button>
   </div>
 </header>
 
@@ -977,7 +1185,7 @@ function tickWorldClocks(){
 tickWorldClocks();setInterval(tickWorldClocks,1000);
 
 /* ══ MARKET DATA ══ */
-var FINNHUB_KEY='d6dmrfhr01qm89pk6ta0d6dmrfhr01qm89pk6tag';
+var FINNHUB_KEY='__FINNHUB_KEY__';
 var MB_MAP=[
   {id:'n50',valId:'mv-n50',chgId:'mc-n50',srcId:'ms-n50',yfSym:'^NSEI',fhSym:null,nseKey:'NIFTY 50',prefix:'',isVix:false},
   {id:'bn',valId:'mv-bn',chgId:'mc-bn',srcId:'ms-bn',yfSym:'^NSEBANK',fhSym:null,nseKey:'NIFTY BANK',prefix:'',isVix:false},
@@ -1093,6 +1301,27 @@ document.querySelectorAll('.sc-card[href]').forEach(function(c,i){
   c.style.transition='opacity .4s ease '+i*.07+'s,transform .4s ease '+i*.07+'s';
   setTimeout(function(){c.style.opacity='1';c.style.transform='none';},80+i*60);
 });
+</script>
+
+<!-- ══ FIREBASE ══ -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+  const firebaseConfig = {
+    apiKey:            "__FIREBASE_API_KEY__",
+    authDomain:        "__FIREBASE_AUTH_DOMAIN__",
+    projectId:         "__FIREBASE_PROJECT_ID__",
+    storageBucket:     "__FIREBASE_STORAGE_BUCKET__",
+    messagingSenderId: "__FIREBASE_MESSAGING_SENDER_ID__",
+    appId:             "__FIREBASE_APP_ID__"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  // app is ready — import and use other Firebase services below as needed.
+  // Example (Firestore):
+  // import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  // const db = getFirestore(app);
 </script>
 </body>
 </html>
