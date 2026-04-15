@@ -570,6 +570,92 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
 </script>
 </head>
 <body>
+<div id="login-screen" style="
+  display:none; position:fixed; inset:0; z-index:9999;
+  background:linear-gradient(135deg,#0d1b3e 0%,#0a1628 60%,#0d2040 100%);
+  align-items:center; justify-content:center; flex-direction:column; gap:18px;">
+
+  <!-- grid overlay -->
+  <div style="position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(rgba(96,165,250,.025) 1px,transparent 1px),
+               linear-gradient(90deg,rgba(96,165,250,.025) 1px,transparent 1px);
+    background-size:50px 50px;"></div>
+  <!-- glow -->
+  <div style="position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(96,165,250,.07) 0%,transparent 70%);"></div>
+
+  <!-- card -->
+  <div style="position:relative;z-index:2;
+    background:rgba(10,22,50,.92);
+    border:1px solid rgba(96,165,250,.2);
+    border-radius:14px;
+    padding:40px 36px 36px;
+    width:320px;
+    box-shadow:0 0 60px rgba(96,165,250,.08), 0 20px 60px rgba(0,0,20,.6);
+    display:flex;flex-direction:column;gap:18px;align-items:center;">
+
+    <!-- logo -->
+    <div style="width:52px;height:52px;border-radius:50%;
+      background:radial-gradient(circle at 35% 35%,rgba(96,165,250,.25),rgba(10,20,50,.8));
+      border:1px solid rgba(96,165,250,.4);
+      display:flex;align-items:center;justify-content:center;font-size:26px;
+      box-shadow:0 0 30px rgba(96,165,250,.25);">📈</div>
+
+    <!-- title -->
+    <div style="text-align:center;">
+      <div style="font-family:'Orbitron',monospace;color:#60a5fa;font-size:18px;
+        letter-spacing:3px;font-weight:700;text-shadow:0 0 14px rgba(96,165,250,.5);">
+        NIFTY HUB
+      </div>
+      <div style="font-family:'Space Mono',monospace;color:rgba(96,165,250,.5);
+        font-size:11px;letter-spacing:2px;margin-top:4px;">SECURE ACCESS</div>
+    </div>
+
+    <!-- email -->
+    <input id="login-email" type="email" placeholder="EMAIL ADDRESS"
+      style="width:100%;padding:11px 14px;
+        background:rgba(96,165,250,.05);
+        border:1px solid rgba(96,165,250,.2);
+        border-radius:7px;color:#cce0ff;font-size:13px;
+        font-family:'Space Mono',monospace;letter-spacing:1px;
+        outline:none;transition:border .2s;"
+      onfocus="this.style.borderColor='rgba(96,165,250,.6)'"
+      onblur="this.style.borderColor='rgba(96,165,250,.2)'">
+
+    <!-- password -->
+    <input id="login-password" type="password" placeholder="PASSWORD"
+      style="width:100%;padding:11px 14px;
+        background:rgba(96,165,250,.05);
+        border:1px solid rgba(96,165,250,.2);
+        border-radius:7px;color:#cce0ff;font-size:13px;
+        font-family:'Space Mono',monospace;letter-spacing:1px;
+        outline:none;transition:border .2s;"
+      onfocus="this.style.borderColor='rgba(96,165,250,.6)'"
+      onblur="this.style.borderColor='rgba(96,165,250,.2)'"
+      onkeydown="if(event.key==='Enter')document.getElementById('login-btn').click()">
+
+    <!-- button -->
+    <button id="login-btn"
+      style="width:100%;padding:12px;
+        background:linear-gradient(135deg,#3b82f6,#60a5fa);
+        color:#0d1b3e;border:none;border-radius:7px;
+        font-family:'Space Mono',monospace;font-weight:700;
+        font-size:13px;letter-spacing:2px;cursor:pointer;
+        box-shadow:0 0 20px rgba(96,165,250,.3);
+        transition:opacity .2s;"
+      onmouseover="this.style.opacity='.85'"
+      onmouseout="this.style.opacity='1'">
+      LOGIN →
+    </button>
+
+    <!-- error -->
+    <div id="login-error"
+      style="color:#f87171;font-size:12px;font-family:'Space Mono',monospace;
+        letter-spacing:1px;min-height:16px;text-align:center;"></div>
+
+  </div>
+</div>
+
 <!-- ══ FIREBASE AUTH OVERLAY ══ -->
 <div id="auth-overlay">
   <div class="auth-box">
@@ -1303,9 +1389,11 @@ document.querySelectorAll('.sc-card[href]').forEach(function(c,i){
 });
 </script>
 
-<!-- ══ FIREBASE ══ -->
+<!-- ══ FIREBASE AUTH ══ -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { initializeApp }                          from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword,
+           onAuthStateChanged, signOut }            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
   const firebaseConfig = {
     apiKey:            "__FIREBASE_API_KEY__",
@@ -1316,12 +1404,43 @@ document.querySelectorAll('.sc-card[href]').forEach(function(c,i){
     appId:             "__FIREBASE_APP_ID__"
   };
 
-  const app = initializeApp(firebaseConfig);
+  const app  = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-  // app is ready — import and use other Firebase services below as needed.
-  // Example (Firestore):
-  // import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-  // const db = getFirestore(app);
+  // Hide app immediately until auth state is known
+  document.getElementById('app').style.display = 'none';
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.getElementById('app').style.display          = 'flex';
+      document.getElementById('login-screen').style.display = 'none';
+    } else {
+      document.getElementById('app').style.display          = 'none';
+      document.getElementById('login-screen').style.display = 'flex';
+    }
+  });
+
+  // Login button
+  document.getElementById('login-btn').addEventListener('click', () => {
+    const email    = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errEl    = document.getElementById('login-error');
+    errEl.textContent = '';
+
+    if (!email || !password) {
+      errEl.textContent = 'Please enter email and password.';
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+      .catch(() => {
+        errEl.textContent = '✕ Invalid email or password.';
+      });
+  });
+
+  // Logout button (optional — add id="logout-btn" anywhere in your HTML to use)
+  const logoutBtn = document.getElementById('logout-btn');
+  if (logoutBtn) logoutBtn.addEventListener('click', () => signOut(auth));
 </script>
 </body>
 </html>
