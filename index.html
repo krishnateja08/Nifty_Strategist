@@ -394,9 +394,74 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
   .fl,.fr{font-size:11px;}
   #floatback{bottom:12px;right:12px;font-size:13px;padding:7px 12px;}
 }
+/* ══ LOGOUT BTN ══ */
+.btn-logout{
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;
+  border:1px solid rgba(248,113,113,.25);padding:5px 10px;
+  border-radius:3px;background:rgba(50,10,10,.5);color:rgba(248,113,113,.85);
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.btn-logout:hover{border-color:rgba(248,113,113,.5);background:rgba(248,113,113,.1);color:#f87171;}
+.user-pill{
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;
+  color:rgba(160,200,255,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;
+}
+
+/* ══ AUTH LOADING ══ */
+.auth-loading{
+  position:fixed;inset:0;z-index:99999;
+  background:linear-gradient(135deg,#0d1b3e,#0a1628);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+}
+.auth-loading.hidden{display:none;}
+.auth-spinner{width:36px;height:36px;border:3px solid rgba(96,165,250,.15);border-top-color:#60a5fa;border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.auth-text{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:2px;color:rgba(96,165,250,.6);}
 </style>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 </head>
 <body>
+
+<!-- Auth loading screen (shown until auth check completes) -->
+<div class="auth-loading" id="authLoading">
+  <div class="auth-spinner"></div>
+  <div class="auth-text">VERIFYING ACCESS...</div>
+</div>
+
+<script>
+// ══ Firebase Init + Auth Gate ══
+var firebaseConfig = {
+  apiKey: "%%FIREBASE_API_KEY%%",
+  authDomain: "%%FIREBASE_AUTH_DOMAIN%%",
+  projectId: "%%FIREBASE_PROJECT_ID%%",
+  storageBucket: "%%FIREBASE_STORAGE_BUCKET%%",
+  messagingSenderId: "%%FIREBASE_MESSAGING_SENDER_ID%%",
+  appId: "%%FIREBASE_APP_ID%%"
+};
+firebase.initializeApp(firebaseConfig);
+var _fbAuth = firebase.auth();
+var _currentUser = null;
+
+_fbAuth.onAuthStateChanged(function(user) {
+  if (!user) {
+    window.location.href = './login.html';
+    return;
+  }
+  _currentUser = user;
+  document.getElementById('authLoading').classList.add('hidden');
+  // Set user display in header
+  var userEl = document.getElementById('userDisplay');
+  if (userEl) userEl.textContent = (user.displayName || user.email || '').toUpperCase();
+});
+
+function doLogout() {
+  _fbAuth.signOut().then(function() {
+    window.location.href = './login.html';
+  });
+}
+</script>
 <div id="scan"></div>
 <div id="app">
 
@@ -404,8 +469,10 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
 <div class="tb">
   <div class="tb-l">NIFTY INDIAN MARKETS HUB // DEEP NAVY v3.1</div>
   <div class="tb-r">
+    <span class="user-pill" id="userDisplay"></span>
     <span class="v">12_NODES_ACTIVE</span>
     <span class="live"><span class="dot"></span>ALL LIVE</span>
+    <button class="btn-logout" onclick="doLogout()">⏻ LOGOUT</button>
   </div>
 </div>
 
@@ -977,7 +1044,7 @@ function tickWorldClocks(){
 tickWorldClocks();setInterval(tickWorldClocks,1000);
 
 /* ══ MARKET DATA ══ */
-var FINNHUB_KEY='d6dmrfhr01qm89pk6ta0d6dmrfhr01qm89pk6tag';
+var FINNHUB_KEY='%%FINNHUB_API_KEY%%';
 var MB_MAP=[
   {id:'n50',valId:'mv-n50',chgId:'mc-n50',srcId:'ms-n50',yfSym:'^NSEI',fhSym:null,nseKey:'NIFTY 50',prefix:'',isVix:false},
   {id:'bn',valId:'mv-bn',chgId:'mc-bn',srcId:'ms-bn',yfSym:'^NSEBANK',fhSym:null,nseKey:'NIFTY BANK',prefix:'',isVix:false},
