@@ -323,8 +323,7 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
 #viewer.open{display:flex}
 #vbar{background:rgba(8,18,50,.97);border-bottom:1px solid rgba(96,165,250,.25);padding:6px 12px;display:flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;flex-shrink:0;box-shadow:0 0 20px rgba(77,159,255,.1);position:relative;z-index:501;}
 #vtitle{color:var(--cyan);font-weight:700;font-size:14px;text-shadow:0 0 12px rgba(77,159,255,.5);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-#vopen{padding:7px 16px;font-size:14px;letter-spacing:2px;font-family:'Space Mono',monospace;text-transform:uppercase;border:2px solid #60a5fa;color:#ffffff;background:rgba(96,165,250,.25);cursor:pointer;transition:all .2s;touch-action:manipulation;border-radius:6px;font-weight:700;box-shadow:0 0 14px rgba(96,165,250,.4),0 0 28px rgba(96,165,250,.15);text-shadow:0 0 8px rgba(96,165,250,.8);}
-#vopen:hover{background:rgba(96,165,250,.45);box-shadow:0 0 22px rgba(96,165,250,.7),0 0 44px rgba(96,165,250,.3);transform:scale(1.04);}
+
 #vclose{padding:7px 16px;font-size:14px;letter-spacing:2px;font-family:'Space Mono',monospace;text-transform:uppercase;border:2px solid #4ade80;color:#ffffff;background:rgba(74,222,128,.22);cursor:pointer;transition:all .2s;border-radius:6px;touch-action:manipulation;font-weight:700;box-shadow:0 0 14px rgba(74,222,128,.4),0 0 28px rgba(74,222,128,.15);text-shadow:0 0 8px rgba(74,222,128,.8);}
 #vclose:hover{background:rgba(74,222,128,.4);box-shadow:0 0 22px rgba(74,222,128,.7),0 0 44px rgba(74,222,128,.3);transform:scale(1.04);}
 #vframe-wrap{flex:1;width:100%;background:#000;position:relative;overflow:hidden;}
@@ -989,7 +988,6 @@ function doLogout() {
 <div id="viewer">
   <div id="vbar">
     <div id="vtitle">— NODE VIEWER —</div>
-    <button id="vopen" onclick="openExternal()">↗ OPEN TAB</button>
     <button id="vclose" onclick="closeViewer(false)">✕ BACK TO HUB</button>
   </div>
   <div id="vload"><div class="lspinner"></div><div class="ltxt">LOADING NODE...</div></div>
@@ -1143,7 +1141,7 @@ var _vframe=null;
 function spawnFrame(){if(_vframe){_vframe.src='about:blank';vwrap.removeChild(_vframe);_vframe=null;}var f=document.createElement('iframe');f.style.cssText='width:100%;height:100%;border:none;background:#000;position:absolute;inset:0;';f.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');f.setAttribute('referrerpolicy','no-referrer');vwrap.appendChild(f);_vframe=f;return f;}
 function openViewer(url,name){currentUrl=url;vtitle.textContent='▶ '+name.toUpperCase();viewer.classList.add('open');document.body.style.overflow='hidden';document.getElementById('floatback').classList.add('visible');history.pushState({viewer:true,url:url,name:name},'','#node');vload.classList.remove('hidden');var f=spawnFrame();f.onload=function(){vload.classList.add('hidden');};f.src=currentUrl;}
 function closeViewer(fromPopState){viewer.classList.remove('open');document.body.style.overflow='';document.getElementById('floatback').classList.remove('visible');if(_vframe){_vframe.src='about:blank';vwrap.removeChild(_vframe);_vframe=null;}currentUrl='';if(!fromPopState&&location.hash==='#node'){history.replaceState(null,'',location.pathname);}}
-function openExternal(){if(currentUrl)window.open(currentUrl,'_blank');}
+
 window.addEventListener('popstate',function(){if(viewer.classList.contains('open'))closeViewer(true);});
 if(location.hash==='#node'){history.replaceState(null,'',location.pathname);}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&viewer.classList.contains('open'))closeViewer(false);});
