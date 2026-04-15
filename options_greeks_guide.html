@@ -1,0 +1,2199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Options Greeks — Professional Trader's Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #050810;
+  --bg2:      #080c18;
+  --bg3:      #0c1220;
+  --bg4:      #111828;
+  --border:   rgba(255,255,255,0.06);
+  --border2:  rgba(255,255,255,0.1);
+  --white:    #eef2ff;
+  --muted:    rgba(238,242,255,0.5);
+  --faint:    rgba(238,242,255,0.2);
+
+  --delta:    #38bdf8;
+  --delta-bg: rgba(56,189,248,0.08);
+  --delta-bd: rgba(56,189,248,0.2);
+
+  --theta:    #34d399;
+  --theta-bg: rgba(52,211,153,0.08);
+  --theta-bd: rgba(52,211,153,0.2);
+
+  --vega:     #a78bfa;
+  --vega-bg:  rgba(167,139,250,0.08);
+  --vega-bd:  rgba(167,139,250,0.2);
+
+  --gamma:    #f87171;
+  --gamma-bg: rgba(248,113,113,0.08);
+  --gamma-bd: rgba(248,113,113,0.2);
+
+  --buy:      #34d399;
+  --buy-bg:   rgba(52,211,153,0.1);
+  --sell:     #fb923c;
+  --sell-bg:  rgba(251,146,60,0.1);
+  --gold:     #fbbf24;
+  --danger:   #f87171;
+  --profit:   #4ade80;
+  --loss:     #f87171;
+
+  --vix:      #e879f9;
+  --vix-bg:   rgba(232,121,249,0.08);
+  --vix-bd:   rgba(232,121,249,0.22);
+  --vix-low:  #34d399;
+  --vix-mod:  #fbbf24;
+  --vix-high: #fb923c;
+  --vix-ext:  #f87171;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9999;
+  opacity:.4;
+}
+
+/* ── STICKY NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(5,8,16,0.92);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  height: 56px;
+  gap: 2rem;
+}
+
+.nav-brand {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.nav-tab {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.18s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-tab:hover { background: rgba(255,255,255,0.06); }
+.nav-tab.delta { color: var(--delta); }
+.nav-tab.theta { color: var(--theta); }
+.nav-tab.vega  { color: var(--vega); }
+.nav-tab.gamma { color: var(--gamma); }
+.nav-tab.summary { color: var(--gold); }
+.nav-tab.vix   { color: var(--vix); }
+.nav-tab.active { background: rgba(255,255,255,0.08) !important; }
+
+/* ── TAB PAGE SYSTEM ── */
+.tab-page { display: none; }
+.tab-page.active { display: block; }
+
+/* ── HERO ── */
+.hero {
+  width: 100%;
+  padding: 80px 3rem 60px;
+  background: linear-gradient(180deg, rgba(56,189,248,0.04) 0%, transparent 100%);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-left {}
+
+.hero-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.hero h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.8rem, 4vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 1.2rem;
+  color: var(--white);
+}
+
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--delta), var(--vega));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-desc {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 480px;
+  line-height: 1.75;
+}
+
+.hero-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.hero-greek-pill {
+  border-radius: 12px;
+  padding: 18px 20px;
+  border: 1px solid;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: block;
+}
+
+.hero-greek-pill:hover { transform: translateY(-2px); }
+
+.hero-greek-pill.delta { background: var(--delta-bg); border-color: var(--delta-bd); }
+.hero-greek-pill.theta { background: var(--theta-bg); border-color: var(--theta-bd); }
+.hero-greek-pill.vega  { background: var(--vega-bg);  border-color: var(--vega-bd); }
+.hero-greek-pill.gamma { background: var(--gamma-bg); border-color: var(--gamma-bd); }
+
+.pill-sym {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.delta .pill-sym { color: var(--delta); }
+.theta .pill-sym { color: var(--theta); }
+.vega  .pill-sym { color: var(--vega); }
+.gamma .pill-sym { color: var(--gamma); }
+
+.pill-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.pill-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── PAGE LAYOUT ── */
+.page { width: 100%; }
+
+/* ── SECTION ── */
+.greek-section {
+  width: 100%;
+  padding: 80px 3rem;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 56px;
+}
+
+.greek-section.delta { background: linear-gradient(180deg, rgba(56,189,248,0.03) 0%, transparent 60%); }
+.greek-section.theta { background: linear-gradient(180deg, rgba(52,211,153,0.03) 0%, transparent 60%); }
+.greek-section.vega  { background: linear-gradient(180deg, rgba(167,139,250,0.03) 0%, transparent 60%); }
+.greek-section.gamma { background: linear-gradient(180deg, rgba(248,113,113,0.03) 0%, transparent 60%); }
+
+/* ── SECTION HEADER ── */
+.sec-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sec-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.delta .sec-badge { background: var(--delta-bg); color: var(--delta); border: 1px solid var(--delta-bd); }
+.theta .sec-badge { background: var(--theta-bg); color: var(--theta); border: 1px solid var(--theta-bd); }
+.vega  .sec-badge { background: var(--vega-bg);  color: var(--vega);  border: 1px solid var(--vega-bd); }
+.gamma .sec-badge { background: var(--gamma-bg); color: var(--gamma); border: 1px solid var(--gamma-bd); }
+
+.sec-title-block { flex: 1; }
+
+.sec-title-block h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.delta h2 { color: var(--delta); }
+.theta h2 { color: var(--theta); }
+.vega  h2 { color: var(--vega); }
+.gamma h2 { color: var(--gamma); }
+
+.sec-tagline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.sec-oneliner {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--white);
+  padding: 12px 18px;
+  border-radius: 8px;
+  border-left: 3px solid;
+  max-width: 700px;
+}
+
+.delta .sec-oneliner { background: var(--delta-bg); border-color: var(--delta); }
+.theta .sec-oneliner { background: var(--theta-bg); border-color: var(--theta); }
+.vega  .sec-oneliner { background: var(--vega-bg);  border-color: var(--vega); }
+.gamma .sec-oneliner { background: var(--gamma-bg); border-color: var(--gamma); }
+
+/* ── CONTENT GRID ── */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.content-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+.content-grid.wide  { grid-template-columns: 2fr 1fr; }
+.content-grid.full  { grid-template-columns: 1fr; }
+
+/* ── CARD ── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.delta .card-header { background: rgba(56,189,248,0.06); color: var(--delta); }
+.theta .card-header { background: rgba(52,211,153,0.06); color: var(--theta); }
+.vega  .card-header { background: rgba(167,139,250,0.06); color: var(--vega); }
+.gamma .card-header { background: rgba(248,113,113,0.06); color: var(--gamma); }
+
+.card-body { padding: 20px; }
+
+/* ── MONO CODE BLOCK ── */
+.mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  line-height: 2;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.c-d { color: var(--delta); font-weight: 600; }
+.c-t { color: var(--theta); font-weight: 600; }
+.c-v { color: var(--vega);  font-weight: 600; }
+.c-g { color: var(--gamma); font-weight: 600; }
+.c-gold { color: var(--gold); font-weight: 600; }
+.c-profit { color: var(--profit); font-weight: 700; }
+.c-loss { color: var(--loss); font-weight: 700; }
+.c-muted { color: var(--muted); }
+.c-white { color: var(--white); font-weight: 500; }
+.c-buy { color: var(--buy); font-weight: 700; }
+.c-sell { color: var(--sell); font-weight: 700; }
+.c-warn { color: var(--gold); font-weight: 600; }
+
+/* ── BUYER vs SELLER SPLIT ── */
+.bvs-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.bvs-col {
+  padding: 0;
+}
+
+.bvs-col-header {
+  padding: 16px 24px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bvs-col.buyer .bvs-col-header {
+  background: var(--buy-bg);
+  color: var(--buy);
+  border-bottom: 1px solid rgba(52,211,153,0.15);
+}
+
+.bvs-col.seller .bvs-col-header {
+  background: var(--sell-bg);
+  color: var(--sell);
+  border-bottom: 1px solid rgba(251,146,60,0.15);
+  border-left: 1px solid var(--border);
+}
+
+.bvs-col-body {
+  padding: 20px 24px;
+  background: var(--bg2);
+}
+
+.bvs-col.seller .bvs-col-body {
+  border-left: 1px solid var(--border);
+}
+
+.bvs-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bvs-item {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+}
+
+.bvs-item-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+
+.bvs-item-value {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--white);
+}
+
+.bvs-item.good { border-color: rgba(74,222,128,0.2); background: rgba(74,222,128,0.05); }
+.bvs-item.bad  { border-color: rgba(248,113,113,0.2); background: rgba(248,113,113,0.05); }
+.bvs-item.warn { border-color: rgba(251,191,36,0.2);  background: rgba(251,191,36,0.05); }
+
+/* ── ANALOGY BANNER ── */
+.analogy-banner {
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.delta .analogy-banner { background: rgba(56,189,248,0.06); border: 1px solid var(--delta-bd); }
+.theta .analogy-banner { background: rgba(52,211,153,0.06); border: 1px solid var(--theta-bd); }
+.vega  .analogy-banner { background: rgba(167,139,250,0.06); border: 1px solid var(--vega-bd); }
+.gamma .analogy-banner { background: rgba(248,113,113,0.06); border: 1px solid var(--gamma-bd); }
+
+.analogy-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.analogy-content strong {
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.analogy-content p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── METRICS ROW ── */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.metric-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.metric-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.metric-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ── PRO INSIGHT ── */
+.pro-insight {
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.pro-insight.gold {
+  background: rgba(251,191,36,0.07);
+  border: 1px solid rgba(251,191,36,0.25);
+}
+
+.pro-insight.danger {
+  background: rgba(248,113,113,0.07);
+  border: 1px solid rgba(248,113,113,0.25);
+}
+
+.pro-insight.info {
+  background: rgba(56,189,248,0.07);
+  border: 1px solid rgba(56,189,248,0.25);
+}
+
+.pi-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.pi-text {
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.pro-insight.gold .pi-text { color: rgba(251,191,36,0.9); }
+.pro-insight.danger .pi-text { color: rgba(248,150,150,0.9); }
+.pro-insight.info .pi-text { color: rgba(120,195,248,0.9); }
+
+.pi-text strong { display: inline; font-weight: 700; color: inherit; }
+
+/* ── GAMMA TIMELINE ── */
+.gamma-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+}
+
+.gtl-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 90px;
+  align-items: center;
+  gap: 12px;
+}
+
+.gtl-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.gtl-bar-track {
+  height: 32px;
+  background: rgba(248,113,113,0.06);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(248,113,113,0.1);
+}
+
+.gtl-bar {
+  height: 100%;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  white-space: nowrap;
+}
+
+.gtl-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: right;
+  letter-spacing: 0.5px;
+}
+
+/* ── NIFTY ACCELERATION TABLE ── */
+.accel-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.accel-table th {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+  background: var(--bg3);
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.accel-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.accel-table tr:last-child td { border-bottom: none; }
+.accel-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* ── FULL COMPARISON TABLE ── */
+.full-compare {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.full-compare th {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  background: var(--bg3);
+  text-align: left;
+}
+
+.full-compare td {
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.full-compare tr:last-child td { border-bottom: none; }
+.full-compare tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+
+.tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.tag.buy  { background: var(--buy-bg);  color: var(--buy);  border: 1px solid rgba(52,211,153,0.3); }
+.tag.sell { background: var(--sell-bg); color: var(--sell); border: 1px solid rgba(251,146,60,0.3); }
+.tag.good { background: rgba(74,222,128,0.1); color: var(--profit); border: 1px solid rgba(74,222,128,0.25); }
+.tag.bad  { background: rgba(248,113,113,0.1); color: var(--loss); border: 1px solid rgba(248,113,113,0.25); }
+.tag.warn { background: rgba(251,191,36,0.1); color: var(--gold);  border: 1px solid rgba(251,191,36,0.25); }
+
+/* ── SUMMARY SECTION ── */
+.summary-section {
+  width: 100%;
+  padding: 80px 3rem;
+  background: var(--bg2);
+  scroll-margin-top: 56px;
+}
+
+.summary-section h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.summary-section .sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+
+.greek-cards-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 2.5rem;
+}
+
+.gcard {
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid;
+}
+
+.gcard.delta { background: var(--delta-bg); border-color: var(--delta-bd); }
+.gcard.theta { background: var(--theta-bg); border-color: var(--theta-bd); }
+.gcard.vega  { background: var(--vega-bg);  border-color: var(--vega-bd); }
+.gcard.gamma { background: var(--gamma-bg); border-color: var(--gamma-bd); }
+
+.gcard-sym {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.gcard.delta .gcard-sym { color: var(--delta); }
+.gcard.theta .gcard-sym { color: var(--theta); }
+.gcard.vega  .gcard-sym { color: var(--vega); }
+.gcard.gamma .gcard-sym { color: var(--gamma); }
+
+.gcard-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.gcard-line {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.gcard-buyer, .gcard-seller {
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+.gcard-buyer { background: var(--buy-bg); color: rgba(52,211,153,0.9); }
+.gcard-seller { background: var(--sell-bg); color: rgba(251,146,60,0.9); }
+
+/* ── REAL WORLD RULES BOX ── */
+.rules-box {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.rules-box-header {
+  padding: 14px 22px;
+  background: rgba(251,191,36,0.08);
+  border-bottom: 1px solid var(--border);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.rules-list {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rule-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--white);
+}
+
+.rule-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  background: rgba(251,191,36,0.12);
+  border: 1px solid rgba(251,191,36,0.25);
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── INDIA VIX PAGE STYLES ── */
+.vix-page { background: linear-gradient(180deg, rgba(232,121,249,0.04) 0%, transparent 40%); }
+.vix-sec-badge { background: var(--vix-bg); color: var(--vix); border: 1px solid var(--vix-bd); }
+.vix-h2 { color: var(--vix); }
+.vix-oneliner { background: var(--vix-bg); border-left: 3px solid var(--vix); border-radius: 8px; padding: 12px 18px; font-size: 16px; font-weight: 500; color: var(--white); max-width: 700px; }
+
+.vix-meter-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 2rem; }
+.vix-meter-box { border-radius: 12px; padding: 16px; text-align: center; border: 1px solid; }
+.vix-meter-box.low  { background: rgba(52,211,153,0.06);  border-color: rgba(52,211,153,0.2); }
+.vix-meter-box.mod  { background: rgba(251,191,36,0.06);  border-color: rgba(251,191,36,0.2); }
+.vix-meter-box.high { background: rgba(251,146,60,0.07);  border-color: rgba(251,146,60,0.25); }
+.vix-meter-box.ext  { background: rgba(248,113,113,0.07); border-color: rgba(248,113,113,0.25); }
+.vix-meter-range { font-family: 'IBM Plex Mono', monospace; font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.vix-meter-box.low  .vix-meter-range { color: var(--vix-low); }
+.vix-meter-box.mod  .vix-meter-range { color: var(--vix-mod); }
+.vix-meter-box.high .vix-meter-range { color: var(--vix-high); }
+.vix-meter-box.ext  .vix-meter-range { color: var(--vix-ext); }
+.vix-meter-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.vix-meter-action { font-size: 11px; font-weight: 600; padding: 3px 0; }
+.vix-meter-box.low  .vix-meter-action { color: var(--vix-low); }
+.vix-meter-box.mod  .vix-meter-action { color: var(--vix-mod); }
+.vix-meter-box.high .vix-meter-action { color: var(--vix-high); }
+.vix-meter-box.ext  .vix-meter-action { color: var(--vix-ext); }
+
+.live-now-badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; background: rgba(251,146,60,0.2); color: var(--vix-high); border: 1px solid rgba(251,146,60,0.4); margin-left: 8px; vertical-align: middle; }
+
+.vix-zone-card { border-radius: 14px; padding: 22px 24px; border: 1px solid; margin-bottom: 16px; }
+.vix-zone-card.zlow  { background: rgba(52,211,153,0.06);  border-color: rgba(52,211,153,0.25); }
+.vix-zone-card.zmod  { background: rgba(251,191,36,0.06);  border-color: rgba(251,191,36,0.25); }
+.vix-zone-card.zhigh { background: rgba(251,146,60,0.07);  border-color: rgba(251,146,60,0.3); }
+.vix-zone-card.zext  { background: rgba(248,113,113,0.07); border-color: rgba(248,113,113,0.3); }
+
+.vix-zone-title { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.vix-zone-badge { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; white-space: nowrap; }
+.zlow  .vix-zone-badge { background: rgba(52,211,153,0.15);  color: var(--vix-low);  border: 1px solid rgba(52,211,153,0.3); }
+.zmod  .vix-zone-badge { background: rgba(251,191,36,0.15);  color: var(--vix-mod);  border: 1px solid rgba(251,191,36,0.3); }
+.zhigh .vix-zone-badge { background: rgba(251,146,60,0.15);  color: var(--vix-high); border: 1px solid rgba(251,146,60,0.3); }
+.zext  .vix-zone-badge { background: rgba(248,113,113,0.15); color: var(--vix-ext);  border: 1px solid rgba(248,113,113,0.3); }
+.vix-zone-name { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 800; }
+.zlow  .vix-zone-name { color: var(--vix-low); }
+.zmod  .vix-zone-name { color: var(--vix-mod); }
+.zhigh .vix-zone-name { color: var(--vix-high); }
+.zext  .vix-zone-name { color: var(--vix-ext); }
+
+.vix-strat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.vix-strat-col { border-radius: 10px; padding: 16px; border: 1px solid var(--border); }
+.vix-strat-col.buy-col   { background: rgba(52,211,153,0.06);  border-color: rgba(52,211,153,0.2); }
+.vix-strat-col.sell-col  { background: rgba(251,146,60,0.06);  border-color: rgba(251,146,60,0.2); }
+.vix-strat-col.avoid-col { background: rgba(248,113,113,0.06); border-color: rgba(248,113,113,0.2); }
+.vix-strat-col.wait-col  { background: rgba(251,191,36,0.06);  border-color: rgba(251,191,36,0.2); }
+.vix-strat-col-header { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+.buy-col   .vix-strat-col-header { color: var(--buy); }
+.sell-col  .vix-strat-col-header { color: var(--sell); }
+.avoid-col .vix-strat-col-header { color: var(--danger); }
+.wait-col  .vix-strat-col-header { color: var(--gold); }
+.vix-strat-item { font-size: 13px; color: var(--white); padding: 6px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
+.vix-strat-item:last-child { border-bottom: none; }
+.vix-strat-item .strat-name { font-weight: 600; color: var(--white); }
+.vix-strat-item .strat-why  { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+.vix-example-block { background: var(--bg3); border: 1px solid var(--border2); border-radius: 10px; padding: 14px 18px; margin-top: 12px; }
+.vix-example-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.vix-example-text { font-size: 13px; color: var(--muted); line-height: 1.8; }
+.vix-example-text strong { color: var(--white); font-weight: 600; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .content-grid { grid-template-columns: 1fr; }
+  .content-grid.three { grid-template-columns: 1fr; }
+  .bvs-split { grid-template-columns: 1fr; }
+  .metrics-row { grid-template-columns: 1fr 1fr; }
+  .greek-cards-row { grid-template-columns: 1fr 1fr; }
+  nav { padding: 0 1.5rem; }
+  .greek-section, .summary-section { padding: 60px 1.5rem; }
+  .hero { padding: 60px 1.5rem 40px; }
+  .gtl-row { grid-template-columns: 100px 1fr 70px; }
+}
+
+/* ── FADE IN ANIMATION ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero { animation: fadeUp 0.6s ease both; }
+.greek-section { animation: fadeUp 0.5s ease both; }
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav>
+  <div class="nav-brand">⚡ Greeks Master Guide</div>
+  <div class="nav-tabs">
+    <button onclick="showTab('greeks')" class="nav-tab delta active" id="tab-greeks">Δ Greeks</button>
+    <button onclick="showTab('vix')"    class="nav-tab vix"           id="tab-vix">◈ India VIX</button>
+  </div>
+</nav>
+
+<div class="tab-page active" id="page-greeks">
+<div class="page">
+
+<!-- ═══════ HERO ═══════ -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Professional Trader's Reference</div>
+    <h1>Options Greeks<br><em>Decoded</em></h1>
+    <p class="hero-desc">Every Greek explained from both sides of the trade — buyer and seller — with real Nifty numbers, professional rules, and the exact scenarios where each Greek works for you or against you.</p>
+  </div>
+  <div class="hero-right">
+    <a href="#delta" class="hero-greek-pill delta">
+      <div class="pill-sym">Δ</div>
+      <div class="pill-name">Delta</div>
+      <div class="pill-desc">Price movement sensitivity</div>
+    </a>
+    <a href="#theta" class="hero-greek-pill theta">
+      <div class="pill-sym">Θ</div>
+      <div class="pill-name">Theta</div>
+      <div class="pill-desc">Daily time decay</div>
+    </a>
+    <a href="#vega" class="hero-greek-pill vega">
+      <div class="pill-sym">ν</div>
+      <div class="pill-name">Vega</div>
+      <div class="pill-desc">Volatility / VIX impact</div>
+    </a>
+    <a href="#gamma" class="hero-greek-pill gamma">
+      <div class="pill-sym">Γ</div>
+      <div class="pill-name">Gamma</div>
+      <div class="pill-desc">Delta acceleration force</div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     DELTA
+═══════════════════════════════════════════ -->
+<div class="greek-section delta" id="delta">
+
+  <div class="sec-header delta">
+    <div class="sec-badge">Δ</div>
+    <div class="sec-title-block">
+      <div class="sec-tagline">GREEK 1 OF 4 — PRICE SENSITIVITY</div>
+      <h2>Delta</h2>
+      <div class="sec-oneliner">
+        📌 If Nifty moves ₹1 in any direction, Delta is exactly how much your option price moves.
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALOGY -->
+  <div class="analogy-banner delta">
+    <div class="analogy-icon">🚗</div>
+    <div class="analogy-content">
+      <strong>Professional Analogy: Shadow of a Moving Car</strong>
+      <p>Delta is like the shadow of Nifty. When Nifty (the car) moves, your option (the shadow) follows — but the shadow size depends on where you are. ATM option = shadow is exactly half the car. Deep ITM = shadow matches the car perfectly. Deep OTM = tiny shadow, barely moves no matter how fast the car goes.</p>
+    </div>
+  </div>
+
+  <!-- METRICS -->
+  <div class="metrics-row">
+    <div class="metric-box">
+      <div class="metric-label">Deep OTM</div>
+      <div class="metric-value" style="color:var(--muted);">0.05–0.15</div>
+      <div class="metric-sub">Far from strike</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">ATM</div>
+      <div class="metric-value" style="color:var(--delta);">0.50</div>
+      <div class="metric-sub">At the money</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">ITM</div>
+      <div class="metric-value" style="color:var(--delta);">0.70–0.85</div>
+      <div class="metric-sub">In the money</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Deep ITM</div>
+      <div class="metric-value" style="color:var(--profit);">0.90–1.0</div>
+      <div class="metric-sub">Acts like Nifty</div>
+    </div>
+  </div>
+
+  <!-- BUYER vs SELLER SPLIT -->
+  <div class="bvs-split">
+    <div class="bvs-col buyer">
+      <div class="bvs-col-header">
+        <span>🟢</span> OPTION BUYER — Delta Perspective
+      </div>
+      <div class="bvs-col-body">
+        <div class="bvs-row">
+          <div class="bvs-item good">
+            <div class="bvs-item-label">When Delta Works For You</div>
+            <div class="bvs-item-value">You <strong style="color:var(--buy)">buy CE</strong> → Delta is +0.5 → Nifty rises → you profit ₹0.50 per ₹1 move × 65 lots. As Nifty keeps rising, Delta increases to 0.7, 0.9 → you profit faster and faster. That acceleration is Gamma working for you.</div>
+          </div>
+          <div class="bvs-item bad">
+            <div class="bvs-item-label">When Delta Hurts You</div>
+            <div class="bvs-item-value">You buy CE → Nifty falls → Delta still 0.5 but now works against you. For every ₹1 Nifty falls, CE loses ₹0.50. AND as Nifty keeps falling, Delta shrinks toward 0 — saving you from total loss, but you still bleed daily from Theta.</div>
+          </div>
+          <div class="bvs-item warn">
+            <div class="bvs-item-label">Professional Rule for Buyers</div>
+            <div class="bvs-item-value">Buy ATM or slightly ITM options (Delta 0.4–0.6). Don't buy deep OTM (Delta 0.10) thinking it's cheap — Nifty needs to move 500+ pts just to make these profitable. It's a lottery ticket, not a trade.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bvs-col seller">
+      <div class="bvs-col-header">
+        <span>🟠</span> OPTION SELLER — Delta Perspective
+      </div>
+      <div class="bvs-col-body">
+        <div class="bvs-row">
+          <div class="bvs-item good">
+            <div class="bvs-item-label">When Delta Works For You</div>
+            <div class="bvs-item-value">You <strong style="color:var(--sell)">sell PE</strong> → Delta = −0.5 (from your position) → Nifty rises → PE loses value → you profit. Bull Put Spread is designed around this: sell ATM PE, buy OTM PE. Delta favours you when Nifty stays flat or rises.</div>
+          </div>
+          <div class="bvs-item bad">
+            <div class="bvs-item-label">When Delta Hurts You</div>
+            <div class="bvs-item-value">You sell PE → Nifty drops → Delta accelerates against you via Gamma. Every ₹1 Nifty falls costs you more than the previous ₹1. This compounding is why sellers need strict stop losses, not hope.</div>
+          </div>
+          <div class="bvs-item warn">
+            <div class="bvs-item-label">Professional Rule for Sellers</div>
+            <div class="bvs-item-value">Short Straddle has Delta ≈ 0. You are not taking a directional view — you are selling pure time value. The moment Nifty moves 150+ pts, your Delta becomes non-zero and you have a directional exposure. Exit or hedge immediately.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REAL EXAMPLE -->
+  <div class="content-grid">
+    <div class="card delta">
+      <div class="card-header">📊 Real Example — Buyer Makes Money</div>
+      <div class="card-body">
+        <div class="mono"><span class="c-muted">Monday 9:15 AM — Nifty at 23,150</span>
+<span class="c-buy">BUY 1 lot Nifty 23150 CE (ATM)</span>
+<span class="c-muted">Premium paid = ₹233 × 65 = ₹15,145</span>
+<span class="c-d">Delta = 0.50</span>
+
+<span class="c-muted">───── 11 AM: Nifty at 23,350 (+200pts) ─────</span>
+
+<span class="c-white">Delta P&L = 0.50 × 200 × 65</span>
+<span class="c-profit">         = +₹6,500 profit</span>
+
+<span class="c-muted">But Delta grew too (Gamma effect):</span>
+<span class="c-d">Delta now = 0.68</span> <span class="c-muted">(moved from 0.5 → 0.68)</span>
+<span class="c-white">Actual P&L ≈ +₹8,450</span>  <span class="c-profit">← more than linear</span>
+
+<span class="c-profit">55% profit on investment in 2 hours</span></div>
+      </div>
+    </div>
+    <div class="card delta">
+      <div class="card-header">📊 Real Example — Seller Benefits From Delta</div>
+      <div class="card-body">
+        <div class="mono"><span class="c-muted">Monday — Nifty at 23,150</span>
+<span class="c-sell">SELL Bull Put Spread</span>
+<span class="c-muted">Sell 23150 PE, Buy 23100 PE</span>
+<span class="c-muted">Credit collected = ₹1,534</span>
+
+<span class="c-d">Net Delta = −0.03 (nearly neutral)</span>
+
+<span class="c-muted">──── Wednesday: Nifty at 23,300 (+150pts) ────</span>
+
+<span class="c-white">Both PEs moved OTM → worthless</span>
+<span class="c-muted">Nifty didn't need to move much.</span>
+<span class="c-muted">Just needed to STAY ABOVE 23,150.</span>
+<span class="c-profit">Full profit = +₹1,534 ✅</span>
+
+<span class="c-muted">Delta protected you — position was</span>
+<span class="c-muted">nearly flat, you won on TIME not direction</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pro-insight gold">
+    <div class="pi-icon">💡</div>
+    <div class="pi-text"><strong>Pro Trader Rule:</strong> Delta is your directional exposure meter. +Delta = net long (bullish). −Delta = net short (bearish). Zero Delta = market-neutral. Professional sellers always aim for near-zero net Delta — they make money on Theta and IV crush, not on predicting direction. If your Delta is large, you're not selling premium — you're speculating.</div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     THETA
+═══════════════════════════════════════════ -->
+<div class="greek-section theta" id="theta">
+
+  <div class="sec-header theta">
+    <div class="sec-badge">Θ</div>
+    <div class="sec-title-block">
+      <div class="sec-tagline">GREEK 2 OF 4 — TIME DECAY</div>
+      <h2>Theta</h2>
+      <div class="sec-oneliner">
+        📌 Every single day that passes, your option loses a fixed amount of value — even if Nifty doesn't move 1 point. Theta is that daily loss (or gain for sellers).
+      </div>
+    </div>
+  </div>
+
+  <div class="analogy-banner theta">
+    <div class="analogy-icon">🧊</div>
+    <div class="analogy-content">
+      <strong>Professional Analogy: The Melting Ice Cube</strong>
+      <p>Every option is a melting ice cube. From the moment you buy it, it starts shrinking — slowly at first, then rapidly in the final days. Buyers are holding that ice and watching it melt. Sellers already cashed out the ice water — they profit as the cube melts, and pocket everything left by expiry. The question is always: does the buyer's gain from Nifty moving outpace the daily melt?</p>
+    </div>
+  </div>
+
+  <!-- THETA ACCELERATION CHART -->
+  <div class="card theta" style="margin-bottom:2rem;">
+    <div class="card-header">📈 Theta Acceleration — Same Straddle, Different Days</div>
+    <div class="card-body">
+      <div class="mono"><span class="c-muted">Short Straddle ATM — Nifty 23,150 — Weekly Expiry</span>
+<span class="c-muted">Theta earned per day as expiry approaches:</span>
+
+<span class="c-white">Monday    (5 days left)  </span><span class="c-t">+₹2,800/day</span>   <span class="c-muted">▓░░░░░░░░░  Slow</span>
+<span class="c-white">Tuesday   (4 days left)  </span><span class="c-t">+₹3,600/day</span>   <span class="c-muted">▓▓▓░░░░░░░  Building</span>
+<span class="c-white">Wednesday (3 days left)  </span><span class="c-t">+₹5,728/day</span>   <span class="c-muted">▓▓▓▓▓░░░░░  Strong</span>
+<span class="c-white">Thursday  (2 days left)  </span><span class="c-t">+₹8,400/day</span>   <span class="c-muted">▓▓▓▓▓▓▓░░░  Fast</span>
+<span class="c-white">Friday    (1 day left)   </span><span class="c-t">+₹14,000/day</span>  <span class="c-muted">▓▓▓▓▓▓▓▓▓▓  MAXIMUM</span>
+
+<span class="c-warn">⚠ But Friday = EXTREME GAMMA risk too. High reward, high danger.</span>
+<span class="c-muted">Professional sweet spot: Enter Monday, exit Wednesday</span></div>
+    </div>
+  </div>
+
+  <!-- BUYER vs SELLER SPLIT -->
+  <div class="bvs-split">
+    <div class="bvs-col buyer">
+      <div class="bvs-col-header"><span>🟢</span> OPTION BUYER — Theta Perspective</div>
+      <div class="bvs-col-body">
+        <div class="bvs-row">
+          <div class="bvs-item bad">
+            <div class="bvs-item-label">Theta is Your Biggest Silent Killer</div>
+            <div class="bvs-item-value">You buy a CE for ₹233. Even if Nifty sits completely flat for 3 days, that CE is now worth ₹180. You lost ₹53 per unit = ₹3,445 without Nifty moving at all. This is the cost of holding the option — like paying daily rent on a position.</div>
+          </div>
+          <div class="bvs-item warn">
+            <div class="bvs-item-label">The Breakeven Speed Problem</div>
+            <div class="bvs-item-value">If you buy ATM CE on Monday at ₹233, you need Nifty to move fast enough to offset ₹5,728/day of straddle decay. Nifty must move at least 80–100pts just to break even by end of day. If it moves slowly, Theta eats your profit.</div>
+          </div>
+          <div class="bvs-item good">
+            <div class="bvs-item-label">When Buyers Beat Theta</div>
+            <div class="bvs-item-value">When a big news event causes Nifty to move 300–400pts in a single session, buyers win decisively. Theta only collected 1 day of decay, but Delta × 300pts created massive profit. Big fast moves are the buyer's best friend.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bvs-col seller">
+      <div class="bvs-col-header"><span>🟠</span> OPTION SELLER — Theta Perspective</div>
+      <div class="bvs-col-body">
+        <div class="bvs-row">
+          <div class="bvs-item good">
+            <div class="bvs-item-label">Theta is Your Passive Income Engine</div>
+            <div class="bvs-item-value">You sell Short Straddle on Monday. Theta earns you +₹5,728 per day. Monday night you sleep — wake up ₹5,728 richer. No screen time. No analysis. Just time passing. 3 days × ₹5,728 = ₹17,184 earned if Nifty stays flat. This is why sellers love quiet markets.</div>
+          </div>
+          <div class="bvs-item warn">
+            <div class="bvs-item-label">The Gamma vs Theta Race</div>
+            <div class="bvs-item-value">Near expiry, Theta accelerates — but so does Gamma. Monday: Theta wins comfortably. Wednesday afternoon: race is close. Thursday: Gamma starts winning. The professional exits when Gamma risk overtakes Theta reward — not when greed says "one more day."</div>
+          </div>
+          <div class="bvs-item good">
+            <div class="bvs-item-label">Professional Seller Strategy</div>
+            <div class="bvs-item-value">Enter Monday at 9:30 AM after gap settles. Target 35–40% of max profit (not 100%). Exit Wednesday 12 PM regardless. Never hold to expiry. Repeat every week. Monthly income, not monthly gamble. Consistency beats greed every single time.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="card theta">
+      <div class="card-header">📊 Example — Theta Destroys Buyer (Slow Move)</div>
+      <div class="card-body">
+        <div class="mono"><span class="c-buy">BUY Nifty 23150 CE — Monday 9:15 AM</span>
+<span class="c-muted">Premium = ₹233 × 65 lots = ₹15,145</span>
+
+<span class="c-muted">──── 3 days pass, Nifty moves +50pts ────</span>
+
+<span class="c-white">Delta gain  = 0.5 × 50 × 65 = </span><span class="c-profit">+₹1,625</span>
+<span class="c-white">Theta loss  = ₹5,200 × 3 days = </span><span class="c-loss">−₹15,600</span>
+<span class="c-white">Vega change = minimal</span>
+
+<span class="c-white">Net P&L = </span><span class="c-loss">−₹13,975 loss</span>
+
+<span class="c-muted">Nifty moved in your direction.</span>
+<span class="c-muted">You still lost. Theta killed you.</span>
+<span class="c-muted">This is why buyers need FAST moves.</span></div>
+      </div>
+    </div>
+    <div class="card theta">
+      <div class="card-header">📊 Example — Theta Rewards Seller (Flat Market)</div>
+      <div class="card-body">
+        <div class="mono"><span class="c-sell">SELL Short Straddle — Monday 9:15 AM</span>
+<span class="c-muted">Credit = ₹32,412 (CE ₹233 + PE ₹213 × 65)</span>
+
+<span class="c-muted">──── 3 days pass, Nifty moves +30pts ────</span>
+
+<span class="c-white">Delta gain  = tiny (near-zero position)</span>
+<span class="c-white">Theta earn  = ₹5,728 × 3 days = </span><span class="c-profit">+₹17,184</span>
+<span class="c-white">Gamma risk  = low (small move)</span>
+
+<span class="c-white">Net P&L = </span><span class="c-profit">+₹17,184 profit</span>
+
+<span class="c-muted">Nifty barely moved. You earned ₹17,184.</span>
+<span class="c-muted">53% of max profit in 3 days.</span>
+<span class="c-profit">→ This is the textbook seller's exit. ✅</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pro-insight gold">
+    <div class="pi-icon">💡</div>
+    <div class="pi-text"><strong>Pro Trader Rule:</strong> Never buy options with less than 5 days to expiry unless you expect a massive move TODAY. Theta is exponential in the final days — you are fighting physics. Sellers: the best theta harvest is Monday entry to Wednesday exit for weekly options. You capture 60–70% of the theta decay with only 40% of the gamma risk. That asymmetry is the entire edge.</div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     VEGA
+═══════════════════════════════════════════ -->
+<div class="greek-section vega" id="vega">
+
+  <div class="sec-header vega">
+    <div class="sec-badge">ν</div>
+    <div class="sec-title-block">
+      <div class="sec-tagline">GREEK 3 OF 4 — VOLATILITY SENSITIVITY</div>
+      <h2>Vega</h2>
+      <div class="sec-oneliner">
+        📌 If India VIX moves by 1 point, Vega tells you exactly how much your option changes in value — regardless of whether Nifty moved at all.
+      </div>
+    </div>
+  </div>
+
+  <div class="analogy-banner vega">
+    <div class="analogy-icon">🏠</div>
+    <div class="analogy-content">
+      <strong>Professional Analogy: The Rent Market</strong>
+      <p>Think of option premium as rent. When you SELL options, you are the landlord collecting rent. High VIX = expensive neighbourhood = high rent income. But if VIX spikes after you lock in your rent, new market rent is higher. Your tenants (buyers) now pay more than you collected. You have to buy them out at a loss to exit — even if the property (Nifty) didn't change. Sell when rent is high. Exit before rent rises further.</p>
+    </div>
+  </div>
+
+  <!-- VIX REFERENCE -->
+  <div class="card vega" style="margin-bottom:2rem;">
+    <div class="card-header">📊 India VIX Level Guide — What It Means for Your Trade</div>
+    <div class="card-body">
+      <div class="mono"><span class="c-muted">VIX Level    IVP%    Market State          Action</span>
+<span class="c-muted">─────────────────────────────────────────────────────</span>
+<span class="c-white">Below 12     </span><span class="c-loss">5–15%</span>   <span class="c-muted">Ultra calm — IV cheap   </span><span class="c-buy">→ BUY strategies</span>
+<span class="c-white">12 – 15      </span><span class="c-loss">15–40%</span>  <span class="c-muted">Normal, fair priced     </span><span class="c-buy">→ BUY or spreads only</span>
+<span class="c-white">15 – 18      </span><span class="c-warn">40–65%</span>  <span class="c-muted">Slightly elevated       </span><span class="c-warn">→ Spreads, be selective</span>
+<span class="c-white">18 – 22      </span><span class="c-profit">65–80%</span>  <span class="c-muted">Good selling zone       </span><span class="c-sell">→ SELL premium ✓</span>
+<span class="c-white">22 – 28      </span><span class="c-profit">80–95%</span>  <span class="c-muted">Excellent selling zone  </span><span class="c-sell">→ SELL premium ✓✓</span>
+<span class="c-white">Above 28     </span><span class="c-profit">95%+</span>    <span class="c-muted">Extreme fear/event      </span><span class="c-warn">→ SELL but small size</span>
+
+<span class="c-v">Your case: VIX 22.6, IVP 98% = Premium is EXTREMELY fat</span>
+<span class="c-v">This is one of the best selling environments of the year</span></div>
+    </div>
+  </div>
+
+  <!-- BUYER vs SELLER SPLIT -->
+  <div class="bvs-split">
+    <div class="bvs-col buyer">
+      <div class="bvs-col-header"><span>🟢</span> OPTION BUYER — Vega Perspective</div>
+      <div class="bvs-col-body">
+        <div class="bvs-row">
+          <div class="bvs-item good">
+            <div class="bvs-item-label">VIX Spike = Buyer's Windfall</div>
+            <div class="bvs-item-value">You buy CE when VIX = 14. Surprise news hits → VIX jumps to 24. Even if Nifty barely moved, your CE doubled in price because everyone is suddenly scared and willing to pay more for options. Vega gifted you a profit without a Nifty move.</div>
+          </div>
+          <div class="bvs-item warn">
+            <div class="bvs-item-label">Never Buy When VIX is Already High</div>
+            <div class="bvs-item-value">If VIX = 26 (IVP 95%), options are already expensive. You are buying at peak rent. After the event passes, VIX crashes from 26 → 15. Your option loses 40% of value from IV crush alone — even if Nifty moved in your direction. This is the most common beginner mistake.</div>
+          </div>
+          <div class="bvs-item good">
+            <div class="bvs-item-label">Best Buying Opportunity</div>
+            <div class="bvs-item-value">Buy when VIX is at 52-week lows (IVP below 20%). Premium is cheap. Any event = VIX spikes = your option value explodes. You get both Delta gain AND Vega gain. Double benefit from the same move.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bvs-col seller">
+      <div class="bvs-col-header"><span>🟠</span> OPTION SELLER — Vega Perspective</div>
+      <div class="bvs-col-body">
+        <div class="bvs-row">
+          <div class="bvs-item good">
+            <div class="bvs-item-label">IV Crush = Seller's Best Day</div>
+            <div class="bvs-item-value">You sell before Budget day. VIX = 26, you collect ₹520/unit. Budget passes without drama. VIX crashes to 15 in 30 minutes. Your sold options are now worth ₹300/unit. You close for ₹14,300 profit — and Nifty only moved 80pts. IV crush did all the work.</div>
+          </div>
+          <div class="bvs-item bad">
+            <div class="bvs-item-label">VIX Spike After You Sell = Nightmare</div>
+            <div class="bvs-item-value">You sell Straddle when VIX = 16. Unexpected bad news hits → VIX jumps to 25. Nifty only moved 50pts, but your options are now 60% more expensive. You must close at a big loss even though your directional view was right. Vega defeated you, not Delta.</div>
+          </div>
+          <div class="bvs-item good">
+            <div class="bvs-item-label">The Professional Vega Play</div>
+            <div class="bvs-item-value">Sell BEFORE big events (Budget, RBI, FOMC) when VIX is elevated. The event itself matters less than the VIX crash after it. Markets almost always see IV crush post-announcement regardless of outcome. Sell the fear, buy back the calm.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="card vega">
+      <div class="card-header">📊 Example 1 — VIX Spike Destroys Seller</div>
+      <div class="card-body">
+        <div class="mono"><span class="c-muted">Monday — calm market</span>
+<span class="c-sell">SELL Short Straddle, VIX = 16</span>
+<span class="c-muted">CE ₹180 + PE ₹170 = ₹350/unit × 65</span>
+<span class="c-profit">Total collected = +₹22,750</span>
+
+<span class="c-muted">──── 2 PM: RBI surprise rate hike ────</span>
+
+<span class="c-white">Nifty moves: only −50pts</span>
+<span class="c-v">VIX jumps: 16 → 24 (+8 points)</span>
+
+<span class="c-white">CE now priced: ₹240  </span><span class="c-loss">(+₹60 against you)</span>
+<span class="c-white">PE now priced: ₹228  </span><span class="c-loss">(+₹58 against you)</span>
+<span class="c-white">Cost to close: ₹468/unit</span>
+<span class="c-white">You collected: ₹350/unit</span>
+
+<span class="c-loss">Loss = ₹118 × 65 = −₹7,670</span>
+<span class="c-muted">Nifty moved only 50pts. Vega killed you.</span></div>
+      </div>
+    </div>
+    <div class="card vega">
+      <div class="card-header">📊 Example 2 — IV Crush Rewards Seller</div>
+      <div class="card-body">
+        <div class="mono"><span class="c-muted">Monday — before RBI Policy day</span>
+<span class="c-sell">SELL Short Straddle, VIX = 26</span>
+<span class="c-muted">CE ₹280 + PE ₹240 = ₹520/unit × 65</span>
+<span class="c-profit">Total collected = +₹33,800</span>
+
+<span class="c-muted">──── RBI: No surprise, rate hold ────</span>
+
+<span class="c-white">Nifty moves: only +80pts</span>
+<span class="c-v">VIX crashes: 26 → 15 (−11 points)</span>
+
+<span class="c-white">CE now priced: ₹160  </span><span class="c-profit">(−₹120 in your favour)</span>
+<span class="c-white">PE now priced: ₹140  </span><span class="c-profit">(−₹100 in your favour)</span>
+<span class="c-white">Cost to close: ₹300/unit</span>
+<span class="c-white">You collected: ₹520/unit</span>
+
+<span class="c-profit">Profit = ₹220 × 65 = +₹14,300</span>
+<span class="c-muted">In one day. Nifty only moved 80pts.</span>
+<span class="c-profit">IV crush did the heavy lifting. ✅</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pro-insight gold">
+    <div class="pi-icon">💡</div>
+    <div class="pi-text"><strong>Pro Trader Rule — The Vega Timing Secret:</strong> The best options trade is not about predicting direction. It's about predicting when fear will subside. Sell options the day before the event (VIX is highest then). Buy them back the day after (IV crush completes within hours of announcement). This works regardless of which direction Nifty moves. Sell the uncertainty, buy back the certainty. That's the professional volatility trade.</div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     GAMMA
+═══════════════════════════════════════════ -->
+<div class="greek-section gamma" id="gamma">
+
+  <div class="sec-header gamma">
+    <div class="sec-badge">Γ</div>
+    <div class="sec-title-block">
+      <div class="sec-tagline">GREEK 4 OF 4 — DELTA ACCELERATION</div>
+      <h2>Gamma</h2>
+      <div class="sec-oneliner">
+        📌 Gamma measures how fast your Delta changes when Nifty moves. It makes profits and losses NON-LINEAR — each move hurts (or helps) more than the one before it.
+      </div>
+    </div>
+  </div>
+
+  <div class="analogy-banner gamma">
+    <div class="analogy-icon">❄️</div>
+    <div class="analogy-content">
+      <strong>Professional Analogy: Snowball Rolling Downhill</strong>
+      <p>Gamma is a snowball. At the top of the hill (Monday, 5 days to expiry), it's tiny — easy to stop, manageable risk. Every day it rolls, it collects more snow. By expiry morning (bottom of the hill), the snowball is enormous — a single 100pt Nifty move can wipe out your entire premium collected. Sellers must get off the hill before the snowball reaches them. That exit window is Wednesday noon for weekly options.</p>
+    </div>
+  </div>
+
+  <!-- GAMMA DRIVERS -->
+  <div class="content-grid three" style="margin-bottom:2rem;">
+    <div class="card gamma">
+      <div class="card-header">⏰ Driver 1: Time to Expiry</div>
+      <div class="card-body">
+        <div class="mono" style="font-size:12px;"><span class="c-muted">Same strike, same Nifty:</span>
+
+<span class="c-white">5 days left </span><span class="c-g">Gamma = 0.0008</span>
+<span class="c-white">3 days left </span><span class="c-g">Gamma = 0.0018</span>
+<span class="c-white">1 day left  </span><span class="c-g">Gamma = 0.0052</span>
+<span class="c-white">Exp morning </span><span class="c-g">Gamma = 0.0180</span>
+
+<span class="c-loss">22x bigger in 5 days</span>
+<span class="c-muted">Time is Gamma's fuel.</span>
+<span class="c-muted">Less time = more Gamma.</span></div>
+      </div>
+    </div>
+    <div class="card gamma">
+      <div class="card-header">📍 Driver 2: Distance From Strike</div>
+      <div class="card-body">
+        <div class="mono" style="font-size:12px;"><span class="c-muted">Strike = 23,000. Nifty at:</span>
+
+<span class="c-white">23,000 (ATM)  </span><span class="c-g">MAX Gamma</span>
+<span class="c-white">22,900 (−100) </span><span class="c-g">High Gamma</span>
+<span class="c-white">22,700 (−300) </span><span class="c-warn">Medium</span>
+<span class="c-white">22,500 (−500) </span><span class="c-muted">Low Gamma</span>
+<span class="c-white">22,000 (−1000)</span><span class="c-muted">Very Low</span>
+
+<span class="c-muted">ATM = binary outcome.</span>
+<span class="c-muted">Pays or doesn't = high sensitivity.</span></div>
+      </div>
+    </div>
+    <div class="card gamma">
+      <div class="card-header">📊 Driver 3: VIX Level</div>
+      <div class="card-body">
+        <div class="mono" style="font-size:12px;"><span class="c-muted">Higher VIX = LOWER Gamma</span>
+<span class="c-muted">Lower VIX = HIGHER Gamma</span>
+
+<span class="c-white">VIX = 12 </span><span class="c-g">→ Gamma HIGH</span>
+<span class="c-white">VIX = 18 </span><span class="c-warn">→ Gamma MED</span>
+<span class="c-white">VIX = 26 </span><span class="c-muted">→ Gamma LOW</span>
+
+<span class="c-muted">High VIX spreads risk wider.</span>
+<span class="c-muted">Low VIX = options knife-edge.</span>
+<span class="c-warn">Calm market = most Gamma danger.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAMMA TIMELINE -->
+  <div class="card gamma" style="margin-bottom:2rem;">
+    <div class="card-header">⏱ Gamma Danger Level Through The Week — Short Straddle</div>
+    <div class="gamma-timeline">
+      <div class="gtl-row">
+        <div class="gtl-label">MON 9 AM</div>
+        <div class="gtl-bar-track">
+          <div class="gtl-bar" style="width:10%;background:linear-gradient(90deg,rgba(248,113,113,0.5),rgba(248,113,113,0.3));">LOW</div>
+        </div>
+        <div class="gtl-status" style="color:#4ade80;">✅ SAFE</div>
+      </div>
+      <div class="gtl-row">
+        <div class="gtl-label">MON 3 PM</div>
+        <div class="gtl-bar-track">
+          <div class="gtl-bar" style="width:18%;background:linear-gradient(90deg,rgba(248,113,113,0.55),rgba(248,113,113,0.35));">LOW–MED</div>
+        </div>
+        <div class="gtl-status" style="color:#4ade80;">✅ SAFE</div>
+      </div>
+      <div class="gtl-row">
+        <div class="gtl-label">TUE 9 AM</div>
+        <div class="gtl-bar-track">
+          <div class="gtl-bar" style="width:30%;background:linear-gradient(90deg,rgba(248,113,113,0.6),rgba(248,113,113,0.4));">MEDIUM</div>
+        </div>
+        <div class="gtl-status" style="color:#fbbf24;">⚠ WATCH</div>
+      </div>
+      <div class="gtl-row">
+        <div class="gtl-label">WED 9 AM</div>
+        <div class="gtl-bar-track">
+          <div class="gtl-bar" style="width:52%;background:linear-gradient(90deg,rgba(248,113,113,0.75),rgba(248,113,113,0.55));">HIGH — EXIT ZONE</div>
+        </div>
+        <div class="gtl-status" style="color:#fbbf24;">⚠ EXIT</div>
+      </div>
+      <div class="gtl-row">
+        <div class="gtl-label">WED 2 PM</div>
+        <div class="gtl-bar-track">
+          <div class="gtl-bar" style="width:75%;background:linear-gradient(90deg,rgba(248,113,113,0.85),rgba(248,113,113,0.65));">VERY HIGH</div>
+        </div>
+        <div class="gtl-status" style="color:#f87171;">🔴 DANGER</div>
+      </div>
+      <div class="gtl-row">
+        <div class="gtl-label">WED 3:30 PM</div>
+        <div class="gtl-bar-track">
+          <div class="gtl-bar" style="width:100%;background:linear-gradient(90deg,#f87171,#fb923c);">EXTREME — NUCLEAR GAMMA 💥</div>
+        </div>
+        <div class="gtl-status" style="color:#f87171;">💥 EXIT NOW</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUYER vs SELLER SPLIT -->
+  <div class="bvs-split">
+    <div class="bvs-col buyer">
+      <div class="bvs-col-header"><span>🟢</span> OPTION BUYER — Gamma Perspective</div>
+      <div class="bvs-col-body">
+        <div class="bvs-row">
+          <div class="bvs-item good">
+            <div class="bvs-item-label">Gamma is Your Accelerator</div>
+            <div class="bvs-item-value">You buy CE. Nifty rises 100pts — you make ₹3,250. Nifty rises another 100pts — you make ₹4,500 (more than before, because Delta grew from 0.5 to 0.7 due to Gamma). Each 100pt move in your direction pays MORE than the last. Gamma is compounding profits for buyers.</div>
+          </div>
+          <div class="bvs-item good">
+            <div class="bvs-item-label">Best Gamma Buying Scenario</div>
+            <div class="bvs-item-value">Buy ATM CE or PE with 3–5 days to expiry just BEFORE a big expected move (Fed announcement, budget, earnings). Gamma is high enough to accelerate profits fast, and IV spike from the event adds Vega gains on top. Double rocket fuel.</div>
+          </div>
+          <div class="bvs-item warn">
+            <div class="bvs-item-label">Gamma Cuts Both Ways for Buyers</div>
+            <div class="bvs-item-value">If Nifty moves against you, Gamma slows your losses (Delta shrinks toward zero). But combined with Theta eating you daily, even a wrong direction + high Gamma day still destroys buyers who hold too long. Always have a time stop: exit in 2–3 days max if move doesn't happen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bvs-col seller">
+      <div class="bvs-col-header"><span>🟠</span> OPTION SELLER — Gamma Perspective</div>
+      <div class="bvs-col-body">
+        <div class="bvs-row">
+          <div class="bvs-item bad">
+            <div class="bvs-item-label">Gamma is Your Biggest Enemy</div>
+            <div class="bvs-item-value">You sell Straddle. Nifty drops 100pts — you lose ₹3,200. Drops another 100pts — you lose ₹4,500. Another 100pts — ₹5,800. Each move costs MORE than the previous. You are short Gamma. Losses accelerate while Theta (your income) is linear. This asymmetry kills accounts.</div>
+          </div>
+          <div class="bvs-item bad">
+            <div class="bvs-item-label">The Expiry Day Trap</div>
+            <div class="bvs-item-value">Straddle seller on expiry day thinking "just 3 hours left, almost free money." Then Nifty drops 200pts at 1 PM. Gamma is nuclear — you lose ₹18,000+ in 2 hours. The entire week's Theta income wiped. This scenario happens almost every week to overconfident sellers.</div>
+          </div>
+          <div class="bvs-item good">
+            <div class="bvs-item-label">How Professionals Handle Gamma</div>
+            <div class="bvs-item-value">Set a hard Delta limit. If net Delta exceeds ±0.15 from a move, exit immediately — no exceptions. The move already happened; you cannot get it back. A small loss today beats a catastrophic loss tomorrow. Capital preservation is the entire game for premium sellers.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCELERATION TABLE -->
+  <div class="card gamma" style="margin-bottom:2rem;">
+    <div class="card-header">📊 Gamma Acceleration — Tuesday Expiry Day, Short Straddle, Nifty Drops</div>
+    <div class="card-body">
+      <table class="accel-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Nifty Level</th>
+            <th>Total Move</th>
+            <th>Delta at This Point</th>
+            <th>Loss This 100pts</th>
+            <th>Total Loss</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-family:'IBM Plex Mono',monospace;">9:15 AM</td>
+            <td style="font-family:'IBM Plex Mono',monospace;">23,000</td>
+            <td style="color:var(--muted);">Flat</td>
+            <td style="color:var(--gamma);font-family:'IBM Plex Mono',monospace;">0.00</td>
+            <td style="color:var(--muted);">—</td>
+            <td style="color:var(--muted);font-family:'IBM Plex Mono',monospace;">₹0</td>
+          </tr>
+          <tr>
+            <td style="font-family:'IBM Plex Mono',monospace;">10:00 AM</td>
+            <td style="font-family:'IBM Plex Mono',monospace;">22,900</td>
+            <td style="color:var(--loss);">−100pts</td>
+            <td style="color:var(--gamma);font-family:'IBM Plex Mono',monospace;">−0.30</td>
+            <td style="color:var(--loss);font-family:'IBM Plex Mono',monospace;">−₹3,200</td>
+            <td style="color:var(--loss);font-family:'IBM Plex Mono',monospace;font-weight:700;">−₹3,200</td>
+          </tr>
+          <tr>
+            <td style="font-family:'IBM Plex Mono',monospace;">11:00 AM</td>
+            <td style="font-family:'IBM Plex Mono',monospace;">22,800</td>
+            <td style="color:var(--loss);">−200pts</td>
+            <td style="color:var(--gamma);font-family:'IBM Plex Mono',monospace;">−0.55</td>
+            <td style="color:var(--loss);font-family:'IBM Plex Mono',monospace;">−₹3,575</td>
+            <td style="color:var(--loss);font-family:'IBM Plex Mono',monospace;font-weight:700;">−₹6,775</td>
+          </tr>
+          <tr>
+            <td style="font-family:'IBM Plex Mono',monospace;">12:00 PM</td>
+            <td style="font-family:'IBM Plex Mono',monospace;">22,700</td>
+            <td style="color:var(--loss);">−300pts</td>
+            <td style="color:var(--gamma);font-family:'IBM Plex Mono',monospace;">−0.75</td>
+            <td style="color:var(--loss);font-family:'IBM Plex Mono',monospace;">−₹4,875</td>
+            <td style="color:var(--loss);font-family:'IBM Plex Mono',monospace;font-weight:700;">−₹11,650</td>
+          </tr>
+          <tr>
+            <td style="font-family:'IBM Plex Mono',monospace;">1:00 PM</td>
+            <td style="font-family:'IBM Plex Mono',monospace;">22,600</td>
+            <td style="color:var(--loss);">−400pts</td>
+            <td style="color:var(--gamma);font-family:'IBM Plex Mono',monospace;">−0.90</td>
+            <td style="color:var(--loss);font-family:'IBM Plex Mono',monospace;">−₹5,850</td>
+            <td style="color:var(--danger);font-family:'IBM Plex Mono',monospace;font-weight:700;">−₹17,500 🔴</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="padding:14px 16px 0;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);">
+        Note: Same 100pt move each time — but loss grows every hour. That is Gamma. You collected ₹32,412. Half is gone by 1 PM. This is why the rule is: exit by Wednesday noon.
+      </div>
+    </div>
+  </div>
+
+  <div class="pro-insight danger">
+    <div class="pi-icon">🚨</div>
+    <div class="pi-text"><strong>Pro Trader Warning — The Perfect Storm:</strong> Tuesday expiry day + Nifty sitting exactly AT your strike + VIX has fallen to 14 (calm morning) = Maximum possible Gamma. This combination appears almost every expiry week. The morning looks peaceful. Then at 2 PM something happens. In 1 hour, 3 weeks of Theta income disappears. The professional rule: be OUT by Wednesday 12 PM. No negotiation. No "just one more day."</div>
+  </div>
+
+  <div class="rules-box">
+    <div class="rules-box-header">⚡ Professional Gamma Rules for Short Straddle Sellers</div>
+    <div class="rules-list">
+      <div class="rule-item">
+        <div class="rule-num">1</div>
+        <div>Enter on <strong>Monday after 9:30 AM</strong> — wait for the gap and initial volatility to settle before selling. Never sell into a fast-moving open.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">2</div>
+        <div><strong>Hard exit rule: Wednesday 12 PM</strong> — regardless of P&L. Even if you're still at breakeven. Gamma accelerates violently from Wednesday afternoon. You cannot recover in the final 6 hours what Gamma can take in 30 minutes.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">3</div>
+        <div><strong>Stop loss: Nifty ±100pts from your strike</strong> — not ±200, not ±150. At 100pts, Delta has shifted and your position is no longer market-neutral. Exit and re-assess. The move may continue. Gamma will compound the loss on every further point.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">4</div>
+        <div><strong>Target: 35–40% of max profit</strong> — not 80%, not 100%. Taking half the theoretical profit with half the time reduces your Gamma exposure by 60–70%. That's professional risk management, not settling for less.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num">5</div>
+        <div><strong>Never add lots after a loss</strong> — the classic "average down" trap for sellers. If Nifty moved 150pts against you, Gamma is now working against you exponentially. Adding more is not averaging — it's compounding a losing trade.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SUMMARY
+═══════════════════════════════════════════ -->
+<div class="summary-section" id="summary">
+  <h2>Complete Greeks Reference</h2>
+  <div class="sub">Everything in one place. Buyer and seller perspective. Professional rules.</div>
+
+  <div class="greek-cards-row">
+    <div class="gcard delta">
+      <div class="gcard-sym">Δ</div>
+      <div class="gcard-name">Delta</div>
+      <div class="gcard-line">₹1 Nifty move = option moves by Delta amount</div>
+      <div class="gcard-buyer">
+        <strong>Buyer:</strong> Direction is everything. Right direction = profits compound with Gamma.
+      </div>
+      <div class="gcard-seller">
+        <strong>Seller:</strong> Keep net Delta near zero. Monitor it like a speedometer — if it moves, danger is building.
+      </div>
+    </div>
+    <div class="gcard theta">
+      <div class="gcard-sym">Θ</div>
+      <div class="gcard-name">Theta</div>
+      <div class="gcard-line">Daily decay — silent profit for sellers, silent cost for buyers</div>
+      <div class="gcard-buyer">
+        <strong>Buyer:</strong> Enemy always. Need big fast moves to outpace Theta. Never hold slow movers.
+      </div>
+      <div class="gcard-seller">
+        <strong>Seller:</strong> Best friend. Every day = passive income. Sweet spot is Monday–Wednesday harvest.
+      </div>
+    </div>
+    <div class="gcard vega">
+      <div class="gcard-sym">ν</div>
+      <div class="gcard-name">Vega</div>
+      <div class="gcard-line">VIX +1 point = option changes by Vega amount</div>
+      <div class="gcard-buyer">
+        <strong>Buyer:</strong> Buy low VIX. Any surprise = IV spike = double profit (Delta + Vega).
+      </div>
+      <div class="gcard-seller">
+        <strong>Seller:</strong> Sell high VIX (IVP >70%). Collect fat premium, profit from post-event IV crush.
+      </div>
+    </div>
+    <div class="gcard gamma">
+      <div class="gcard-sym">Γ</div>
+      <div class="gcard-name">Gamma</div>
+      <div class="gcard-line">Delta's acceleration — makes moves non-linear</div>
+      <div class="gcard-buyer">
+        <strong>Buyer:</strong> Best friend near expiry. Each move in your direction pays more than the last.
+      </div>
+      <div class="gcard-seller">
+        <strong>Seller:</strong> Biggest enemy. Exit before Wednesday noon. Every hour after = exponential risk.
+      </div>
+    </div>
+  </div>
+
+  <!-- MASTER COMPARISON TABLE -->
+  <div class="card" style="margin-bottom:2rem;border-color:var(--border2);">
+    <div class="card-header" style="background:rgba(251,191,36,0.07);color:var(--gold);">★ Master Comparison — All Greeks, Both Perspectives</div>
+    <div class="card-body" style="padding:0;">
+      <table class="full-compare">
+        <thead>
+          <tr>
+            <th>Greek</th>
+            <th>Measures</th>
+            <th>Buyer — Friend or Foe</th>
+            <th>Seller — Friend or Foe</th>
+            <th>Short Straddle Reality</th>
+            <th>Pro Rule</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1.1rem;color:var(--delta);">Δ Delta</span></td>
+            <td>Price move impact</td>
+            <td><span class="tag good">✅ Directional profit</span></td>
+            <td><span class="tag warn">⚠️ Depends on move</span></td>
+            <td style="color:var(--muted);font-size:13px;">≈ 0 at ATM. Shifts as Nifty moves. Monitor constantly.</td>
+            <td style="font-size:13px;color:var(--white);">Keep net Delta &lt; ±0.15 or exit</td>
+          </tr>
+          <tr>
+            <td><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1.1rem;color:var(--theta);">Θ Theta</span></td>
+            <td>Daily time decay</td>
+            <td><span class="tag bad">🔴 Always enemy</span></td>
+            <td><span class="tag good">✅ Passive income</span></td>
+            <td style="color:var(--muted);font-size:13px;">+₹5,728/day income. Accelerates near expiry. Do NOT hold to expiry.</td>
+            <td style="font-size:13px;color:var(--white);">Buyers: need fast moves. Sellers: Mon–Wed harvest only.</td>
+          </tr>
+          <tr>
+            <td><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1.1rem;color:var(--vega);">ν Vega</span></td>
+            <td>VIX / IV change</td>
+            <td><span class="tag good">✅ VIX spike = profit</span></td>
+            <td><span class="tag bad">🔴 VIX spike = loss</span></td>
+            <td style="color:var(--muted);font-size:13px;">CE+PE Vega nearly cancel out. IV spike still dangerous on big moves.</td>
+            <td style="font-size:13px;color:var(--white);">Sell IVP&gt;70%. Buy IVP&lt;30%. Check VIX before every trade.</td>
+          </tr>
+          <tr>
+            <td><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1.1rem;color:var(--gamma);">Γ Gamma</span></td>
+            <td>Delta acceleration</td>
+            <td><span class="tag good">✅ Profits compound</span></td>
+            <td><span class="tag bad">🔴 Losses compound</span></td>
+            <td style="color:var(--muted);font-size:13px;">Negative Gamma position. Explodes on expiry day. Biggest risk in the strategy.</td>
+            <td style="font-size:13px;color:var(--white);">Exit by Wednesday 12 PM. Stop loss at ±100pts from strike.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FINAL INSIGHT -->
+  <div class="pro-insight gold">
+    <div class="pi-icon">🎯</div>
+    <div class="pi-text">
+      <strong>The Professional Short Straddle Framework in One Paragraph:</strong><br><br>
+      Enter Monday after 9:30 AM when VIX &gt; 18 (IVP &gt; 65%). Your Delta is near zero — you are not betting on direction. Theta earns you ₹5,000–₹8,000 per day passively. Vega is neutralised (CE and PE cancel). Your ONLY enemy is Gamma — the snowball that gets bigger every day. Exit Wednesday 12 PM at 35–40% profit regardless. Stop loss: Nifty moves ±100pts from your strike — exit immediately, no hope trades. If executed consistently, this is a 4–6% monthly return on margin with controlled risk. That is the professional edge: not predicting markets, but harvesting time value with surgical risk management.
+    </div>
+  </div>
+
+</div>
+</div>
+</div><!-- end page-greeks tab-page -->
+
+<!-- ═══════════════════════════════════════════
+     INDIA VIX — SEPARATE TAB PAGE
+═══════════════════════════════════════════ -->
+<div class="tab-page" id="page-vix">
+<div class="page vix-page">
+
+<div class="greek-section" style="background:linear-gradient(180deg,rgba(232,121,249,0.05) 0%,transparent 60%);">
+
+  <!-- SECTION HEADER -->
+  <div class="sec-header" style="border-bottom:1px solid var(--border);">
+    <div class="sec-badge vix-sec-badge" style="font-size:1.6rem;">◈</div>
+    <div class="sec-title-block">
+      <div class="sec-tagline" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--vix);margin-bottom:10px;">VOLATILITY INTELLIGENCE MODULE</div>
+      <h2 class="vix-h2" style="font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:900;letter-spacing:-0.5px;line-height:1.1;margin-bottom:6px;">India VIX</h2>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:10px;">THE FEAR INDEX — YOUR STRATEGY SELECTOR</div>
+      <div class="vix-oneliner">
+        📌 India VIX tells you <em>how much</em> the market expects to move — not which direction. Low VIX = cheap premiums = BUY. High VIX = expensive premiums = SELL.
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALOGY BANNER -->
+  <div class="analogy-banner" style="background:rgba(232,121,249,0.06);border:1px solid var(--vix-bd);margin-bottom:2rem;">
+    <div class="analogy-icon">☂️</div>
+    <div class="analogy-content">
+      <strong style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:var(--white);display:block;margin-bottom:6px;">Professional Analogy: Umbrella Price in a Storm</strong>
+      <p style="font-size:14px;color:var(--muted);line-height:1.7;">India VIX is the price of an umbrella. When the sky is perfectly clear (VIX &lt; 15), umbrellas are dirt cheap — buy them before the storm arrives. When a cyclone is forecast (VIX &gt; 25), umbrella shops charge 3× the price — that's when you sell umbrellas to scared people. The smart trader buys fear cheaply when nobody is scared, and sells it expensively when everyone is panicking.</p>
+    </div>
+  </div>
+
+  <!-- VIX METER — 4 ZONES -->
+  <div class="vix-meter-row">
+    <div class="vix-meter-box low">
+      <div class="vix-meter-label">Zone 1 — Calm</div>
+      <div class="vix-meter-range">&lt; 15</div>
+      <div class="vix-meter-action">BUY OPTIONS</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;">Cheap premiums</div>
+    </div>
+    <div class="vix-meter-box mod">
+      <div class="vix-meter-label">Zone 2 — Normal</div>
+      <div class="vix-meter-range">15 – 20</div>
+      <div class="vix-meter-action">SPREAD TRADES</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;">Balanced market</div>
+    </div>
+    <div class="vix-meter-box high">
+      <div class="vix-meter-label">Zone 3 — Fear &nbsp;<span class="live-now-badge">25.52 NOW</span></div>
+      <div class="vix-meter-range">20 – 30</div>
+      <div class="vix-meter-action">SELL OPTIONS</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;">Inflated premiums</div>
+    </div>
+    <div class="vix-meter-box ext">
+      <div class="vix-meter-label">Zone 4 — Panic</div>
+      <div class="vix-meter-range">&gt; 30</div>
+      <div class="vix-meter-action">HEDGE / WAIT</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:4px;">Crisis conditions</div>
+    </div>
+  </div>
+
+  <!-- ══ ZONE 1: LOW ══ -->
+  <div class="vix-zone-card zlow">
+    <div class="vix-zone-title">
+      <span class="vix-zone-badge">Zone 1 — VIX below 15</span>
+      <span class="vix-zone-name">Calm Market — BUY options aggressively</span>
+    </div>
+    <div class="vix-strat-grid">
+      <div class="vix-strat-col buy-col">
+        <div class="vix-strat-col-header">✅ Best Strategies to BUY</div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Long Call (CE)</div>
+          <div class="strat-why">Cheapest time to buy. Pay low premium, earn big if market rallies.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Long Put (PE)</div>
+          <div class="strat-why">Cheap downside protection. Perfect insurance before events.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Long Straddle (ATM CE + PE)</div>
+          <div class="strat-why">Both sides cheap. Bet volatility will explode — direction doesn't matter.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Long Strangle (OTM CE + OTM PE)</div>
+          <div class="strat-why">Even cheaper than straddle. Big move in any direction = profit.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Bull Call / Bear Put Spread</div>
+          <div class="strat-why">Directional debit spread. Defined risk, cheap entry, strong reward.</div>
+        </div>
+      </div>
+      <div class="vix-strat-col avoid-col">
+        <div class="vix-strat-col-header">🚫 Avoid Selling (poor risk-reward)</div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Naked Short Straddle</div>
+          <div class="strat-why">Collect ₹40–60 premium, risk ₹500+. Terrible ratio at low VIX.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Naked Short Strangle</div>
+          <div class="strat-why">Low IV = thin premiums. The income doesn't justify the risk.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Short ATM Options</div>
+          <div class="strat-why">If VIX spikes from 11 → 25, your sold option value triples against you.</div>
+        </div>
+      </div>
+    </div>
+    <div class="vix-example-block">
+      <div class="vix-example-label">📊 Real Example — VIX at 11 (3 weeks before Budget)</div>
+      <div class="vix-example-text">
+        Nifty = 22,000. Budget is in 3 weeks. <strong>VIX is at 11 — premiums are dirt cheap.</strong><br>
+        You buy an ATM Straddle: 22,000 CE @ ₹85 + 22,000 PE @ ₹80 = <strong>total ₹165 (₹12,375 for 75 qty).</strong><br>
+        Budget day arrives. Nifty shoots up 400 pts. VIX spikes from 11 → 22.<br>
+        Your CE is now ₹280. Your straddle is worth ₹360.<br>
+        <strong>Profit: ₹195 × 75 = ₹14,625 — a 118% return.</strong><br>
+        You earned from BOTH Delta (Nifty moved) AND Vega (VIX spiked). That is the double-profit power of buying at low VIX.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ZONE 2: MODERATE ══ -->
+  <div class="vix-zone-card zmod">
+    <div class="vix-zone-title">
+      <span class="vix-zone-badge">Zone 2 — VIX 15–20</span>
+      <span class="vix-zone-name">Normal Market — Balanced, defined-risk strategies</span>
+    </div>
+    <div class="vix-strat-grid">
+      <div class="vix-strat-col buy-col">
+        <div class="vix-strat-col-header">✅ Good BUY Strategies</div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Bull Call Spread</div>
+          <div class="strat-why">Buy 22,000 CE + Sell 22,200 CE. Reduce cost, cap upside. Ideal for moderate bullish view.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Bear Put Spread</div>
+          <div class="strat-why">Buy 21,900 PE + Sell 21,700 PE. Directional bearish with limited downside risk.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Single CE or PE (with stop loss)</div>
+          <div class="strat-why">Premiums are reasonable. Acceptable if you have a clear directional conviction.</div>
+        </div>
+      </div>
+      <div class="vix-strat-col sell-col">
+        <div class="vix-strat-col-header">✅ Good SELL Strategies</div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Iron Condor</div>
+          <div class="strat-why">Sell OTM CE + OTM PE, buy further wings. Perfect range-bound income strategy.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Iron Butterfly</div>
+          <div class="strat-why">Sell ATM straddle + buy OTM wings. Maximum profit if Nifty stays flat at expiry.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Covered Call</div>
+          <div class="strat-why">If holding Nifty or stock position, sell OTM CE to earn income on top.</div>
+        </div>
+      </div>
+    </div>
+    <div class="vix-example-block">
+      <div class="vix-example-label">📊 Real Example — VIX at 17 (Normal Expiry Week)</div>
+      <div class="vix-example-text">
+        Nifty = 22,000. No major events expected. VIX is calm at 17.<br>
+        You set up an <strong>Iron Condor</strong>:<br>
+        Sell 22,300 CE @ ₹55 + Buy 22,500 CE @ ₹22 = net credit ₹33<br>
+        Sell 21,700 PE @ ₹48 + Buy 21,500 PE @ ₹18 = net credit ₹30<br>
+        <strong>Total premium collected: ₹63 × 75 = ₹4,725.</strong><br>
+        If Nifty stays between 21,700–22,300 at expiry: you keep the full ₹4,725. Max risk is capped by the long wings. This zone rewards disciplined, defined-risk income strategies perfectly.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ZONE 3: HIGH ══ -->
+  <div class="vix-zone-card zhigh">
+    <div class="vix-zone-title">
+      <span class="vix-zone-badge">Zone 3 — VIX 20–30 &nbsp; YOU ARE HERE</span>
+      <span class="vix-zone-name">Fearful Market — SELL options (with protection) <span class="live-now-badge">VIX 25.52</span></span>
+    </div>
+    <div class="vix-strat-grid">
+      <div class="vix-strat-col sell-col">
+        <div class="vix-strat-col-header">✅ Best Strategies to SELL</div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Short Straddle (hedged)</div>
+          <div class="strat-why">Sell ATM CE + PE. Premiums are 2–3× inflated. Volatility crush = huge profit as fear fades.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Short Strangle (wider strikes)</div>
+          <div class="strat-why">OTM CE + OTM PE farther out. Fatter premium, wider safety buffer. Best with defined-risk wings.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Iron Condor (wide strikes)</div>
+          <div class="strat-why">Full protection. Collect elevated premium while your maximum loss is completely capped.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Cash-Secured Put</div>
+          <div class="strat-why">Sell OTM PE on stocks you want to own. Collect premium, willing to buy at lower price.</div>
+        </div>
+      </div>
+      <div class="vix-strat-col avoid-col">
+        <div class="vix-strat-col-header">🚫 Never BUY options at VIX 25+</div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Naked Long Calls or Puts</div>
+          <div class="strat-why">You overpay 2–3×. Even if direction is correct, falling VIX (Vega loss) destroys your position.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Long Straddle or Strangle</div>
+          <div class="strat-why">Buying both CE + PE at peak premium. VIX crush obliterates the position even if Nifty moves.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Weekly long options (no hedge)</div>
+          <div class="strat-why">High premium + Theta decay + VIX crash = triple damage. All three forces work against you.</div>
+        </div>
+      </div>
+    </div>
+    <div class="vix-example-block">
+      <div class="vix-example-label">📊 Real Example — Right Now (VIX 25.52, April 2026)</div>
+      <div class="vix-example-text">
+        Nifty = 22,000. VIX = 25.52 (geopolitical fear + FPI selling ₹88,000 Cr in March).<br>
+        The 22,000 ATM Straddle is priced at <strong>₹420 total</strong> (vs ₹165 when VIX was 11 — 2.5× more expensive).<br>
+        You sell the straddle: collect <strong>₹420 × 75 = ₹31,500.</strong><br>
+        One week later: US-Iran tensions ease, FPI selling stops. VIX falls from 25 → 16. Nifty barely moves (22,100).<br>
+        Straddle is now worth ₹180. You buy it back.<br>
+        <strong>Profit: ₹240 × 75 = ₹18,000 — purely from VIX crush. No direction needed.</strong><br>
+        This is the seller's edge: you didn't predict the market — you sold overpriced fear.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ZONE 4: EXTREME ══ -->
+  <div class="vix-zone-card zext">
+    <div class="vix-zone-title">
+      <span class="vix-zone-badge">Zone 4 — VIX above 30</span>
+      <span class="vix-zone-name">Panic / Crisis — Wait for VIX peak, then sell. Protect capital.</span>
+    </div>
+    <div class="vix-strat-grid">
+      <div class="vix-strat-col wait-col">
+        <div class="vix-strat-col-header">⏳ Wait for Peak → Then Act</div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Wait for VIX to peak and turn down</div>
+          <div class="strat-why">Sell options AFTER VIX tops out and begins falling. Never sell into a still-rising VIX — it can spike 50% in a day.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Far OTM Iron Condor (post-peak only)</div>
+          <div class="strat-why">Once VIX peaks and starts falling, sell a very wide Iron Condor. Collect massive premiums with full defined risk.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Buy Nifty PE as portfolio hedge</div>
+          <div class="strat-why">If holding equity portfolios, buy Nifty puts to protect. Even at elevated premium, it is insurance worth paying.</div>
+        </div>
+      </div>
+      <div class="vix-strat-col avoid-col">
+        <div class="vix-strat-col-header">🚫 What Kills Traders Here</div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Naked option selling (any direction)</div>
+          <div class="strat-why">Market can gap 5–8% in a single session. Naked shorts = unlimited loss. This is career-ending territory.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Averaging losing positions</div>
+          <div class="strat-why">Extreme VIX = extreme moves. Adding to a losing trade during a crisis compounds catastrophic losses fast.</div>
+        </div>
+        <div class="vix-strat-item">
+          <div class="strat-name">Hoping for a reversal without a stop</div>
+          <div class="strat-why">"It will come back" is the most expensive phrase in trading. In panic markets, respect stops always.</div>
+        </div>
+      </div>
+    </div>
+    <div class="vix-example-block">
+      <div class="vix-example-label">📊 Historical Example — COVID Crash (VIX hit 87, March 2020)</div>
+      <div class="vix-example-text">
+        VIX hit <strong>87 on March 24, 2020.</strong> Nifty fell from 12,000 → 7,500 in 4 weeks (-38%). Daily 5–8% gaps were normal.<br>
+        Traders who had sold naked straddles at VIX 20 suffered <strong>losses of 50–100× their collected premium.</strong><br>
+        <strong>The right move:</strong> Wait until VIX peaked and started falling. By April 1st, VIX dropped from 87 → 55 → 35 over 3 weeks.<br>
+        Traders who then sold far OTM Iron Condors (6,500 PE / 10,000 CE as protection range) collected enormous premiums and profited massively as VIX crashed back to 25 by May.<br>
+        <strong>Rule: Never sell into a rising VIX spike. Sell after the peak. The reversion IS your profit.</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIX + GREEKS CONNECTION TABLE -->
+  <div style="margin-top:2rem;">
+    <div class="card" style="border-color:var(--vix-bd);">
+      <div class="card-header" style="background:var(--vix-bg);color:var(--vix);">◈ How India VIX Connects to Every Greek — The Master Link</div>
+      <div class="card-body" style="padding:0;">
+        <table class="full-compare">
+          <thead>
+            <tr>
+              <th>Greek</th>
+              <th>When VIX is LOW (&lt; 15)</th>
+              <th>When VIX is HIGH (&gt; 20)</th>
+              <th>Your Trading Implication</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--vega);">ν Vega</span></td>
+              <td style="color:var(--profit);font-size:13px;">Low IV → options cheap. Vega gives you gains if VIX rises (which it always does eventually).</td>
+              <td style="color:var(--loss);font-size:13px;">High IV → options expensive. Vega hurts buyers as VIX normalises — you lose even if direction is right.</td>
+              <td style="font-size:13px;color:var(--white);"><strong>Low VIX = BUY</strong> (Vega tailwind). <strong>High VIX = SELL</strong> (Vega is a headwind for buyers).</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--theta);">Θ Theta</span></td>
+              <td style="color:var(--muted);font-size:13px;">Theta income is small — premiums are thin. Selling is not rewarding enough.</td>
+              <td style="color:var(--profit);font-size:13px;">Theta income is maximum — fat premiums decay fast. Sellers earn the most per day.</td>
+              <td style="font-size:13px;color:var(--white);">High VIX = maximum Theta harvest for sellers. The Mon–Wed formula earns the most here.</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--gamma);">Γ Gamma</span></td>
+              <td style="color:var(--muted);font-size:13px;">Gamma is proportional. Sellers can manage risk more easily in calm conditions.</td>
+              <td style="color:var(--loss);font-size:13px;">High VIX = violent intraday swings. Gamma can explode against short sellers at any moment.</td>
+              <td style="font-size:13px;color:var(--white);">High VIX: <strong>always use Iron Condors — never naked shorts.</strong> Gamma without protection is fatal.</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--delta);">Δ Delta</span></td>
+              <td style="color:var(--profit);font-size:13px;">Low VIX often accompanies trending markets. Directional Delta bets pay cleanly.</td>
+              <td style="color:var(--muted);font-size:13px;">High VIX = two-way violent whipsaws. Hard to hold Delta positions without getting stopped out.</td>
+              <td style="font-size:13px;color:var(--white);">Low VIX favours directional long options. High VIX favours market-neutral strategies only.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 GOLDEN RULES -->
+  <div class="rules-box" style="margin-top:2rem;border-color:var(--vix-bd);">
+    <div class="rules-box-header" style="background:var(--vix-bg);color:var(--vix);border-color:var(--vix-bd);">◈ The 6 Golden Rules of India VIX Trading</div>
+    <div class="rules-list">
+      <div class="rule-item">
+        <div class="rule-num" style="background:var(--vix-bg);border-color:var(--vix-bd);color:var(--vix);">1</div>
+        <div><strong>VIX below 15 → Buy options, never sell.</strong> Premiums are cheap — you get maximum Vega leverage. Any surprise event = double profit from Delta + Vega gains combined.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num" style="background:var(--vix-bg);border-color:var(--vix-bd);color:var(--vix);">2</div>
+        <div><strong>VIX above 20 → Sell options (with hedges), never buy naked.</strong> You collect inflated premiums. When fear normalises, you earn from volatility crush — even if Nifty barely moves.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num" style="background:var(--vix-bg);border-color:var(--vix-bd);color:var(--vix);">3</div>
+        <div><strong>Never buy options when VIX is above 25.</strong> You overpay by 2–3×. Even if your directional view is correct, falling VIX (Vega loss) + Theta decay combine to destroy the position over time.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num" style="background:var(--vix-bg);border-color:var(--vix-bd);color:var(--vix);">4</div>
+        <div><strong>Watch VIX direction, not just its level.</strong> VIX rising 18 → 22 = danger for sellers (tighten hedges). VIX falling 25 → 18 = prime time for sellers (open positions with confidence).</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num" style="background:var(--vix-bg);border-color:var(--vix-bd);color:var(--vix);">5</div>
+        <div><strong>In extreme VIX (&gt; 30), wait for the peak before selling.</strong> Sell into a falling VIX, not a rising one. The VIX reversion from peak levels is where the largest seller profits are made.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-num" style="background:var(--vix-bg);border-color:var(--vix-bd);color:var(--vix);">6</div>
+        <div><strong>Check VIX before every single trade.</strong> Your strategy must be determined by the VIX zone first, chart patterns second. The best technical setup means nothing if you're buying in the wrong volatility environment.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING INSIGHT -->
+  <div class="pro-insight gold" style="margin-top:2rem;">
+    <div class="pi-icon">🎯</div>
+    <div class="pi-text">
+      <strong>The Complete VIX + Greeks Framework in One Paragraph:</strong><br><br>
+      Check India VIX before every trade — it determines your entire strategy. VIX below 15: buy mode — premiums are cheap, Vega is your friend, any surprise event doubles your profit. VIX 20–30: sell mode — Theta earns maximum passive income, volatility crush is your profit engine, use Iron Condors not naked shorts. VIX above 30: wait mode — preserve capital, hedge existing positions, wait for the peak to turn before opening any short volatility trade. The professional edge is not predicting market direction — it is always being in the right strategy for the current volatility regime.
+    </div>
+  </div>
+
+</div>
+</div>
+</div><!-- end page-vix tab-page -->
+
+<script>
+function showTab(tab) {
+  document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + tab).classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// Animate elements on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.bvs-item, .card, .metric-box, .gcard, .vix-zone-card, .vix-meter-box').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(12px)';
+  el.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+  observer.observe(el);
+});
+
+// Scroll-based active highlight for Greeks tab internal anchors
+const greeksNav = document.querySelectorAll('.nav-tab:not(#tab-vix)');
+window.addEventListener('scroll', () => {
+  const greeksPage = document.getElementById('page-greeks');
+  if (!greeksPage.classList.contains('active')) return;
+  const sections = greeksPage.querySelectorAll('[id]');
+  let current = '';
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 80) current = section.getAttribute('id');
+  });
+});
+</script>
+
+</body>
+</html>
