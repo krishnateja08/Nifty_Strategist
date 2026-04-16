@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-16T06:26:45Z",
+  "updated": "2026-04-16T08:20:51Z",
   "data": {
     "sp": {
       "price": 7022.95,
@@ -17,78 +17,78 @@
       "src": "GHA"
     },
     "inr": {
-      "price": 93.31,
-      "chgPct": -0.03,
-      "src": "GHA"
-    },
-    "crude": {
-      "price": 91.5,
-      "chgPct": -0.25,
-      "src": "GHA"
-    },
-    "gold": {
-      "price": 4844.6,
+      "price": 93.28,
       "chgPct": -0.06,
       "src": "GHA"
     },
+    "crude": {
+      "price": 89.36,
+      "chgPct": -2.58,
+      "src": "GHA"
+    },
+    "gold": {
+      "price": 4833.7,
+      "chgPct": -0.29,
+      "src": "GHA"
+    },
     "silver": {
-      "price": 80.61,
-      "chgPct": -0.01,
+      "price": 80.07,
+      "chgPct": -0.68,
       "src": "GHA"
     },
     "n50": {
-      "price": 24226.85,
-      "chgPct": 0.06,
+      "price": 24168.35,
+      "chgPct": -0.18,
       "src": "GHA"
     },
     "bn": {
-      "price": 56206.4,
-      "chgPct": -0.09,
+      "price": 56098.45,
+      "chgPct": -0.29,
       "src": "GHA"
     },
     "sx": {
-      "price": 78221.12,
-      "chgPct": 0.14,
-      "src": "GHA"
-    },
-    "fn": {
-      "price": 26496.6,
-      "chgPct": 0.24,
-      "src": "GHA"
-    },
-    "vix": {
-      "price": 18.25,
-      "chgPct": -2.72,
-      "src": "GHA"
-    },
-    "t_RELIANCE": {
-      "price": 1337.7,
+      "price": 77734.84,
       "chgPct": -0.48,
       "src": "GHA"
     },
+    "fn": {
+      "price": 26372.5,
+      "chgPct": -0.23,
+      "src": "GHA"
+    },
+    "vix": {
+      "price": 18.22,
+      "chgPct": -2.85,
+      "src": "GHA"
+    },
+    "t_RELIANCE": {
+      "price": 1335.0,
+      "chgPct": -0.68,
+      "src": "GHA"
+    },
     "t_HDFCBANK": {
-      "price": 803.8,
-      "chgPct": -0.72,
+      "price": 800.15,
+      "chgPct": -1.17,
       "src": "GHA"
     },
     "t_ICICIBANK": {
-      "price": 1352.8,
-      "chgPct": 0.43,
+      "price": 1345.0,
+      "chgPct": -0.15,
       "src": "GHA"
     },
     "t_INFY": {
-      "price": 1320.0,
-      "chgPct": 1.15,
+      "price": 1311.6,
+      "chgPct": 0.51,
       "src": "GHA"
     },
     "t_TCS": {
-      "price": 2573.0,
-      "chgPct": 0.79,
+      "price": 2571.7,
+      "chgPct": 0.74,
       "src": "GHA"
     },
     "t_AIRTEL": {
-      "price": 1839.1,
-      "chgPct": -0.89,
+      "price": 1827.7,
+      "chgPct": -1.51,
       "src": "GHA"
     },
     "t_ITC": {
@@ -97,68 +97,68 @@
       "src": "GHA"
     },
     "t_SBI": {
-      "price": 1067.6,
-      "chgPct": -0.36,
+      "price": 1067.5,
+      "chgPct": -0.37,
       "src": "GHA"
     },
     "t_KOTAK": {
-      "price": 382.45,
-      "chgPct": 0.01,
+      "price": 380.4,
+      "chgPct": -0.52,
       "src": "GHA"
     },
     "t_LT": {
-      "price": 4130.7,
-      "chgPct": 1.42,
+      "price": 4111.8,
+      "chgPct": 0.95,
       "src": "GHA"
     },
     "u_AAPL": {
       "price": 266.43,
-      "chgPct": 3.03,
+      "chgPct": -0.19,
       "src": "GHA"
     },
     "u_MSFT": {
       "price": 411.22,
-      "chgPct": 4.26,
+      "chgPct": -1.15,
       "src": "GHA"
     },
     "u_NVDA": {
       "price": 198.87,
-      "chgPct": 1.37,
+      "chgPct": 0.19,
       "src": "GHA"
     },
     "u_AMZN": {
       "price": 248.5,
-      "chgPct": -0.26,
+      "chgPct": 0.17,
       "src": "GHA"
     },
     "u_GOOGL": {
       "price": 337.12,
-      "chgPct": 1.15,
+      "chgPct": -0.05,
       "src": "GHA"
     },
     "u_META": {
       "price": 671.58,
-      "chgPct": 0.85,
+      "chgPct": -0.33,
       "src": "GHA"
     },
     "u_TSLA": {
       "price": 391.95,
-      "chgPct": 7.09,
+      "chgPct": -0.41,
       "src": "GHA"
     },
     "u_BRK": {
       "price": 474.09,
-      "chgPct": -0.8,
+      "chgPct": -0.12,
       "src": "GHA"
     },
     "u_JPM": {
       "price": 305.93,
-      "chgPct": -1.72,
+      "chgPct": -0.26,
       "src": "GHA"
     },
     "u_UNH": {
       "price": 314.05,
-      "chgPct": -0.09,
+      "chgPct": 0.12,
       "src": "GHA"
     }
   },
