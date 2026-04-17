@@ -1,39 +1,39 @@
 {
-  "updated": "2026-04-17T18:39:42Z",
+  "updated": "2026-04-17T19:49:30Z",
   "data": {
     "sp": {
-      "price": 7125.35,
-      "chgPct": 1.22,
+      "price": 7121.74,
+      "chgPct": 1.17,
       "src": "GHA"
     },
     "ndq": {
-      "price": 24446.52,
-      "chgPct": 1.43,
+      "price": 24450.63,
+      "chgPct": 1.44,
       "src": "GHA"
     },
     "dji": {
-      "price": 49482.71,
-      "chgPct": 1.89,
+      "price": 49427.32,
+      "chgPct": 1.78,
       "src": "GHA"
     },
     "inr": {
-      "price": 92.46,
-      "chgPct": -0.59,
+      "price": 92.53,
+      "chgPct": -0.51,
       "src": "GHA"
     },
     "crude": {
-      "price": 82.73,
-      "chgPct": -7.9,
+      "price": 82.95,
+      "chgPct": -7.66,
       "src": "GHA"
     },
     "gold": {
-      "price": 4884.1,
-      "chgPct": 1.45,
+      "price": 4881.0,
+      "chgPct": 1.39,
       "src": "GHA"
     },
     "silver": {
-      "price": 81.97,
-      "chgPct": 3.78,
+      "price": 81.61,
+      "chgPct": 3.31,
       "src": "GHA"
     },
     "n50": {
@@ -112,53 +112,53 @@
       "src": "GHA"
     },
     "u_AAPL": {
-      "price": 270.7,
-      "chgPct": 2.5,
+      "price": 270.33,
+      "chgPct": 2.36,
       "src": "GHA"
     },
     "u_MSFT": {
-      "price": 422.37,
-      "chgPct": 0.34,
+      "price": 422.6,
+      "chgPct": 0.4,
       "src": "GHA"
     },
     "u_NVDA": {
-      "price": 200.85,
-      "chgPct": 1.49,
+      "price": 201.46,
+      "chgPct": 1.8,
       "src": "GHA"
     },
     "u_AMZN": {
-      "price": 251.77,
-      "chgPct": 0.82,
+      "price": 250.79,
+      "chgPct": 0.43,
       "src": "GHA"
     },
     "u_GOOGL": {
-      "price": 341.54,
-      "chgPct": 1.42,
+      "price": 341.59,
+      "chgPct": 1.44,
       "src": "GHA"
     },
     "u_META": {
-      "price": 684.6,
-      "chgPct": 1.08,
+      "price": 688.87,
+      "chgPct": 1.71,
       "src": "GHA"
     },
     "u_TSLA": {
-      "price": 401.57,
-      "chgPct": 3.44,
+      "price": 400.6,
+      "chgPct": 3.19,
       "src": "GHA"
     },
     "u_BRK": {
-      "price": 476.45,
-      "chgPct": 0.16,
+      "price": 474.95,
+      "chgPct": -0.16,
       "src": "GHA"
     },
     "u_JPM": {
-      "price": 311.08,
-      "chgPct": 0.45,
+      "price": 310.81,
+      "chgPct": 0.36,
       "src": "GHA"
     },
     "u_UNH": {
-      "price": 323.66,
-      "chgPct": 2.14,
+      "price": 323.82,
+      "chgPct": 2.19,
       "src": "GHA"
     }
   },
