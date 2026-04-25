@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Options Trading Mastery — Complete Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #0f1528;
+    --bg3: #141c35;
+    --surface: #1a2340;
+    --surface2: #1f2a4a;
+    --border: rgba(99,179,237,0.15);
+    --accent: #63b3ed;
+    --accent2: #f6ad55;
+    --accent3: #68d391;
+    --accent4: #fc8181;
+    --accent5: #b794f4;
+    --text: #e8edf8;
+    --text2: #a0aec0;
+    --text3: #718096;
+    --gold: #f6e05e;
+    --sidebar-w: 280px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── SIDEBAR ─── */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: transparent; }
+  #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .sidebar-logo {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-logo .logo-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #63b3ed, #b794f4);
+    color: #0a0e1a;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .sidebar-logo h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .sidebar-logo p { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+  .nav-section-title {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 16px 20px 6px;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    font-size: 13px;
+    color: var(--text2);
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+  }
+  .nav-link:hover { background: var(--surface); color: var(--accent); }
+  .nav-link.active { background: rgba(99,179,237,0.08); color: var(--accent); border-left-color: var(--accent); }
+  .nav-link .nav-icon { font-size: 14px; width: 18px; text-align: center; }
+  .nav-link .nav-num {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    background: var(--bg3);
+    padding: 1px 6px;
+    border-radius: 10px;
+  }
+
+  .progress-bar-wrap {
+    margin: 16px 20px;
+    background: var(--bg3);
+    border-radius: 6px;
+    height: 4px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent5));
+    border-radius: 6px;
+    width: 0%;
+    transition: width 0.3s;
+  }
+  .progress-label { font-size: 11px; color: var(--text3); margin: 6px 20px 16px; }
+
+  /* ─── MAIN CONTENT ─── */
+  #main {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, #0a0e1a 0%, #0f1a3a 50%, #0a0e1a 100%);
+    padding: 80px 60px 60px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(99,179,237,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 20%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(183,148,244,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(99,179,237,0.1);
+    border: 1px solid rgba(99,179,237,0.3);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero h1 .hl { color: var(--accent); }
+  .hero h1 .hl2 { color: var(--accent2); }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text2);
+    max-width: 600px;
+    margin-bottom: 36px;
+    line-height: 1.8;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+    display: block;
+  }
+  .hero-stat .lbl { font-size: 12px; color: var(--text3); }
+
+  /* ─── SECTION WRAPPER ─── */
+  .section {
+    padding: 60px 60px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(99,179,237,0.1);
+    border: 1px solid rgba(99,179,237,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3vw, 40px);
+    font-weight: 800;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .section-intro {
+    font-size: 16px;
+    color: var(--text2);
+    max-width: 700px;
+    margin-bottom: 40px;
+    line-height: 1.8;
+  }
+
+  /* ─── DEFINITION CARDS ─── */
+  .def-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .def-card:hover { border-color: rgba(99,179,237,0.4); transform: translateY(-2px); }
+  .def-card .card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .def-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .def-card p { color: var(--text2); font-size: 15px; line-height: 1.8; }
+  .def-card .tag {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .tag-call { background: rgba(104,211,145,0.15); color: var(--accent3); border: 1px solid rgba(104,211,145,0.3); }
+  .tag-put { background: rgba(252,129,129,0.15); color: var(--accent4); border: 1px solid rgba(252,129,129,0.3); }
+  .tag-key { background: rgba(183,148,244,0.15); color: var(--accent5); border: 1px solid rgba(183,148,244,0.3); }
+  .tag-warn { background: rgba(246,173,85,0.15); color: var(--accent2); border: 1px solid rgba(246,173,85,0.3); }
+
+  /* ─── GRID LAYOUTS ─── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  /* ─── ANALOGY BOXES ─── */
+  .analogy-box {
+    background: linear-gradient(135deg, rgba(99,179,237,0.06), rgba(183,148,244,0.06));
+    border: 1px solid rgba(99,179,237,0.25);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .analogy-box::before {
+    content: '💡 Real-World Analogy';
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 12px;
+  }
+  .analogy-box p { color: var(--text2); font-size: 15px; line-height: 1.9; }
+  .analogy-box strong { color: var(--text); }
+
+  /* ─── OPTION CHAIN TABLE ─── */
+  .chain-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+  .chain-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  .chain-table th {
+    background: var(--bg3);
+    color: var(--text3);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  .chain-table td { padding: 10px 14px; text-align: center; border-bottom: 1px solid rgba(99,179,237,0.06); }
+  .chain-table tr:last-child td { border-bottom: none; }
+  .chain-table tr:hover td { background: rgba(99,179,237,0.04); }
+  .call-side td { color: #68d391; }
+  .call-side td.strike { color: var(--text); }
+  .put-side td { color: #fc8181; }
+  .put-side td.strike { color: var(--text); }
+  .atm-row td { background: rgba(246,224,94,0.06) !important; color: var(--gold) !important; font-weight: 600; }
+  .atm-row td.atm-badge::after { content: ' ← ATM'; font-size: 10px; color: var(--gold); }
+  .chain-header { display: grid; grid-template-columns: 1fr auto 1fr; text-align: center; }
+  .chain-calls-label { color: var(--accent3); font-weight: 700; font-size: 13px; letter-spacing: 1px; padding: 14px; background: rgba(104,211,145,0.05); }
+  .chain-puts-label { color: var(--accent4); font-weight: 700; font-size: 13px; letter-spacing: 1px; padding: 14px; background: rgba(252,129,129,0.05); }
+  .chain-strike-label { color: var(--gold); font-weight: 700; font-size: 13px; padding: 14px; }
+
+  /* ─── PAYOFF DIAGRAM ─── */
+  .payoff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .payoff-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color 0.3s;
+  }
+  .payoff-card:hover { border-color: rgba(99,179,237,0.3); }
+  .payoff-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .payoff-card .sub { font-size: 12px; color: var(--text3); margin-bottom: 16px; }
+  .payoff-svg { width: 100%; height: 160px; }
+
+  /* ─── GREEKS CARDS ─── */
+  .greek-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 20px;
+    transition: all 0.3s;
+    text-align: center;
+  }
+  .greek-card:hover { border-color: rgba(99,179,237,0.4); transform: translateY(-3px); }
+  .greek-symbol {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    display: block;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent5));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .greek-name { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .greek-def { font-size: 13px; color: var(--text2); line-height: 1.7; }
+  .greek-impact { margin-top: 12px; font-size: 12px; }
+  .greek-bar {
+    height: 3px;
+    border-radius: 3px;
+    margin-top: 10px;
+    background: linear-gradient(90deg, var(--accent3), var(--accent));
+  }
+
+  /* ─── STRATEGY CARDS ─── */
+  .strat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s;
+  }
+  .strat-card:hover { border-color: rgba(99,179,237,0.35); transform: translateY(-2px); }
+  .strat-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+  .strat-title { font-size: 17px; font-weight: 700; font-family: 'Playfair Display', serif; }
+  .risk-badge { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; letter-spacing: 1px; }
+  .risk-low { background: rgba(104,211,145,0.15); color: var(--accent3); border: 1px solid rgba(104,211,145,0.3); }
+  .risk-med { background: rgba(246,173,85,0.15); color: var(--accent2); border: 1px solid rgba(246,173,85,0.3); }
+  .risk-high { background: rgba(252,129,129,0.15); color: var(--accent4); border: 1px solid rgba(252,129,129,0.3); }
+  .strat-desc { font-size: 14px; color: var(--text2); margin-bottom: 14px; line-height: 1.7; }
+  .strat-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pill {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--bg3);
+    color: var(--text3);
+    border: 1px solid var(--border);
+  }
+  .strat-mini-chart { margin-top: 14px; }
+
+  /* ─── INFO ROWS ─── */
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-icon { font-size: 22px; min-width: 36px; }
+  .info-body h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .info-body p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+  /* ─── CALLOUT BOXES ─── */
+  .callout {
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 20px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 20px; min-width: 28px; margin-top: 1px; }
+  .callout-body { font-size: 14px; line-height: 1.8; }
+  .callout-body strong { font-size: 15px; display: block; margin-bottom: 4px; }
+  .callout-info { background: rgba(99,179,237,0.07); border: 1px solid rgba(99,179,237,0.2); }
+  .callout-info .callout-body { color: #a8d5f5; }
+  .callout-warn { background: rgba(246,173,85,0.07); border: 1px solid rgba(246,173,85,0.2); }
+  .callout-warn .callout-body { color: #f8d49a; }
+  .callout-danger { background: rgba(252,129,129,0.07); border: 1px solid rgba(252,129,129,0.2); }
+  .callout-danger .callout-body { color: #fca5a5; }
+  .callout-success { background: rgba(104,211,145,0.07); border: 1px solid rgba(104,211,145,0.2); }
+  .callout-success .callout-body { color: #a7f3c9; }
+
+  /* ─── COMPARE TABLE ─── */
+  .compare-table { width: 100%; border-collapse: collapse; }
+  .compare-table th {
+    background: var(--surface);
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border);
+    color: var(--text2);
+  }
+  .compare-table th:first-child { border-radius: 12px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 12px 0 0; }
+  .compare-table td { padding: 12px 18px; font-size: 14px; border-bottom: 1px solid var(--border); color: var(--text2); }
+  .compare-table tr:hover td { background: rgba(99,179,237,0.04); }
+  .compare-table td:first-child { font-weight: 600; color: var(--text); }
+  .yes { color: var(--accent3); font-weight: 700; }
+  .no { color: var(--accent4); }
+
+  /* ─── STEP CARDS ─── */
+  .steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .steps::before {
+    content: '';
+    position: absolute;
+    left: 27px;
+    top: 40px;
+    bottom: 40px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--accent5));
+  }
+  .step-item { display: flex; gap: 20px; align-items: flex-start; padding: 16px 0; }
+  .step-num {
+    min-width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .step-content { padding-top: 12px; }
+  .step-content h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .step-content p { font-size: 14px; color: var(--text2); line-height: 1.8; }
+
+  /* ─── EXAMPLE BOX ─── */
+  .example-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+  .example-box .ex-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .ex-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .ex-row:last-child { border-bottom: none; }
+  .ex-key { font-size: 13px; color: var(--text3); }
+  .ex-val { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; }
+  .ex-green { color: var(--accent3); }
+  .ex-red { color: var(--accent4); }
+  .ex-blue { color: var(--accent); }
+  .ex-gold { color: var(--gold); }
+
+  /* ─── SKILLS SECTION ─── */
+  .skill-bar-wrap { margin-bottom: 18px; }
+  .skill-bar-top { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+  .skill-bar-bg { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .skill-bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+
+  /* ─── GLOSSARY ─── */
+  .glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .gloss-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    transition: border-color 0.2s;
+  }
+  .gloss-item:hover { border-color: rgba(99,179,237,0.3); }
+  .gloss-term { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+  .gloss-def { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  /* ─── MOBILE TOGGLE ─── */
+  .hamburger {
+    display: none;
+    position: fixed;
+    top: 16px; left: 16px;
+    z-index: 200;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text);
+  }
+
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 99;
+  }
+
+  @media (max-width: 900px) {
+    #sidebar { transform: translateX(-100%); }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; }
+    .hamburger { display: block; }
+    .sidebar-overlay.show { display: block; }
+    .section { padding: 40px 24px; }
+    .hero { padding: 60px 24px 40px; }
+    .grid-2, .grid-3, .grid-4, .payoff-grid, .glossary-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── MISC ─── */
+  .divider { height: 1px; background: var(--border); margin: 32px 0; }
+  .spacer { height: 24px; }
+  .accent-text { color: var(--accent); }
+  .gold-text { color: var(--gold); }
+  .green-text { color: var(--accent3); }
+  .red-text { color: var(--accent4); }
+
+  /* ─── RISK METER ─── */
+  .risk-meter { display: flex; gap: 4px; align-items: center; margin: 8px 0; }
+  .risk-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+  /* ─── BREADCRUMB ─── */
+  .breadcrumb { font-size: 12px; color: var(--text3); margin-bottom: 8px; }
+  .breadcrumb span { color: var(--text2); }
+
+  /* ─── STICKY NOTE ─── */
+  .sticky {
+    background: rgba(246,224,94,0.08);
+    border: 1px solid rgba(246,224,94,0.25);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #f6e05e;
+    margin: 16px 0;
+    line-height: 1.7;
+  }
+  .sticky::before { content: '📌 '; }
+
+  /* ─── footer ─── */
+  .footer {
+    margin-left: 0;
+    padding: 32px 60px;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text3);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Hamburger -->
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- ─── SIDEBAR ─── -->
+<aside id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-badge">PRO GUIDE</div>
+    <h2>Options Trading<br>Mastery</h2>
+    <p>Complete Beginner to Pro</p>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">0% read</div>
+
+  <div class="nav-section-title">📘 Foundation</div>
+  <a class="nav-link active" onclick="scrollTo('intro')"><span class="nav-icon">🏠</span> What Are Options? <span class="nav-num">01</span></a>
+  <a class="nav-link" onclick="scrollTo('call-put')"><span class="nav-icon">📞</span> Call vs Put <span class="nav-num">02</span></a>
+  <a class="nav-link" onclick="scrollTo('key-terms')"><span class="nav-icon">📖</span> Key Terms <span class="nav-num">03</span></a>
+  <a class="nav-link" onclick="scrollTo('how-options-work')"><span class="nav-icon">⚙️</span> How Options Work <span class="nav-num">04</span></a>
+
+  <div class="nav-section-title">📊 Options Chain</div>
+  <a class="nav-link" onclick="scrollTo('chain-intro')"><span class="nav-icon">🔗</span> What is Options Chain? <span class="nav-num">05</span></a>
+  <a class="nav-link" onclick="scrollTo('chain-read')"><span class="nav-icon">👁️</span> How to Read a Chain <span class="nav-num">06</span></a>
+  <a class="nav-link" onclick="scrollTo('itm-otm-atm')"><span class="nav-icon">🎯</span> ITM / ATM / OTM <span class="nav-num">07</span></a>
+
+  <div class="nav-section-title">🧮 Pricing & Greeks</div>
+  <a class="nav-link" onclick="scrollTo('pricing')"><span class="nav-icon">💰</span> Option Pricing <span class="nav-num">08</span></a>
+  <a class="nav-link" onclick="scrollTo('greeks')"><span class="nav-icon">🔢</span> The Greeks <span class="nav-num">09</span></a>
+  <a class="nav-link" onclick="scrollTo('iv')"><span class="nav-icon">🌪️</span> Implied Volatility <span class="nav-num">10</span></a>
+
+  <div class="nav-section-title">📈 Strategies</div>
+  <a class="nav-link" onclick="scrollTo('basic-strats')"><span class="nav-icon">🟢</span> Basic Strategies <span class="nav-num">11</span></a>
+  <a class="nav-link" onclick="scrollTo('spreads')"><span class="nav-icon">📐</span> Spreads <span class="nav-num">12</span></a>
+  <a class="nav-link" onclick="scrollTo('advanced-strats')"><span class="nav-icon">🔴</span> Advanced Strategies <span class="nav-num">13</span></a>
+
+  <div class="nav-section-title">🛠 Trade Execution</div>
+  <a class="nav-link" onclick="scrollTo('how-to-trade')"><span class="nav-icon">🖥️</span> How to Trade <span class="nav-num">14</span></a>
+  <a class="nav-link" onclick="scrollTo('order-types')"><span class="nav-icon">📋</span> Order Types <span class="nav-num">15</span></a>
+  <a class="nav-link" onclick="scrollTo('risk-mgmt')"><span class="nav-icon">🛡️</span> Risk Management <span class="nav-num">16</span></a>
+
+  <div class="nav-section-title">🧠 Skills & Mindset</div>
+  <a class="nav-link" onclick="scrollTo('skills')"><span class="nav-icon">💡</span> Skills You Need <span class="nav-num">17</span></a>
+  <a class="nav-link" onclick="scrollTo('mistakes')"><span class="nav-icon">⚠️</span> Common Mistakes <span class="nav-num">18</span></a>
+  <a class="nav-link" onclick="scrollTo('glossary')"><span class="nav-icon">📚</span> Full Glossary <span class="nav-num">19</span></a>
+</aside>
+
+<!-- ─── MAIN ─── -->
+<main id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">📈 Complete Options Trading Guide 2024</div>
+    <h1>Master <span class="hl">Options Trading</span><br>From <span class="hl2">Zero to Pro</span></h1>
+    <p class="hero-sub">A beautifully structured, beginner-friendly guide to understanding options, reading option chains, trading strategies, and the skills every trader needs to succeed.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="val">19</span><span class="lbl">Topics Covered</span></div>
+      <div class="hero-stat"><span class="val">50+</span><span class="lbl">Real Examples</span></div>
+      <div class="hero-stat"><span class="val">10+</span><span class="lbl">Strategies</span></div>
+      <div class="hero-stat"><span class="val">∞</span><span class="lbl">Knowledge Gained</span></div>
+    </div>
+  </div>
+
+  <!-- ─── 01: WHAT ARE OPTIONS ─── -->
+  <section class="section" id="intro">
+    <div class="breadcrumb">Foundation → <span>What Are Options?</span></div>
+    <div class="section-tag">01 · Foundation</div>
+    <h2>What Are Options?</h2>
+    <p class="section-intro">An option is a financial contract that gives the buyer the <strong>right — but NOT the obligation</strong> — to buy or sell an asset (like a stock) at a specific price, on or before a specific date.</p>
+
+    <div class="analogy-box">
+      <p>Imagine you're interested in buying a house worth <strong>₹50 Lakhs</strong>. You tell the seller: <em>"I'll pay you ₹1 Lakh today for the right to buy this house at ₹50 Lakhs anytime in the next 3 months."</em><br><br>
+      If the house price rises to <strong>₹70 Lakhs</strong> in 2 months, you can still buy it at ₹50 Lakhs — <strong>making ₹20 Lakhs profit!</strong><br>
+      If the price drops, you simply walk away. You only lose the ₹1 Lakh you paid. <strong>That ₹1 Lakh = the Option Premium.</strong></p>
+    </div>
+
+    <div class="grid-2">
+      <div class="def-card">
+        <span class="card-icon">📜</span>
+        <div class="tag tag-key">CONTRACT</div>
+        <h3>It's a Contract</h3>
+        <p>An options contract is between a <strong>buyer</strong> and a <strong>seller</strong>. The buyer pays a <em>premium</em> to get the right. The seller receives the premium and takes on the obligation.</p>
+      </div>
+      <div class="def-card">
+        <span class="card-icon">🎯</span>
+        <div class="tag tag-key">LEVERAGE</div>
+        <h3>It's Leveraged</h3>
+        <p>With a small amount of money (premium), you can control a much larger position in the underlying asset. This means <em>massive potential gains</em> — but also complete loss of your premium.</p>
+      </div>
+      <div class="def-card">
+        <span class="card-icon">⏰</span>
+        <div class="tag tag-warn">TIME</div>
+        <h3>It Expires</h3>
+        <p>Options are not forever. Every option has an <strong>expiry date</strong>. After that date, the contract is worthless if not exercised. Time works against buyers and for sellers.</p>
+      </div>
+      <div class="def-card">
+        <span class="card-icon">🏦</span>
+        <div class="tag tag-key">ASSET</div>
+        <h3>Underlying Asset</h3>
+        <p>Options can be on <strong>stocks</strong> (like Reliance, Infosys), <strong>indexes</strong> (Nifty 50, Bank Nifty), commodities, or currencies. The asset your option is based on is called the <em>underlying</em>.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">ℹ️</div>
+      <div class="callout-body">
+        <strong>Key Insight: Right vs. Obligation</strong>
+        The buyer has the RIGHT but not the obligation. The seller has the OBLIGATION to fulfil if the buyer exercises. This asymmetry is the core of options trading.
+      </div>
+    </div>
+
+    <div class="compare-table" style="border-radius:12px; overflow:hidden; border:1px solid var(--border);">
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Stocks</th><th>Options</th></tr>
+        <tr><td>Ownership</td><td>You own shares</td><td>You own a right/contract</td></tr>
+        <tr><td>Expiry</td><td>No expiry</td><td>Has an expiry date</td></tr>
+        <tr><td>Cost</td><td>Full price of stock</td><td>Just the premium (small)</td></tr>
+        <tr><td>Leverage</td><td class="no">Low / None</td><td class="yes">Very High</td></tr>
+        <tr><td>Max Loss (Buyer)</td><td>Full investment</td><td>Only premium paid</td></tr>
+        <tr><td>Complexity</td><td>Simple</td><td>More complex</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ─── 02: CALL VS PUT ─── -->
+  <section class="section" id="call-put">
+    <div class="breadcrumb">Foundation → <span>Call vs Put Options</span></div>
+    <div class="section-tag">02 · Foundation</div>
+    <h2>Call Options vs Put Options</h2>
+    <p class="section-intro">There are only TWO types of options. Once you understand these, you understand 50% of options trading.</p>
+
+    <div class="grid-2">
+      <div class="def-card" style="border-color: rgba(104,211,145,0.3);">
+        <span class="card-icon">📞</span>
+        <div class="tag tag-call">CALL</div>
+        <h3>Call Option</h3>
+        <p>A <strong>CALL</strong> gives the buyer the right to <strong>BUY</strong> the underlying asset at the strike price. You buy a CALL when you believe the price will <em>GO UP</em>.</p>
+        <div class="spacer"></div>
+        <div style="font-size:13px;color:var(--text3);">
+          <div style="margin-bottom:4px;">📈 <strong style="color:var(--accent3)">Profit when price rises</strong></div>
+          <div style="margin-bottom:4px;">📉 Loss limited to premium</div>
+          <div>🎯 Buyer is bullish</div>
+        </div>
+      </div>
+      <div class="def-card" style="border-color: rgba(252,129,129,0.3);">
+        <span class="card-icon">🤿</span>
+        <div class="tag tag-put">PUT</div>
+        <h3>Put Option</h3>
+        <p>A <strong>PUT</strong> gives the buyer the right to <strong>SELL</strong> the underlying asset at the strike price. You buy a PUT when you believe the price will <em>GO DOWN</em>.</p>
+        <div class="spacer"></div>
+        <div style="font-size:13px;color:var(--text3);">
+          <div style="margin-bottom:4px;">📉 <strong style="color:var(--accent4)">Profit when price falls</strong></div>
+          <div style="margin-bottom:4px;">📈 Loss limited to premium</div>
+          <div>🎯 Buyer is bearish</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="analogy-box">
+      <p><strong>CALL Analogy:</strong> You book a flight ticket from Delhi to Mumbai for ₹5,000 today for travel 2 months later. If ticket prices rise to ₹10,000, you still fly at ₹5,000. You <strong>called</strong> the price.<br><br>
+      <strong>PUT Analogy:</strong> You have 100 kg of wheat. You're worried prices may fall. You pay a farmer ₹500 for the right to SELL your wheat at today's price of ₹2,000/kg for 3 months. You <strong>put</strong> the price floor in place.</p>
+    </div>
+
+    <!-- Payoff Diagrams -->
+    <h3 style="font-size:20px; margin-bottom:20px; font-family:'Playfair Display',serif;">📊 Payoff Diagrams (Visual)</h3>
+    <div class="payoff-grid">
+      <div class="payoff-card">
+        <h4 class="green-text">Buy Call Option</h4>
+        <div class="sub">Profit when price goes UP above strike</div>
+        <svg class="payoff-svg" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="140" x2="300" y2="140" stroke="#2d3748" stroke-width="1"/>
+          <line x1="20" y1="10" x2="20" y2="150" stroke="#2d3748" stroke-width="1"/>
+          <text x="155" y="155" fill="#718096" font-size="10" text-anchor="middle">Stock Price →</text>
+          <text x="10" y="80" fill="#718096" font-size="10" text-anchor="middle" transform="rotate(-90,10,80)">P&L</text>
+          <!-- Loss line -->
+          <line x1="20" y1="110" x2="160" y2="110" stroke="#fc8181" stroke-width="2.5"/>
+          <!-- Break even dot -->
+          <circle cx="160" cy="110" r="4" fill="#f6e05e"/>
+          <text x="160" y="105" fill="#f6e05e" font-size="9" text-anchor="middle">Break Even</text>
+          <!-- Profit line -->
+          <line x1="160" y1="110" x2="300" y2="30" stroke="#68d391" stroke-width="2.5"/>
+          <!-- Premium label -->
+          <text x="30" y="108" fill="#fc8181" font-size="9">−Premium</text>
+          <!-- Arrow -->
+          <text x="260" y="28" fill="#68d391" font-size="9">Unlimited</text>
+          <text x="260" y="38" fill="#68d391" font-size="9">Profit ↗</text>
+        </svg>
+      </div>
+      <div class="payoff-card">
+        <h4 class="red-text">Buy Put Option</h4>
+        <div class="sub">Profit when price goes DOWN below strike</div>
+        <svg class="payoff-svg" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="140" x2="300" y2="140" stroke="#2d3748" stroke-width="1"/>
+          <line x1="20" y1="10" x2="20" y2="150" stroke="#2d3748" stroke-width="1"/>
+          <text x="155" y="155" fill="#718096" font-size="10" text-anchor="middle">Stock Price →</text>
+          <text x="10" y="80" fill="#718096" font-size="10" text-anchor="middle" transform="rotate(-90,10,80)">P&L</text>
+          <!-- Profit line going left (price falling) -->
+          <line x1="20" y1="30" x2="160" y2="110" stroke="#68d391" stroke-width="2.5"/>
+          <!-- Break even dot -->
+          <circle cx="160" cy="110" r="4" fill="#f6e05e"/>
+          <text x="160" y="105" fill="#f6e05e" font-size="9" text-anchor="middle">Break Even</text>
+          <!-- Loss line -->
+          <line x1="160" y1="110" x2="300" y2="110" stroke="#fc8181" stroke-width="2.5"/>
+          <!-- Label -->
+          <text x="270" y="108" fill="#fc8181" font-size="9">−Premium</text>
+          <text x="25" y="28" fill="#68d391" font-size="9">Big Profit ↙</text>
+        </svg>
+      </div>
+      <div class="payoff-card">
+        <h4 style="color:var(--accent2);">Sell Call (Short Call)</h4>
+        <div class="sub">Collect premium; unlimited risk if price rises</div>
+        <svg class="payoff-svg" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="140" x2="300" y2="140" stroke="#2d3748" stroke-width="1"/>
+          <line x1="20" y1="10" x2="20" y2="150" stroke="#2d3748" stroke-width="1"/>
+          <text x="155" y="155" fill="#718096" font-size="10" text-anchor="middle">Stock Price →</text>
+          <!-- Profit (premium) -->
+          <line x1="20" y1="50" x2="160" y2="50" stroke="#68d391" stroke-width="2.5"/>
+          <!-- Break even -->
+          <circle cx="160" cy="50" r="4" fill="#f6e05e"/>
+          <!-- Loss line going down -->
+          <line x1="160" y1="50" x2="300" y2="130" stroke="#fc8181" stroke-width="2.5"/>
+          <text x="30" y="46" fill="#68d391" font-size="9">+Premium</text>
+          <text x="240" y="145" fill="#fc8181" font-size="9">Unlimited Loss ↘</text>
+        </svg>
+      </div>
+      <div class="payoff-card">
+        <h4 style="color:var(--accent5);">Sell Put (Short Put)</h4>
+        <div class="sub">Collect premium; risk if price falls sharply</div>
+        <svg class="payoff-svg" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="140" x2="300" y2="140" stroke="#2d3748" stroke-width="1"/>
+          <line x1="20" y1="10" x2="20" y2="150" stroke="#2d3748" stroke-width="1"/>
+          <text x="155" y="155" fill="#718096" font-size="10" text-anchor="middle">Stock Price →</text>
+          <!-- Loss going left -->
+          <line x1="20" y1="130" x2="160" y2="50" stroke="#fc8181" stroke-width="2.5"/>
+          <!-- Break even -->
+          <circle cx="160" cy="50" r="4" fill="#f6e05e"/>
+          <!-- Profit flat -->
+          <line x1="160" y1="50" x2="300" y2="50" stroke="#68d391" stroke-width="2.5"/>
+          <text x="270" y="46" fill="#68d391" font-size="9">+Premium</text>
+          <text x="25" y="145" fill="#fc8181" font-size="9">Big Loss ↙</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 03: KEY TERMS ─── -->
+  <section class="section" id="key-terms">
+    <div class="breadcrumb">Foundation → <span>Key Terms</span></div>
+    <div class="section-tag">03 · Key Terms</div>
+    <h2>Essential Options Vocabulary</h2>
+    <p class="section-intro">Before you trade a single option, you must know these terms cold. No shortcuts here.</p>
+
+    <div class="info-row">
+      <div class="info-icon">🎯</div>
+      <div class="info-body">
+        <h4>Strike Price</h4>
+        <p>The predetermined price at which you can buy (call) or sell (put) the underlying asset. <em>Example: Nifty 22,000 CE — strike is 22,000.</em></p>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">💵</div>
+      <div class="info-body">
+        <h4>Premium</h4>
+        <p>The price you pay to buy an option. It's the cost of the contract. This is your maximum loss as a buyer. <em>Example: Nifty 22,000 CE premium = ₹150 per lot.</em></p>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">📅</div>
+      <div class="info-body">
+        <h4>Expiry Date</h4>
+        <p>The last date on which the option can be exercised. In India, weekly options expire every Thursday; monthly expire last Thursday. After expiry, options become worthless if out-of-the-money.</p>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">📦</div>
+      <div class="info-body">
+        <h4>Lot Size</h4>
+        <p>Options are traded in lots, not individual units. <em>Example: Nifty 1 lot = 50 units.</em> So if premium is ₹150, you need ₹150 × 50 = ₹7,500 per lot.</p>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">📍</div>
+      <div class="info-body">
+        <h4>Spot Price</h4>
+        <p>The current market price of the underlying asset right now. <em>Example: Nifty is currently trading at 22,300 — that's the spot price.</em></p>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">🔄</div>
+      <div class="info-body">
+        <h4>Open Interest (OI)</h4>
+        <p>Total number of outstanding option contracts that have NOT been settled or closed. High OI means high liquidity and strong interest at that strike. Very important for reading market sentiment.</p>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">📊</div>
+      <div class="info-body">
+        <h4>Volume</h4>
+        <p>Number of contracts traded today. High volume = active market = easier to enter/exit. Always trade where there is good volume.</p>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">⚖️</div>
+      <div class="info-body">
+        <h4>Intrinsic Value vs Time Value</h4>
+        <p><strong>Intrinsic Value</strong> = Real value if exercised now. For a call: Spot − Strike (if positive). <br><strong>Time Value</strong> = Premium − Intrinsic Value. It decays as expiry approaches (called Theta decay).</p>
+      </div>
+    </div>
+
+    <div class="sticky">
+      Premium = Intrinsic Value + Time Value. A far OTM option has ZERO intrinsic value — you're only paying for time and hope!
+    </div>
+
+    <div class="example-box">
+      <div class="ex-header">📌 Example: Understanding Premium Components</div>
+      <div class="ex-row"><div class="ex-key">Nifty Spot Price</div><div class="ex-val ex-blue">22,300</div></div>
+      <div class="ex-row"><div class="ex-key">Strike Price (Call)</div><div class="ex-val ex-blue">22,000</div></div>
+      <div class="ex-row"><div class="ex-key">Option Premium</div><div class="ex-val ex-gold">₹350</div></div>
+      <div class="ex-row"><div class="ex-key">Intrinsic Value (22,300 − 22,000)</div><div class="ex-val ex-green">₹300</div></div>
+      <div class="ex-row"><div class="ex-key">Time Value (350 − 300)</div><div class="ex-val ex-gold">₹50</div></div>
+    </div>
+  </section>
+
+  <!-- ─── 04: HOW OPTIONS WORK ─── -->
+  <section class="section" id="how-options-work">
+    <div class="breadcrumb">Foundation → <span>How Options Work</span></div>
+    <div class="section-tag">04 · Foundation</div>
+    <h2>How Options Actually Work</h2>
+    <p class="section-intro">Let's walk through a complete options trade from buying to profit booking with a real example.</p>
+
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>You Analyse the Market</h4>
+          <p>Nifty is at <strong>22,000</strong>. You study charts, news, and believe Nifty will rise to 22,500 in the next 2 weeks (you are bullish).</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>You Select an Option</h4>
+          <p>You decide to buy a <strong>Nifty 22,200 Call Option</strong> expiring next Thursday. The premium is ₹120 per unit. Lot size = 50 units. Total cost = ₹120 × 50 = <strong>₹6,000</strong>.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>You Place the Buy Order</h4>
+          <p>You buy 1 lot of Nifty 22,200 CE at ₹120. The money (₹6,000) leaves your account as premium. This is the maximum you can lose.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Market Moves in Your Favour</h4>
+          <p>2 days later, Nifty rises to 22,500. Your 22,200 CE premium has now risen to ₹320 because it's now deep in-the-money.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>You Sell / Square Off</h4>
+          <p>You sell the option at ₹320. Your profit = (₹320 − ₹120) × 50 = <strong>₹200 × 50 = ₹10,000 profit</strong> on a ₹6,000 investment. That's <strong>+167% return</strong>!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="ex-header">📌 Trade Summary</div>
+      <div class="ex-row"><div class="ex-key">Entry Premium</div><div class="ex-val ex-blue">₹120</div></div>
+      <div class="ex-row"><div class="ex-key">Exit Premium</div><div class="ex-val ex-green">₹320</div></div>
+      <div class="ex-row"><div class="ex-key">Profit per unit</div><div class="ex-val ex-green">₹200</div></div>
+      <div class="ex-row"><div class="ex-key">Lot size</div><div class="ex-val ex-blue">50 units</div></div>
+      <div class="ex-row"><div class="ex-key">Total Profit</div><div class="ex-val ex-green">₹10,000 🎉</div></div>
+      <div class="ex-row"><div class="ex-key">Return on Investment</div><div class="ex-val ex-green">+167%</div></div>
+    </div>
+
+    <div class="callout callout-danger">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <strong>What if Nifty fell to 21,700?</strong>
+        Your 22,200 CE would be worthless at expiry. You lose the entire ₹6,000 premium. But that's it — you can never lose more than what you paid.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 05: OPTIONS CHAIN INTRO ─── -->
+  <section class="section" id="chain-intro">
+    <div class="breadcrumb">Options Chain → <span>What is Options Chain?</span></div>
+    <div class="section-tag">05 · Options Chain</div>
+    <h2>What is an Options Chain?</h2>
+    <p class="section-intro">An options chain (also called option matrix) is a table that lists ALL available options for a particular stock or index — every strike price, every expiry, calls AND puts — all in one place.</p>
+
+    <div class="analogy-box">
+      <p>Think of an options chain like a <strong>restaurant menu</strong>. The menu shows you all available dishes (strike prices), their prices (premium), how popular they are (volume/OI), and what category they fall in (call/put). You pick what suits your appetite (trade plan) and budget (capital).</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="def-card">
+        <span class="card-icon">📊</span>
+        <h3>All Strikes</h3>
+        <p>Shows every available strike price from deep ITM to deep OTM in one view.</p>
+      </div>
+      <div class="def-card">
+        <span class="card-icon">🔄</span>
+        <h3>Live Data</h3>
+        <p>Updates in real time as the market moves. Premiums, OI, and volume change by the second.</p>
+      </div>
+      <div class="def-card">
+        <span class="card-icon">🧭</span>
+        <h3>Market Sentiment</h3>
+        <p>High OI at certain strikes reveals where big players (institutions) have placed bets — crucial intelligence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 06: HOW TO READ CHAIN ─── -->
+  <section class="section" id="chain-read">
+    <div class="breadcrumb">Options Chain → <span>How to Read a Chain</span></div>
+    <div class="section-tag">06 · Options Chain</div>
+    <h2>How to Read an Options Chain</h2>
+    <p class="section-intro">Below is a sample Nifty options chain. Calls are on the LEFT, Puts are on the RIGHT, Strikes are in the CENTRE. The highlighted row is the ATM (At The Money) strike.</p>
+
+    <!-- Chain Header Labels -->
+    <div style="display:grid; grid-template-columns:1fr auto 1fr; margin-bottom:0; border-radius: 12px 12px 0 0; overflow:hidden; border: 1px solid var(--border); border-bottom:none;">
+      <div class="chain-calls-label">📞 CALLS (CE) — Bullish Side</div>
+      <div class="chain-strike-label">⚡ STRIKE</div>
+      <div class="chain-puts-label">🤿 PUTS (PE) — Bearish Side</div>
+    </div>
+
+    <div class="chain-wrap" style="border-radius: 0 0 12px 12px; border-top:none;">
+      <table class="chain-table">
+        <thead>
+          <tr>
+            <th style="color:var(--accent3)">OI</th>
+            <th style="color:var(--accent3)">Chng OI</th>
+            <th style="color:var(--accent3)">Volume</th>
+            <th style="color:var(--accent3)">IV%</th>
+            <th style="color:var(--accent3)">LTP</th>
+            <th style="color:var(--gold)">STRIKE</th>
+            <th style="color:var(--accent4)">LTP</th>
+            <th style="color:var(--accent4)">IV%</th>
+            <th style="color:var(--accent4)">Volume</th>
+            <th style="color:var(--accent4)">Chng OI</th>
+            <th style="color:var(--accent4)">OI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="call-side">
+            <td>12,45,600</td><td class="green-text">+18,200</td><td>45,230</td><td>14.2%</td><td>485.30</td>
+            <td class="strike" style="color:var(--text); font-weight:700;">21,700</td>
+            <td class="put-side">12.50</td><td>14.1%</td><td>8,420</td><td class="red-text">−1,200</td><td>3,24,500</td>
+          </tr>
+          <tr class="call-side">
+            <td>18,32,100</td><td class="green-text">+22,400</td><td>62,100</td><td>13.8%</td><td>385.20</td>
+            <td class="strike" style="color:var(--text); font-weight:700;">21,800</td>
+            <td class="put-side">18.70</td><td>13.9%</td><td>12,300</td><td class="red-text">−2,100</td><td>4,87,200</td>
+          </tr>
+          <tr class="call-side">
+            <td>22,18,900</td><td class="green-text">+31,000</td><td>84,500</td><td>13.2%</td><td>285.60</td>
+            <td class="strike" style="color:var(--text); font-weight:700;">21,900</td>
+            <td class="put-side">28.90</td><td>13.3%</td><td>18,700</td><td class="red-text">−3,400</td><td>6,21,800</td>
+          </tr>
+          <tr class="call-side">
+            <td>31,45,200</td><td class="green-text">+48,600</td><td>1,12,400</td><td>12.6%</td><td>192.40</td>
+            <td class="strike" style="color:var(--text); font-weight:700;">22,000</td>
+            <td class="put-side">42.60</td><td>12.8%</td><td>28,900</td><td class="red-text">−5,200</td><td>8,94,100</td>
+          </tr>
+          <!-- ATM ROW -->
+          <tr class="atm-row">
+            <td>45,32,100</td><td>+82,100</td><td>1,95,600</td><td>12.0%</td><td>118.50</td>
+            <td class="atm-badge" style="font-weight:900;">22,100</td>
+            <td>72.30</td><td>12.1%</td><td>48,200</td><td>−9,800</td><td>12,45,600</td>
+          </tr>
+          <tr class="call-side">
+            <td>38,21,400</td><td class="red-text">−12,300</td><td>1,42,300</td><td>12.4%</td><td>68.20</td>
+            <td class="strike" style="color:var(--text); font-weight:700;">22,200</td>
+            <td class="put-side">112.40</td><td>12.5%</td><td>62,100</td><td class="green-text">+14,200</td><td>15,78,300</td>
+          </tr>
+          <tr class="call-side">
+            <td>28,94,500</td><td class="red-text">−18,400</td><td>98,200</td><td>12.9%</td><td>35.80</td>
+            <td class="strike" style="color:var(--text); font-weight:700;">22,300</td>
+            <td class="put-side">168.20</td><td>13.0%</td><td>88,400</td><td class="green-text">+22,100</td><td>18,92,400</td>
+          </tr>
+          <tr class="call-side">
+            <td>18,45,100</td><td class="red-text">−24,200</td><td>64,100</td><td>13.5%</td><td>16.20</td>
+            <td class="strike" style="color:var(--text); font-weight:700;">22,400</td>
+            <td class="put-side">232.50</td><td>13.6%</td><td>1,12,800</td><td class="green-text">+28,400</td><td>21,34,200</td>
+          </tr>
+          <tr class="call-side">
+            <td>10,23,400</td><td class="red-text">−18,900</td><td>38,200</td><td>14.2%</td><td>6.80</td>
+            <td class="strike" style="color:var(--text); font-weight:700;">22,500</td>
+            <td class="put-side">302.80</td><td>14.3%</td><td>82,300</td><td class="green-text">+18,200</td><td>16,78,500</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="spacer"></div>
+    <h3 style="font-family:'Playfair Display',serif; font-size:20px; margin-bottom:16px;">🔍 What Each Column Means</h3>
+    <div class="grid-2">
+      <div class="info-row" style="padding:12px 0;"><div class="info-icon">📈</div><div class="info-body"><h4>LTP (Last Traded Price)</h4><p>The current premium of the option. This is the price you pay to buy or receive when you sell.</p></div></div>
+      <div class="info-row" style="padding:12px 0;"><div class="info-icon">🔄</div><div class="info-body"><h4>OI (Open Interest)</h4><p>Total open contracts. The higher the OI, the more money is parked at that strike. Big OI = strong support/resistance.</p></div></div>
+      <div class="info-row" style="padding:12px 0;"><div class="info-icon">↕️</div><div class="info-body"><h4>Change in OI</h4><p>Increase in OI = new positions being built (strong). Decrease in OI = positions being unwound (weakening).</p></div></div>
+      <div class="info-row" style="padding:12px 0;"><div class="info-icon">🌪️</div><div class="info-body"><h4>IV (Implied Volatility)</h4><p>The market's expectation of future price swings. High IV = expensive options. Low IV = cheap options. Key for strategy selection.</p></div></div>
+      <div class="info-row" style="padding:12px 0;"><div class="info-icon">📊</div><div class="info-body"><h4>Volume</h4><p>Number of contracts traded today. High volume confirms the move. Trade where volume is high for easy entry/exit.</p></div></div>
+      <div class="info-row" style="padding:12px 0;"><div class="info-icon">⚡</div><div class="info-body"><h4>Strike Price (Centre)</h4><p>The price at which you can buy/sell the underlying. Strikes closest to current price = ATM. Above = OTM for calls. Below = OTM for puts.</p></div></div>
+    </div>
+
+    <div class="callout callout-success">
+      <div class="callout-icon">🧠</div>
+      <div class="callout-body">
+        <strong>Pro Tip: OI Analysis for Support & Resistance</strong>
+        The strike with highest Call OI = Strong RESISTANCE (market may struggle to go above). The strike with highest Put OI = Strong SUPPORT (market may bounce from here). In our example above: max call OI at 22,100 (resistance), max put OI at 22,400 (support).
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 07: ITM / ATM / OTM ─── -->
+  <section class="section" id="itm-otm-atm">
+    <div class="breadcrumb">Options Chain → <span>ITM / ATM / OTM</span></div>
+    <div class="section-tag">07 · Options Chain</div>
+    <h2>In-The-Money, At-The-Money, Out-of-The-Money</h2>
+    <p class="section-intro">These three terms describe the relationship between the current stock price and the strike price. They're absolutely crucial for every options trader.</p>
+
+    <div class="sticky">Assume Nifty Spot Price = 22,100 for all examples below.</div>
+
+    <div class="grid-3">
+      <div class="def-card" style="border-color:rgba(104,211,145,0.4);">
+        <span class="card-icon">✅</span>
+        <div class="tag tag-call">ITM</div>
+        <h3>In-The-Money</h3>
+        <p>The option has <strong>real intrinsic value right now.</strong></p>
+        <div class="divider"></div>
+        <p style="font-size:13px; color:var(--text2);">
+          <strong class="green-text">Call ITM:</strong> Strike < Spot Price<br>
+          <em>22,000 CE when Nifty=22,100 → ITM ✅</em><br><br>
+          <strong class="red-text">Put ITM:</strong> Strike > Spot Price<br>
+          <em>22,200 PE when Nifty=22,100 → ITM ✅</em>
+        </p>
+        <div class="divider"></div>
+        <p style="font-size:12px; color:var(--text3);">Higher premium. More expensive but safer bet.</p>
+      </div>
+      <div class="def-card" style="border-color:rgba(246,224,94,0.4);">
+        <span class="card-icon">🎯</span>
+        <div class="tag" style="background:rgba(246,224,94,0.15);color:var(--gold);border:1px solid rgba(246,224,94,0.3);">ATM</div>
+        <h3>At-The-Money</h3>
+        <p>Strike price is <strong>equal or very close</strong> to the current spot price.</p>
+        <div class="divider"></div>
+        <p style="font-size:13px; color:var(--text2);">
+          <strong class="gold-text">Call ATM:</strong> Strike ≈ Spot Price<br>
+          <em>22,100 CE when Nifty=22,100 → ATM 🎯</em><br><br>
+          <strong class="gold-text">Put ATM:</strong> Strike ≈ Spot Price<br>
+          <em>22,100 PE when Nifty=22,100 → ATM 🎯</em>
+        </p>
+        <div class="divider"></div>
+        <p style="font-size:12px; color:var(--text3);">Most liquidity, most sensitive to price moves. Traders' favourite.</p>
+      </div>
+      <div class="def-card" style="border-color:rgba(252,129,129,0.4);">
+        <span class="card-icon">❌</span>
+        <div class="tag tag-put">OTM</div>
+        <h3>Out-of-The-Money</h3>
+        <p>The option has <strong>NO intrinsic value</strong>. Only time value.</p>
+        <div class="divider"></div>
+        <p style="font-size:13px; color:var(--text2);">
+          <strong class="red-text">Call OTM:</strong> Strike > Spot Price<br>
+          <em>22,400 CE when Nifty=22,100 → OTM ❌</em><br><br>
+          <strong class="green-text">Put OTM:</strong> Strike < Spot Price<br>
+          <em>21,800 PE when Nifty=22,100 → OTM ❌</em>
+        </p>
+        <div class="divider"></div>
+        <p style="font-size:12px; color:var(--text3);">Cheap premium. High risk. Like a lottery ticket.</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="ex-header">📌 Quick Reference Table — Nifty at 22,100</div>
+      <div class="ex-row"><div class="ex-key">22,000 CE (Call)</div><div class="ex-val ex-green">ITM ✅ (Spot above strike)</div></div>
+      <div class="ex-row"><div class="ex-key">22,100 CE (Call)</div><div class="ex-val ex-gold">ATM 🎯 (At the money)</div></div>
+      <div class="ex-row"><div class="ex-key">22,300 CE (Call)</div><div class="ex-val ex-red">OTM ❌ (Spot below strike)</div></div>
+      <div class="ex-row"><div class="ex-key">22,200 PE (Put)</div><div class="ex-val ex-green">ITM ✅ (Spot below strike)</div></div>
+      <div class="ex-row"><div class="ex-key">22,100 PE (Put)</div><div class="ex-val ex-gold">ATM 🎯 (At the money)</div></div>
+      <div class="ex-row"><div class="ex-key">21,900 PE (Put)</div><div class="ex-val ex-red">OTM ❌ (Spot above strike)</div></div>
+    </div>
+  </section>
+
+  <!-- ─── 08: PRICING ─── -->
+  <section class="section" id="pricing">
+    <div class="breadcrumb">Pricing & Greeks → <span>Option Pricing</span></div>
+    <div class="section-tag">08 · Pricing</div>
+    <h2>How Are Options Priced?</h2>
+    <p class="section-intro">Option premiums aren't random. They are determined by 6 key factors. Understanding these factors means you can predict how premiums will move.</p>
+
+    <div class="grid-2">
+      <div class="def-card">
+        <div class="tag tag-key">FACTOR 1</div>
+        <span class="card-icon">📍</span>
+        <h3>Spot Price vs Strike</h3>
+        <p>The farther the spot is from the strike (in your favour), the higher the premium. An ITM option costs more than an OTM option.</p>
+      </div>
+      <div class="def-card">
+        <div class="tag tag-warn">FACTOR 2</div>
+        <span class="card-icon">⏳</span>
+        <h3>Time to Expiry</h3>
+        <p>More time = more premium. A 30-day option is more expensive than a 7-day option. As days pass, time value decays (Theta decay). This hurts buyers, helps sellers.</p>
+      </div>
+      <div class="def-card">
+        <div class="tag tag-key">FACTOR 3</div>
+        <span class="card-icon">🌪️</span>
+        <h3>Implied Volatility (IV)</h3>
+        <p>Higher expected price swings = higher premium. Before earnings, events, or Budget, IV spikes and premiums become expensive. After the event, IV crashes (IV crush).</p>
+      </div>
+      <div class="def-card">
+        <div class="tag tag-call">FACTOR 4</div>
+        <span class="card-icon">📈</span>
+        <h3>Direction of Price Move</h3>
+        <p>Call premiums rise when price goes up. Put premiums rise when price falls. This is the most obvious factor.</p>
+      </div>
+      <div class="def-card">
+        <div class="tag tag-put">FACTOR 5</div>
+        <span class="card-icon">🏦</span>
+        <h3>Risk-Free Interest Rate</h3>
+        <p>Higher interest rates slightly increase call premiums and decrease put premiums. Less impactful for retail traders in short-term options.</p>
+      </div>
+      <div class="def-card">
+        <div class="tag tag-warn">FACTOR 6</div>
+        <span class="card-icon">💰</span>
+        <h3>Dividends</h3>
+        <p>For stock options, expected dividends reduce call premiums and increase put premiums slightly.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">🔑</div>
+      <div class="callout-body">
+        <strong>The Black-Scholes Model</strong>
+        The most famous option pricing formula. It uses: Spot price, Strike price, Time to expiry, Implied Volatility, and Risk-free rate to calculate fair value. Most trading platforms compute this for you automatically.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 09: GREEKS ─── -->
+  <section class="section" id="greeks">
+    <div class="breadcrumb">Pricing & Greeks → <span>The Greeks</span></div>
+    <div class="section-tag">09 · Greeks</div>
+    <h2>The Option Greeks</h2>
+    <p class="section-intro">Greeks measure how sensitive an option's price is to different factors. Master these and you become a true options professional. Each Greek is named after a Greek letter.</p>
+
+    <div class="grid-3">
+      <div class="greek-card">
+        <span class="greek-symbol">Δ</span>
+        <div class="greek-name">Delta</div>
+        <div class="greek-def">How much the option premium changes when the stock price moves by ₹1 (or 1 point).</div>
+        <div class="greek-impact" style="color:var(--accent2);">Range: 0 to 1 (calls) / −1 to 0 (puts)</div>
+        <div class="spacer"></div>
+        <p style="font-size:12px; color:var(--text3);">ATM option Delta ≈ 0.5 means if Nifty moves 100 pts, premium moves ~50 pts</p>
+        <div class="greek-bar" style="width:70%"></div>
+      </div>
+      <div class="greek-card">
+        <span class="greek-symbol">Γ</span>
+        <div class="greek-name">Gamma</div>
+        <div class="greek-def">Rate of change of Delta. It tells you how fast Delta itself is changing as the stock price moves.</div>
+        <div class="greek-impact" style="color:var(--accent2);">Highest near ATM, near expiry</div>
+        <div class="spacer"></div>
+        <p style="font-size:12px; color:var(--text3);">High Gamma = option becomes very sensitive. A double-edged sword near expiry.</p>
+        <div class="greek-bar" style="width:55%; background: linear-gradient(90deg, var(--accent5), var(--accent));"></div>
+      </div>
+      <div class="greek-card">
+        <span class="greek-symbol">Θ</span>
+        <div class="greek-name">Theta</div>
+        <div class="greek-def">Time decay. How much the option's value decreases each passing day, all else equal.</div>
+        <div class="greek-impact" style="color:var(--accent4);">Always negative for buyers!</div>
+        <div class="spacer"></div>
+        <p style="font-size:12px; color:var(--text3);">If Theta = −5, your option loses ₹5 per day just from time passing. Enemy of buyers, friend of sellers.</p>
+        <div class="greek-bar" style="width:90%; background: linear-gradient(90deg, var(--accent4), var(--accent2));"></div>
+      </div>
+      <div class="greek-card">
+        <span class="greek-symbol">Ν</span>
+        <div class="greek-name">Vega</div>
+        <div class="greek-def">Sensitivity to changes in Implied Volatility. A 1% increase in IV changes the option by Vega amount.</div>
+        <div class="greek-impact" style="color:var(--accent2);">Positive for buyers</div>
+        <div class="spacer"></div>
+        <p style="font-size:12px; color:var(--text3);">Buy options when IV is LOW. Sell options when IV is HIGH. Vega helps you exploit IV changes.</p>
+        <div class="greek-bar" style="width:60%; background: linear-gradient(90deg, var(--accent2), var(--accent3));"></div>
+      </div>
+      <div class="greek-card">
+        <span class="greek-symbol">ρ</span>
+        <div class="greek-name">Rho</div>
+        <div class="greek-def">Sensitivity to changes in interest rates. Usually the least impactful Greek for short-term traders.</div>
+        <div class="greek-impact" style="color:var(--text3);">Least important for retail</div>
+        <div class="spacer"></div>
+        <p style="font-size:12px; color:var(--text3);">More relevant for long-dated options (LEAPS). Can be safely ignored by most short-term option buyers.</p>
+        <div class="greek-bar" style="width:25%; background: linear-gradient(90deg, var(--text3), var(--text2));"></div>
+      </div>
+      <div class="greek-card" style="border-color: rgba(246,173,85,0.3); background: rgba(246,173,85,0.04);">
+        <span class="greek-symbol" style="font-size:32px; font-family:'JetBrains Mono',monospace;">📋</span>
+        <div class="greek-name" style="color:var(--accent2);">Summary Guide</div>
+        <div style="font-size:13px; color:var(--text2); line-height:2;">
+          <div>📈 Price up → <span class="green-text">Delta profits</span></div>
+          <div>📅 Time passes → <span class="red-text">Theta hurts</span></div>
+          <div>🌪️ IV rises → <span class="green-text">Vega profits</span></div>
+          <div>💥 Big moves → <span class="accent-text">Gamma gains</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="ex-header">📌 Reading Greeks in Practice — Nifty 22,100 CE (ATM)</div>
+      <div class="ex-row"><div class="ex-key">LTP (Premium)</div><div class="ex-val ex-blue">₹118.50</div></div>
+      <div class="ex-row"><div class="ex-key">Delta</div><div class="ex-val ex-green">0.52 → 52 pts move for every 100 pts Nifty move</div></div>
+      <div class="ex-row"><div class="ex-key">Gamma</div><div class="ex-val ex-blue">0.0018 → Delta changes by 0.0018 per point</div></div>
+      <div class="ex-row"><div class="ex-key">Theta</div><div class="ex-val ex-red">−4.20 → Loses ₹4.20 per day automatically</div></div>
+      <div class="ex-row"><div class="ex-key">Vega</div><div class="ex-val ex-gold">12.80 → +₹12.80 for every 1% IV increase</div></div>
+    </div>
+  </section>
+
+  <!-- ─── 10: IMPLIED VOLATILITY ─── -->
+  <section class="section" id="iv">
+    <div class="breadcrumb">Pricing & Greeks → <span>Implied Volatility</span></div>
+    <div class="section-tag">10 · Implied Volatility</div>
+    <h2>Implied Volatility (IV) Deep Dive</h2>
+    <p class="section-intro">IV is the single most important concept for options traders beyond price direction. It tells you whether options are cheap or expensive right now.</p>
+
+    <div class="analogy-box">
+      <p>Think of IV like the price of umbrella insurance. During a sunshine week, umbrella insurance is cheap (low IV). The day before a predicted storm, it becomes very expensive (high IV). Smart traders <strong>buy before the storm is expected</strong> and <strong>sell just before it hits</strong> — not after.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="def-card" style="border-color:rgba(252,129,129,0.3);">
+        <span class="card-icon">🔥</span>
+        <h3>High IV Environment</h3>
+        <ul style="color:var(--text2); font-size:14px; line-height:2.2; padding-left:18px;">
+          <li>Premiums are expensive</li>
+          <li>Don't buy options — you overpay</li>
+          <li>Better to SELL options (collect fat premium)</li>
+          <li>Happens before events: Budget, RBI policy, earnings</li>
+          <li>After event, IV collapses (IV Crush)</li>
+        </ul>
+      </div>
+      <div class="def-card" style="border-color:rgba(104,211,145,0.3);">
+        <span class="card-icon">🌊</span>
+        <h3>Low IV Environment</h3>
+        <ul style="color:var(--text2); font-size:14px; line-height:2.2; padding-left:18px;">
+          <li>Premiums are cheap</li>
+          <li>Good time to BUY options</li>
+          <li>Avoid selling — collect thin premium, high risk</li>
+          <li>Happens in quiet, sideways markets</li>
+          <li>Buy calls/puts and wait for volatility to spike</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-danger">
+      <div class="callout-icon">💣</div>
+      <div class="callout-body">
+        <strong>IV Crush — The Beginner Trap!</strong>
+        You buy a call before earnings. The company reports great results. The stock goes UP. But your option LOSES value. Why? Because IV was 80% before earnings and crashed to 30% after. The Vega loss exceeded the Delta gain. This is IV crush — one of the most expensive lessons new traders learn.
+      </div>
+    </div>
+
+    <div class="sticky">
+      India VIX is India's "fear index." VIX above 20 = High IV / expensive options. VIX below 12 = Low IV / cheap options. Always check VIX before trading!
+    </div>
+  </section>
+
+  <!-- ─── 11: BASIC STRATEGIES ─── -->
+  <section class="section" id="basic-strats">
+    <div class="breadcrumb">Strategies → <span>Basic Strategies</span></div>
+    <div class="section-tag">11 · Strategies</div>
+    <h2>Basic Options Strategies</h2>
+    <p class="section-intro">Start here. These are the foundational building blocks of ALL options strategies. Master these before moving to complex strategies.</p>
+
+    <div class="grid-2">
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">📞 Long Call</div>
+          <div class="risk-badge risk-low">LOW RISK</div>
+        </div>
+        <div class="strat-desc">Buy a call option when you're <strong>bullish</strong> on the underlying. Max loss = premium paid. Max profit = unlimited.</div>
+        <div class="strat-pills">
+          <span class="pill">Bullish View</span>
+          <span class="pill">Limited Risk</span>
+          <span class="pill">Unlimited Profit</span>
+          <span class="pill">Buy 1 CE</span>
+        </div>
+        <div class="example-box" style="margin-top:14px; padding:14px 16px;">
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Buy</div><div class="ex-val ex-green">Nifty 22,200 CE @ ₹80</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Max Loss</div><div class="ex-val ex-red">₹80 × 50 = ₹4,000</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Break Even</div><div class="ex-val ex-gold">22,200 + 80 = 22,280</div></div>
+        </div>
+      </div>
+
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">🤿 Long Put</div>
+          <div class="risk-badge risk-low">LOW RISK</div>
+        </div>
+        <div class="strat-desc">Buy a put option when you're <strong>bearish</strong>. Insurance against a falling market. Max loss = premium paid.</div>
+        <div class="strat-pills">
+          <span class="pill">Bearish View</span>
+          <span class="pill">Limited Risk</span>
+          <span class="pill">High Profit if Falls</span>
+          <span class="pill">Buy 1 PE</span>
+        </div>
+        <div class="example-box" style="margin-top:14px; padding:14px 16px;">
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Buy</div><div class="ex-val ex-red">Nifty 22,000 PE @ ₹90</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Max Loss</div><div class="ex-val ex-red">₹90 × 50 = ₹4,500</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Break Even</div><div class="ex-val ex-gold">22,000 − 90 = 21,910</div></div>
+        </div>
+      </div>
+
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">✍️ Covered Call</div>
+          <div class="risk-badge risk-low">INCOME</div>
+        </div>
+        <div class="strat-desc">You OWN the stock and <strong>sell a call</strong> against it to earn premium income. Great strategy for long-term investors.</div>
+        <div class="strat-pills">
+          <span class="pill">Neutral/Slightly Bullish</span>
+          <span class="pill">Income Strategy</span>
+          <span class="pill">Hold Stock + Sell CE</span>
+        </div>
+        <div class="example-box" style="margin-top:14px; padding:14px 16px;">
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Hold</div><div class="ex-val ex-blue">100 shares Reliance @ ₹2,800</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Sell</div><div class="ex-val ex-green">Reliance 2,900 CE @ ₹40</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Income</div><div class="ex-val ex-green">₹40 × 100 = ₹4,000</div></div>
+        </div>
+      </div>
+
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">🏦 Cash Secured Put</div>
+          <div class="risk-badge risk-med">MODERATE</div>
+        </div>
+        <div class="strat-desc">Sell a put while keeping enough cash to buy the stock if assigned. You earn premium and may buy the stock cheap.</div>
+        <div class="strat-pills">
+          <span class="pill">Slightly Bullish</span>
+          <span class="pill">Income + Stock Acquisition</span>
+          <span class="pill">Sell 1 PE</span>
+        </div>
+        <div class="example-box" style="margin-top:14px; padding:14px 16px;">
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Sell</div><div class="ex-val ex-red">Nifty 21,800 PE @ ₹60</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Max Profit</div><div class="ex-val ex-green">₹60 (if Nifty stays above 21,800)</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Risk</div><div class="ex-val ex-red">Must buy at 21,800 if falls</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 12: SPREADS ─── -->
+  <section class="section" id="spreads">
+    <div class="breadcrumb">Strategies → <span>Spreads</span></div>
+    <div class="section-tag">12 · Spreads</div>
+    <h2>Options Spreads</h2>
+    <p class="section-intro">A spread involves buying AND selling options simultaneously to limit both risk and reward. Spreads are more affordable and risk-defined.</p>
+
+    <div class="grid-2">
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">📐 Bull Call Spread</div>
+          <div class="risk-badge risk-low">DEFINED RISK</div>
+        </div>
+        <div class="strat-desc">Buy a lower-strike call AND sell a higher-strike call. Reduces cost but also caps profit. Ideal for moderately bullish view.</div>
+        <div class="example-box" style="margin-top:14px; padding:14px 16px;">
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Buy</div><div class="ex-val ex-green">22,100 CE @ ₹120</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Sell</div><div class="ex-val ex-red">22,300 CE @ ₹50</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Net Cost</div><div class="ex-val ex-gold">₹70 (vs ₹120 alone)</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Max Profit</div><div class="ex-val ex-green">200 − 70 = ₹130</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Max Loss</div><div class="ex-val ex-red">₹70 only</div></div>
+        </div>
+      </div>
+
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">📐 Bear Put Spread</div>
+          <div class="risk-badge risk-low">DEFINED RISK</div>
+        </div>
+        <div class="strat-desc">Buy a higher-strike put AND sell a lower-strike put. Reduces cost, caps profit. Ideal for moderately bearish view.</div>
+        <div class="example-box" style="margin-top:14px; padding:14px 16px;">
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Buy</div><div class="ex-val ex-red">22,100 PE @ ₹110</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Sell</div><div class="ex-val ex-green">21,900 PE @ ₹45</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Net Cost</div><div class="ex-val ex-gold">₹65</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Max Profit</div><div class="ex-val ex-green">200 − 65 = ₹135</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Max Loss</div><div class="ex-val ex-red">₹65 only</div></div>
+        </div>
+      </div>
+
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">⚡ Straddle</div>
+          <div class="risk-badge risk-med">VOLATILITY</div>
+        </div>
+        <div class="strat-desc">Buy BOTH a call and a put at the SAME strike price. Profit if the market makes a BIG MOVE in either direction. Good before major events.</div>
+        <div class="example-box" style="margin-top:14px; padding:14px 16px;">
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Buy</div><div class="ex-val ex-green">22,100 CE @ ₹120</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Buy</div><div class="ex-val ex-red">22,100 PE @ ₹110</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Total Cost</div><div class="ex-val ex-gold">₹230</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Profit if</div><div class="ex-val ex-green">Nifty > 22,330 or < 21,870</div></div>
+        </div>
+      </div>
+
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">🦅 Strangle</div>
+          <div class="risk-badge risk-med">VOLATILITY</div>
+        </div>
+        <div class="strat-desc">Like a straddle but using OTM options on both sides. Cheaper but needs a BIGGER move to profit. Also great before events.</div>
+        <div class="example-box" style="margin-top:14px; padding:14px 16px;">
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Buy OTM Call</div><div class="ex-val ex-green">22,300 CE @ ₹60</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Buy OTM Put</div><div class="ex-val ex-red">21,900 PE @ ₹55</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Total Cost</div><div class="ex-val ex-gold">₹115 (cheaper than straddle)</div></div>
+          <div class="ex-row" style="padding:5px 0;"><div class="ex-key">Profit if</div><div class="ex-val ex-green">Big directional move</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 13: ADVANCED STRATEGIES ─── -->
+  <section class="section" id="advanced-strats">
+    <div class="breadcrumb">Strategies → <span>Advanced Strategies</span></div>
+    <div class="section-tag">13 · Advanced</div>
+    <h2>Advanced Options Strategies</h2>
+    <p class="section-intro">These strategies are used by professional traders. Understand the basics deeply before attempting these.</p>
+
+    <div class="grid-2">
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">🦋 Iron Condor</div>
+          <div class="risk-badge risk-med">NEUTRAL</div>
+        </div>
+        <div class="strat-desc">Sell an OTM call spread + Sell an OTM put spread. Profit when the market stays <strong>range-bound</strong>. Income from both sides with defined risk.</div>
+        <div class="strat-pills">
+          <span class="pill">Neutral/Sideways</span>
+          <span class="pill">4 Legs</span>
+          <span class="pill">High Probability</span>
+          <span class="pill">Limited Profit</span>
+        </div>
+      </div>
+
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">🦋 Butterfly Spread</div>
+          <div class="risk-badge risk-low">NEUTRAL</div>
+        </div>
+        <div class="strat-desc">Profit if the market stays near a specific price at expiry. Very cheap to execute, maximum profit at the middle strike.</div>
+        <div class="strat-pills">
+          <span class="pill">Pinpoint View</span>
+          <span class="pill">3 Strikes</span>
+          <span class="pill">Very Cheap</span>
+          <span class="pill">High Risk/Reward</span>
+        </div>
+      </div>
+
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">📅 Calendar Spread</div>
+          <div class="risk-badge risk-med">TIME PLAY</div>
+        </div>
+        <div class="strat-desc">Buy a longer-dated option and sell a shorter-dated one at the same strike. Exploit the difference in time decay rates.</div>
+        <div class="strat-pills">
+          <span class="pill">Neutral Short-Term</span>
+          <span class="pill">Time Decay Play</span>
+          <span class="pill">Different Expiries</span>
+        </div>
+      </div>
+
+      <div class="strat-card">
+        <div class="strat-header">
+          <div class="strat-title">📊 Ratio Spreads</div>
+          <div class="risk-badge risk-high">HIGH RISK</div>
+        </div>
+        <div class="strat-desc">Buy 1 option, sell 2 or more. Significantly increases risk exposure. Used by very experienced traders only.</div>
+        <div class="strat-pills">
+          <span class="pill">Expert Only</span>
+          <span class="pill">Unlimited Risk Possible</span>
+          <span class="pill">Unbalanced</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">🎓</div>
+      <div class="callout-body">
+        <strong>Strategy Selection Framework</strong>
+        Bullish + Low IV → Buy Call or Bull Call Spread | Bearish + Low IV → Buy Put or Bear Put Spread | Neutral + High IV → Iron Condor or Short Straddle | Big Move Expected + Low IV → Long Straddle/Strangle
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 14: HOW TO TRADE ─── -->
+  <section class="section" id="how-to-trade">
+    <div class="breadcrumb">Trade Execution → <span>How to Trade Options</span></div>
+    <div class="section-tag">14 · Execution</div>
+    <h2>How to Actually Trade Options</h2>
+    <p class="section-intro">Here's your step-by-step checklist for placing your first (or next) options trade professionally.</p>
+
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Open a Demat + Trading Account</h4>
+          <p>Use a broker that offers F&O trading: Zerodha (Kite), Upstox, Angel One, or similar. Get F&O segment activated. This requires signing additional forms and minimum capital requirements.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Form Your Market View</h4>
+          <p>Never trade without a view. Ask: Is the market bullish, bearish, or neutral? What is the expected range? Where is support and resistance? What is the timeframe?</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Check the Options Chain</h4>
+          <p>Open the options chain. Check IV (is it high or low?). Find the ATM strike. Look at OI concentration. Choose your strike price based on your view and budget.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Select Expiry Date</h4>
+          <p>Weekly (Thu) for short-term trades. Monthly for medium-term. Never hold short-dated OTM options too long — theta eats them alive in the last 2 days.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>Calculate Position Size & Risk</h4>
+          <p>Never risk more than 2-3% of your capital per trade. Calculate: if this option goes to zero, how much do I lose? That's your max risk per trade.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <h4>Place the Order</h4>
+          <p>Use LIMIT orders (not market orders) to get better fills. Set the price at or slightly above the Ask for buying, slightly below Bid for selling.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">7</div>
+        <div class="step-content">
+          <h4>Manage the Trade</h4>
+          <p>Set a stop-loss target (e.g., 50% of premium paid). Set a profit target (e.g., 50-100% gain). Monitor greeks. Be ready to exit early if your view changes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 15: ORDER TYPES ─── -->
+  <section class="section" id="order-types">
+    <div class="breadcrumb">Trade Execution → <span>Order Types</span></div>
+    <div class="section-tag">15 · Order Types</div>
+    <h2>Options Order Types</h2>
+    <p class="section-intro">Placing the wrong order type can cost you money. Know these cold before you trade.</p>
+
+    <div class="grid-2">
+      <div class="def-card">
+        <span class="card-icon">🎯</span>
+        <div class="tag tag-key">BEST PRACTICE</div>
+        <h3>Limit Order</h3>
+        <p>You specify the exact price you want. Order fills only if market reaches your price. <strong>Always use limit orders in options</strong> — the bid-ask spread can be wide and market orders can get you terrible fills.</p>
+      </div>
+      <div class="def-card">
+        <span class="card-icon">⚡</span>
+        <div class="tag tag-warn">AVOID</div>
+        <h3>Market Order</h3>
+        <p>Fills immediately at whatever price is available. In options, this can result in overpaying significantly due to wide bid-ask spreads. Avoid except in extreme emergency exits.</p>
+      </div>
+      <div class="def-card">
+        <span class="card-icon">🛑</span>
+        <div class="tag tag-put">PROTECTION</div>
+        <h3>Stop-Loss Order (SL)</h3>
+        <p>Automatically exits your position if the price reaches a loss threshold. <strong>Always set SL</strong>. Without it, you have no protection against catastrophic loss.</p>
+      </div>
+      <div class="def-card">
+        <span class="card-icon">📋</span>
+        <div class="tag tag-call">ADVANCED</div>
+        <h3>GTT (Good Till Triggered)</h3>
+        <p>Set your profit target AND stop-loss in advance. The order stays active until triggered. Lets you trade without watching the screen all day.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Bid-Ask Spread Explained</strong>
+        In options, there's always a Bid price (what buyers offer) and Ask price (what sellers want). The gap between them is the spread. For example: Bid ₹118, Ask ₹122 = ₹4 spread. Always buy near Ask and sell near Bid to get fair fills.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 16: RISK MANAGEMENT ─── -->
+  <section class="section" id="risk-mgmt">
+    <div class="breadcrumb">Trade Execution → <span>Risk Management</span></div>
+    <div class="section-tag">16 · Risk Management</div>
+    <h2>Risk Management in Options</h2>
+    <p class="section-intro">Risk management is what separates professional traders from gamblers. No matter how smart your analysis is, without risk management you will eventually blow up.</p>
+
+    <div class="grid-3">
+      <div class="def-card" style="border-color:rgba(104,211,145,0.3);">
+        <span class="card-icon">🎯</span>
+        <h3>2% Rule</h3>
+        <p>Never risk more than <strong>2% of your total capital</strong> on any single trade. On ₹1 Lakh capital, max risk per trade = ₹2,000.</p>
+      </div>
+      <div class="def-card" style="border-color:rgba(246,173,85,0.3);">
+        <span class="card-icon">✂️</span>
+        <h3>Stop-Loss Always</h3>
+        <p>Set a stop-loss of <strong>50% of premium paid</strong> as a starting rule. If you paid ₹120, exit if premium hits ₹60. No exceptions.</p>
+      </div>
+      <div class="def-card" style="border-color:rgba(183,148,244,0.3);">
+        <span class="card-icon">📊</span>
+        <h3>Never Over-Leverage</h3>
+        <p>Don't trade too many lots for your capital. A single lot of Nifty options can move ₹5,000 in minutes. Size appropriately.</p>
+      </div>
+      <div class="def-card" style="border-color:rgba(99,179,237,0.3);">
+        <span class="card-icon">📅</span>
+        <h3>Avoid Last-Day OTM</h3>
+        <p>Never hold OTM options on expiry day unless you have a very strong reason. Theta destroys them completely. Exit before expiry Thursday.</p>
+      </div>
+      <div class="def-card" style="border-color:rgba(252,129,129,0.3);">
+        <span class="card-icon">📰</span>
+        <h3>Respect Events</h3>
+        <p>Exit positions before major events (RBI, Fed, Budget, earnings) unless you specifically trade events. Surprises can wipe out months of profit.</p>
+      </div>
+      <div class="def-card" style="border-color:rgba(246,224,94,0.3);">
+        <span class="card-icon">🧮</span>
+        <h3>Track Your Trades</h3>
+        <p>Maintain a trade journal. Record entry, exit, reasoning, emotion, and outcome. This is how you find your edge over time.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-danger">
+      <div class="callout-icon">🚨</div>
+      <div class="callout-body">
+        <strong>The Option Seller's Risk</strong>
+        When you sell options (especially naked/uncovered), your max profit is the premium received. But your max LOSS is theoretically unlimited (for calls) or very large (for puts). Always hedge short positions. Never sell options naked without experience and significant capital buffer.
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 17: SKILLS ─── -->
+  <section class="section" id="skills">
+    <div class="breadcrumb">Skills & Mindset → <span>Skills You Need</span></div>
+    <div class="section-tag">17 · Skills</div>
+    <h2>Skills Every Options Trader Needs</h2>
+    <p class="section-intro">Options trading is a skill-based activity. Here's everything you need to develop, in order of importance.</p>
+
+    <div class="grid-2">
+      <div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-top"><span>📊 Technical Analysis (Charts)</span><span class="accent-text">Essential</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:95%; background:linear-gradient(90deg,#68d391,#63b3ed);"></div></div>
+          <p style="font-size:12px; color:var(--text3); margin-top:4px;">Support, resistance, trend lines, candlestick patterns, RSI, MACD. You need to know WHERE the market is going.</p>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-top"><span>🧠 Options Greeks Mastery</span><span class="accent-text">Essential</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%; background:linear-gradient(90deg,#63b3ed,#b794f4);"></div></div>
+          <p style="font-size:12px; color:var(--text3); margin-top:4px;">Understanding how Delta, Theta, Vega affect your P&L in real time is non-negotiable.</p>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-top"><span>🌪️ Volatility Reading (IV/VIX)</span><span style="color:var(--accent2)">Very Important</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%; background:linear-gradient(90deg,#f6ad55,#fc8181);"></div></div>
+          <p style="font-size:12px; color:var(--text3); margin-top:4px;">Know when options are cheap vs expensive. India VIX monitoring, IV percentile analysis.</p>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-top"><span>🔗 Options Chain Analysis</span><span style="color:var(--accent2)">Very Important</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%; background:linear-gradient(90deg,#b794f4,#63b3ed);"></div></div>
+          <p style="font-size:12px; color:var(--text3); margin-top:4px;">Reading OI, PCR (Put-Call Ratio), max pain, OI buildup patterns for market sentiment.</p>
+        </div>
+      </div>
+      <div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-top"><span>🧮 Risk Management</span><span class="accent-text">Critical</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:100%; background:linear-gradient(90deg,#fc8181,#f6ad55);"></div></div>
+          <p style="font-size:12px; color:var(--text3); margin-top:4px;">Position sizing, stop-loss, capital allocation. Without this skill, everything else is irrelevant.</p>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-top"><span>🧘 Psychology / Discipline</span><span class="accent-text">Critical</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:95%; background:linear-gradient(90deg,#f6ad55,#f6e05e);"></div></div>
+          <p style="font-size:12px; color:var(--text3); margin-top:4px;">Fear and greed kill most traders. Follow your plan. No revenge trades. No FOMO trades.</p>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-top"><span>📰 Fundamental Awareness</span><span style="color:var(--text3)">Helpful</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:60%; background:linear-gradient(90deg,#68d391,#b794f4);"></div></div>
+          <p style="font-size:12px; color:var(--text3); margin-top:4px;">RBI dates, earnings calendar, budget dates, FII/DII data. Know the macro calendar.</p>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-top"><span>📓 Trade Journaling</span><span style="color:var(--text3)">Important</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%; background:linear-gradient(90deg,#63b3ed,#68d391);"></div></div>
+          <p style="font-size:12px; color:var(--text3); margin-top:4px;">Record every trade. Review weekly. Find patterns in your wins and losses. This is your edge.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:20px; margin:32px 0 16px;">📚 Learning Path for Beginners</h3>
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-num">W1</div>
+        <div class="step-content"><h4>Week 1–2: Paper Trade Only</h4><p>Use virtual/paper trading on Sensibull or NSE website. Practice reading chains and placing trades without real money.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">M1</div>
+        <div class="step-content"><h4>Month 1–3: Micro Lots, Real Money</h4><p>Start with just 1 lot. Focus on learning, not earning. Your goal is to understand execution, emotions, and market behavior.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">M6</div>
+        <div class="step-content"><h4>Month 3–6: Develop 1 Strategy</h4><p>Pick one strategy (bull call spread, long straddle, etc.) and master it completely. Don't jump between strategies.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">Y1</div>
+        <div class="step-content"><h4>Year 1+: Scale Up Gradually</h4><p>Only increase position size after consistent profitability for 3+ months. Keep a journal and review regularly.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 18: MISTAKES ─── -->
+  <section class="section" id="mistakes">
+    <div class="breadcrumb">Skills & Mindset → <span>Common Mistakes</span></div>
+    <div class="section-tag">18 · Mistakes</div>
+    <h2>10 Common Mistakes to Avoid</h2>
+    <p class="section-intro">Learn from others' expensive mistakes. Every single one of these has wiped out beginner accounts.</p>
+
+    <div class="grid-2">
+      <div class="callout callout-danger" style="margin:8px 0;">
+        <div class="callout-icon">❌</div>
+        <div class="callout-body"><strong>1. Buying cheap OTM options</strong> — They expire worthless 90% of the time. Just because they're cheap doesn't make them good.</div>
+      </div>
+      <div class="callout callout-danger" style="margin:8px 0;">
+        <div class="callout-icon">❌</div>
+        <div class="callout-body"><strong>2. No stop-loss</strong> — "It'll come back." It usually doesn't. Always set a stop-loss before you enter.</div>
+      </div>
+      <div class="callout callout-danger" style="margin:8px 0;">
+        <div class="callout-icon">❌</div>
+        <div class="callout-body"><strong>3. Holding till expiry</strong> — OTM options held till expiry almost always go to zero. Exit early and save capital.</div>
+      </div>
+      <div class="callout callout-danger" style="margin:8px 0;">
+        <div class="callout-icon">❌</div>
+        <div class="callout-body"><strong>4. Trading around events without understanding IV crush</strong> — The IV trap is real. Many beginners lose money even being right on direction.</div>
+      </div>
+      <div class="callout callout-warn" style="margin:8px 0;">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body"><strong>5. Over-trading</strong> — Taking too many trades daily leads to emotional decisions and excessive brokerage. Quality over quantity.</div>
+      </div>
+      <div class="callout callout-warn" style="margin:8px 0;">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body"><strong>6. Revenge trading</strong> — After a loss, immediately trading to "recover" almost always compounds the loss. Take a break.</div>
+      </div>
+      <div class="callout callout-warn" style="margin:8px 0;">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body"><strong>7. Ignoring liquidity</strong> — Trading illiquid options with no volume means terrible fills and unable to exit when needed.</div>
+      </div>
+      <div class="callout callout-warn" style="margin:8px 0;">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body"><strong>8. Risking money you can't afford to lose</strong> — Options are high risk. Only trade with money that, if lost completely, won't affect your life.</div>
+      </div>
+      <div class="callout callout-info" style="margin:8px 0;">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body"><strong>9. Not having a trade plan</strong> — Entry, target, stop-loss, reason — all defined BEFORE you enter. Not after.</div>
+      </div>
+      <div class="callout callout-info" style="margin:8px 0;">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body"><strong>10. Skipping paper trading</strong> — Don't rush to real money. 3 months of paper trading will save you years of painful losses.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 19: GLOSSARY ─── -->
+  <section class="section" id="glossary">
+    <div class="breadcrumb">Skills & Mindset → <span>Full Glossary</span></div>
+    <div class="section-tag">19 · Glossary</div>
+    <h2>Complete Options Glossary</h2>
+    <p class="section-intro">A reference guide to every important term in options trading. Bookmark this section.</p>
+
+    <div class="glossary-grid">
+      <div class="gloss-item"><div class="gloss-term">ATM (At The Money)</div><div class="gloss-def">Strike price equals or is very close to the current spot price.</div></div>
+      <div class="gloss-item"><div class="gloss-term">ITM (In The Money)</div><div class="gloss-def">Option with intrinsic value. Call: strike < spot. Put: strike > spot.</div></div>
+      <div class="gloss-item"><div class="gloss-term">OTM (Out of The Money)</div><div class="gloss-def">Option with no intrinsic value. Only time value remains.</div></div>
+      <div class="gloss-item"><div class="gloss-term">CE (Call European)</div><div class="gloss-def">Indian notation for Call Option. Can only be exercised at expiry.</div></div>
+      <div class="gloss-item"><div class="gloss-term">PE (Put European)</div><div class="gloss-def">Indian notation for Put Option. Can only be exercised at expiry.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Premium</div><div class="gloss-def">Price paid to buy an option contract. Buyer's maximum loss.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Strike Price</div><div class="gloss-def">Pre-agreed price at which option can be exercised.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Expiry Date</div><div class="gloss-def">Last day option can be exercised. Weekly = Thursday in India.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Lot Size</div><div class="gloss-def">Minimum number of units in 1 options contract. Nifty = 50 units.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Open Interest (OI)</div><div class="gloss-def">Total unsettled contracts. Indicates market interest and liquidity.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Delta</div><div class="gloss-def">Change in option price per 1-point move in underlying.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Theta</div><div class="gloss-def">Daily time decay. How much premium is lost per day.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Vega</div><div class="gloss-def">Sensitivity to implied volatility changes.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Gamma</div><div class="gloss-def">Rate of change of Delta. Acceleration of price sensitivity.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Implied Volatility (IV)</div><div class="gloss-def">Market's expectation of future price movement. Affects premiums.</div></div>
+      <div class="gloss-item"><div class="gloss-term">India VIX</div><div class="gloss-def">India's fear index. Measures expected volatility. High VIX = fear.</div></div>
+      <div class="gloss-item"><div class="gloss-term">IV Crush</div><div class="gloss-def">Sudden drop in IV after a major event, reducing option premiums.</div></div>
+      <div class="gloss-item"><div class="gloss-term">PCR (Put-Call Ratio)</div><div class="gloss-def">OI of puts / OI of calls. Above 1.2 = bearish sentiment.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Max Pain</div><div class="gloss-def">Strike at which maximum number of options expire worthless.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Square Off</div><div class="gloss-def">Closing your position by doing the opposite trade before expiry.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Assignment</div><div class="gloss-def">When an option seller is obligated to buy/sell the underlying.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Exercise</div><div class="gloss-def">Buyer using their right to buy/sell at strike price.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Naked Option</div><div class="gloss-def">Selling options without a hedge. Unlimited risk. Dangerous.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Hedge</div><div class="gloss-def">An offsetting position that reduces risk of another position.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Intrinsic Value</div><div class="gloss-def">Real immediate value of an option if exercised right now.</div></div>
+      <div class="gloss-item"><div class="gloss-term">Time Value (Extrinsic)</div><div class="gloss-def">Premium beyond intrinsic value. Decays to zero at expiry.</div></div>
+      <div class="gloss-item"><div class="gloss-term">F&O Margin</div><div class="gloss-def">Capital required to sell options. Buying only needs premium amount.</div></div>
+      <div class="gloss-item"><div class="gloss-term">SPAN Margin</div><div class="gloss-def">Minimum margin required by exchange for option selling positions.</div></div>
+    </div>
+
+    <div class="callout callout-success" style="margin-top:32px;">
+      <div class="callout-icon">🏆</div>
+      <div class="callout-body">
+        <strong>You're Now Ready to Start!</strong>
+        You've covered everything from the basics to advanced strategies. Remember: Start with paper trading, keep position sizes small, always use stop-losses, and treat every trade as a learning experience. The market will teach you — make sure the tuition fee is small while you're learning.
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p style="font-family:'Playfair Display',serif; font-size:18px; color:var(--text2); margin-bottom:8px;">Options Trading Mastery Guide</p>
+    <p>Built for beginners. Designed for professionals. 📈</p>
+    <p style="margin-top:8px; font-size:11px;">⚠️ This is an educational guide only. Options trading involves significant risk. Always do your own research and consult a SEBI-registered financial advisor before trading.</p>
+  </div>
+
+</main>
+
+<script>
+  // ─── SIDEBAR NAVIGATION ───
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Update active state
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+    }
+    // Close sidebar on mobile
+    if (window.innerWidth <= 900) toggleSidebar();
+  }
+
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('show');
+  }
+
+  // ─── SCROLL PROGRESS ───
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = Math.round((scrollTop / docHeight) * 100);
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('progressLabel').textContent = progress + '% read';
+
+    // Update active nav link based on scroll position
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(l => {
+      l.classList.remove('active');
+      if (l.getAttribute('onclick') && l.getAttribute('onclick').includes("'" + current + "'")) {
+        l.classList.add('active');
+      }
+    });
+  });
+
+  // ─── ANIMATE SKILL BARS ON SCROLL ───
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          const w = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => { bar.style.width = w; }, 100);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('#skills').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
