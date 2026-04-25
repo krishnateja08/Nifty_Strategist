@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Advanced Trading Mastery Guide — Options, Risk & Psychology</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Orbitron:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d1b3e;--panel:#0e1f45;--p2:#0a1628;
+  --cyan:#60a5fa;--pink:#93c5fd;--yel:#fbbf24;
+  --grn:#4ade80;--pur:#818cf8;--red:#f87171;--ora:#fb923c;
+  --bc:rgba(96,165,250,.15);--bp:rgba(96,165,250,.08);
+  --tx:#cce0ff;--t2:rgba(96,165,250,.75);--t3:rgba(96,165,250,.45);
+  --sidebar-w:280px;
+}
+html,body{
+  background:linear-gradient(135deg,#0d1b3e 0%,#0a1628 40%,#0d2040 100%);
+  color:var(--tx);font-family:'Space Grotesk',sans-serif;font-weight:500;
+  overflow-x:hidden;min-height:100vh;
+}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(rgba(96,165,250,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.02) 1px,transparent 1px);
+  background-size:50px 50px;}
+
+/* ══ TOPBAR ══ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(8,18,48,.97);border-bottom:1px solid rgba(96,165,250,.25);
+  padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;
+  font-family:'Space Mono',monospace;
+  box-shadow:0 0 30px rgba(0,0,20,.8);
+}
+.topbar-brand{display:flex;align-items:center;gap:12px;}
+.topbar-icon{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,.2),rgba(10,20,50,.8));
+  border:1px solid rgba(251,191,36,.5);display:flex;align-items:center;justify-content:center;font-size:16px;
+  box-shadow:0 0 15px rgba(251,191,36,.3);}
+.topbar-title{font-size:13px;letter-spacing:2px;color:#fbbf24;font-weight:700;}
+.topbar-sub{font-size:11px;letter-spacing:1.5px;color:rgba(148,186,255,.6);margin-top:1px;}
+.topbar-right{display:flex;align-items:center;gap:16px;font-size:12px;letter-spacing:1.5px;}
+.topbar-badge{padding:4px 10px;border:1px solid rgba(74,222,128,.3);background:rgba(16,50,30,.6);color:#4ade80;border-radius:2px;}
+.back-btn{padding:5px 12px;border:1px solid rgba(96,165,250,.25);background:rgba(10,20,50,.7);
+  color:rgba(160,200,255,.8);border-radius:2px;cursor:pointer;text-decoration:none;
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;transition:all .2s;}
+.back-btn:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(96,165,250,.1);}
+
+/* ══ LAYOUT ══ */
+.layout{display:flex;padding-top:52px;min-height:100vh;}
+
+/* ══ SIDEBAR ══ */
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  position:fixed;top:52px;left:0;bottom:0;
+  background:rgba(6,12,32,.97);border-right:1px solid rgba(96,165,250,.12);
+  overflow-y:auto;overflow-x:hidden;z-index:100;
+  scrollbar-width:thin;scrollbar-color:rgba(96,165,250,.2) transparent;
+}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(96,165,250,.2);border-radius:2px;}
+.sidebar-header{padding:16px 16px 10px;border-bottom:1px solid rgba(96,165,250,.08);}
+.sidebar-header-txt{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:rgba(160,200,255,.5);font-weight:700;}
+
+.nav-section{margin-bottom:4px;}
+.nav-section-title{
+  padding:10px 16px 6px;
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2.5px;
+  color:rgba(160,200,255,.4);font-weight:700;text-transform:uppercase;
+}
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 16px;cursor:pointer;
+  font-size:13px;color:rgba(180,215,255,.7);
+  border-left:2px solid transparent;
+  transition:all .15s;position:relative;
+}
+.nav-item:hover{background:rgba(96,165,250,.06);color:#cce0ff;border-left-color:rgba(96,165,250,.3);}
+.nav-item.active{background:rgba(96,165,250,.1);color:#60a5fa;border-left-color:#60a5fa;}
+.nav-item.active.yel{color:#fbbf24;border-left-color:#fbbf24;background:rgba(251,191,36,.08);}
+.nav-item.active.grn{color:#4ade80;border-left-color:#4ade80;background:rgba(74,222,128,.08);}
+.nav-item.active.pur{color:#a78bfa;border-left-color:#a78bfa;background:rgba(167,139,250,.08);}
+.nav-item .nav-ico{font-size:14px;flex-shrink:0;width:20px;text-align:center;}
+.nav-item .nav-txt{font-size:12px;letter-spacing:.3px;line-height:1.3;}
+.nav-sub{padding-left:46px;font-size:11px;color:rgba(160,200,255,.4);margin-top:1px;}
+
+.sidebar-progress{padding:14px 16px;border-top:1px solid rgba(96,165,250,.08);margin-top:8px;}
+.progress-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(160,200,255,.4);margin-bottom:6px;}
+.progress-bar{height:3px;background:rgba(96,165,250,.1);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#fbbf24,#4ade80);border-radius:2px;transition:width .4s ease;width:0%;}
+
+/* ══ MAIN CONTENT ══ */
+.main{margin-left:var(--sidebar-w);flex:1;padding:0 0 80px;}
+
+/* ══ SECTIONS ══ */
+.guide-section{padding:40px 44px;border-bottom:1px solid rgba(96,165,250,.07);display:none;}
+.guide-section.active{display:block;}
+
+.section-hero{
+  background:linear-gradient(135deg,rgba(13,27,62,.99),rgba(8,16,40,.97));
+  border:1px solid rgba(96,165,250,.12);border-radius:8px;
+  padding:30px 36px;margin-bottom:32px;position:relative;overflow:hidden;
+}
+.section-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:180px;height:180px;
+  border-radius:50%;opacity:.06;background:radial-gradient(circle,var(--hero-color,#fbbf24),transparent);}
+.section-hero-tag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;
+  color:var(--hero-color,#fbbf24);margin-bottom:10px;opacity:.8;}
+.section-hero h1{font-family:'Orbitron',monospace;font-size:28px;font-weight:700;
+  color:#e8f4ff;letter-spacing:1px;margin-bottom:12px;line-height:1.2;}
+.section-hero p{font-size:15px;color:rgba(180,215,255,.75);line-height:1.7;max-width:700px;}
+
+/* ══ CONTENT BLOCKS ══ */
+h2{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:#e8f4ff;
+  margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid rgba(96,165,250,.1);
+  display:flex;align-items:center;gap:10px;}
+h2 .h-ico{font-size:18px;}
+h3{font-size:16px;font-weight:700;color:var(--cyan);margin:22px 0 10px;letter-spacing:.5px;}
+h4{font-size:14px;font-weight:700;color:rgba(251,191,36,.9);margin:16px 0 8px;letter-spacing:.5px;
+  font-family:'Space Mono',monospace;text-transform:uppercase;}
+p{font-size:14px;line-height:1.8;color:rgba(180,215,255,.8);margin-bottom:14px;}
+
+/* ══ INFO BOXES ══ */
+.info-box{
+  border-radius:6px;padding:18px 20px;margin:18px 0;
+  border-left:3px solid var(--box-color,var(--cyan));
+  background:rgba(96,165,250,.05);position:relative;
+}
+.info-box.yellow{--box-color:#fbbf24;background:rgba(251,191,36,.05);}
+.info-box.green{--box-color:#4ade80;background:rgba(74,222,128,.05);}
+.info-box.red{--box-color:#f87171;background:rgba(248,113,113,.05);}
+.info-box.purple{--box-color:#a78bfa;background:rgba(167,139,250,.05);}
+.info-box.orange{--box-color:#fb923c;background:rgba(251,146,60,.05);}
+.info-box-title{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;
+  color:var(--box-color,var(--cyan));font-weight:700;margin-bottom:8px;}
+.info-box p{font-size:13px;color:rgba(180,215,255,.8);margin:0;}
+
+/* ══ EXAMPLE CARDS ══ */
+.example-card{
+  background:linear-gradient(135deg,rgba(10,22,52,.98),rgba(6,14,36,.97));
+  border:1px solid rgba(96,165,250,.15);border-radius:8px;
+  padding:22px 24px;margin:20px 0;position:relative;overflow:hidden;
+}
+.example-card::before{content:'LIVE EXAMPLE';position:absolute;top:12px;right:14px;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;
+  color:rgba(74,222,128,.5);border:1px solid rgba(74,222,128,.2);padding:2px 7px;border-radius:2px;}
+.example-card h4{color:#4ade80;margin-top:0;}
+.example-card.red-ex::before{content:'RISK EXAMPLE';color:rgba(248,113,113,.5);border-color:rgba(248,113,113,.2);}
+.example-card.red-ex h4{color:#f87171;}
+.example-card.yel-ex::before{content:'REAL TRADE';color:rgba(251,191,36,.6);border-color:rgba(251,191,36,.2);}
+.example-card.yel-ex h4{color:#fbbf24;}
+
+/* ══ STRATEGY TABLE ══ */
+.strat-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:13px;}
+.strat-table th{
+  background:rgba(10,20,52,.9);font-family:'Space Mono',monospace;font-size:10px;
+  letter-spacing:2px;color:rgba(160,200,255,.6);padding:10px 14px;text-align:left;
+  border-bottom:1px solid rgba(96,165,250,.2);
+}
+.strat-table td{padding:11px 14px;border-bottom:1px solid rgba(96,165,250,.06);color:rgba(180,215,255,.8);vertical-align:top;}
+.strat-table tr:hover td{background:rgba(96,165,250,.04);}
+.tag{display:inline-block;padding:2px 8px;border-radius:2px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;font-weight:700;}
+.tag.bull{background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.3);}
+.tag.bear{background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.3);}
+.tag.neutral{background:rgba(96,165,250,.15);color:#60a5fa;border:1px solid rgba(96,165,250,.3);}
+.tag.limited{background:rgba(167,139,250,.15);color:#a78bfa;border:1px solid rgba(167,139,250,.3);}
+.tag.unlimited{background:rgba(251,146,60,.15);color:#fb923c;border:1px solid rgba(251,146,60,.3);}
+
+/* ══ PAYOFF DIAGRAM ══ */
+.payoff-wrap{background:rgba(6,12,30,.9);border:1px solid rgba(96,165,250,.1);border-radius:6px;padding:20px;margin:18px 0;}
+.payoff-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(160,200,255,.5);margin-bottom:14px;}
+.payoff-diagram{width:100%;height:160px;position:relative;}
+.payoff-diagram svg{width:100%;height:100%;}
+
+/* ══ TRADE SETUP BOX ══ */
+.trade-setup{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:12px;margin:16px 0;
+}
+.setup-item{
+  background:rgba(10,20,52,.8);border:1px solid rgba(96,165,250,.1);
+  border-radius:6px;padding:12px 14px;
+}
+.setup-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(160,200,255,.4);margin-bottom:4px;}
+.setup-value{font-size:15px;font-weight:700;color:#e8f4ff;}
+.setup-value.grn{color:#4ade80;}
+.setup-value.red{color:#f87171;}
+.setup-value.yel{color:#fbbf24;}
+.setup-value.pur{color:#a78bfa;}
+
+/* ══ RISK METER ══ */
+.risk-meter{display:flex;align-items:center;gap:12px;margin:10px 0;}
+.risk-bar-wrap{flex:1;height:8px;background:rgba(96,165,250,.1);border-radius:4px;overflow:hidden;}
+.risk-bar-fill{height:100%;border-radius:4px;transition:width .5s ease;}
+.risk-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;color:rgba(160,200,255,.6);width:70px;}
+.risk-pct{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;width:40px;text-align:right;}
+
+/* ══ PSYCHOLOGY CARDS ══ */
+.psych-card{
+  display:flex;gap:18px;align-items:flex-start;
+  background:rgba(10,20,52,.7);border:1px solid rgba(96,165,250,.1);
+  border-radius:8px;padding:20px;margin:14px 0;
+}
+.psych-icon{font-size:28px;flex-shrink:0;width:44px;text-align:center;}
+.psych-body h4{margin-top:0;margin-bottom:6px;font-size:14px;}
+.psych-body p{font-size:13px;margin:0;color:rgba(180,215,255,.7);}
+.psych-fix{margin-top:10px;padding:8px 12px;background:rgba(74,222,128,.07);border-left:2px solid #4ade80;border-radius:2px;font-size:12px;color:rgba(180,215,255,.75);}
+.psych-fix strong{color:#4ade80;}
+
+/* ══ SCENARIO BOX ══ */
+.scenario{border-radius:6px;padding:16px 20px;margin:14px 0;border:1px solid rgba(96,165,250,.1);}
+.scenario.win{background:rgba(74,222,128,.04);border-color:rgba(74,222,128,.15);}
+.scenario.lose{background:rgba(248,113,113,.04);border-color:rgba(248,113,113,.15);}
+.scenario-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;margin-bottom:8px;}
+.scenario.win .scenario-title{color:rgba(74,222,128,.7);}
+.scenario.lose .scenario-title{color:rgba(248,113,113,.7);}
+.scenario p{font-size:13px;margin:0;color:rgba(180,215,255,.75);}
+
+/* ══ CHECKLIST ══ */
+.checklist{list-style:none;margin:14px 0;}
+.checklist li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(96,165,250,.05);font-size:13px;color:rgba(180,215,255,.8);}
+.checklist li:last-child{border-bottom:none;}
+.check-ico{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px;}
+.check-ico.ok{background:rgba(74,222,128,.15);color:#4ade80;}
+.check-ico.no{background:rgba(248,113,113,.15);color:#f87171;}
+.check-ico.warn{background:rgba(251,191,36,.15);color:#fbbf24;}
+
+/* ══ FORMULA BOX ══ */
+.formula{
+  background:rgba(6,12,30,.9);border:1px solid rgba(96,165,250,.15);
+  border-radius:6px;padding:16px 20px;margin:14px 0;
+  font-family:'Space Mono',monospace;font-size:14px;
+  color:#60a5fa;letter-spacing:.5px;text-align:center;
+}
+.formula span{color:#fbbf24;}
+.formula small{display:block;font-size:10px;color:rgba(160,200,255,.4);margin-top:6px;letter-spacing:1.5px;}
+
+/* ══ JOURNAL TABLE ══ */
+.journal-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;gap:0;
+  border-bottom:1px solid rgba(96,165,250,.07);}
+.journal-row.header .jc{background:rgba(10,20,52,.9);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(160,200,255,.5);}
+.jc{padding:10px 12px;font-size:12px;color:rgba(180,215,255,.8);}
+.jc.win-cell{color:#4ade80;}
+.jc.lose-cell{color:#f87171;}
+
+/* ══ STEP BOXES ══ */
+.steps{margin:18px 0;}
+.step{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;}
+.step-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(96,165,250,.2),rgba(96,165,250,.05));
+  border:1px solid rgba(96,165,250,.3);display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--cyan);margin-top:2px;}
+.step-body h4{margin-top:0;margin-bottom:5px;}
+.step-body p{font-size:13px;margin:0;color:rgba(180,215,255,.75);}
+
+/* ══ DIVIDER ══ */
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(96,165,250,.15),transparent);margin:28px 0;}
+
+/* ══ HIGHLIGHT ══ */
+.hl-yel{color:#fbbf24;font-weight:700;}
+.hl-grn{color:#4ade80;font-weight:700;}
+.hl-red{color:#f87171;font-weight:700;}
+.hl-blu{color:#60a5fa;font-weight:700;}
+.hl-pur{color:#a78bfa;font-weight:700;}
+
+/* ══ NIFTY EXAMPLE BADGE ══ */
+.nifty-badge{display:inline-block;padding:2px 8px;background:rgba(251,191,36,.1);
+  border:1px solid rgba(251,191,36,.25);border-radius:2px;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:#fbbf24;
+  margin-left:8px;vertical-align:middle;}
+
+/* ══ CALLOUT ══ */
+.callout{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;
+  background:rgba(96,165,250,.05);border:1px solid rgba(96,165,250,.15);
+  border-radius:6px;margin:16px 0;}
+.callout-ico{font-size:20px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:13px;color:rgba(180,215,255,.8);line-height:1.7;}
+.callout-body strong{color:#e8f4ff;}
+
+/* ══ GRID 2 ══ */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+/* ══ STAT BOX ══ */
+.stat-box{background:rgba(10,20,52,.8);border:1px solid rgba(96,165,250,.1);border-radius:6px;padding:16px;text-align:center;}
+.stat-box .stat-val{font-family:'Orbitron',monospace;font-size:26px;font-weight:700;margin-bottom:4px;}
+.stat-box .stat-lbl{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(160,200,255,.5);}
+
+/* ══ PROGRESS TRACKER ══ */
+.topic-progress{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 24px;}
+.tp-dot{width:10px;height:10px;border-radius:50%;background:rgba(96,165,250,.15);border:1px solid rgba(96,165,250,.2);cursor:pointer;transition:all .2s;}
+.tp-dot.done{background:#4ade80;border-color:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.4);}
+
+/* ══ MOBILE ══ */
+@media(max-width:768px){
+  :root{--sidebar-w:0px;}
+  .sidebar{transform:translateX(-100%);transition:transform .3s;width:260px;}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .guide-section{padding:24px 18px;}
+  .section-hero{padding:20px;}
+  .section-hero h1{font-size:20px;}
+  .mobile-menu-btn{display:flex!important;}
+  .topbar-title{font-size:11px;}
+}
+.mobile-menu-btn{display:none;align-items:center;justify-content:center;
+  width:34px;height:34px;background:rgba(10,20,50,.8);border:1px solid rgba(96,165,250,.2);
+  border-radius:3px;cursor:pointer;font-size:18px;color:var(--cyan);}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="mobile-menu-btn" onclick="toggleSidebar()" title="Menu">☰</button>
+    <div class="topbar-brand">
+      <div class="topbar-icon">📚</div>
+      <div>
+        <div class="topbar-title">ADVANCED TRADING MASTERY GUIDE</div>
+        <div class="topbar-sub" style="font-family:'Space Mono',monospace;font-size:10px;">OPTIONS STRATEGIES · RISK MANAGEMENT · TRADING PSYCHOLOGY</div>
+      </div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-badge">3 MODULES · 30+ TOPICS</div>
+    <a href="index.html" class="back-btn">← BACK TO HUB</a>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-header-txt">📍 NAVIGATION</div>
+  </div>
+
+  <!-- MODULE 1 -->
+  <div class="nav-section">
+    <div class="nav-section-title" style="color:rgba(251,191,36,.5);">▸ MODULE 01 — OPTIONS STRATEGIES</div>
+    <div class="nav-item yel active" onclick="showSection('intro-options')" id="nav-intro-options">
+      <span class="nav-ico">🎯</span><div><div class="nav-txt">Introduction to Options</div><div class="nav-sub">Basics & terminology</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('bull-strategies')" id="nav-bull-strategies">
+      <span class="nav-ico">📈</span><div><div class="nav-txt">Bullish Strategies</div><div class="nav-sub">Long Call, Bull Spread</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('bear-strategies')" id="nav-bear-strategies">
+      <span class="nav-ico">📉</span><div><div class="nav-txt">Bearish Strategies</div><div class="nav-sub">Long Put, Bear Spread</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('neutral-strategies')" id="nav-neutral-strategies">
+      <span class="nav-ico">⚖️</span><div><div class="nav-txt">Neutral Strategies</div><div class="nav-sub">Straddle, Strangle, Iron Condor</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('advanced-options')" id="nav-advanced-options">
+      <span class="nav-ico">🔬</span><div><div class="nav-txt">Advanced Plays</div><div class="nav-sub">Butterfly, Calendar, Ratio</div></div>
+    </div>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="nav-section">
+    <div class="nav-section-title" style="color:rgba(74,222,128,.5);">▸ MODULE 02 — RISK MANAGEMENT</div>
+    <div class="nav-item" onclick="showSection('risk-intro')" id="nav-risk-intro">
+      <span class="nav-ico">🛡️</span><div><div class="nav-txt">Why Risk Management?</div><div class="nav-sub">The survival mindset</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('position-sizing')" id="nav-position-sizing">
+      <span class="nav-ico">📐</span><div><div class="nav-txt">Position Sizing</div><div class="nav-sub">1% rule, Kelly criterion</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('stop-loss')" id="nav-stop-loss">
+      <span class="nav-ico">🚨</span><div><div class="nav-txt">Stop Loss Mastery</div><div class="nav-sub">Types, placement, discipline</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('rr-ratio')" id="nav-rr-ratio">
+      <span class="nav-ico">⚡</span><div><div class="nav-txt">Risk:Reward Ratio</div><div class="nav-sub">1:2, 1:3 setups</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('drawdown')" id="nav-drawdown">
+      <span class="nav-ico">📊</span><div><div class="nav-txt">Drawdown & Recovery</div><div class="nav-sub">Managing losing streaks</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('portfolio-risk')" id="nav-portfolio-risk">
+      <span class="nav-ico">🗂️</span><div><div class="nav-txt">Portfolio Risk</div><div class="nav-sub">Diversification, correlation</div></div>
+    </div>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="nav-section">
+    <div class="nav-section-title" style="color:rgba(167,139,250,.5);">▸ MODULE 03 — PSYCHOLOGY</div>
+    <div class="nav-item" onclick="showSection('psych-intro')" id="nav-psych-intro">
+      <span class="nav-ico">🧠</span><div><div class="nav-txt">The Trader's Mind</div><div class="nav-sub">Why 90% traders fail</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('fomo-greed')" id="nav-fomo-greed">
+      <span class="nav-ico">🔥</span><div><div class="nav-txt">FOMO & Greed</div><div class="nav-sub">Most dangerous emotions</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('fear-hesitation')" id="nav-fear-hesitation">
+      <span class="nav-ico">😰</span><div><div class="nav-txt">Fear & Hesitation</div><div class="nav-sub">Paralysis and overtrading</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('revenge-trading')" id="nav-revenge-trading">
+      <span class="nav-ico">💢</span><div><div class="nav-txt">Revenge Trading</div><div class="nav-sub">The account killer</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('discipline')" id="nav-discipline">
+      <span class="nav-ico">🎯</span><div><div class="nav-txt">Building Discipline</div><div class="nav-sub">Habits & routines</div></div>
+    </div>
+    <div class="nav-item" onclick="showSection('trade-journal')" id="nav-trade-journal">
+      <span class="nav-ico">📓</span><div><div class="nav-txt">Trade Journal</div><div class="nav-sub">Track, review, improve</div></div>
+    </div>
+  </div>
+
+  <div class="sidebar-progress">
+    <div class="progress-label">READING PROGRESS</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="main-content">
+
+<!-- ══════════════════════════════════════════
+     SECTION: INTRO OPTIONS
+══════════════════════════════════════════ -->
+<div class="guide-section active" id="sec-intro-options">
+  <div class="section-hero" style="--hero-color:#fbbf24;">
+    <div class="section-hero-tag">MODULE 01 // OPTIONS STRATEGIES</div>
+    <h1>Options Strategies Guide</h1>
+    <p>Learn how to use options not just as a bet, but as a precision weapon. From simple long calls to advanced iron condors — every strategy explained with real Nifty trade examples.</p>
+  </div>
+
+  <h2><span class="h-ico">📖</span> What Are Options?</h2>
+  <p>An <span class="hl-yel">option</span> is a contract that gives you the <em>right, but not the obligation</em>, to buy or sell an underlying asset (like Nifty 50) at a specific price (called the <span class="hl-blu">Strike Price</span>) before or on a specific date (<span class="hl-blu">Expiry</span>).</p>
+  <p>Think of it like this: You see a flat for ₹50 lakh. You pay ₹50,000 to the owner to "lock the price" for 30 days. If prices rise to ₹60 lakh, you exercise your right and buy at ₹50L. If prices fall, you just lose the ₹50,000 — your premium. That's exactly how a <span class="hl-grn">Call Option</span> works.</p>
+
+  <div class="grid2">
+    <div class="info-box yellow">
+      <div class="info-box-title">📞 CALL OPTION</div>
+      <p>Right to <strong>BUY</strong> at strike price. You buy a Call when you expect the market to go <strong>UP</strong>. Your max loss = Premium paid. Profit = Unlimited upside.</p>
+    </div>
+    <div class="info-box red">
+      <div class="info-box-title">📤 PUT OPTION</div>
+      <p>Right to <strong>SELL</strong> at strike price. You buy a Put when you expect the market to go <strong>DOWN</strong>. Your max loss = Premium paid. Profit = Unlimited downside.</p>
+    </div>
+  </div>
+
+  <h3>Key Terms Every Options Trader Must Know</h3>
+  <table class="strat-table">
+    <tr><th>TERM</th><th>MEANING</th><th>NIFTY EXAMPLE</th></tr>
+    <tr><td><span class="hl-yel">Strike Price</span></td><td>Price at which option can be exercised</td><td>Nifty 24,000 CE (Call at 24000)</td></tr>
+    <tr><td><span class="hl-blu">Premium</span></td><td>Price you pay to buy the option contract</td><td>₹150 premium × 50 lot size = ₹7,500 cost</td></tr>
+    <tr><td><span class="hl-grn">ITM</span></td><td>In The Money — option has intrinsic value</td><td>Nifty at 24,200, 24000 CE = ITM</td></tr>
+    <tr><td><span class="hl-red">OTM</span></td><td>Out of The Money — no intrinsic value yet</td><td>Nifty at 23,800, 24000 CE = OTM</td></tr>
+    <tr><td><span class="hl-pur">ATM</span></td><td>At The Money — strike = spot price</td><td>Nifty at 24,000, 24000 CE = ATM</td></tr>
+    <tr><td><span class="hl-yel">Expiry</span></td><td>Last date to exercise the option</td><td>Weekly: every Thursday on Nifty</td></tr>
+    <tr><td><span class="hl-blu">Lot Size</span></td><td>Minimum qty you must trade</td><td>Nifty = 50 units per lot</td></tr>
+    <tr><td><span class="hl-pur">Open Interest</span></td><td>Total open contracts at a strike</td><td>High OI at 24000 = strong support/resistance</td></tr>
+  </table>
+
+  <div class="example-card yel-ex">
+    <h4>🎯 Real Example: Understanding Premium</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin:10px 0 14px;">Nifty is at <span class="hl-yel">24,000</span>. You buy 1 lot of <span class="hl-grn">24,100 CE</span> (Call Option) at ₹120 premium.</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">STRIKE</div><div class="setup-value yel">24,100</div></div>
+      <div class="setup-item"><div class="setup-label">PREMIUM PAID</div><div class="setup-value red">₹120</div></div>
+      <div class="setup-item"><div class="setup-label">LOT SIZE</div><div class="setup-value">50</div></div>
+      <div class="setup-item"><div class="setup-label">TOTAL COST</div><div class="setup-value red">₹6,000</div></div>
+      <div class="setup-item"><div class="setup-label">BREAKEVEN</div><div class="setup-value yel">24,220</div></div>
+      <div class="setup-item"><div class="setup-label">MAX LOSS</div><div class="setup-value red">₹6,000</div></div>
+    </div>
+    <div class="grid2" style="margin-top:12px;">
+      <div class="scenario win">
+        <div class="scenario-title">✅ IF NIFTY RISES TO 24,400</div>
+        <p>Intrinsic value = 24,400 - 24,100 = <strong>₹300</strong><br>Profit = (300 - 120) × 50 = <strong class="hl-grn">₹9,000 profit</strong> (150% return)</p>
+      </div>
+      <div class="scenario lose">
+        <div class="scenario-title">❌ IF NIFTY STAYS BELOW 24,100</div>
+        <p>Option expires worthless.<br>Loss = Premium paid = <strong class="hl-red">₹6,000 (entire premium lost)</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box green">
+    <div class="info-box-title">💡 BEGINNER TIP</div>
+    <p>Always calculate your breakeven before entering. For a Call: <strong>Breakeven = Strike + Premium</strong>. For a Put: <strong>Breakeven = Strike − Premium</strong>. The market must cross your breakeven point for you to make money at expiry.</p>
+  </div>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:flex-end;">
+    <button onclick="showSection('bull-strategies')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(251,191,36,.2),rgba(251,191,36,.1));border:1px solid rgba(251,191,36,.4);color:#fbbf24;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: BULLISH STRATEGIES →</button>
+  </div>
+</div>
+
+<!-- ══ BULL STRATEGIES ══ -->
+<div class="guide-section" id="sec-bull-strategies">
+  <div class="section-hero" style="--hero-color:#4ade80;">
+    <div class="section-hero-tag">MODULE 01 // BULLISH OPTIONS STRATEGIES</div>
+    <h1>Bullish Strategies</h1>
+    <p>Strategies to profit when you expect the market to go UP. Ranging from simple Long Calls to defined-risk Bull Spreads.</p>
+  </div>
+
+  <h2><span class="h-ico">📞</span> Strategy 1: Long Call</h2>
+  <p>The simplest bullish strategy. You <span class="hl-grn">buy a Call option</span> expecting the market to rise. Risk is limited to the premium. Reward is theoretically unlimited.</p>
+
+  <div class="example-card yel-ex">
+    <h4>NIFTY LONG CALL — Full Trade Example</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;"><strong>Setup:</strong> Nifty is at <span class="hl-yel">23,800</span>. Budget: ₹10,000. You expect a budget rally to push Nifty to 24,200 in 5 days.</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">BUY</div><div class="setup-value grn">24,000 CE</div></div>
+      <div class="setup-item"><div class="setup-label">PREMIUM</div><div class="setup-value yel">₹180</div></div>
+      <div class="setup-item"><div class="setup-label">LOTS</div><div class="setup-value">1</div></div>
+      <div class="setup-item"><div class="setup-label">INVESTED</div><div class="setup-value red">₹9,000</div></div>
+      <div class="setup-item"><div class="setup-label">BREAKEVEN</div><div class="setup-value yel">24,180</div></div>
+      <div class="setup-item"><div class="setup-label">TARGET</div><div class="setup-value grn">₹25,000+</div></div>
+    </div>
+    <div class="grid3" style="margin-top:12px;">
+      <div class="scenario win"><div class="scenario-title">🚀 NIFTY @ 24,300</div><p>Value = ₹300. Profit = (300-180)×50 = <strong class="hl-grn">₹6,000</strong></p></div>
+      <div class="scenario win"><div class="scenario-title">✅ NIFTY @ 24,200</div><p>Value = ₹200. Profit = (200-180)×50 = <strong class="hl-grn">₹1,000</strong></p></div>
+      <div class="scenario lose"><div class="scenario-title">❌ NIFTY @ 23,900</div><p>OTM, expires worthless. Loss = <strong class="hl-red">₹9,000</strong></p></div>
+    </div>
+  </div>
+
+  <h2><span class="h-ico">📊</span> Strategy 2: Bull Call Spread</h2>
+  <p>A smarter bullish strategy. You <span class="hl-grn">buy a lower strike Call</span> and <span class="hl-red">sell a higher strike Call</span>. This <strong>reduces your premium cost</strong> but caps your profit. Perfect when you have a specific target in mind.</p>
+
+  <div class="info-box yellow">
+    <div class="info-box-title">💡 WHY USE A SPREAD?</div>
+    <p>A plain Long Call on Nifty might cost ₹9,000. A Bull Call Spread for the same view might cost only ₹3,500 — <strong>60% less capital at risk</strong>, with capped but realistic profit potential.</p>
+  </div>
+
+  <div class="example-card yel-ex">
+    <h4>BULL CALL SPREAD — Step by Step</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;"><strong>View:</strong> Nifty at 24,000. You expect it to go to 24,300 by expiry — not beyond.</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">BUY (LEG 1)</div><div class="setup-value grn">24,000 CE @ ₹200</div></div>
+      <div class="setup-item"><div class="setup-label">SELL (LEG 2)</div><div class="setup-value red">24,300 CE @ ₹80</div></div>
+      <div class="setup-item"><div class="setup-label">NET COST</div><div class="setup-value yel">₹120 (200−80)</div></div>
+      <div class="setup-item"><div class="setup-label">MAX PROFIT</div><div class="setup-value grn">₹180 (300−120)</div></div>
+      <div class="setup-item"><div class="setup-label">MAX LOSS</div><div class="setup-value red">₹120 per unit</div></div>
+      <div class="setup-item"><div class="setup-label">BREAKEVEN</div><div class="setup-value yel">24,120</div></div>
+    </div>
+    <p style="font-size:12px;color:rgba(160,200,255,.5);margin-top:10px;font-family:'Space Mono',monospace;">TOTAL INVESTED: ₹120 × 50 = ₹6,000 | MAX PROFIT: ₹9,000 | R:R = 1:1.5</p>
+  </div>
+
+  <table class="strat-table">
+    <tr><th>STRATEGY</th><th>MARKET VIEW</th><th>MAX PROFIT</th><th>MAX LOSS</th><th>BEST FOR</th></tr>
+    <tr><td><span class="hl-grn">Long Call</span></td><td><span class="tag bull">STRONG BULL</span></td><td>Unlimited</td><td>Premium only</td><td>High conviction moves</td></tr>
+    <tr><td><span class="hl-grn">Bull Call Spread</span></td><td><span class="tag bull">MODERATE BULL</span></td><td>Capped</td><td>Net premium</td><td>Targeted moves with lower cost</td></tr>
+    <tr><td><span class="hl-grn">Covered Call</span></td><td><span class="tag neutral">MILD BULL</span></td><td>Premium + limited</td><td>Stock fall</td><td>Generating income on holdings</td></tr>
+  </table>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('intro-options')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('bear-strategies')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(74,222,128,.2),rgba(74,222,128,.1));border:1px solid rgba(74,222,128,.4);color:#4ade80;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: BEARISH STRATEGIES →</button>
+  </div>
+</div>
+
+<!-- ══ BEAR STRATEGIES ══ -->
+<div class="guide-section" id="sec-bear-strategies">
+  <div class="section-hero" style="--hero-color:#f87171;">
+    <div class="section-hero-tag">MODULE 01 // BEARISH OPTIONS STRATEGIES</div>
+    <h1>Bearish Strategies</h1>
+    <p>Profit when markets fall. Options give you the power to make money in a bear market without shorting futures with unlimited risk.</p>
+  </div>
+
+  <h2><span class="h-ico">📤</span> Strategy 1: Long Put</h2>
+  <p>Buy a Put option when you expect the market to fall. Your max loss is the premium. Ideal during weak markets, negative news, or when Nifty breaks support.</p>
+
+  <div class="example-card red-ex">
+    <h4>LONG PUT — Real Example</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;"><strong>Setup:</strong> Nifty at <span class="hl-yel">24,000</span>. FII selling, global cues weak. You expect fall to 23,500.</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">BUY</div><div class="setup-value red">23,800 PE</div></div>
+      <div class="setup-item"><div class="setup-label">PREMIUM</div><div class="setup-value yel">₹160</div></div>
+      <div class="setup-item"><div class="setup-label">INVESTED</div><div class="setup-value red">₹8,000</div></div>
+      <div class="setup-item"><div class="setup-label">BREAKEVEN</div><div class="setup-value yel">23,640</div></div>
+    </div>
+    <div class="grid2" style="margin-top:12px;">
+      <div class="scenario win"><div class="scenario-title">✅ NIFTY FALLS TO 23,400</div><p>Value = 23,800 - 23,400 = ₹400. Profit = (400−160)×50 = <strong class="hl-grn">₹12,000</strong></p></div>
+      <div class="scenario lose"><div class="scenario-title">❌ NIFTY STAYS AT 24,000</div><p>OTM, expires worthless. Loss = <strong class="hl-red">₹8,000 premium</strong></p></div>
+    </div>
+  </div>
+
+  <h2><span class="h-ico">📊</span> Strategy 2: Bear Put Spread</h2>
+  <p>Buy a higher strike Put, sell a lower strike Put. Reduces cost, limits profit but gives you a defined-risk bearish play.</p>
+
+  <div class="example-card red-ex">
+    <h4>BEAR PUT SPREAD — Example</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;"><strong>View:</strong> Nifty at 24,000, expecting fall to 23,600 by expiry.</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">BUY (LEG 1)</div><div class="setup-value red">24,000 PE @ ₹190</div></div>
+      <div class="setup-item"><div class="setup-label">SELL (LEG 2)</div><div class="setup-value grn">23,700 PE @ ₹90</div></div>
+      <div class="setup-item"><div class="setup-label">NET COST</div><div class="setup-value yel">₹100</div></div>
+      <div class="setup-item"><div class="setup-label">MAX PROFIT</div><div class="setup-value grn">₹200 (300−100)</div></div>
+      <div class="setup-item"><div class="setup-label">MAX LOSS</div><div class="setup-value red">₹100 per unit</div></div>
+      <div class="setup-item"><div class="setup-label">BREAKEVEN</div><div class="setup-value yel">23,900</div></div>
+    </div>
+  </div>
+
+  <div class="info-box red">
+    <div class="info-box-title">⚠️ NEVER SHORT A NAKED PUT WITHOUT KNOWLEDGE</div>
+    <p>Selling a Put without owning the underlying gives you <strong>unlimited downside risk</strong>. A ₹200 premium received can turn into a ₹10,000+ loss if the market crashes. Only experienced traders should sell naked options.</p>
+  </div>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('bull-strategies')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('neutral-strategies')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(96,165,250,.2),rgba(96,165,250,.1));border:1px solid rgba(96,165,250,.4);color:#60a5fa;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: NEUTRAL STRATEGIES →</button>
+  </div>
+</div>
+
+<!-- ══ NEUTRAL STRATEGIES ══ -->
+<div class="guide-section" id="sec-neutral-strategies">
+  <div class="section-hero" style="--hero-color:#818cf8;">
+    <div class="section-hero-tag">MODULE 01 // NEUTRAL STRATEGIES</div>
+    <h1>Neutral / Non-Directional Strategies</h1>
+    <p>When you don't know which direction the market will move — but you know it WILL move (or won't). These strategies profit from volatility itself.</p>
+  </div>
+
+  <h2><span class="h-ico">⚡</span> Strategy 1: Long Straddle</h2>
+  <p>Buy a Call AND a Put at the <span class="hl-yel">same strike</span> and same expiry. You profit if the market moves sharply in EITHER direction. Best before big events like Budget, RBI policy, elections.</p>
+
+  <div class="example-card yel-ex">
+    <h4>LONG STRADDLE — Budget Day Example</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;"><strong>Setup:</strong> Budget day tomorrow. Nifty at <span class="hl-yel">24,000</span>. Market could rally 500 pts OR crash 500 pts. You don't know which way.</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">BUY CALL</div><div class="setup-value grn">24,000 CE @ ₹220</div></div>
+      <div class="setup-item"><div class="setup-label">BUY PUT</div><div class="setup-value red">24,000 PE @ ₹200</div></div>
+      <div class="setup-item"><div class="setup-label">TOTAL COST</div><div class="setup-value yel">₹420</div></div>
+      <div class="setup-item"><div class="setup-label">UPPER BE</div><div class="setup-value grn">24,420</div></div>
+      <div class="setup-item"><div class="setup-label">LOWER BE</div><div class="setup-value red">23,580</div></div>
+      <div class="setup-item"><div class="setup-label">TOTAL INVESTED</div><div class="setup-value red">₹21,000</div></div>
+    </div>
+    <div class="grid3" style="margin-top:12px;">
+      <div class="scenario win"><div class="scenario-title">🚀 NIFTY RALLIES TO 24,600</div><p>Call profit = (600−220)×50 = <strong class="hl-grn">₹19,000</strong><br>Put expires worthless (−₹10,000)<br>Net = <strong class="hl-grn">+₹9,000</strong></p></div>
+      <div class="scenario win"><div class="scenario-title">💥 NIFTY CRASHES TO 23,400</div><p>Put profit = (600−200)×50 = <strong class="hl-grn">₹20,000</strong><br>Call expires worthless (−₹11,000)<br>Net = <strong class="hl-grn">+₹9,000</strong></p></div>
+      <div class="scenario lose"><div class="scenario-title">😴 NIFTY STAYS AT 24,000</div><p>Both legs expire worthless.<br>Loss = <strong class="hl-red">₹21,000 (full premium)</strong></p></div>
+    </div>
+  </div>
+
+  <h2><span class="h-ico">🦅</span> Strategy 2: Iron Condor</h2>
+  <p>The opposite of a straddle. You <span class="hl-grn">sell a strangle</span> (sell OTM Call + OTM Put) and hedge it by <span class="hl-red">buying further OTM options</span>. Profit when market stays in a range. Popular with sellers on weekly expiry.</p>
+
+  <div class="callout">
+    <div class="callout-ico">🏦</div>
+    <div class="callout-body"><strong>Iron Condor = Bull Put Spread + Bear Call Spread combined.</strong> It's the favourite strategy of professional option sellers. You collect premium and hope Nifty doesn't move too much. Best in low-volatility weeks.</div>
+  </div>
+
+  <div class="example-card yel-ex">
+    <h4>IRON CONDOR — Weekly Nifty Setup</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;"><strong>View:</strong> Nifty at 24,000 on Monday. Expect range-bound week (23,600–24,400).</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">SELL CALL</div><div class="setup-value red">24,400 CE @ ₹80</div></div>
+      <div class="setup-item"><div class="setup-label">BUY CALL</div><div class="setup-value grn">24,600 CE @ ₹35</div></div>
+      <div class="setup-item"><div class="setup-label">SELL PUT</div><div class="setup-value red">23,600 PE @ ₹75</div></div>
+      <div class="setup-item"><div class="setup-label">BUY PUT</div><div class="setup-value grn">23,400 PE @ ₹30</div></div>
+      <div class="setup-item"><div class="setup-label">NET CREDIT</div><div class="setup-value grn">₹90 (80+75−35−30)</div></div>
+      <div class="setup-item"><div class="setup-label">MAX PROFIT</div><div class="setup-value grn">₹4,500 (90×50)</div></div>
+    </div>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-top:12px;">✅ <strong>Profit zone:</strong> Nifty stays between <span class="hl-grn">23,600 and 24,400</span> — you keep full ₹4,500 credit.<br>❌ <strong>Max loss:</strong> If Nifty breaks 24,600 or 23,400 = ₹200 width − ₹90 credit = <span class="hl-red">₹110 × 50 = ₹5,500</span></p>
+  </div>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('bear-strategies')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('advanced-options')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(167,139,250,.2),rgba(167,139,250,.1));border:1px solid rgba(167,139,250,.4);color:#a78bfa;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: ADVANCED PLAYS →</button>
+  </div>
+</div>
+
+<!-- ══ ADVANCED OPTIONS ══ -->
+<div class="guide-section" id="sec-advanced-options">
+  <div class="section-hero" style="--hero-color:#a78bfa;">
+    <div class="section-hero-tag">MODULE 01 // ADVANCED STRATEGIES</div>
+    <h1>Advanced Options Plays</h1>
+    <p>Butterfly spreads, calendar spreads and ratio spreads — tools for the experienced trader seeking precision.</p>
+  </div>
+
+  <h2><span class="h-ico">🦋</span> Butterfly Spread</h2>
+  <p>A <span class="hl-pur">Butterfly</span> profits when the market expires exactly at your chosen strike. Buy 1 ITM Call, Sell 2 ATM Calls, Buy 1 OTM Call. Very low cost, very precise.</p>
+
+  <div class="example-card yel-ex">
+    <h4>LONG CALL BUTTERFLY — Example</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;">View: Nifty at 24,000. Expect expiry exactly near 24,200.</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">BUY 1 LOT</div><div class="setup-value grn">24,000 CE @ ₹220</div></div>
+      <div class="setup-item"><div class="setup-label">SELL 2 LOTS</div><div class="setup-value red">24,200 CE @ ₹130</div></div>
+      <div class="setup-item"><div class="setup-label">BUY 1 LOT</div><div class="setup-value grn">24,400 CE @ ₹60</div></div>
+      <div class="setup-item"><div class="setup-label">NET COST</div><div class="setup-value yel">₹20 (220−260+60)</div></div>
+      <div class="setup-item"><div class="setup-label">MAX PROFIT</div><div class="setup-value grn">₹180 at 24,200</div></div>
+      <div class="setup-item"><div class="setup-label">PROFIT ZONE</div><div class="setup-value yel">24,020 — 24,380</div></div>
+    </div>
+    <p style="font-size:13px;color:rgba(180,215,255,.75);margin-top:10px;">Cost only ₹1,000 (₹20 × 50) for a potential ₹9,000 profit if Nifty pins 24,200 on expiry! 🎯</p>
+  </div>
+
+  <h2><span class="h-ico">📅</span> Calendar Spread</h2>
+  <p>Sell a near-week option and buy a far-week option at the <strong>same strike</strong>. Profits from time decay. The near-term option decays faster, and you pocket the difference.</p>
+
+  <div class="info-box purple">
+    <div class="info-box-title">📚 STRATEGY QUICK REFERENCE</div>
+    <p><strong>When market is going UP:</strong> Long Call, Bull Call Spread, Call Ratio Backspread<br>
+    <strong>When market is going DOWN:</strong> Long Put, Bear Put Spread, Put Ratio Backspread<br>
+    <strong>When market is RANGEBOUND:</strong> Iron Condor, Short Strangle, Butterfly<br>
+    <strong>When BIG MOVE expected:</strong> Long Straddle, Long Strangle, Backspread</p>
+  </div>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('neutral-strategies')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('risk-intro')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(74,222,128,.2),rgba(74,222,128,.1));border:1px solid rgba(74,222,128,.4);color:#4ade80;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: RISK MANAGEMENT →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MODULE 2: RISK MANAGEMENT
+══════════════════════════════════════════ -->
+<div class="guide-section" id="sec-risk-intro">
+  <div class="section-hero" style="--hero-color:#4ade80;">
+    <div class="section-hero-tag">MODULE 02 // RISK MANAGEMENT</div>
+    <h1>Risk Management</h1>
+    <p>The single most important skill in trading. You can have the best strategy in the world — without risk management, you will blow your account. Every professional trader says: <em>"Protect capital first, profits second."</em></p>
+  </div>
+
+  <div class="grid3">
+    <div class="stat-box"><div class="stat-val" style="color:#f87171;">90%</div><div class="stat-lbl">TRADERS LOSE MONEY</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:#fbbf24;">95%</div><div class="stat-lbl">BLAME STRATEGY — NOT RISK</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:#4ade80;">5%</div><div class="stat-lbl">MASTER RISK = SURVIVE</div></div>
+  </div>
+
+  <h2><span class="h-ico">💀</span> The 5 Ways Traders Blow Their Account</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num" style="border-color:rgba(248,113,113,.4);color:#f87171;">1</div><div class="step-body"><h4 style="color:#f87171;">Over-leveraging</h4><p>Taking a ₹2L position with ₹10,000 capital. One bad trade = total wipeout. Futures margin gives 10x leverage — most beginners don't respect this.</p></div></div>
+    <div class="step"><div class="step-num" style="border-color:rgba(248,113,113,.4);color:#f87171;">2</div><div class="step-body"><h4 style="color:#f87171;">No Stop Loss</h4><p>"It will come back" — the most expensive 5 words in trading. Refusing to accept a small loss leads to catastrophic losses.</p></div></div>
+    <div class="step"><div class="step-num" style="border-color:rgba(248,113,113,.4);color:#f87171;">3</div><div class="step-body"><h4 style="color:#f87171;">Overtrading</h4><p>Taking 10-15 trades a day trying to "recover" losses. Each trade has brokerage + slippage. The house always wins with overtraders.</p></div></div>
+    <div class="step"><div class="step-num" style="border-color:rgba(248,113,113,.4);color:#f87171;">4</div><div class="step-body"><h4 style="color:#f87171;">Averaging Down Losers</h4><p>Buying more as the stock falls. "Sahi ho jayega." This turns small losses into massive ones. Never average a losing trade without a plan.</p></div></div>
+    <div class="step"><div class="step-num" style="border-color:rgba(248,113,113,.4);color:#f87171;">5</div><div class="step-body"><h4 style="color:#f87171;">No Daily/Weekly Loss Limit</h4><p>No cap on how much you'll lose in a day. A bad day can erase a week of gains. Professionals set hard daily loss limits.</p></div></div>
+  </div>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('advanced-options')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('position-sizing')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(74,222,128,.2),rgba(74,222,128,.1));border:1px solid rgba(74,222,128,.4);color:#4ade80;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: POSITION SIZING →</button>
+  </div>
+</div>
+
+<!-- ══ POSITION SIZING ══ -->
+<div class="guide-section" id="sec-position-sizing">
+  <div class="section-hero" style="--hero-color:#4ade80;">
+    <div class="section-hero-tag">MODULE 02 // POSITION SIZING</div>
+    <h1>Position Sizing</h1>
+    <p>How much to put into each trade. This single rule separates professionals from gamblers. Get this right, and no single trade can ruin you.</p>
+  </div>
+
+  <h2><span class="h-ico">📐</span> The 1% Rule</h2>
+  <p>Never risk more than <span class="hl-grn">1% of your total trading capital</span> on any single trade. This means even if you have 10 losing trades in a row, you still have 90% of your capital intact.</p>
+
+  <div class="formula">
+    <span>Position Size</span> = (Account Size × Risk %) ÷ (Entry Price − Stop Loss Price)
+    <small>EXAMPLE: ₹1,00,000 ACCOUNT × 1% = ₹1,000 MAX RISK PER TRADE</small>
+  </div>
+
+  <div class="example-card yel-ex">
+    <h4>POSITION SIZING — Real Calculation</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;">Account = <span class="hl-yel">₹2,00,000</span>. You want to buy Nifty futures at 24,000. Stop loss at 23,800. Max risk = 1%.</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">ACCOUNT SIZE</div><div class="setup-value yel">₹2,00,000</div></div>
+      <div class="setup-item"><div class="setup-label">MAX RISK (1%)</div><div class="setup-value red">₹2,000</div></div>
+      <div class="setup-item"><div class="setup-label">ENTRY</div><div class="setup-value">24,000</div></div>
+      <div class="setup-item"><div class="setup-label">STOP LOSS</div><div class="setup-value red">23,800</div></div>
+      <div class="setup-item"><div class="setup-label">RISK/UNIT</div><div class="setup-value">₹200</div></div>
+      <div class="setup-item"><div class="setup-label">MAX UNITS</div><div class="setup-value grn">10 units (₹2000÷₹200)</div></div>
+    </div>
+    <p style="font-size:13px;color:rgba(180,215,255,.75);margin-top:12px;">Since Nifty lot = 50 units, and you can only afford 10 units = <span class="hl-red">don't take this futures trade</span>. Either increase stop width or wait till account grows. <strong>Discipline over ego.</strong></p>
+  </div>
+
+  <h2><span class="h-ico">🧮</span> Kelly Criterion (Advanced)</h2>
+  <p>The Kelly formula tells you the optimal % of capital to risk based on your win rate and average win/loss ratio.</p>
+  <div class="formula">
+    Kelly % = W − [(1 − W) ÷ R]
+    <small>W = WIN RATE | R = AVERAGE WIN ÷ AVERAGE LOSS</small>
+  </div>
+  <div class="example-card">
+    <h4>Kelly Calculation Example</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);">Your stats: Win rate = 55% (W=0.55), Avg win = ₹3,000, Avg loss = ₹1,500 (R=2)</p>
+    <p style="font-size:14px;margin-top:10px;color:#60a5fa;font-family:'Space Mono',monospace;">Kelly = 0.55 − [(1−0.55) ÷ 2] = 0.55 − 0.225 = <span class="hl-grn">0.325 = 32.5%</span></p>
+    <p style="font-size:13px;color:rgba(180,215,255,.75);margin-top:8px;">Kelly says risk 32.5% per trade — that's too aggressive. Most pros use <strong>Half Kelly (16%)</strong> or even quarter Kelly for safety.</p>
+  </div>
+
+  <h3>Position Sizing by Account Size — Quick Reference</h3>
+  <table class="strat-table">
+    <tr><th>ACCOUNT SIZE</th><th>1% RISK/TRADE</th><th>2% RISK/TRADE</th><th>DAILY LOSS LIMIT (5%)</th></tr>
+    <tr><td>₹50,000</td><td>₹500</td><td>₹1,000</td><td>₹2,500</td></tr>
+    <tr><td>₹1,00,000</td><td>₹1,000</td><td>₹2,000</td><td>₹5,000</td></tr>
+    <tr><td>₹2,00,000</td><td>₹2,000</td><td>₹4,000</td><td>₹10,000</td></tr>
+    <tr><td>₹5,00,000</td><td>₹5,000</td><td>₹10,000</td><td>₹25,000</td></tr>
+    <tr><td>₹10,00,000</td><td>₹10,000</td><td>₹20,000</td><td>₹50,000</td></tr>
+  </table>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('risk-intro')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('stop-loss')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(74,222,128,.2),rgba(74,222,128,.1));border:1px solid rgba(74,222,128,.4);color:#4ade80;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: STOP LOSS MASTERY →</button>
+  </div>
+</div>
+
+<!-- ══ STOP LOSS ══ -->
+<div class="guide-section" id="sec-stop-loss">
+  <div class="section-hero" style="--hero-color:#f87171;">
+    <div class="section-hero-tag">MODULE 02 // STOP LOSS MASTERY</div>
+    <h1>Stop Loss Mastery</h1>
+    <p>A stop loss is your airbag. You hope you never need it, but the day you do — it saves you. Placing it correctly is an art.</p>
+  </div>
+
+  <h2><span class="h-ico">🚨</span> Types of Stop Losses</h2>
+  <div class="grid2">
+    <div class="info-box green">
+      <div class="info-box-title">📍 FIXED STOP LOSS</div>
+      <p>Set at a fixed ₹ amount or % from entry. Simple but doesn't account for market structure. E.g.: Always exit if trade goes ₹2,000 against you.</p>
+    </div>
+    <div class="info-box yellow">
+      <div class="info-box-title">📊 TECHNICAL STOP LOSS</div>
+      <p>Placed below key support/above key resistance. Respects market structure. E.g.: Nifty entry at 24,000, stop below 23,780 support level.</p>
+    </div>
+    <div class="info-box purple">
+      <div class="info-box-title">⏰ TIME-BASED STOP LOSS</div>
+      <p>Exit if trade doesn't work within expected time. E.g.: Bought Nifty call for a rally — if no move in 2 days, exit regardless of P&L.</p>
+    </div>
+    <div class="info-box orange">
+      <div class="info-box-title">🔄 TRAILING STOP LOSS</div>
+      <p>Move stop up as trade profits. Locks in gains while letting winners run. E.g.: Buy at 24,000, target 24,400. Shift stop to 23,900 once 24,100 reached.</p>
+    </div>
+  </div>
+
+  <div class="example-card yel-ex">
+    <h4>TECHNICAL STOP LOSS — Nifty Trade Example</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;">Nifty breaks out above <span class="hl-yel">24,000</span> with strong volume. Support zone = 23,780–23,820.</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">ENTRY</div><div class="setup-value yel">24,020 (breakout)</div></div>
+      <div class="setup-item"><div class="setup-label">STOP LOSS</div><div class="setup-value red">23,780 (below support)</div></div>
+      <div class="setup-item"><div class="setup-label">TARGET 1</div><div class="setup-value grn">24,250</div></div>
+      <div class="setup-item"><div class="setup-label">TARGET 2</div><div class="setup-value grn">24,500</div></div>
+      <div class="setup-item"><div class="setup-label">RISK</div><div class="setup-value red">240 pts</div></div>
+      <div class="setup-item"><div class="setup-label">REWARD</div><div class="setup-value grn">230 / 480 pts</div></div>
+    </div>
+    <p style="font-size:13px;color:rgba(180,215,255,.75);margin-top:12px;"><span class="hl-red">Why 23,780?</span> Because if Nifty goes back below that support zone, the breakout is FAILED — your thesis is wrong. No point holding. Exit, reassess, re-enter if setup forms again.</p>
+  </div>
+
+  <h2><span class="h-ico">🧠</span> Stop Loss Psychology</h2>
+  <ul class="checklist">
+    <li><span class="check-ico ok">✓</span><span><strong>Set stop loss BEFORE entering</strong> — never decide after. Once in a trade, emotions cloud judgment.</span></li>
+    <li><span class="check-ico ok">✓</span><span><strong>Never move stop loss wider</strong> because you "feel" it will come back. If your stop is wrong, exit and re-analyze.</span></li>
+    <li><span class="check-ico ok">✓</span><span><strong>Respect your stop</strong> even if it triggers and the market reverses. The market doesn't owe you anything.</span></li>
+    <li><span class="check-ico no">✗</span><span><strong>Never trade without a stop loss</strong> in futures/options — one bad gap-down open can destroy weeks of work.</span></li>
+    <li><span class="check-ico warn">!</span><span><strong>Trailing stops are powerful</strong> but don't trail too tight — you'll get stopped out of great moves on noise.</span></li>
+  </ul>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('position-sizing')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('rr-ratio')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(74,222,128,.2),rgba(74,222,128,.1));border:1px solid rgba(74,222,128,.4);color:#4ade80;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: RISK:REWARD RATIO →</button>
+  </div>
+</div>
+
+<!-- ══ RR RATIO ══ -->
+<div class="guide-section" id="sec-rr-ratio">
+  <div class="section-hero" style="--hero-color:#4ade80;">
+    <div class="section-hero-tag">MODULE 02 // RISK:REWARD RATIO</div>
+    <h1>Risk:Reward Ratio</h1>
+    <p>Even a trader who's right only 40% of the time can be profitable — if their winners are bigger than their losers. This is the magic of R:R ratio.</p>
+  </div>
+
+  <h2><span class="h-ico">⚡</span> Understanding R:R Ratio</h2>
+  <p>R:R ratio compares how much you <span class="hl-red">risk</span> to how much you <span class="hl-grn">stand to gain</span>. A <span class="hl-yel">1:2 R:R</span> means for every ₹1,000 you risk, you target ₹2,000 profit.</p>
+
+  <div class="formula">
+    R:R Ratio = <span>Target Profit</span> ÷ <span>Stop Loss Amount</span>
+    <small>TARGET = ₹5,000 | STOP LOSS = ₹2,500 | R:R = 1:2 ✅</small>
+  </div>
+
+  <h3>Why Even a 40% Win Rate is Profitable with 1:2 R:R</h3>
+  <div class="example-card yel-ex">
+    <h4>10 Trades with 40% Win Rate & 1:2 R:R</h4>
+    <div style="background:rgba(6,12,30,.8);border-radius:6px;overflow:hidden;margin-top:10px;">
+      <div class="journal-row header">
+        <div class="jc">TRADE #</div><div class="jc">RESULT</div><div class="jc">RISK</div><div class="jc">REWARD</div><div class="jc">P&L</div><div class="jc">RUNNING TOTAL</div>
+      </div>
+      <div class="journal-row"><div class="jc">1</div><div class="jc win-cell">WIN ✅</div><div class="jc red">-₹1,000</div><div class="jc grn">+₹2,000</div><div class="jc win-cell">+₹2,000</div><div class="jc win-cell">+₹2,000</div></div>
+      <div class="journal-row"><div class="jc">2</div><div class="jc lose-cell">LOSS ❌</div><div class="jc red">-₹1,000</div><div class="jc">—</div><div class="jc lose-cell">-₹1,000</div><div class="jc win-cell">+₹1,000</div></div>
+      <div class="journal-row"><div class="jc">3</div><div class="jc lose-cell">LOSS ❌</div><div class="jc red">-₹1,000</div><div class="jc">—</div><div class="jc lose-cell">-₹1,000</div><div class="jc" style="color:#ccc;">0</div></div>
+      <div class="journal-row"><div class="jc">4</div><div class="jc win-cell">WIN ✅</div><div class="jc red">-₹1,000</div><div class="jc grn">+₹2,000</div><div class="jc win-cell">+₹2,000</div><div class="jc win-cell">+₹2,000</div></div>
+      <div class="journal-row"><div class="jc">5</div><div class="jc lose-cell">LOSS ❌</div><div class="jc red">-₹1,000</div><div class="jc">—</div><div class="jc lose-cell">-₹1,000</div><div class="jc win-cell">+₹1,000</div></div>
+      <div class="journal-row"><div class="jc">6</div><div class="jc lose-cell">LOSS ❌</div><div class="jc red">-₹1,000</div><div class="jc">—</div><div class="jc lose-cell">-₹1,000</div><div class="jc" style="color:#ccc;">0</div></div>
+      <div class="journal-row"><div class="jc">7</div><div class="jc win-cell">WIN ✅</div><div class="jc red">-₹1,000</div><div class="jc grn">+₹2,000</div><div class="jc win-cell">+₹2,000</div><div class="jc win-cell">+₹2,000</div></div>
+      <div class="journal-row"><div class="jc">8</div><div class="jc lose-cell">LOSS ❌</div><div class="jc red">-₹1,000</div><div class="jc">—</div><div class="jc lose-cell">-₹1,000</div><div class="jc win-cell">+₹1,000</div></div>
+      <div class="journal-row"><div class="jc">9</div><div class="jc lose-cell">LOSS ❌</div><div class="jc red">-₹1,000</div><div class="jc">—</div><div class="jc lose-cell">-₹1,000</div><div class="jc" style="color:#ccc;">0</div></div>
+      <div class="journal-row"><div class="jc">10</div><div class="jc win-cell">WIN ✅</div><div class="jc red">-₹1,000</div><div class="jc grn">+₹2,000</div><div class="jc win-cell">+₹2,000</div><div class="jc win-cell" style="font-weight:700;font-size:14px;">+₹2,000 🏆</div></div>
+    </div>
+    <p style="font-size:13px;color:rgba(180,215,255,.75);margin-top:14px;"><strong>Result:</strong> 4 wins × ₹2,000 = <span class="hl-grn">₹8,000</span>. 6 losses × ₹1,000 = <span class="hl-red">₹6,000</span>. <strong>Net profit: ₹2,000 with only 40% win rate!</strong> This is why R:R matters more than win rate alone.</p>
+  </div>
+
+  <h3>Minimum Win Rate Needed at Different R:R Ratios</h3>
+  <table class="strat-table">
+    <tr><th>R:R RATIO</th><th>MIN WIN RATE TO BREAK EVEN</th><th>VERDICT</th></tr>
+    <tr><td><span class="hl-red">1:1</span></td><td>50%</td><td>Tough. Need to be right half the time.</td></tr>
+    <tr><td><span class="hl-yel">1:1.5</span></td><td>40%</td><td>Reasonable for most strategies.</td></tr>
+    <tr><td><span class="hl-grn">1:2</span></td><td>33%</td><td>Excellent. Comfortable even with more losses.</td></tr>
+    <tr><td><span class="hl-grn">1:3</span></td><td>25%</td><td>Outstanding. 1 win pays for 3 losses.</td></tr>
+  </table>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('stop-loss')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('drawdown')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(74,222,128,.2),rgba(74,222,128,.1));border:1px solid rgba(74,222,128,.4);color:#4ade80;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: DRAWDOWN →</button>
+  </div>
+</div>
+
+<!-- ══ DRAWDOWN ══ -->
+<div class="guide-section" id="sec-drawdown">
+  <div class="section-hero" style="--hero-color:#fb923c;">
+    <div class="section-hero-tag">MODULE 02 // DRAWDOWN & RECOVERY</div>
+    <h1>Drawdown & Recovery</h1>
+    <p>Drawdown is the peak-to-trough decline in your account. Managing it correctly separates traders who survive long-term from those who blow up.</p>
+  </div>
+
+  <h2><span class="h-ico">📉</span> The Brutal Math of Recovery</h2>
+  <p>Most traders don't realize how hard it is to recover from large losses. A 50% loss requires a <span class="hl-red">100% gain</span> just to get back to break even!</p>
+
+  <table class="strat-table">
+    <tr><th>LOSS %</th><th>REMAINING CAPITAL</th><th>GAIN NEEDED TO RECOVER</th><th>DIFFICULTY</th></tr>
+    <tr><td><span class="hl-grn">10%</span></td><td>₹90,000 (from ₹1L)</td><td>11.1%</td><td>Easy</td></tr>
+    <tr><td><span class="hl-yel">20%</span></td><td>₹80,000</td><td>25%</td><td>Manageable</td></tr>
+    <tr><td><span class="hl-ora">30%</span></td><td>₹70,000</td><td>42.8%</td><td>Hard</td></tr>
+    <tr><td><span class="hl-red">50%</span></td><td>₹50,000</td><td>100%</td><td>Very Hard</td></tr>
+    <tr><td><span class="hl-red">70%</span></td><td>₹30,000</td><td>233%</td><td>Almost Impossible</td></tr>
+  </table>
+
+  <div class="info-box red">
+    <div class="info-box-title">🚨 HARD RULE: MAX DRAWDOWN LIMIT = 20%</div>
+    <p>If your account drops 20% from its peak, <strong>STOP TRADING</strong>. Take a break, review your trades, find what went wrong. Never try to "trade your way out" of a deep drawdown — it leads to desperate decisions and further losses.</p>
+  </div>
+
+  <div class="example-card yel-ex">
+    <h4>Managing a Losing Streak — Real Example</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;">Account: <span class="hl-yel">₹1,00,000</span>. You've had 5 losing trades in a row. Down ₹8,000 (8%).</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Reduce position size by 50%</h4><p>If you were risking ₹1,000/trade, drop to ₹500. Give yourself room to breathe and rebuild confidence.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Review your last 5 trades in journal</h4><p>Is the market in a different regime? Was there a pattern in your losses? Entry too early? Stop too tight?</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Sit out 1–2 days</h4><p>Sometimes the market just isn't suitable for your strategy. No trade is a trade. Cash is a position.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Re-enter only when setup is A+ quality</h4><p>Don't trade to "get even." Trade only when all your checklist boxes are ticked. Be selective.</p></div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('rr-ratio')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('portfolio-risk')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(74,222,128,.2),rgba(74,222,128,.1));border:1px solid rgba(74,222,128,.4);color:#4ade80;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: PORTFOLIO RISK →</button>
+  </div>
+</div>
+
+<!-- ══ PORTFOLIO RISK ══ -->
+<div class="guide-section" id="sec-portfolio-risk">
+  <div class="section-hero" style="--hero-color:#4ade80;">
+    <div class="section-hero-tag">MODULE 02 // PORTFOLIO RISK</div>
+    <h1>Portfolio Risk & Diversification</h1>
+    <p>Don't put all your eggs in one basket — but also don't diversify for the sake of it. Smart diversification reduces risk without killing returns.</p>
+  </div>
+
+  <h2><span class="h-ico">🗂️</span> Capital Allocation Framework</h2>
+  <div class="grid3">
+    <div class="stat-box"><div class="stat-val" style="color:#4ade80;font-size:22px;">50%</div><div class="stat-lbl" style="margin-top:8px;">CORE HOLDINGS<br><span style="color:rgba(180,215,255,.5);font-size:9px;">Long-term quality stocks/MFs</span></div></div>
+    <div class="stat-box"><div class="stat-val" style="color:#fbbf24;font-size:22px;">30%</div><div class="stat-lbl" style="margin-top:8px;">SWING TRADES<br><span style="color:rgba(180,215,255,.5);font-size:9px;">2–10 day trades on setups</span></div></div>
+    <div class="stat-box"><div class="stat-val" style="color:#f87171;font-size:22px;">20%</div><div class="stat-lbl" style="margin-top:8px;">ACTIVE / F&O<br><span style="color:rgba(180,215,255,.5);font-size:9px;">Intraday / Options plays</span></div></div>
+  </div>
+
+  <h3>Correlation Risk — The Hidden Danger</h3>
+  <p>Many traders think they're diversified but hold 5 IT stocks (Infosys, TCS, Wipro, HCL, Tech M) — all move together. True diversification = <span class="hl-yel">uncorrelated assets</span>.</p>
+  <table class="strat-table">
+    <tr><th>ASSET CLASS</th><th>CORRELATION WITH NIFTY</th><th>DIVERSIFICATION VALUE</th></tr>
+    <tr><td>Bank Nifty</td><td><span class="hl-red">High (+0.85)</span></td><td>Low — moves with Nifty</td></tr>
+    <tr><td>Gold</td><td><span class="hl-grn">Negative (−0.3)</span></td><td>High — rises when equity falls</td></tr>
+    <tr><td>IT Sector</td><td><span class="hl-yel">Medium (+0.65)</span></td><td>Medium — partially correlated</td></tr>
+    <tr><td>Pharma Sector</td><td><span class="hl-grn">Low (+0.35)</span></td><td>High — often counter-cyclical</td></tr>
+    <tr><td>USD/INR</td><td><span class="hl-grn">Negative (−0.4)</span></td><td>High — hedge against market falls</td></tr>
+  </table>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('drawdown')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('psych-intro')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(167,139,250,.2),rgba(167,139,250,.1));border:1px solid rgba(167,139,250,.4);color:#a78bfa;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: TRADING PSYCHOLOGY →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MODULE 3: PSYCHOLOGY
+══════════════════════════════════════════ -->
+<div class="guide-section" id="sec-psych-intro">
+  <div class="section-hero" style="--hero-color:#a78bfa;">
+    <div class="section-hero-tag">MODULE 03 // TRADING PSYCHOLOGY</div>
+    <h1>The Trader's Mind</h1>
+    <p>Trading is 20% strategy and 80% psychology. The market doesn't beat traders — traders beat themselves. Understanding your mind is the most profitable investment you can make.</p>
+  </div>
+
+  <div class="grid3">
+    <div class="stat-box"><div class="stat-val" style="color:#f87171;">90%</div><div class="stat-lbl">FAIL DUE TO PSYCHOLOGY</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:#fbbf24;">80%</div><div class="stat-lbl">EMOTIONAL DECISIONS LOSE</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:#4ade80;">100%</div><div class="stat-lbl">DISCIPLINE IS LEARNABLE</div></div>
+  </div>
+
+  <h2><span class="h-ico">🧠</span> The Emotional Cycle of a Trader</h2>
+  <p>Every new trader goes through the same emotional journey. Recognizing where you are in this cycle is the first step to breaking free from it.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num" style="background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.4);color:#4ade80;">1</div><div class="step-body"><h4 style="color:#4ade80;">Optimism & Excitement</h4><p>New trader. "I've found the perfect strategy." Makes a few wins. Feels invincible. Increases size too fast.</p></div></div>
+    <div class="step"><div class="step-num" style="background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.4);color:#fbbf24;">2</div><div class="step-body"><h4 style="color:#fbbf24;">Anxiety & Denial</h4><p>Losses start. "It's just a bad patch." Holds losers longer. Hopes. Averages down. Capital erodes slowly.</p></div></div>
+    <div class="step"><div class="step-num" style="background:rgba(248,113,113,.15);border-color:rgba(248,113,113,.4);color:#f87171;">3</div><div class="step-body"><h4 style="color:#f87171;">Panic & Desperation</h4><p>Big loss. Revenge trades. Abandons strategy. Takes random trades trying to recover. Account bleeds rapidly.</p></div></div>
+    <div class="step"><div class="step-num" style="background:rgba(167,139,250,.15);border-color:rgba(167,139,250,.4);color:#a78bfa;">4</div><div class="step-body"><h4 style="color:#a78bfa;">Acceptance & Learning</h4><p>Hits rock bottom. Studies more. Starts journaling. Reduces size. Accepts losses as cost of doing business.</p></div></div>
+    <div class="step"><div class="step-num" style="background:rgba(96,165,250,.15);border-color:rgba(96,165,250,.4);color:#60a5fa;">5</div><div class="step-body"><h4 style="color:#60a5fa;">Mastery & Consistency</h4><p>Process over outcome. Follows rules. Small, consistent gains. No ego. Trades like a machine, not a gambler.</p></div></div>
+  </div>
+
+  <div class="info-box purple">
+    <div class="info-box-title">💡 KEY INSIGHT</div>
+    <p>The best traders are not the ones who are never afraid or greedy. They're the ones who <strong>recognize the emotion, and trade their plan anyway</strong>. Emotion is information — not instruction.</p>
+  </div>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('portfolio-risk')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('fomo-greed')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(167,139,250,.2),rgba(167,139,250,.1));border:1px solid rgba(167,139,250,.4);color:#a78bfa;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: FOMO & GREED →</button>
+  </div>
+</div>
+
+<!-- ══ FOMO & GREED ══ -->
+<div class="guide-section" id="sec-fomo-greed">
+  <div class="section-hero" style="--hero-color:#fb923c;">
+    <div class="section-hero-tag">MODULE 03 // FOMO & GREED</div>
+    <h1>FOMO & Greed</h1>
+    <p>Fear Of Missing Out and Greed are the two deadliest emotions in trading. They make you chase trades, hold winners too long, and ignore your plan.</p>
+  </div>
+
+  <h2><span class="h-ico">🔥</span> FOMO — Fear of Missing Out</h2>
+
+  <div class="psych-card">
+    <div class="psych-icon">😱</div>
+    <div class="psych-body">
+      <h4 style="color:#fb923c;">The FOMO Trade</h4>
+      <p>Nifty suddenly rallies 200 points. You're not in. You see the candle going up. Urgency takes over — "I'm missing this move!" You jump in near the top, just as it reverses.</p>
+      <div class="psych-fix"><strong>FIX:</strong> Accept that you missed it. There will be ANOTHER setup. "I don't chase trades — I wait for trades to come to me." Write this on a sticky note next to your screen.</div>
+    </div>
+  </div>
+
+  <div class="example-card red-ex">
+    <h4>FOMO Trade — Real Cost</h4>
+    <p style="font-size:13px;color:rgba(180,215,255,.8);margin-bottom:14px;">Nifty rallies from 23,800 to 24,200 in 30 minutes on budget news. You missed the initial entry.</p>
+    <div class="trade-setup">
+      <div class="setup-item"><div class="setup-label">FOMO ENTRY</div><div class="setup-value red">24,190 (near top)</div></div>
+      <div class="setup-item"><div class="setup-label">IDEAL ENTRY</div><div class="setup-value grn">23,830 (breakout)</div></div>
+      <div class="setup-item"><div class="setup-label">REVERSAL TO</div><div class="setup-value red">23,950</div></div>
+      <div class="setup-item"><div class="setup-label">FOMO LOSS</div><div class="setup-value red">−₹12,000</div></div>
+    </div>
+    <p style="font-size:13px;color:rgba(180,215,255,.75);margin-top:12px;">The patient trader who waited for the breakout at 23,830 made ₹18,000. The FOMO trader lost ₹12,000 entering the same "rally." <strong>Timing from emotion = destruction.</strong></p>
+  </div>
+
+  <h2><span class="h-ico">💰</span> Greed — Moving Targets & Over-Leveraging</h2>
+  <div class="psych-card">
+    <div class="psych-icon">🤑</div>
+    <div class="psych-body">
+      <h4 style="color:#fbbf24;">The Greed Trap</h4>
+      <p>Your trade hits Target 1 (₹5,000 profit). Instead of booking, you think "It's going to 24,500 for sure!" You hold. Market reverses. You end up with ₹1,000 profit — or worse, a loss.</p>
+      <div class="psych-fix"><strong>FIX:</strong> Book partial profits at Target 1 (50-60%). Move stop to breakeven. Let rest ride to Target 2. Never let a winner turn into a loser by waiting for "just a bit more."</div>
+    </div>
+  </div>
+
+  <div class="psych-card">
+    <div class="psych-icon">📈</div>
+    <div class="psych-body">
+      <h4 style="color:#f87171;">Over-Leveraging After Wins</h4>
+      <p>You made ₹20,000 in a week. You feel invincible. You triple your position size. One loss wipes out the entire week's gains — plus more.</p>
+      <div class="psych-fix"><strong>FIX:</strong> Increase position size gradually — max 10% increase after 3 consecutive profitable weeks. Never double size after one good trade. Respect the process.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('psych-intro')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('fear-hesitation')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(167,139,250,.2),rgba(167,139,250,.1));border:1px solid rgba(167,139,250,.4);color:#a78bfa;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: FEAR & HESITATION →</button>
+  </div>
+</div>
+
+<!-- ══ FEAR & HESITATION ══ -->
+<div class="guide-section" id="sec-fear-hesitation">
+  <div class="section-hero" style="--hero-color:#818cf8;">
+    <div class="section-hero-tag">MODULE 03 // FEAR & HESITATION</div>
+    <h1>Fear & Hesitation</h1>
+    <p>The other side of greed. Fear makes you miss good setups, exit winners too early, and freeze when you should act.</p>
+  </div>
+
+  <div class="psych-card">
+    <div class="psych-icon">😰</div>
+    <div class="psych-body">
+      <h4>Fear of Pulling the Trigger</h4>
+      <p>Perfect setup forms. All indicators aligned. But after 3 losses last week, you hesitate. You watch the trade move without you. You enter late, after confirmation — just as it reverses.</p>
+      <div class="psych-fix"><strong>FIX:</strong> Trust your system. If your edge has proven itself over 50+ trades, take the next trade without hesitation. A small position size helps — you can't be paralyzed by a trade you barely risk on.</div>
+    </div>
+  </div>
+
+  <div class="psych-card">
+    <div class="psych-icon">🏃</div>
+    <div class="psych-body">
+      <h4>Exiting Winners Too Early</h4>
+      <p>You're up ₹4,000 in a trade. Profit looks great. Fear of losing it kicks in. You exit at ₹4,000 but the trade runs to ₹15,000. You "got out" but missed the real move.</p>
+      <div class="psych-fix"><strong>FIX:</strong> Let the chart decide your exit, not your emotions. If stop hasn't been hit, stay in. Trust the structure. Lock in gains with a trailing stop instead of a market exit out of fear.</div>
+    </div>
+  </div>
+
+  <div class="psych-card">
+    <div class="psych-icon">🔄</div>
+    <div class="psych-body">
+      <h4>Analysis Paralysis</h4>
+      <p>You look at 12 indicators. They all say different things. Stochastic says buy, MACD says sell, RSI is neutral. You can't decide and do nothing — or worse, take a random trade out of frustration.</p>
+      <div class="psych-fix"><strong>FIX:</strong> Simplify. Pick your top 3 confluences (e.g., trend + S/R level + one momentum indicator). Only trade when all 3 agree. Complexity is the enemy of execution.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('fomo-greed')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('revenge-trading')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(167,139,250,.2),rgba(167,139,250,.1));border:1px solid rgba(167,139,250,.4);color:#a78bfa;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: REVENGE TRADING →</button>
+  </div>
+</div>
+
+<!-- ══ REVENGE TRADING ══ -->
+<div class="guide-section" id="sec-revenge-trading">
+  <div class="section-hero" style="--hero-color:#f87171;">
+    <div class="section-hero-tag">MODULE 03 // REVENGE TRADING</div>
+    <h1>Revenge Trading</h1>
+    <p>The single most account-destroying behaviour in trading. It starts with one loss — and ends with many.</p>
+  </div>
+
+  <h2><span class="h-ico">💢</span> What is Revenge Trading?</h2>
+  <p>After a loss, an emotional impulse to <span class="hl-red">"get the money back immediately"</span> drives you to take another trade — usually bigger, more aggressive, without a proper setup. It's trading out of anger, not analysis.</p>
+
+  <div class="example-card red-ex">
+    <h4>The Revenge Spiral — How ₹5,000 Loss Becomes ₹40,000 Loss</h4>
+    <div class="steps" style="margin-top:12px;">
+      <div class="step"><div class="step-num" style="background:rgba(248,113,113,.15);border-color:#f87171;color:#f87171;">1</div><div class="step-body"><h4 style="color:#f87171;">9:30 AM — Trade 1</h4><p>Normal setup. Buy Nifty 24,000 CE. Stop hits. Loss: <span class="hl-red">−₹5,000</span>. Running total: −₹5,000</p></div></div>
+      <div class="step"><div class="step-num" style="background:rgba(248,113,113,.15);border-color:#f87171;color:#f87171;">2</div><div class="step-body"><h4 style="color:#f87171;">9:45 AM — Trade 2 (Revenge)</h4><p>No setup. Doubles size to recover. Angry, no patience. Stop hits again. Loss: <span class="hl-red">−₹10,000</span>. Total: −₹15,000</p></div></div>
+      <div class="step"><div class="step-num" style="background:rgba(248,113,113,.15);border-color:#f87171;color:#f87171;">3</div><div class="step-body"><h4 style="color:#f87171;">10:05 AM — Trade 3 (Desperate)</h4><p>Triples size now. No stop loss set — "can't afford to lose again." Market gaps down. Loss: <span class="hl-red">−₹18,000</span>. Total: −₹33,000</p></div></div>
+      <div class="step"><div class="step-num" style="background:rgba(248,113,113,.15);border-color:#f87171;color:#f87171;">4</div><div class="step-body"><h4 style="color:#f87171;">10:30 AM — Trade 4 (Final)</h4><p>All-in. No logic. Panic. Loss: <span class="hl-red">−₹7,000</span>. Final total: <span class="hl-red">−₹40,000</span> in 1 hour</p></div></div>
+    </div>
+    <p style="font-size:13px;color:rgba(180,215,255,.75);margin-top:10px;">One disciplined exit at −₹5,000 could have ended the day. Instead, the entire account lost 40% in 60 minutes.</p>
+  </div>
+
+  <h2><span class="h-ico">🛑</span> How to Stop Revenge Trading</h2>
+  <ul class="checklist">
+    <li><span class="check-ico ok">✓</span><span><strong>Daily loss limit = 2× average trade risk.</strong> Hit it? Platform is closed for the day. Non-negotiable.</span></li>
+    <li><span class="check-ico ok">✓</span><span><strong>10-minute rule:</strong> After any loss, stand up, walk away for 10 minutes before even thinking about the next trade.</span></li>
+    <li><span class="check-ico ok">✓</span><span><strong>Acknowledge the emotion:</strong> Say out loud — "I am angry right now. Angry traders lose. I will not trade angry."</span></li>
+    <li><span class="check-ico ok">✓</span><span><strong>Shrink position size</strong> after a loss — not increase it. Smaller risk = clearer thinking.</span></li>
+    <li><span class="check-ico no">✗</span><span>Never let yesterday's loss affect today's trade size or plan.</span></li>
+  </ul>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('fear-hesitation')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('discipline')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(167,139,250,.2),rgba(167,139,250,.1));border:1px solid rgba(167,139,250,.4);color:#a78bfa;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: BUILDING DISCIPLINE →</button>
+  </div>
+</div>
+
+<!-- ══ DISCIPLINE ══ -->
+<div class="guide-section" id="sec-discipline">
+  <div class="section-hero" style="--hero-color:#60a5fa;">
+    <div class="section-hero-tag">MODULE 03 // DISCIPLINE</div>
+    <h1>Building Trading Discipline</h1>
+    <p>Discipline is not willpower. It's a system. The best traders don't rely on motivation — they build habits and routines that make good decisions automatic.</p>
+  </div>
+
+  <h2><span class="h-ico">📋</span> The Pre-Market Routine</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><h4>8:30 AM — Market Prep (30 mins)</h4><p>Check SGX Nifty, global cues (Dow, Nasdaq, crude). Read 2-3 key news items. No Twitter/social media.</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><h4>9:00 AM — Chart Analysis</h4><p>Mark key support/resistance levels on Nifty 15m, 1h, daily. Identify the daily bias (bullish/bearish/neutral).</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><h4>9:10 AM — Trading Plan</h4><p>Write down: "If Nifty does X, I will do Y with Z stop loss and A target." Plan the trade before it happens.</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><h4>9:15 AM — Mindset Check</h4><p>Are you tired? Emotional? Distracted? If yes — trade half size or don't trade. Your state of mind IS your edge.</p></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-body"><h4>9:15–9:30 AM — WAIT</h4><p>Never trade the first 15 minutes. Let the market settle. Gaps fill, fake moves fade. Let professionals shake out the weak hands.</p></div></div>
+  </div>
+
+  <h2><span class="h-ico">📜</span> The Trader's Rules — Print and Paste</h2>
+  <ul class="checklist">
+    <li><span class="check-ico ok">✓</span><span>I will <strong>never risk more than 1-2%</strong> of my capital on any single trade.</span></li>
+    <li><span class="check-ico ok">✓</span><span>I will <strong>set my stop loss before entering</strong> every trade — no exceptions.</span></li>
+    <li><span class="check-ico ok">✓</span><span>I will <strong>stick to my daily loss limit</strong>. If hit, I close the platform and do something else.</span></li>
+    <li><span class="check-ico ok">✓</span><span>I will <strong>not trade the first 15 minutes</strong> of the market open.</span></li>
+    <li><span class="check-ico ok">✓</span><span>I will <strong>record every trade</strong> in my journal: entry, exit, reason, emotion.</span></li>
+    <li><span class="check-ico no">✗</span><span>I will <strong>not revenge trade</strong>. A loss is a business expense. Move on.</span></li>
+    <li><span class="check-ico no">✗</span><span>I will <strong>not increase position size</strong> to recover losses.</span></li>
+    <li><span class="check-ico no">✗</span><span>I will <strong>not average down</strong> a losing trade without a pre-planned rule.</span></li>
+    <li><span class="check-ico warn">!</span><span>I accept that <strong>losses are part of trading.</strong> My job is to manage risk, not avoid losses.</span></li>
+  </ul>
+
+  <div class="divider"></div>
+  <div style="display:flex;justify-content:space-between;">
+    <button onclick="showSection('revenge-trading')" style="padding:10px 24px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:rgba(160,200,255,.7);border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← PREV</button>
+    <button onclick="showSection('trade-journal')" style="padding:10px 24px;background:linear-gradient(90deg,rgba(167,139,250,.2),rgba(167,139,250,.1));border:1px solid rgba(167,139,250,.4);color:#a78bfa;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">NEXT: TRADE JOURNAL →</button>
+  </div>
+</div>
+
+<!-- ══ TRADE JOURNAL ══ -->
+<div class="guide-section" id="sec-trade-journal">
+  <div class="section-hero" style="--hero-color:#4ade80;">
+    <div class="section-hero-tag">MODULE 03 // TRADE JOURNAL</div>
+    <h1>The Trade Journal</h1>
+    <p>Your journal is your personal trading coach. It shows you patterns in your behaviour — both good and bad — that no mentor can see. The best traders review their journal weekly.</p>
+  </div>
+
+  <h2><span class="h-ico">📓</span> What to Record in Every Trade</h2>
+  <div class="grid2">
+    <div class="info-box green">
+      <div class="info-box-title">📊 TRADE DATA</div>
+      <p>Date, Time, Instrument (Nifty/BankNifty), Strike, Entry Price, Exit Price, Stop Loss, Target, Lot Size, P&L, Brokerage.</p>
+    </div>
+    <div class="info-box purple">
+      <div class="info-box-title">🧠 EMOTION LOG</div>
+      <p>How were you feeling before the trade? During? After? Were you anxious? Confident? Did emotions affect any decision? Rate emotion 1-10.</p>
+    </div>
+    <div class="info-box yellow">
+      <div class="info-box-title">📝 TRADE REASON</div>
+      <p>What was your setup? What signal triggered entry? Was it in line with the daily bias? Rate setup quality: A, B, or C grade.</p>
+    </div>
+    <div class="info-box orange">
+      <div class="info-box-title">🔍 POST-TRADE REVIEW</div>
+      <p>Did you follow your plan? What went right? What went wrong? What would you do differently? Max 3 bullet points per trade.</p>
+    </div>
+  </div>
+
+  <h2><span class="h-ico">📊</span> Sample Trade Journal — One Week</h2>
+  <div style="background:rgba(6,12,30,.9);border:1px solid rgba(96,165,250,.1);border-radius:6px;overflow-x:auto;margin:16px 0;">
+    <div style="min-width:700px;">
+      <div class="journal-row header">
+        <div class="jc">DATE</div><div class="jc">TRADE</div><div class="jc">ENTRY/EXIT</div><div class="jc">P&L</div><div class="jc">GRADE</div><div class="jc">EMOTION</div>
+      </div>
+      <div class="journal-row">
+        <div class="jc" style="font-size:11px;">Mon 14 Apr</div>
+        <div class="jc">Nifty 24000CE Buy</div>
+        <div class="jc" style="font-size:11px;">₹180 → ₹260</div>
+        <div class="jc win-cell">+₹4,000</div>
+        <div class="jc"><span class="tag bull">A+</span></div>
+        <div class="jc" style="font-size:12px;">😊 Calm, followed plan</div>
+      </div>
+      <div class="journal-row">
+        <div class="jc" style="font-size:11px;">Mon 14 Apr</div>
+        <div class="jc">BankNifty 51000PE</div>
+        <div class="jc" style="font-size:11px;">₹220 → ₹145</div>
+        <div class="jc lose-cell">-₹3,750</div>
+        <div class="jc"><span class="tag neutral">B</span></div>
+        <div class="jc" style="font-size:12px;">😐 Forced — no setup</div>
+      </div>
+      <div class="journal-row">
+        <div class="jc" style="font-size:11px;">Tue 15 Apr</div>
+        <div class="jc">Nifty 23800PE Buy</div>
+        <div class="jc" style="font-size:11px;">₹160 → ₹280</div>
+        <div class="jc win-cell">+₹6,000</div>
+        <div class="jc"><span class="tag bull">A</span></div>
+        <div class="jc" style="font-size:12px;">💪 Confident, patient</div>
+      </div>
+      <div class="journal-row">
+        <div class="jc" style="font-size:11px;">Wed 16 Apr</div>
+        <div class="jc">Nifty 24200CE Buy</div>
+        <div class="jc" style="font-size:11px;">₹130 → ₹85</div>
+        <div class="jc lose-cell">-₹2,250</div>
+        <div class="jc"><span class="tag neutral">B+</span></div>
+        <div class="jc" style="font-size:12px;">😤 Bit anxious, cut early</div>
+      </div>
+      <div class="journal-row">
+        <div class="jc" style="font-size:11px;">Thu 17 Apr</div>
+        <div class="jc">NO TRADE</div>
+        <div class="jc" style="color:rgba(160,200,255,.4);font-size:11px;">—</div>
+        <div class="jc" style="color:rgba(160,200,255,.4);">₹0</div>
+        <div class="jc"><span class="tag limited">WAIT</span></div>
+        <div class="jc" style="font-size:12px;">🧘 Calm. No A setup</div>
+      </div>
+      <div class="journal-row">
+        <div class="jc" style="font-size:11px;">Fri 18 Apr</div>
+        <div class="jc">Nifty Iron Condor</div>
+        <div class="jc" style="font-size:11px;">Net ₹90 credit</div>
+        <div class="jc win-cell">+₹4,500</div>
+        <div class="jc"><span class="tag bull">A</span></div>
+        <div class="jc" style="font-size:12px;">😎 Methodical, no emotion</div>
+      </div>
+      <div class="journal-row" style="background:rgba(74,222,128,.04);">
+        <div class="jc" style="font-weight:700;color:#e8f4ff;">WEEK TOTAL</div>
+        <div class="jc" style="color:rgba(160,200,255,.5);">5 trades</div>
+        <div class="jc" style="color:rgba(160,200,255,.5);">3W / 2L</div>
+        <div class="jc win-cell" style="font-weight:700;font-size:15px;">+₹8,500</div>
+        <div class="jc" style="color:#fbbf24;">60% WR</div>
+        <div class="jc" style="color:rgba(160,200,255,.5);font-size:12px;">Avg emotion: 7/10</div>
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="h-ico">📈</span> Weekly Review Questions</h2>
+  <ul class="checklist">
+    <li><span class="check-ico ok">?</span><span>What were my best trades this week, and what made them good?</span></li>
+    <li><span class="check-ico ok">?</span><span>What were my worst trades? Did I follow my rules on those?</span></li>
+    <li><span class="check-ico ok">?</span><span>Was there a pattern in my losing trades? (e.g., always losing on FOMO entries?)</span></li>
+    <li><span class="check-ico ok">?</span><span>Was my emotional state affecting my decisions? When?</span></li>
+    <li><span class="check-ico ok">?</span><span>What is ONE thing I will do differently next week?</span></li>
+  </ul>
+
+  <div class="info-box green">
+    <div class="info-box-title">🏆 FINAL THOUGHT: THE PROFESSIONAL EDGE</div>
+    <p>The difference between a professional trader and an amateur is not intelligence or special information. It's <strong>consistency of process</strong>. Every great trader: <strong>(1) Has a tested edge</strong>, <strong>(2) Manages risk religiously</strong>, <strong>(3) Keeps emotions in check</strong>, and <strong>(4) Reviews and improves constantly.</strong> The journal is where step 4 happens. Never skip it.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COMPLETION -->
+  <div style="text-align:center;padding:30px;background:linear-gradient(135deg,rgba(13,27,62,.99),rgba(8,16,40,.97));border:1px solid rgba(74,222,128,.2);border-radius:8px;">
+    <div style="font-size:40px;margin-bottom:12px;">🏆</div>
+    <div style="font-family:'Orbitron',monospace;font-size:22px;color:#4ade80;margin-bottom:8px;">GUIDE COMPLETE</div>
+    <p style="color:rgba(180,215,255,.7);max-width:500px;margin:0 auto 20px;">You've covered all 3 modules. Options Strategies, Risk Management, and Trading Psychology. Knowledge without action is nothing — start applying one concept at a time.</p>
+    <a href="index.html" style="display:inline-block;padding:12px 28px;background:linear-gradient(90deg,rgba(251,191,36,.2),rgba(251,191,36,.1));border:1px solid rgba(251,191,36,.4);color:#fbbf24;border-radius:4px;text-decoration:none;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">← RETURN TO HUB</a>
+  </div>
+</div>
+
+</div><!-- end main -->
+</div><!-- end layout -->
+
+<script>
+const sections = [
+  'intro-options','bull-strategies','bear-strategies','neutral-strategies','advanced-options',
+  'risk-intro','position-sizing','stop-loss','rr-ratio','drawdown','portfolio-risk',
+  'psych-intro','fomo-greed','fear-hesitation','revenge-trading','discipline','trade-journal'
+];
+const visited = new Set(['intro-options']);
+
+function showSection(id) {
+  // Hide all
+  sections.forEach(s => {
+    document.getElementById('sec-' + s).classList.remove('active');
+    const nav = document.getElementById('nav-' + s);
+    if (nav) {
+      nav.classList.remove('active', 'yel', 'grn', 'pur');
+    }
+  });
+
+  // Show selected
+  const sec = document.getElementById('sec-' + id);
+  if (sec) sec.classList.add('active');
+
+  // Update nav
+  const nav = document.getElementById('nav-' + id);
+  if (nav) {
+    nav.classList.add('active');
+    const mod = getModule(id);
+    if (mod === 1) nav.classList.add('yel');
+    else if (mod === 2) nav.classList.add('grn');
+    else if (mod === 3) nav.classList.add('pur');
+  }
+
+  // Track visited
+  visited.add(id);
+  const pct = Math.round((visited.size / sections.length) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  // Scroll to top of main
+  document.getElementById('main-content').scrollIntoView({behavior:'smooth', block:'start'});
+  window.scrollTo({top: 52, behavior: 'smooth'});
+
+  // Close sidebar on mobile
+  if (window.innerWidth <= 768) {
+    document.getElementById('sidebar').classList.remove('open');
+  }
+}
+
+function getModule(id) {
+  const m1 = ['intro-options','bull-strategies','bear-strategies','neutral-strategies','advanced-options'];
+  const m2 = ['risk-intro','position-sizing','stop-loss','rr-ratio','drawdown','portfolio-risk'];
+  if (m1.includes(id)) return 1;
+  if (m2.includes(id)) return 2;
+  return 3;
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// Scroll behaviour
+window.addEventListener('scroll', function() {
+  const main = document.getElementById('main-content');
+  const sections_els = document.querySelectorAll('.guide-section.active');
+});
+
+// Init
+document.getElementById('nav-intro-options').classList.add('yel');
+</script>
+</body>
+</html>
