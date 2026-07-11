@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<title>NIFTY Indian Markets HUB — Deep Navy</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Orbitron:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<title>NIFTY Indian Markets HUB — Terminal Phosphor</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 :root{
-  --bg:#0d1b3e;--panel:#0e1f45;--p2:#0a1628;
-  --cyan:#60a5fa;--pink:#93c5fd;--yel:#fbbf24;
-  --grn:#4ade80;--pur:#818cf8;--red:#f87171;
-  --bc:rgba(96,165,250,.15);--bp:rgba(96,165,250,.08);
-  --b1:rgba(96,165,250,.07);--b2:rgba(96,165,250,.12);
-  --tx:#cce0ff;--t2:rgba(96,165,250,.75);--t3:rgba(96,165,250,.45);
+  --bg:#050805;--panel:#071006;--p2:#020402;
+  --cyan:#3fbf3f;--pink:#5fff5f;--yel:#fbbf24;
+  --grn:#4ade80;--pur:#7fd992;--red:#f87171;
+  --bc:rgba(63,191,63,.15);--bp:rgba(63,191,63,.08);
+  --b1:rgba(63,191,63,.07);--b2:rgba(63,191,63,.12);
+  --tx:#c8f5c8;--t2:rgba(63,191,63,.75);--t3:rgba(63,191,63,.45);
 }
 
 html,body{
-  background:linear-gradient(135deg,#0d1b3e 0%,#0a1628 40%,#0d2040 100%);
+  background:linear-gradient(135deg,#050805 0%,#020402 40%,#08110a 100%);
   color:var(--tx);
-  font-family:'Space Grotesk',sans-serif;
+  font-family:'JetBrains Mono',monospace;
   font-weight:500;
   overflow-x:hidden;
   min-height:100vh;
@@ -28,11 +28,11 @@ html,body{
 }
 
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(rgba(96,165,250,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.025) 1px,transparent 1px);
+  background:linear-gradient(rgba(63,191,63,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(63,191,63,.025) 1px,transparent 1px);
   background-size:50px 50px;}
 body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 80% 50% at 50% -5%,rgba(96,165,250,.1) 0%,transparent 55%),
-    radial-gradient(ellipse 30% 40% at 5% 60%,rgba(96,165,250,.05) 0%,transparent 50%),
+  background:radial-gradient(ellipse 80% 50% at 50% -5%,rgba(63,191,63,.1) 0%,transparent 55%),
+    radial-gradient(ellipse 30% 40% at 5% 60%,rgba(63,191,63,.05) 0%,transparent 50%),
     radial-gradient(ellipse 25% 35% at 95% 40%,rgba(251,191,36,.04) 0%,transparent 50%);}
 #scan{position:fixed;inset:0;z-index:998;pointer-events:none;
   background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,20,.04) 3px,rgba(0,0,20,.04) 4px);}
@@ -41,19 +41,19 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 /* ══ TOPBAR ══ */
 .tb{
-  background:rgba(8,18,48,.95);
-  border-bottom:1px solid rgba(96,165,250,.25);
-  padding:3px 12px;
+  background:rgba(6,14,6,.95);
+  border-bottom:1px solid rgba(63,191,63,.25);
+  padding:4px 12px;
   display:flex;justify-content:space-between;align-items:center;
-  font-family:'Space Mono',monospace;font-size:13px;letter-spacing:1.5px;
+  font-family:'Space Mono',monospace;font-size:14px;letter-spacing:2px;
   position:relative;z-index:10;
-  box-shadow:0 0 20px rgba(96,165,250,.06);
-  min-height:26px;
+  box-shadow:0 0 20px rgba(63,191,63,.06);
+  min-height:34px;
   flex-wrap:nowrap;
   gap:8px;
 }
-.tb-l{color:#93c5fd;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px;opacity:1;}
-.tb-r{display:flex;gap:10px;color:rgba(148,186,255,.85);flex-shrink:0;font-size:14px;}
+.tb-l{color:#5fff5f;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px;opacity:1;}
+.tb-r{display:flex;gap:10px;color:rgba(150,210,150,.85);flex-shrink:0;font-size:14px;}
 .tb-r .v{color:var(--t2)}.tb-r .live{color:var(--grn)}
 
 .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--grn);
@@ -63,16 +63,16 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 /* ══ HEADER ══ */
 header{
-  background:linear-gradient(180deg,rgba(13,27,62,.99) 0%,rgba(10,22,50,.97) 100%);
+  background:linear-gradient(180deg,rgba(10,20,10,.99) 0%,rgba(8,17,8,.97) 100%);
   border-bottom:1px solid var(--bc);
-  padding:6px 14px;
+  padding:10px 14px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
   position:sticky;top:0;z-index:90;
   backdrop-filter:blur(20px);
-  box-shadow:0 1px 0 rgba(96,165,250,.1),0 4px 20px rgba(0,0,20,.7);
+  box-shadow:0 1px 0 rgba(63,191,63,.1),0 4px 20px rgba(0,0,20,.7);
   flex-wrap:nowrap;
 }
 header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
@@ -80,22 +80,22 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 
 .brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .logo{
-  width:32px;height:32px;flex-shrink:0;
+  width:40px;height:40px;flex-shrink:0;
   border-radius:50%;
-  background:radial-gradient(circle at 35% 35%,rgba(96,165,250,.25),rgba(10,20,50,.8));
-  border:1px solid rgba(96,165,250,.4);
+  background:radial-gradient(circle at 35% 35%,rgba(63,191,63,.25),rgba(8,16,8,.8));
+  border:1px solid rgba(63,191,63,.4);
   display:flex;align-items:center;justify-content:center;font-size:22px;
-  box-shadow:0 0 25px rgba(96,165,250,.2),inset 0 0 18px rgba(96,165,250,.04);
+  box-shadow:0 0 25px rgba(63,191,63,.2),inset 0 0 18px rgba(63,191,63,.04);
   animation:hexglow 3s ease-in-out infinite;
 }
 @keyframes hexglow{
-  0%,100%{box-shadow:0 0 25px rgba(96,165,250,.2),inset 0 0 18px rgba(96,165,250,.04)}
-  50%{box-shadow:0 0 40px rgba(96,165,250,.4),0 0 70px rgba(96,165,250,.1),inset 0 0 24px rgba(96,165,250,.08)}}
-.bname{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;
-  color:#e8f4ff;
+  0%,100%{box-shadow:0 0 25px rgba(63,191,63,.2),inset 0 0 18px rgba(63,191,63,.04)}
+  50%{box-shadow:0 0 40px rgba(63,191,63,.4),0 0 70px rgba(63,191,63,.1),inset 0 0 24px rgba(63,191,63,.08)}}
+.bname{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;letter-spacing:1px;
+  color:#d8f5d8;
   white-space:nowrap;}
-.bname span{color:#60a5fa;text-shadow:0 0 14px rgba(96,165,250,.5)}
-.bsub{font-size:11px;color:rgba(148,186,255,.6);letter-spacing:1.5px;margin-top:1px;font-family:'Space Mono',monospace}
+.bname span{color:#3fbf3f;text-shadow:0 0 14px rgba(63,191,63,.5)}
+.bsub{font-size:14px;color:rgba(150,210,150,.6);letter-spacing:2px;margin-top:2px;font-family:'Space Mono',monospace}
 
 /* ══ WORLD CLOCK ══ */
 .wclocks{
@@ -103,235 +103,235 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   display:flex;align-items:stretch;justify-content:center;
   overflow-x:auto;overflow-y:hidden;
   scrollbar-width:none;min-width:0;
-  background:rgba(8,15,38,.6);
-  border:1px solid rgba(96,165,250,.1);
+  background:rgba(6,12,6,.6);
+  border:1px solid rgba(63,191,63,.1);
 }
 .wclocks::-webkit-scrollbar{display:none;}
-.wc{display:flex;flex-direction:column;min-width:105px;flex-shrink:0;border-right:1px solid rgba(96,165,250,.07);cursor:default;transition:background .2s;position:relative;}
+.wc{display:flex;flex-direction:column;min-width:105px;flex-shrink:0;border-right:1px solid rgba(63,191,63,.07);cursor:default;transition:background .2s;position:relative;}
 .wc:last-child{border-right:none;}
-.wc:hover{background:rgba(96,165,250,.04);}
+.wc:hover{background:rgba(63,191,63,.04);}
 .wc.active-market{background:rgba(74,222,128,.04);}
 .wc.closed-market .wc-status-dot{background:rgba(150,150,150,.4);box-shadow:0 0 0 rgba(150,150,150,0);}
-.wc-top{padding:3px 8px 2px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(96,165,250,.04);}
-.wc-flag{font-size:13px;}
-.wc-country{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1.2px;color:rgba(160,200,255,.7);font-weight:700;}
+.wc-top{padding:5px 10px 3px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(63,191,63,.04);}
+.wc-flag{font-size:16px;}
+.wc-country{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;color:rgba(160,220,160,.7);font-weight:700;}
 .wc-status-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;transition:background .3s,box-shadow .3s;}
-.wc-bot{padding:2px 8px 3px;display:flex;justify-content:space-between;align-items:baseline;gap:4px;}
-.wc-time{font-family:'Space Mono',monospace;font-size:12px;color:#e8f4ff;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
-.wc-zone{font-family:'Space Mono',monospace;font-size:11px;color:rgba(96,165,250,.5);letter-spacing:1px;font-weight:700;}
+.wc-bot{padding:3px 10px 6px;display:flex;justify-content:space-between;align-items:baseline;gap:4px;}
+.wc-time{font-family:'Space Mono',monospace;font-size:13px;color:#d8f5d8;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+.wc-zone{font-family:'Space Mono',monospace;font-size:11px;color:rgba(63,191,63,.5);letter-spacing:1px;font-weight:700;}
 
 .hright{display:flex;gap:8px;flex-shrink:0;align-items:center;}
 .pill{
   font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;
-  border:1px solid rgba(96,165,250,.2);padding:5px 10px;
-  border-radius:3px;background:rgba(10,20,50,.7);color:rgba(160,200,255,.9);
+  border:1px solid rgba(63,191,63,.2);padding:5px 10px;
+  border-radius:3px;background:rgba(8,16,8,.7);color:rgba(160,220,160,.9);
   white-space:nowrap;display:flex;align-items:center;gap:5px;
 }
 .pill.g{border-color:rgba(74,222,128,.3);background:rgba(16,50,30,.7);color:#4ade80;}
-.pill.p{border-color:rgba(167,139,250,.2);color:rgba(167,139,250,.9);}
+.pill.p{border-color:rgba(207,229,207,.2);color:rgba(207,229,207,.9);}
 
 /* ══ MARKET BAR ══ */
 .mbar{
-  background:linear-gradient(180deg,rgba(8,15,38,.97) 0%,rgba(6,12,30,.96) 100%);
-  border-bottom:1px solid rgba(96,165,250,.1);
-  padding:3px 14px 4px;
+  background:linear-gradient(180deg,rgba(6,12,6,.97) 0%,rgba(4,10,4,.96) 100%);
+  border-bottom:1px solid rgba(63,191,63,.1);
+  padding:4px 14px 5px;
   display:flex;flex-direction:column;gap:0;position:relative;
   box-shadow:0 2px 12px rgba(0,0,20,.6);
 }
 .mbar::before{content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,transparent,rgba(96,165,250,.02) 50%,transparent);z-index:0;}
+  background:linear-gradient(90deg,transparent,rgba(63,191,63,.02) 50%,transparent);z-index:0;}
 .mbar-updated{
   font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.5px;
-  color:rgba(160,200,255,.5);margin-bottom:4px;
-  border-bottom:1px solid rgba(96,165,250,.05);padding-bottom:3px;
+  color:rgba(160,220,160,.5);margin-bottom:4px;
+  border-bottom:1px solid rgba(63,191,63,.05);padding-bottom:3px;
 }
 .mbar-row{display:flex;align-items:center;gap:0;position:relative;z-index:1;padding:2px 0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;}
 .mbar-row::-webkit-scrollbar{display:none;}
-.mbar-sep{width:2px;align-self:stretch;background:linear-gradient(180deg,transparent,rgba(96,165,250,.25),transparent);margin:0 6px;flex-shrink:0;}
+.mbar-sep{width:2px;align-self:stretch;background:linear-gradient(180deg,transparent,rgba(63,191,63,.25),transparent);margin:0 6px;flex-shrink:0;}
 .mbar-label{
   flex-shrink:0;display:flex;align-items:center;gap:7px;
   font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;font-weight:700;
-  border-right:1px solid rgba(96,165,250,.08);padding-right:8px;min-width:90px;
+  border-right:1px solid rgba(63,191,63,.08);padding-right:8px;min-width:90px;
 }
 .mbar-label-flag{font-size:17px;}
-.mbar-label-txt{color:rgba(160,200,255,.85);}
+.mbar-label-txt{color:rgba(160,220,160,.85);}
 .mbar-label.india .mbar-label-txt{color:rgba(255,160,0,.9);}
-.mbar-label.global .mbar-label-txt{color:rgba(96,165,250,.95);}
+.mbar-label.global .mbar-label-txt{color:rgba(63,191,63,.95);}
 .mbar-items{display:flex;overflow-x:visible;overflow-y:hidden;scrollbar-width:none;gap:10px;padding:3px 0;min-width:0;flex-shrink:0;}
 .mbar-items::-webkit-scrollbar{display:none;}
 .mbar-item{
-  position:relative;flex-shrink:0;display:flex;flex-direction:column;gap:1px;
-  background:linear-gradient(135deg,rgba(10,20,50,.7),rgba(5,10,25,.8));
+  position:relative;flex-shrink:0;display:flex;flex-direction:column;gap:2px;
+  background:linear-gradient(135deg,rgba(8,16,8,.7),rgba(4,8,4,.8));
   border-left:2px solid var(--ic,var(--cyan));
-  padding:3px 10px;min-width:130px;
+  padding:5px 12px;min-width:155px;
   border-radius:2px;box-shadow:inset 0 0 8px rgba(0,0,10,.3);
   transition:transform .15s,box-shadow .15s;
 }
 .mbar-item:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,20,.5),inset 0 0 12px rgba(0,0,20,.2);}
-.mbar-name{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;color:rgba(160,200,255,.65);font-weight:700;}
-.mbar-val{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#e8f4ff;letter-spacing:.3px;transition:color .2s;}
-@keyframes valUpdate{0%{color:var(--cyan);transform:scale(1.04)}100%{color:#e8f4ff;transform:scale(1)}}
+.mbar-name{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;color:rgba(160,220,160,.65);font-weight:700;}
+.mbar-val{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#d8f5d8;letter-spacing:.3px;transition:color .2s;}
+@keyframes valUpdate{0%{color:var(--cyan);transform:scale(1.04)}100%{color:#d8f5d8;transform:scale(1)}}
 .val-updated{animation:valUpdate .3s ease-out;}
 .mbar-chg{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.5px;font-weight:700;}
 .mbar-chg.up{color:#4ade80;}
 .mbar-chg.dn{color:#f87171;}
-.mbar-chg.vix{color:#ffd080;}
-.mbar-src{font-family:'Space Mono',monospace;font-size:11px;color:rgba(96,165,250,.35);position:absolute;bottom:2px;right:4px;letter-spacing:1px;}
-.mbar-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(96,165,250,.08),transparent);margin:2px 0;}
+.mbar-chg.vix{color:#ffcf7a;}
+.mbar-src{font-family:'Space Mono',monospace;font-size:11px;color:rgba(63,191,63,.35);position:absolute;bottom:2px;right:4px;letter-spacing:1px;}
+.mbar-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(63,191,63,.08),transparent);margin:2px 0;}
 
 /* ══ TICKER ══ */
-.tkr{background:rgba(6,12,28,.98);border-bottom:1px solid rgba(96,165,250,.08);overflow:hidden;position:relative;height:26px;}
-.tkr::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,20,50,1) 0%,transparent 2%,transparent 98%,rgba(10,20,50,1) 100%);pointer-events:none;z-index:1;}
+.tkr{background:rgba(4,10,4,.98);border-bottom:1px solid rgba(63,191,63,.08);overflow:hidden;position:relative;height:34px;}
+.tkr::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,16,8,1) 0%,transparent 2%,transparent 98%,rgba(8,16,8,1) 100%);pointer-events:none;z-index:1;}
 .tkr-t{display:flex;gap:0;animation:tkrScroll 90s linear infinite;white-space:nowrap;will-change:transform;}
 @keyframes tkrScroll{0%{transform:translateX(0)}100%{transform:translateX(-33.33333%)}}
-.ti{display:inline-flex;padding:0 12px;align-items:center;height:26px;border-right:1px solid rgba(96,165,250,.05);}
+.ti{display:inline-flex;padding:0 14px;align-items:center;height:34px;border-right:1px solid rgba(63,191,63,.05);}
 .ti-inner{display:flex;gap:10px;align-items:center;}
-.ti .s{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.5px;color:rgba(160,200,255,.75);font-weight:700;}
-.ti .tv{font-family:'Space Grotesk',sans-serif;font-size:14px;color:#e8f4ff;font-weight:700;}
+.ti .s{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.5px;color:rgba(160,220,160,.75);font-weight:700;}
+.ti .tv{font-family:'JetBrains Mono',monospace;font-size:14px;color:#d8f5d8;font-weight:700;}
 .ti .up,.ti .dn{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;}
 .ti .up{color:#4ade80;}
 .ti .dn{color:#f87171;}
 
 /* ══ STATS ══ */
-.stats{display:flex;flex-wrap:wrap;gap:8px;padding:8px 12px;background:rgba(8,15,38,.4);}
+.stats{display:flex;flex-wrap:wrap;gap:12px;padding:12px 14px;background:rgba(6,12,6,.4);}
 .sb{
-  flex:1;min-width:160px;
-  background:linear-gradient(135deg,rgba(13,25,56,.95),rgba(8,16,40,.97));
-  border:1px solid rgba(96,165,250,.12);border-radius:6px;
-  padding:7px 12px;position:relative;overflow:hidden;
+  flex:1;min-width:180px;
+  background:linear-gradient(135deg,rgba(10,19,10,.95),rgba(6,13,6,.97));
+  border:1px solid rgba(63,191,63,.12);border-radius:6px;
+  padding:10px 14px;position:relative;overflow:hidden;
   transition:transform .2s,box-shadow .2s;
 }
-.sb:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,20,.5),0 0 0 1px rgba(96,165,250,.15);}
+.sb:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,20,.5),0 0 0 1px rgba(63,191,63,.15);}
 .sb::before{
   content:var(--sg);position:absolute;top:8px;right:8px;
-  font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:900;
+  font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:900;
   color:var(--sc,var(--cyan));opacity:.06;z-index:0;pointer-events:none;
   line-height:1;
 }
-.sb .l{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;color:rgba(160,200,255,.6);margin-bottom:3px;position:relative;z-index:1;font-weight:700;}
-.sb .v{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#e8f4ff;margin-bottom:2px;position:relative;z-index:1;letter-spacing:.5px;}
-.sb .s{font-family:'Space Mono',monospace;font-size:11px;color:rgba(148,186,255,.5);position:relative;z-index:1;letter-spacing:1px;}
+.sb .l{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:rgba(160,220,160,.6);margin-bottom:5px;position:relative;z-index:1;font-weight:700;}
+.sb .v{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#d8f5d8;margin-bottom:3px;position:relative;z-index:1;letter-spacing:.5px;}
+.sb .s{font-family:'Space Mono',monospace;font-size:11px;color:rgba(150,210,150,.5);position:relative;z-index:1;letter-spacing:1px;}
 
 /* ══ SECTION ══ */
 .sec{
-  background:linear-gradient(90deg,rgba(8,15,38,.9),rgba(10,20,50,.8));
-  border-top:1px solid rgba(96,165,250,.1);
-  border-bottom:1px solid rgba(96,165,250,.1);
-  padding:5px 12px;display:flex;align-items:center;gap:8px;
-  position:relative;margin:8px 14px 0;
+  background:linear-gradient(90deg,rgba(6,12,6,.9),rgba(8,16,8,.8));
+  border-top:1px solid rgba(63,191,63,.1);
+  border-bottom:1px solid rgba(63,191,63,.1);
+  padding:8px 14px;display:flex;align-items:center;gap:10px;
+  position:relative;margin:12px 14px 0;
   box-shadow:0 2px 12px rgba(0,0,20,.4);
 }
-.sec::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(96,165,250,.03) 50%,transparent);pointer-events:none;z-index:0;}
-.sec-bar{width:3px;height:15px;background:linear-gradient(180deg,var(--cyan),var(--pur));box-shadow:0 0 8px var(--cyan);flex-shrink:0;z-index:1;position:relative;}
-.sec-txt{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;color:#e8f4ff;flex:1;z-index:1;position:relative;}
-.sec-bdg{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;color:#4ade80;border:1px solid rgba(74,222,128,.3);padding:2px 6px;background:rgba(16,50,30,.5);z-index:1;position:relative;}
+.sec::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(63,191,63,.03) 50%,transparent);pointer-events:none;z-index:0;}
+.sec-bar{width:3px;height:18px;background:linear-gradient(180deg,var(--cyan),var(--pur));box-shadow:0 0 8px var(--cyan);flex-shrink:0;z-index:1;position:relative;}
+.sec-txt{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;letter-spacing:1px;color:#d8f5d8;flex:1;z-index:1;position:relative;}
+.sec-bdg{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:#4ade80;border:1px solid rgba(74,222,128,.3);padding:3px 8px;background:rgba(16,50,30,.5);z-index:1;position:relative;}
 
 /* ══ GROUPS ══ */
-.groups{display:flex;flex-direction:column;gap:0;margin:8px 14px 12px;}
-.sc-group{position:relative;border:1px solid var(--ga,rgba(77,159,255,.15));margin-bottom:8px;border-radius:4px;overflow:hidden;}
+.groups{display:flex;flex-direction:column;gap:0;margin:12px 14px 16px;}
+.sc-group{position:relative;border:1px solid var(--ga,rgba(63,191,63,.15));margin-bottom:12px;border-radius:4px;overflow:hidden;}
 .sc-group:last-child{margin-bottom:0;}
-.sc-group::before{content:'';position:absolute;inset:-1px;background:linear-gradient(135deg,var(--ga,rgba(77,159,255,.12)),transparent 40%,transparent 60%,var(--gb,rgba(77,159,255,.05)));pointer-events:none;z-index:0;opacity:.5;}
-.sc-inner{position:relative;z-index:1;background:rgba(10,20,50,.97);}
-.sc-head{padding:7px 12px;border-bottom:1px solid rgba(96,165,250,.1);display:flex;align-items:center;gap:8px;background:linear-gradient(90deg,rgba(10,20,52,.99),rgba(10,20,52,.85));}
-.sc-head-hex{width:28px;height:28px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,rgba(96,165,250,.1),rgba(96,165,250,.04));border:1px solid var(--gc,var(--cyan));display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 0 12px rgba(96,165,250,.12);animation:hexglow2 3s ease-in-out infinite;}
-@keyframes hexglow2{0%,100%{box-shadow:0 0 10px rgba(96,165,250,.3)}50%{box-shadow:0 0 22px rgba(96,165,250,.6)}}
+.sc-group::before{content:'';position:absolute;inset:-1px;background:linear-gradient(135deg,var(--ga,rgba(63,191,63,.12)),transparent 40%,transparent 60%,var(--gb,rgba(63,191,63,.05)));pointer-events:none;z-index:0;opacity:.5;}
+.sc-inner{position:relative;z-index:1;background:rgba(8,16,8,.97);}
+.sc-head{padding:10px 14px;border-bottom:1px solid rgba(63,191,63,.1);display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,rgba(8,16,8,.99),rgba(8,16,8,.85));}
+.sc-head-hex{width:34px;height:34px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,rgba(63,191,63,.1),rgba(63,191,63,.04));border:1px solid var(--gc,var(--cyan));display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 12px rgba(63,191,63,.12);animation:hexglow2 3s ease-in-out infinite;}
+@keyframes hexglow2{0%,100%{box-shadow:0 0 10px rgba(63,191,63,.3)}50%{box-shadow:0 0 22px rgba(63,191,63,.6)}}
 .sc-head-info{flex:1;min-width:0;}
-.sc-head-tag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;color:rgba(180,215,255,1);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.sc-head-name{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;letter-spacing:.5px;color:var(--gc,var(--cyan));text-shadow:0 0 14px currentColor,0 0 28px currentColor;}
+.sc-head-tag{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:rgba(180,230,180,1);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sc-head-name{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;letter-spacing:.5px;color:var(--gc,var(--cyan));text-shadow:0 0 20px currentColor,0 0 40px currentColor,0 0 60px currentColor;}
 .sc-head-right{text-align:right;flex-shrink:0;}
-.sc-head-status{font-family:'Space Mono',monospace;font-size:12px;color:#4ade80;display:flex;align-items:center;gap:4px;justify-content:flex-end;}
-.sc-head-nodes{font-size:12px;color:rgba(180,215,255,.95);margin-top:1px;font-family:'Space Mono',monospace;letter-spacing:1px;}
+.sc-head-status{font-family:'Space Mono',monospace;font-size:13px;color:#4ade80;display:flex;align-items:center;gap:4px;justify-content:flex-end;}
+.sc-head-nodes{font-size:13px;color:rgba(180,230,180,.95);margin-top:2px;font-family:'Space Mono',monospace;letter-spacing:1px;}
 
 /* ══ CARDS ══ */
-.sc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px;}
-.sc-cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:10px;}
-.sc-cards-5{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:10px;}
-.sc-cards-5 .sc-card-inner{padding:10px 10px 9px;}
-.sc-cards-5 .sc-card-topbar{margin:-10px -10px 8px;}
-.sc-cards-5 .sc-card-name{font-size:14px;margin-bottom:4px;}
-.sc-cards-5 .sc-card-desc{font-size:12px;margin-bottom:7px;line-height:1.4;}
-.sc-cards-5 .sc-card-ico-wrap{width:26px;height:26px;}
-.sc-cards-5 .sc-card-ico{font-size:15px;}
-.sc-cards-5 .sc-card-top{margin-bottom:7px;gap:6px;}
+.sc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:14px;}
+.sc-cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px;}
+.sc-cards-5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:12px;}
+.sc-cards-5 .sc-card-inner{padding:13px 13px 12px;}
+.sc-cards-5 .sc-card-topbar{margin:-13px -13px 11px;}
+.sc-cards-5 .sc-card-name{font-size:16px;margin-bottom:5px;}
+.sc-cards-5 .sc-card-desc{font-size:14px;margin-bottom:10px;line-height:1.5;}
+.sc-cards-5 .sc-card-ico-wrap{width:30px;height:30px;}
+.sc-cards-5 .sc-card-ico{font-size:17px;}
+.sc-cards-5 .sc-card-top{margin-bottom:10px;gap:7px;}
 @media(max-width:1300px){.sc-cards-5{grid-template-columns:repeat(3,1fr);}}
 @media(max-width:900px){.sc-cards-5,.sc-cards-4{grid-template-columns:repeat(2,1fr);}.sc-cards{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:560px){.sc-cards-5,.sc-cards-4,.sc-cards{grid-template-columns:1fr;}}
 
 .sc-card{
   position:relative;border-radius:8px;overflow:hidden;cursor:pointer;
-  background:linear-gradient(135deg,rgba(13,24,56,.98) 0%,rgba(10,18,44,.99) 100%);
-  border:1px solid rgba(96,165,250,.15);
+  background:linear-gradient(135deg,rgba(10,19,10,.98) 0%,rgba(8,15,8,.99) 100%);
+  border:1px solid rgba(63,191,63,.15);
   transition:transform .25s,box-shadow .25s,border-color .25s;
   text-decoration:none;color:inherit;display:block;padding:0;
 }
 .sc-card:hover{
   transform:translateY(-4px);
-  border-color:var(--cc,rgba(96,165,250,.45));
-  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 0 1px var(--cc,rgba(77,159,255,.3)),0 0 24px rgba(77,159,255,.06);
+  border-color:var(--cc,rgba(63,191,63,.45));
+  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 0 1px var(--cc,rgba(63,191,63,.3)),0 0 24px rgba(63,191,63,.06);
 }
-.sc-card .corner-tl,.sc-card .corner-br{position:absolute;width:11px;height:11px;border-color:var(--cc,rgba(77,159,255,.5));border-style:solid;opacity:.55;z-index:4;transition:opacity .2s,width .2s,height .2s;}
+.sc-card .corner-tl,.sc-card .corner-br{position:absolute;width:11px;height:11px;border-color:var(--cc,rgba(63,191,63,.5));border-style:solid;opacity:.55;z-index:4;transition:opacity .2s,width .2s,height .2s;}
 .sc-card .corner-tl{top:7px;left:7px;border-width:1px 0 0 1px;}
 .sc-card .corner-br{bottom:7px;right:7px;border-width:0 1px 1px 0;}
 .sc-card:hover .corner-tl,.sc-card:hover .corner-br{opacity:1;width:14px;height:14px;}
-.sc-card-inner{position:relative;z-index:2;padding:12px 12px 10px;}
-.sc-card-topbar{height:2px;margin:-12px -12px 10px;background:linear-gradient(90deg,var(--cc,var(--cyan)),transparent 70%);opacity:.6;transition:opacity .2s;}
+.sc-card-inner{position:relative;z-index:2;padding:16px 16px 14px;}
+.sc-card-topbar{height:2px;margin:-16px -16px 14px;background:linear-gradient(90deg,var(--cc,var(--cyan)),transparent 70%);opacity:.6;transition:opacity .2s;}
 .sc-card:hover .sc-card-topbar{opacity:1;}
-.sc-card-glow{position:absolute;top:-20px;right:-20px;width:90px;height:90px;border-radius:50%;background:radial-gradient(rgba(77,159,255,.04),transparent 70%);pointer-events:none;z-index:1;opacity:.5;}
-.sc-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.sc-card-ico-wrap{width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--cc,rgba(77,159,255,.28));border-radius:7px;box-shadow:0 0 12px rgba(96,165,250,.05),inset 0 0 8px rgba(96,165,250,.03);position:relative;overflow:hidden;}
+.sc-card-glow{position:absolute;top:-20px;right:-20px;width:90px;height:90px;border-radius:50%;background:radial-gradient(rgba(63,191,63,.04),transparent 70%);pointer-events:none;z-index:1;opacity:.5;}
+.sc-card-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.sc-card-ico-wrap{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--cc,rgba(63,191,63,.28));border-radius:7px;box-shadow:0 0 12px rgba(63,191,63,.05),inset 0 0 8px rgba(63,191,63,.03);position:relative;overflow:hidden;}
 .sc-card-ico-wrap::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.06),transparent 60%);}
-.sc-card-ico{font-size:18px;position:relative;z-index:1;}
+.sc-card-ico{font-size:21px;position:relative;z-index:1;}
 .sc-card-ring{display:none;}
-.sc-card-label{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:rgba(140,185,255,.75);border:1px solid rgba(77,159,255,.2);padding:2px 7px;border-radius:2px;background:rgba(77,159,255,.04);}
+.sc-card-label{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:rgba(150,210,150,.75);border:1px solid rgba(63,191,63,.2);padding:2px 7px;border-radius:2px;background:rgba(63,191,63,.04);}
 .sc-card-pulse{width:5px;height:5px;border-radius:50%;background:var(--cc,var(--cyan));box-shadow:0 0 6px currentColor;animation:pdotA 2s ease-in-out infinite;margin-left:auto;flex-shrink:0;}
 @keyframes pdotA{0%,100%{opacity:1}50%{opacity:.15}}
-.sc-card-name{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:.2px;color:#e8f4ff;margin-bottom:4px;line-height:1.2;}
-.sc-card-desc{font-size:12px;color:rgba(148,186,255,.6);line-height:1.45;margin-bottom:8px;}
-.sc-card-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(96,165,250,.09);padding-top:7px;}
-.sc-card-tag{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.5px;padding:2px 7px;border:1px solid rgba(96,165,250,.15);color:rgba(148,186,255,.5);border-radius:2px;}
+.sc-card-name{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;letter-spacing:.2px;color:#d8f5d8;margin-bottom:7px;line-height:1.25;}
+.sc-card-desc{font-size:14px;color:rgba(150,210,150,.6);line-height:1.6;margin-bottom:12px;}
+.sc-card-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(63,191,63,.09);padding-top:10px;}
+.sc-card-tag{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.5px;padding:2px 7px;border:1px solid rgba(63,191,63,.15);color:rgba(150,210,150,.5);border-radius:2px;}
 .sc-card-btn{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:2px;color:var(--cc,var(--cyan));display:flex;align-items:center;gap:6px;text-shadow:0 0 10px currentColor;transition:gap .18s;}
 .sc-card-btn-line{width:16px;height:1px;background:var(--cc,var(--cyan));box-shadow:0 0 6px currentColor;transition:width .18s;}
 .sc-card:hover .sc-card-btn{gap:10px;}
 .sc-card:hover .sc-card-btn-line{width:26px;}
-.new-badge{position:absolute;top:8px;right:8px;z-index:10;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.5px;color:#fff;background:var(--grn);padding:2px 6px;box-shadow:0 0 10px rgba(16,185,129,.6);border-radius:2px;animation:newbadge 2s ease-in-out infinite;}
-@keyframes newbadge{0%,100%{box-shadow:0 0 10px rgba(16,185,129,.6)}50%{box-shadow:0 0 20px rgba(16,185,129,.9),0 0 35px rgba(16,185,129,.4)}}
+.new-badge{position:absolute;top:8px;right:8px;z-index:10;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.5px;color:#fff;background:var(--grn);padding:2px 6px;box-shadow:0 0 10px rgba(230,153,61,.6);border-radius:2px;animation:newbadge 2s ease-in-out infinite;}
+@keyframes newbadge{0%,100%{box-shadow:0 0 10px rgba(230,153,61,.6)}50%{box-shadow:0 0 20px rgba(230,153,61,.9),0 0 35px rgba(230,153,61,.4)}}
 @keyframes rpl{0%{transform:scale(0);opacity:.35}100%{transform:scale(4);opacity:0}}
-.rpl{position:absolute;width:60px;height:60px;border-radius:50%;background:rgba(77,159,255,.12);pointer-events:none;animation:rpl .55s ease-out forwards;transform-origin:center;z-index:5;}
+.rpl{position:absolute;width:60px;height:60px;border-radius:50%;background:rgba(63,191,63,.12);pointer-events:none;animation:rpl .55s ease-out forwards;transform-origin:center;z-index:5;}
 
 /* ══ FOOTER ══ */
-footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;font-family:'Space Mono',monospace;box-shadow:0 0 20px rgba(77,159,255,.05);}
-.footer-bottom{padding:5px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;}
-.fl{font-size:13px;color:rgba(150,205,255,.85);letter-spacing:1.5px;text-transform:uppercase}
-.fl span{color:var(--cyan);text-shadow:0 0 8px rgba(77,159,255,.4)}
-.fr{font-size:13px;color:rgba(150,205,255,.7);letter-spacing:1px}
+footer{background:rgba(6,12,6,.95);border-top:1px solid var(--bc);padding:0;font-family:'Space Mono',monospace;box-shadow:0 0 20px rgba(63,191,63,.05);}
+.footer-bottom{padding:7px 14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;}
+.fl{font-size:13px;color:rgba(160,220,160,.85);letter-spacing:1.5px;text-transform:uppercase}
+.fl span{color:var(--cyan);text-shadow:0 0 8px rgba(63,191,63,.4)}
+.fr{font-size:13px;color:rgba(160,220,160,.7);letter-spacing:1px}
 
 /* ══ FLOATING BACK BUTTON ══ */
 #floatback{position:fixed;bottom:20px;right:16px;z-index:9999;display:none;align-items:center;gap:6px;padding:9px 14px;
   font-family:'Space Mono',monospace;font-size:14px;font-weight:700;letter-spacing:2px;
-  color:#fff;background:rgba(96,165,250,.85);border:none;cursor:pointer;border-radius:4px;
-  box-shadow:0 0 20px rgba(96,165,250,.5),0 0 40px rgba(96,165,250,.2);
+  color:#fff;background:rgba(63,191,63,.85);border:none;cursor:pointer;border-radius:4px;
+  box-shadow:0 0 20px rgba(63,191,63,.5),0 0 40px rgba(63,191,63,.2);
   animation:floatpulse 2s ease-in-out infinite;transition:transform .15s;touch-action:manipulation;}
 #floatback:hover{transform:scale(1.06)}
 #floatback.visible{display:flex}
 @keyframes floatpulse{
-  0%,100%{box-shadow:0 0 20px rgba(96,165,250,.5),0 0 40px rgba(96,165,250,.2)}
-  50%{box-shadow:0 0 30px rgba(96,165,250,.8),0 0 56px rgba(96,165,250,.4)}}
+  0%,100%{box-shadow:0 0 20px rgba(63,191,63,.5),0 0 40px rgba(63,191,63,.2)}
+  50%{box-shadow:0 0 30px rgba(63,191,63,.8),0 0 56px rgba(63,191,63,.4)}}
 #floatback .kbhint{font-size:9px;opacity:.7;letter-spacing:1px;border:1px solid rgba(255,255,255,.3);padding:1px 4px;border-radius:2px;}
 
 /* ══ IFRAME VIEWER ══ */
 #viewer{position:fixed;inset:0;z-index:500;display:none;flex-direction:column;background:var(--bg);}
 #viewer.open{display:flex}
-#vbar{background:rgba(8,18,50,.97);border-bottom:1px solid rgba(96,165,250,.25);padding:6px 12px;display:flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;flex-shrink:0;box-shadow:0 0 20px rgba(77,159,255,.1);position:relative;z-index:501;}
-#vtitle{color:var(--cyan);font-weight:700;font-size:14px;text-shadow:0 0 12px rgba(77,159,255,.5);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#vbar{background:rgba(6,14,6,.97);border-bottom:1px solid rgba(63,191,63,.25);padding:6px 12px;display:flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;flex-shrink:0;box-shadow:0 0 20px rgba(63,191,63,.1);position:relative;z-index:501;}
+#vtitle{color:var(--cyan);font-weight:700;font-size:14px;text-shadow:0 0 12px rgba(63,191,63,.5);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
 #vclose{padding:7px 16px;font-size:14px;letter-spacing:2px;font-family:'Space Mono',monospace;text-transform:uppercase;border:2px solid #4ade80;color:#ffffff;background:rgba(74,222,128,.22);cursor:pointer;transition:all .2s;border-radius:6px;touch-action:manipulation;font-weight:700;box-shadow:0 0 14px rgba(74,222,128,.4),0 0 28px rgba(74,222,128,.15);text-shadow:0 0 8px rgba(74,222,128,.8);}
 #vclose:hover{background:rgba(74,222,128,.4);box-shadow:0 0 22px rgba(74,222,128,.7),0 0 44px rgba(74,222,128,.3);transform:scale(1.04);}
 #vframe-wrap{flex:1;width:100%;background:#000;position:relative;overflow:hidden;}
 #vload{position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;pointer-events:none;transition:opacity .4s;}
 #vload.hidden{opacity:0}
-.lspinner{width:40px;height:40px;border-radius:50%;border:2px solid rgba(96,165,250,.1);border-top-color:#60a5fa;animation:lspin .8s linear infinite;}
+.lspinner{width:40px;height:40px;border-radius:50%;border:2px solid rgba(63,191,63,.1);border-top-color:#3fbf3f;animation:lspin .8s linear infinite;}
 @keyframes lspin{to{transform:rotate(360deg)}}
-.ltxt{font-family:'Space Mono',monospace;font-size:14px;letter-spacing:2px;color:rgba(96,165,250,.7);}
+.ltxt{font-family:'Space Mono',monospace;font-size:14px;letter-spacing:2px;color:rgba(63,191,63,.7);}
 
 @media(max-width:900px){
   .tb-l{font-size:12px;letter-spacing:1.5px;}
@@ -341,14 +341,14 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
   .bsub{font-size:12px;}
   .wclocks{min-width:0;flex:1;}
   .hright{gap:6px;}
-  .pill{font-size:11px;padding:3px 7px;}
-  .mbar{padding:3px 10px;}
-  .mbar-items{gap:6px;}
-  .mbar-item{min-width:110px;padding:2px 7px;}
-  .stats{gap:6px;padding:6px 8px;}
-  .sb{min-width:150px;padding:6px 10px;}
-  .sec{padding:5px 8px;margin:6px 8px 0;}
-  .groups{margin:6px 8px 8px;}
+  .pill{font-size:11px;padding:4px 8px;}
+  .mbar{padding:4px 10px;}
+  .mbar-items{gap:8px;}
+  .mbar-item{min-width:120px;padding:3px 8px;}
+  .stats{gap:10px;padding:10px;}
+  .sb{min-width:150px;padding:8px 12px;}
+  .sec{padding:6px 10px;margin:10px 10px 0;}
+  .groups{margin:10px 10px 12px;}
 }
 @media(max-width:560px){
   .tb{padding:4px 8px;gap:6px;}
@@ -369,27 +369,27 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
   .mbar-name{font-size:11px;}
   .mbar-val{font-size:14px;}
   .mbar-chg{font-size:11px;}
-  .stats{flex-direction:column;gap:6px;padding:6px;}
-  .sb{min-width:0;padding:6px 8px;}
-  .sec{margin:6px 6px 0;padding:5px 8px;}
-  .groups{margin:6px 6px 8px;}
-  .sc-group{margin-bottom:8px;}
-  .sc-head{padding:6px 8px;}
-  .sc-head-hex{width:24px;height:24px;font-size:14px;}
-  .sc-head-tag{font-size:10px;}
-  .sc-head-name{font-size:15px;}
-  .sc-head-status{font-size:11px;}
-  .sc-head-nodes{font-size:11px;}
-  .sc-cards,.sc-cards-4,.sc-cards-5{padding:8px;gap:8px;}
-  .sc-card-inner{padding:10px 10px 8px;}
-  .sc-card-topbar{margin:-10px -10px 8px;}
-  .sc-card-name{font-size:14px;margin-bottom:4px;}
-  .sc-card-desc{font-size:12px;margin-bottom:7px;}
-  .sc-card-ico-wrap{width:26px;height:26px;}
-  .sc-card-ico{font-size:15px;}
-  .sc-card-top{margin-bottom:7px;gap:6px;}
+  .stats{flex-direction:column;gap:8px;padding:8px;}
+  .sb{min-width:0;padding:8px 10px;}
+  .sec{margin:8px 8px 0;padding:6px 8px;}
+  .groups{margin:8px 8px 10px;}
+  .sc-group{margin-bottom:10px;}
+  .sc-head{padding:8px 10px;}
+  .sc-head-hex{width:28px;height:28px;font-size:16px;}
+  .sc-head-tag{font-size:11px;}
+  .sc-head-name{font-size:17px;}
+  .sc-head-status{font-size:12px;}
+  .sc-head-nodes{font-size:12px;}
+  .sc-cards,.sc-cards-4,.sc-cards-5{padding:10px;gap:10px;}
+  .sc-card-inner{padding:12px 12px 10px;}
+  .sc-card-topbar{margin:-12px -12px 10px;}
+  .sc-card-name{font-size:16px;margin-bottom:6px;}
+  .sc-card-desc{font-size:14px;margin-bottom:10px;}
+  .sc-card-ico-wrap{width:30px;height:30px;}
+  .sc-card-ico{font-size:17px;}
+  .sc-card-top{margin-bottom:10px;gap:7px;}
   footer{padding:0;}
-  .footer-bottom{padding:5px 8px;flex-direction:column;gap:2px;}
+  .footer-bottom{padding:6px 8px;flex-direction:column;gap:3px;}
   .fl,.fr{font-size:11px;}
   #floatback{bottom:12px;right:12px;font-size:13px;padding:7px 12px;}
 }
@@ -403,19 +403,19 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
 .btn-logout:hover{border-color:rgba(248,113,113,.5);background:rgba(248,113,113,.1);color:#f87171;}
 .user-pill{
   font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;
-  color:rgba(160,200,255,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;
+  color:rgba(160,220,160,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;
 }
 
 /* ══ AUTH LOADING ══ */
 .auth-loading{
   position:fixed;inset:0;z-index:99999;
-  background:linear-gradient(135deg,#0d1b3e,#0a1628);
+  background:linear-gradient(135deg,#050805,#020402);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
 }
 .auth-loading.hidden{display:none;}
-.auth-spinner{width:36px;height:36px;border:3px solid rgba(96,165,250,.15);border-top-color:#60a5fa;border-radius:50%;animation:spin .8s linear infinite;}
+.auth-spinner{width:36px;height:36px;border:3px solid rgba(63,191,63,.15);border-top-color:#3fbf3f;border-radius:50%;animation:spin .8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
-.auth-text{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:2px;color:rgba(96,165,250,.6);}
+.auth-text{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:2px;color:rgba(63,191,63,.6);}
 </style>
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -466,7 +466,7 @@ function doLogout() {
 
 <!-- ══ TOP BAR ══ -->
 <div class="tb">
-  <div class="tb-l">NIFTY INDIAN MARKETS HUB // DEEP NAVY v3.1</div>
+  <div class="tb-l">NIFTY INDIAN MARKETS HUB // TERMINAL PHOSPHOR v1.0</div>
   <div class="tb-r">
     <span class="user-pill" id="userDisplay"></span>
     <span class="v">13_NODES_ACTIVE</span>
@@ -527,19 +527,19 @@ function doLogout() {
   <div class="mbar-updated" id="mbar-ts"></div>
   <div class="mbar-row">
     <div class="mbar-items" id="mbar-india" style="flex:none;">
-      <div class="mbar-item" id="mi-n50" style="--ic:#4d9fff;--is:rgba(77,159,255,.3);">
+      <div class="mbar-item" id="mi-n50" style="--ic:#2a8f2a;--is:rgba(63,191,63,.3);">
         <div class="mbar-name">🇮🇳 NIFTY 50</div><div class="mbar-val" id="mv-n50">···</div>
         <div class="mbar-chg" id="mc-n50">···</div><div class="mbar-src" id="ms-n50"></div>
       </div>
-      <div class="mbar-item" id="mi-bn" style="--ic:#34d399;--is:rgba(16,185,129,.3);">
+      <div class="mbar-item" id="mi-bn" style="--ic:#ffb84d;--is:rgba(230,153,61,.3);">
         <div class="mbar-name">🇮🇳 BANK NIFTY</div><div class="mbar-val" id="mv-bn">···</div>
         <div class="mbar-chg" id="mc-bn">···</div><div class="mbar-src" id="ms-bn"></div>
       </div>
-      <div class="mbar-item is-vix" id="mi-vix" style="--ic:#ffd080;--is:rgba(255,208,128,.3);">
+      <div class="mbar-item is-vix" id="mi-vix" style="--ic:#ffcf7a;--is:rgba(255,208,128,.3);">
         <div class="mbar-name">🇮🇳 INDIA VIX</div><div class="mbar-val" id="mv-vix">···</div>
         <div class="mbar-chg vix" id="mc-vix">···</div><div class="mbar-src" id="ms-vix"></div>
       </div>
-      <div class="mbar-item" id="mi-fn" style="--ic:#10b981;--is:rgba(16,185,129,.3);">
+      <div class="mbar-item" id="mi-fn" style="--ic:#e0993d;--is:rgba(230,153,61,.3);">
         <div class="mbar-name">🇮🇳 FINNIFTY</div><div class="mbar-val" id="mv-fn">···</div>
         <div class="mbar-chg" id="mc-fn">···</div><div class="mbar-src" id="ms-fn"></div>
       </div>
@@ -550,19 +550,19 @@ function doLogout() {
     </div>
     <div class="mbar-sep"></div>
     <div class="mbar-items" id="mbar-global" style="flex:none;">
-      <div class="mbar-item" id="mi-sp" style="--ic:#3344cc;--is:rgba(51,68,204,.3);">
+      <div class="mbar-item" id="mi-sp" style="--ic:#123312;--is:rgba(20,60,30,.3);">
         <div class="mbar-name">🌐 S&amp;P 500</div><div class="mbar-val" id="mv-sp">···</div>
         <div class="mbar-chg" id="mc-sp">···</div><div class="mbar-src" id="ms-sp"></div>
       </div>
-      <div class="mbar-item" id="mi-ndq" style="--ic:#6688ff;--is:rgba(102,136,255,.35);">
+      <div class="mbar-item" id="mi-ndq" style="--ic:#7fd992;--is:rgba(127,217,146,.35);">
         <div class="mbar-name">🌐 NASDAQ</div><div class="mbar-val" id="mv-ndq">···</div>
         <div class="mbar-chg" id="mc-ndq">···</div><div class="mbar-src" id="ms-ndq"></div>
       </div>
-      <div class="mbar-item" id="mi-dji" style="--ic:#8899ff;--is:rgba(136,153,255,.2);">
+      <div class="mbar-item" id="mi-dji" style="--ic:#4a8a4a;--is:rgba(127,217,146,.2);">
         <div class="mbar-name">🌐 DOW JONES</div><div class="mbar-val" id="mv-dji">···</div>
         <div class="mbar-chg" id="mc-dji">···</div><div class="mbar-src" id="ms-dji"></div>
       </div>
-      <div class="mbar-item" id="mi-inr" style="--ic:#ffd080;--is:rgba(255,208,128,.25);">
+      <div class="mbar-item" id="mi-inr" style="--ic:#ffcf7a;--is:rgba(255,208,128,.25);">
         <div class="mbar-name">💱 USD/INR</div><div class="mbar-val" id="mv-inr">···</div>
         <div class="mbar-chg" id="mc-inr">···</div><div class="mbar-src" id="ms-inr"></div>
       </div>
@@ -587,19 +587,19 @@ function doLogout() {
 
 <!-- ══ STATS ══ -->
 <div class="stats">
-  <div class="sb" style="--sc:#4d9fff;--sg:'11'">
+  <div class="sb" style="--sc:#2a8f2a;--sg:'11'">
     <div class="l">Nodes Online</div><div class="v">14</div>
     <div class="s">All dashboards active</div>
   </div>
-  <div class="sb" style="--sc:#10b981;--sg:'IN'">
+  <div class="sb" style="--sc:#e0993d;--sg:'IN'">
     <div class="l">Indian Markets</div><div class="v">NSE · BSE</div>
     <div class="s">Nifty · Sensex · OPT</div>
   </div>
-  <div class="sb" style="--sc:#34d399;--sg:'US'">
+  <div class="sb" style="--sc:#ffb84d;--sg:'US'">
     <div class="l">US Markets</div><div class="v">S&amp;P 500</div>
     <div class="s">500 stocks tracked</div>
   </div>
-  <div class="sb" style="--sc:#818cf8;--sg:'◈'">
+  <div class="sb" style="--sc:#7fd992;--sg:'◈'">
     <div class="l">Last Node</div>
     <div class="v" id="lc" style="font-size:14px;padding-top:2px">—</div>
     <div class="s">Session log</div>
@@ -617,21 +617,21 @@ function doLogout() {
 <div class="groups">
 
   <!-- GROUP 1 -->
-  <div class="sc-group" style="--ga:rgba(96,165,250,.18);--gb:rgba(96,165,250,.04);--gc:#60a5fa;">
+  <div class="sc-group" style="--ga:rgba(63,191,63,.18);--gb:rgba(63,191,63,.04);--gc:#3fbf3f;">
     <div class="sc-inner">
       <div class="sc-head">
-        <div class="sc-head-hex" style="border-color:#4d9fff;box-shadow:0 0 14px rgba(77,159,255,.25);">📊</div>
+        <div class="sc-head-hex" style="border-color:#2a8f2a;box-shadow:0 0 14px rgba(63,191,63,.25);">📊</div>
         <div class="sc-head-info">
           <div class="sc-head-tag">GROUP 01 // NSE ANALYTICS SUITE</div>
-          <div class="sc-head-name" style="color:#ff9900;">NIFTY INTELLIGENCE</div>
+          <div class="sc-head-name" style="color:#5fff5f;">NIFTY INTELLIGENCE</div>
         </div>
         <div class="sc-head-right">
           <div class="sc-head-status"><span class="dot"></span>6 NODES ONLINE</div>
           <div class="sc-head-nodes">NSE · INDIA MARKETS</div>
         </div>
       </div>
-      <div class="sc-cards-5">
-        <a class="sc-card" href="https://krishnateja08.github.io/Nifty_50_Stock_Analyzer/" onclick="go(event,'Nifty Stocks Analyzer')" style="--cc:#60a5fa;">
+      <div class="sc-cards">
+        <a class="sc-card" href="https://krishnateja08.github.io/Nifty_50_Stock_Analyzer/" onclick="go(event,'Nifty Stocks Analyzer')" style="--cc:#3fbf3f;">
           <div class="corner-tl"></div><div class="corner-br"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
@@ -645,7 +645,7 @@ function doLogout() {
             <div class="sc-card-footer"><span class="sc-card-tag">NSE · NIFTY 50</span><div class="sc-card-btn"><div class="sc-card-btn-line"></div>LAUNCH</div></div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/BTST-Screener/" onclick="go(event,'BTST Screener')" style="--cc:#60a5fa;">
+        <a class="sc-card" href="https://krishnateja08.github.io/BTST-Screener/" onclick="go(event,'BTST Screener')" style="--cc:#3fbf3f;">
           <div class="corner-tl"></div><div class="corner-br"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
@@ -659,7 +659,7 @@ function doLogout() {
             <div class="sc-card-footer"><span class="sc-card-tag">NSE · BTST</span><div class="sc-card-btn"><div class="sc-card-btn-line"></div>LAUNCH</div></div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/Nifty_Indices_scanner/" onclick="go(event,'Nifty Indices Scanner')" style="--cc:#60a5fa;">
+        <a class="sc-card" href="https://krishnateja08.github.io/Nifty_Indices_scanner/" onclick="go(event,'Nifty Indices Scanner')" style="--cc:#3fbf3f;">
           <div class="corner-tl"></div><div class="corner-br"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
@@ -673,7 +673,7 @@ function doLogout() {
             <div class="sc-card-footer"><span class="sc-card-tag">NSE · INDICES</span><div class="sc-card-btn"><div class="sc-card-btn-line"></div>LAUNCH</div></div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/Trendbreak/" onclick="go(event,'Trendbreak')" style="--cc:#60a5fa;">
+        <a class="sc-card" href="https://krishnateja08.github.io/Trendbreak/" onclick="go(event,'Trendbreak')" style="--cc:#3fbf3f;">
           <div class="corner-tl"></div><div class="corner-br"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
@@ -687,8 +687,8 @@ function doLogout() {
             <div class="sc-card-footer"><span class="sc-card-tag">NSE · TRENDS</span><div class="sc-card-btn"><div class="sc-card-btn-line"></div>LAUNCH</div></div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/Alphascreener/" onclick="go(event,'AlphaScreener')" style="--cc:#60a5fa;">
-          <div class="corner-tl" style="border-color:#4d9fff;"></div><div class="corner-br" style="border-color:#4d9fff;"></div>
+        <a class="sc-card" href="https://krishnateja08.github.io/Alphascreener/" onclick="go(event,'AlphaScreener')" style="--cc:#3fbf3f;">
+          <div class="corner-tl" style="border-color:#2a8f2a;"></div><div class="corner-br" style="border-color:#2a8f2a;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
             <div class="sc-card-top">
@@ -700,8 +700,8 @@ function doLogout() {
             <div class="sc-card-footer"><span class="sc-card-tag">NSE · USA · MULTI-TF</span><div class="sc-card-btn"><div class="sc-card-btn-line"></div>LAUNCH</div></div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/FII-DII_Pulse/" onclick="go(event,'FII/DII Pulse')" style="--cc:#60a5fa;">
-          <div class="corner-tl" style="border-color:#4d9fff;"></div><div class="corner-br" style="border-color:#4d9fff;"></div>
+        <a class="sc-card" href="https://krishnateja08.github.io/FII-DII_Pulse/" onclick="go(event,'FII/DII Pulse')" style="--cc:#3fbf3f;">
+          <div class="corner-tl" style="border-color:#2a8f2a;"></div><div class="corner-br" style="border-color:#2a8f2a;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar"></div><div class="sc-card-glow"></div>
             <div class="sc-card-top">
@@ -718,13 +718,13 @@ function doLogout() {
   </div>
 
   <!-- GROUP 2 — OPTIONS & DERIVATIVES DESK -->
-  <div class="sc-group" style="--ga:rgba(16,185,129,.2);--gb:rgba(16,185,129,.04);--gc:#10b981;">
+  <div class="sc-group" style="--ga:rgba(230,153,61,.2);--gb:rgba(230,153,61,.04);--gc:#e0993d;">
     <div class="sc-inner">
-      <div class="sc-head" style="background:linear-gradient(90deg,rgba(6,13,30,.99),rgba(6,13,30,.85));">
-        <div class="sc-head-hex" style="border-color:#10b981;box-shadow:0 0 14px rgba(16,185,129,.25);background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.04));">⛓️</div>
+      <div class="sc-head" style="background:linear-gradient(90deg,rgba(4,10,4,.99),rgba(4,10,4,.85));">
+        <div class="sc-head-hex" style="border-color:#e0993d;box-shadow:0 0 14px rgba(230,153,61,.25);background:linear-gradient(135deg,rgba(230,153,61,.1),rgba(230,153,61,.04));">⛓️</div>
         <div class="sc-head-info">
           <div class="sc-head-tag">GROUP 02 // OPTIONS &amp; DERIVATIVES DESK</div>
-          <div class="sc-head-name" style="color:#34d399;text-shadow:0 0 12px rgba(16,185,129,.4);">OPTIONS COMMAND</div>
+          <div class="sc-head-name" style="color:#ffb84d;text-shadow:0 0 12px rgba(230,153,61,.4);">OPTIONS COMMAND</div>
         </div>
         <div class="sc-head-right">
           <div class="sc-head-status"><span class="dot"></span>4 NODES ONLINE</div>
@@ -732,71 +732,71 @@ function doLogout() {
         </div>
       </div>
       <div class="sc-cards-4">
-        <a class="sc-card" href="https://krishnateja08.github.io/Nifty_option_chain/" onclick="go(event,'Nifty Option Chain')" style="--cc:#34d399;">
-          <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
+        <a class="sc-card" href="https://krishnateja08.github.io/Nifty_option_chain/" onclick="go(event,'Nifty Option Chain')" style="--cc:#ffb84d;">
+          <div class="corner-tl" style="border-color:#ffb84d;"></div><div class="corner-br" style="border-color:#ffb84d;"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.08),transparent 70%);"></div>
+            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#ffb84d,transparent);box-shadow:0 0 10px #ffb84d;"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(230,153,61,.08),transparent 70%);"></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">⛓️<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">OPTIONS</div>
             </div>
-            <div class="sc-card-name" style="color:#34d399;text-shadow:0 0 10px rgba(16,185,129,.3);">Nifty Option Chain</div>
+            <div class="sc-card-name" style="color:#ffb84d;text-shadow:0 0 10px rgba(230,153,61,.3);">Nifty Option Chain</div>
             <div class="sc-card-desc">Live option chain analysis — OI buildup, PCR ratio, max pain and key strike price levels.</div>
-            <div class="sc-card-footer" style="border-top-color:rgba(16,185,129,.1);">
-              <span class="sc-card-tag" style="border-color:rgba(16,185,129,.15);">NSE · OPTIONS</span>
-              <div class="sc-card-btn" style="color:#22cc22;"><div class="sc-card-btn-line" style="background:#22cc22;"></div>LAUNCH</div>
+            <div class="sc-card-footer" style="border-top-color:rgba(230,153,61,.1);">
+              <span class="sc-card-tag" style="border-color:rgba(230,153,61,.15);">NSE · OPTIONS</span>
+              <div class="sc-card-btn" style="color:#ffcf7a;"><div class="sc-card-btn-line" style="background:#ffcf7a;"></div>LAUNCH</div>
             </div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/BankNifty_options/" onclick="go(event,'Bank/Finance Option Chain')" style="--cc:#34d399;">
-          <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
+        <a class="sc-card" href="https://krishnateja08.github.io/BankNifty_options/" onclick="go(event,'Bank/Finance Option Chain')" style="--cc:#ffb84d;">
+          <div class="corner-tl" style="border-color:#ffb84d;"></div><div class="corner-br" style="border-color:#ffb84d;"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.08),transparent 70%);"></div>
+            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#ffb84d,transparent);box-shadow:0 0 10px #ffb84d;"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(230,153,61,.08),transparent 70%);"></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🏦<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">BANK · FIN OPT</div>
             </div>
-            <div class="sc-card-name" style="color:#34d399;text-shadow:0 0 10px rgba(16,185,129,.3);">Bank/Finance Option Chain</div>
+            <div class="sc-card-name" style="color:#ffb84d;text-shadow:0 0 10px rgba(230,153,61,.3);">Bank/Finance Option Chain</div>
             <div class="sc-card-desc">Live Bank Nifty &amp; Fin Nifty option chain — OI analysis, PCR, max pain and key strike levels.</div>
-            <div class="sc-card-footer" style="border-top-color:rgba(16,185,129,.1);">
-              <span class="sc-card-tag" style="border-color:rgba(16,185,129,.15);">NSE · BANK · FINNIFTY</span>
-              <div class="sc-card-btn" style="color:#22cc22;"><div class="sc-card-btn-line" style="background:#22cc22;"></div>LAUNCH</div>
+            <div class="sc-card-footer" style="border-top-color:rgba(230,153,61,.1);">
+              <span class="sc-card-tag" style="border-color:rgba(230,153,61,.15);">NSE · BANK · FINNIFTY</span>
+              <div class="sc-card-btn" style="color:#ffcf7a;"><div class="sc-card-btn-line" style="background:#ffcf7a;"></div>LAUNCH</div>
             </div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/optionstrategybuilder/" onclick="go(event,'Strategy Builder')" style="--cc:#34d399;">
-          <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
+        <a class="sc-card" href="https://krishnateja08.github.io/optionstrategybuilder/" onclick="go(event,'Strategy Builder')" style="--cc:#ffb84d;">
+          <div class="corner-tl" style="border-color:#ffb84d;"></div><div class="corner-br" style="border-color:#ffb84d;"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div>
+            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#ffb84d,transparent);box-shadow:0 0 10px #ffb84d;"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(230,153,61,.06),transparent 70%);"></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🧮<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">STRATEGY</div>
             </div>
-            <div class="sc-card-name" style="color:#34d399;text-shadow:0 0 10px rgba(16,185,129,.3);">Option Strategy Builder</div>
+            <div class="sc-card-name" style="color:#ffb84d;text-shadow:0 0 10px rgba(230,153,61,.3);">Option Strategy Builder</div>
             <div class="sc-card-desc">Build and visualise options strategies — P&amp;L charts, Greeks, breakeven for any strike &amp; expiry.</div>
-            <div class="sc-card-footer" style="border-top-color:rgba(16,185,129,.1);">
-              <span class="sc-card-tag" style="border-color:rgba(16,185,129,.15);">NSE · P&amp;L · GREEKS</span>
-              <div class="sc-card-btn" style="color:#22cc22;"><div class="sc-card-btn-line" style="background:#22cc22;"></div>LAUNCH</div>
+            <div class="sc-card-footer" style="border-top-color:rgba(230,153,61,.1);">
+              <span class="sc-card-tag" style="border-color:rgba(230,153,61,.15);">NSE · P&amp;L · GREEKS</span>
+              <div class="sc-card-btn" style="color:#ffcf7a;"><div class="sc-card-btn-line" style="background:#ffcf7a;"></div>LAUNCH</div>
             </div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/Strategic_Nodes/" onclick="go(event,'S/R Strike Planner')" style="--cc:#34d399;">
-          <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
+        <a class="sc-card" href="https://krishnateja08.github.io/Strategic_Nodes/" onclick="go(event,'S/R Strike Planner')" style="--cc:#ffb84d;">
+          <div class="corner-tl" style="border-color:#ffb84d;"></div><div class="corner-br" style="border-color:#ffb84d;"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div>
+            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#ffb84d,transparent);box-shadow:0 0 10px #ffb84d;"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(230,153,61,.06),transparent 70%);"></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🎯<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">S/R LEVELS</div>
             </div>
-            <div class="sc-card-name" style="color:#34d399;text-shadow:0 0 10px rgba(16,185,129,.3);">S/R Strike Planner</div>
+            <div class="sc-card-name" style="color:#ffb84d;text-shadow:0 0 10px rgba(230,153,61,.3);">S/R Strike Planner</div>
             <div class="sc-card-desc">Identify key support &amp; resistance strike zones — plan entries, exits and hedge levels with precision.</div>
-            <div class="sc-card-footer" style="border-top-color:rgba(16,185,129,.1);">
-              <span class="sc-card-tag" style="border-color:rgba(16,185,129,.15);">NSE · S/R · STRIKES</span>
-              <div class="sc-card-btn" style="color:#22cc22;"><div class="sc-card-btn-line" style="background:#22cc22;"></div>LAUNCH</div>
+            <div class="sc-card-footer" style="border-top-color:rgba(230,153,61,.1);">
+              <span class="sc-card-tag" style="border-color:rgba(230,153,61,.15);">NSE · S/R · STRIKES</span>
+              <div class="sc-card-btn" style="color:#ffcf7a;"><div class="sc-card-btn-line" style="background:#ffcf7a;"></div>LAUNCH</div>
             </div>
           </div>
         </a>
@@ -805,13 +805,13 @@ function doLogout() {
   </div>
 
   <!-- GROUP 3 -->
-  <div class="sc-group" style="--ga:rgba(102,136,255,.2);--gb:rgba(102,136,255,.04);--gc:#6688ff;">
+  <div class="sc-group" style="--ga:rgba(127,217,146,.2);--gb:rgba(127,217,146,.04);--gc:#7fd992;">
     <div class="sc-inner">
-      <div class="sc-head" style="background:linear-gradient(90deg,rgba(6,13,30,.99),rgba(6,13,30,.85));">
-        <div class="sc-head-hex" style="border-color:#6688ff;box-shadow:0 0 14px rgba(102,136,255,.2);background:linear-gradient(135deg,rgba(102,136,255,.1),rgba(102,136,255,.04));">🌐</div>
+      <div class="sc-head" style="background:linear-gradient(90deg,rgba(4,10,4,.99),rgba(4,10,4,.85));">
+        <div class="sc-head-hex" style="border-color:#7fd992;box-shadow:0 0 14px rgba(127,217,146,.2);background:linear-gradient(135deg,rgba(127,217,146,.1),rgba(127,217,146,.04));">🌐</div>
         <div class="sc-head-info">
           <div class="sc-head-tag">GROUP 03 // MACRO &amp; GLOBAL MARKETS</div>
-          <div class="sc-head-name" style="color:#818cf8;text-shadow:0 0 12px rgba(102,136,255,.35);">GLOBAL INTELLIGENCE</div>
+          <div class="sc-head-name" style="color:#7fd992;text-shadow:0 0 12px rgba(127,217,146,.35);">GLOBAL INTELLIGENCE</div>
         </div>
         <div class="sc-head-right">
           <div class="sc-head-status"><span class="dot"></span>3 NODES ONLINE</div>
@@ -819,55 +819,55 @@ function doLogout() {
         </div>
       </div>
       <div class="sc-cards">
-        <a class="sc-card" href="https://krishnateja08.github.io/USA-SP500-Stocks-Review/" onclick="go(event,'S&P 500 Review')" style="--cc:#6688ff;">
-          <div class="corner-tl" style="border-color:#6688ff;"></div><div class="corner-br" style="border-color:#6688ff;"></div>
+        <a class="sc-card" href="https://krishnateja08.github.io/USA-SP500-Stocks-Review/" onclick="go(event,'S&P 500 Review')" style="--cc:#7fd992;">
+          <div class="corner-tl" style="border-color:#7fd992;"></div><div class="corner-br" style="border-color:#7fd992;"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#6688ff,transparent);box-shadow:0 0 10px #6688ff;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(51,68,204,.08),transparent 70%);"></div>
+            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#7fd992,transparent);box-shadow:0 0 10px #7fd992;"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(20,60,30,.08),transparent 70%);"></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🗽<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">GLOBAL</div>
             </div>
-            <div class="sc-card-name" style="color:#6688ff;text-shadow:0 0 10px rgba(51,68,204,.3);">USA S&amp;P 500 Review</div>
+            <div class="sc-card-name" style="color:#7fd992;text-shadow:0 0 10px rgba(20,60,30,.3);">USA S&amp;P 500 Review</div>
             <div class="sc-card-desc">Comprehensive S&amp;P 500 stock review — US market analysis, sector performance and signals.</div>
-            <div class="sc-card-footer" style="border-top-color:rgba(51,68,204,.1);">
-              <span class="sc-card-tag" style="border-color:rgba(51,68,204,.2);">NYSE · S&amp;P 500</span>
-              <div class="sc-card-btn" style="color:#6688ff;"><div class="sc-card-btn-line" style="background:#6688ff;"></div>LAUNCH</div>
+            <div class="sc-card-footer" style="border-top-color:rgba(20,60,30,.1);">
+              <span class="sc-card-tag" style="border-color:rgba(20,60,30,.2);">NYSE · S&amp;P 500</span>
+              <div class="sc-card-btn" style="color:#7fd992;"><div class="sc-card-btn-line" style="background:#7fd992;"></div>LAUNCH</div>
             </div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/Global_Market_News/" onclick="go(event,'Global Market News')" style="--cc:#ffd080;">
-          <div class="corner-tl" style="border-color:#ffd080;"></div><div class="corner-br" style="border-color:#ffd080;"></div>
+        <a class="sc-card" href="https://krishnateja08.github.io/Global_Market_News/" onclick="go(event,'Global Market News')" style="--cc:#ffcf7a;">
+          <div class="corner-tl" style="border-color:#ffcf7a;"></div><div class="corner-br" style="border-color:#ffcf7a;"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#ffd080,transparent);box-shadow:0 0 10px #ffd080;"></div>
+            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#ffcf7a,transparent);box-shadow:0 0 10px #ffcf7a;"></div>
             <div class="sc-card-glow" style="background:radial-gradient(rgba(255,208,128,.07),transparent 70%);"></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🌍<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">INTELLIGENCE</div>
             </div>
-            <div class="sc-card-name" style="color:#ffd080;text-shadow:0 0 10px rgba(255,208,128,.3);">Global Market News</div>
+            <div class="sc-card-name" style="color:#ffcf7a;text-shadow:0 0 10px rgba(255,208,128,.3);">Global Market News</div>
             <div class="sc-card-desc">Curated global market news — macro events, earnings, central bank decisions and market moves.</div>
             <div class="sc-card-footer" style="border-top-color:rgba(255,208,128,.1);">
               <span class="sc-card-tag" style="border-color:rgba(255,208,128,.2);">GLOBAL · NEWS</span>
-              <div class="sc-card-btn" style="color:#ffd080;"><div class="sc-card-btn-line" style="background:#ffd080;"></div>LAUNCH</div>
+              <div class="sc-card-btn" style="color:#ffcf7a;"><div class="sc-card-btn-line" style="background:#ffcf7a;"></div>LAUNCH</div>
             </div>
           </div>
         </a>
-        <a class="sc-card" href="https://krishnateja08.github.io/Stocks_News_Analyzer/" onclick="go(event,'Stocks News Analyzer')" style="--cc:#a78bfa;">
-          <div class="corner-tl" style="border-color:#a78bfa;"></div><div class="corner-br" style="border-color:#a78bfa;"></div>
+        <a class="sc-card" href="https://krishnateja08.github.io/Stocks_News_Analyzer/" onclick="go(event,'Stocks News Analyzer')" style="--cc:#cfe8cf;">
+          <div class="corner-tl" style="border-color:#cfe8cf;"></div><div class="corner-br" style="border-color:#cfe8cf;"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#a78bfa,transparent);box-shadow:0 0 10px #a78bfa;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(167,139,250,.08),transparent 70%);"></div>
+            <div class="sc-card-topbar" style="background:linear-gradient(90deg,#cfe8cf,transparent);box-shadow:0 0 10px #cfe8cf;"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(207,229,207,.08),transparent 70%);"></div>
             <div class="sc-card-top">
-              <div class="sc-card-ico-wrap" style="border-color:rgba(167,139,250,.35);"><div class="sc-card-ico">📰<div class="sc-card-pulse" style="background:#a78bfa;"></div></div></div>
-              <div class="sc-card-label" style="border-color:rgba(167,139,250,.25);color:rgba(167,139,250,.85);">NEWS · AI</div>
-              <div class="sc-card-pulse" style="background:#a78bfa;"></div>
+              <div class="sc-card-ico-wrap" style="border-color:rgba(207,229,207,.35);"><div class="sc-card-ico">📰<div class="sc-card-pulse" style="background:#cfe8cf;"></div></div></div>
+              <div class="sc-card-label" style="border-color:rgba(207,229,207,.25);color:rgba(207,229,207,.85);">NEWS · AI</div>
+              <div class="sc-card-pulse" style="background:#cfe8cf;"></div>
             </div>
-            <div class="sc-card-name" style="color:#a78bfa;text-shadow:0 0 10px rgba(167,139,250,.3);">Stocks News Analyzer</div>
+            <div class="sc-card-name" style="color:#cfe8cf;text-shadow:0 0 10px rgba(207,229,207,.3);">Stocks News Analyzer</div>
             <div class="sc-card-desc">AI-powered stock news analysis — sentiment scoring, market impact and real-time headline intelligence.</div>
-            <div class="sc-card-footer" style="border-top-color:rgba(167,139,250,.1);">
-              <span class="sc-card-tag" style="border-color:rgba(167,139,250,.2);color:rgba(167,139,250,.6);">GLOBAL · SENTIMENT</span>
-              <div class="sc-card-btn" style="color:#a78bfa;"><div class="sc-card-btn-line" style="background:#a78bfa;"></div>LAUNCH</div>
+            <div class="sc-card-footer" style="border-top-color:rgba(207,229,207,.1);">
+              <span class="sc-card-tag" style="border-color:rgba(207,229,207,.2);color:rgba(207,229,207,.6);">GLOBAL · SENTIMENT</span>
+              <div class="sc-card-btn" style="color:#cfe8cf;"><div class="sc-card-btn-line" style="background:#cfe8cf;"></div>LAUNCH</div>
             </div>
           </div>
         </a>
@@ -884,7 +884,7 @@ function doLogout() {
   ══════════════════════════════════════════════════════════ -->
   <div class="sc-group" style="--ga:rgba(251,191,36,.18);--gb:rgba(251,191,36,.04);--gc:#fbbf24;">
     <div class="sc-inner">
-      <div class="sc-head" style="background:linear-gradient(90deg,rgba(6,13,30,.99),rgba(6,13,30,.85));">
+      <div class="sc-head" style="background:linear-gradient(90deg,rgba(4,10,4,.99),rgba(4,10,4,.85));">
         <div class="sc-head-hex" style="border-color:#fbbf24;box-shadow:0 0 14px rgba(251,191,36,.25);background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(251,191,36,.04));">📚</div>
         <div class="sc-head-info">
           <div class="sc-head-tag">GROUP 04 // GUIDES &amp; EDUCATION</div>
@@ -895,7 +895,7 @@ function doLogout() {
           <div class="sc-head-nodes">LEARN · MASTER</div>
         </div>
       </div>
-      <div class="sc-cards-5">
+      <div class="sc-cards">
 
         <!-- GUIDE CARD 1: Technical Trading Guide -->
         <a class="sc-card" href="./technical_trading_guide.html" onclick="go(event,'Technical Trading Guide')" style="--cc:#fbbf24;">
