@@ -244,19 +244,21 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 
 /* ══ CARDS ══ */
 .sc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:14px;}
-.sc-cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:12px;}
-.sc-cards-4 .sc-card-inner{padding:13px 13px 12px;}
-.sc-cards-4 .sc-card-topbar{margin:-13px -13px 11px;}
-.sc-cards-4 .sc-card-chart{height:72px;margin:0 0 10px;}
-.sc-cards-4 .sc-card-name{font-size:16px;margin-bottom:5px;}
-.sc-cards-4 .sc-card-desc{font-size:13px;margin-bottom:10px;line-height:1.5;}
-.sc-cards-4 .sc-card-ico-wrap{width:30px;height:30px;}
-.sc-cards-4 .sc-card-ico{font-size:16px;}
-.sc-cards-4 .sc-card-top{margin-bottom:9px;gap:7px;}
-.sc-cards-4 .sc-card-label{font-size:11px;padding:2px 6px;}
-.sc-cards-4 .sc-card-tag{font-size:11px;padding:2px 6px;}
-.sc-cards-4 .sc-card-btn{font-size:12px;padding:5px 12px 5px 13px;}
-.sc-cards-4 .sc-card-footer{padding-top:8px;}
+.sc-cards-4{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:10px;}
+.sc-cards-4 .sc-card-inner{padding:10px 10px 9px;}
+.sc-cards-4 .sc-card-topbar{margin:-10px -10px 8px;}
+.sc-cards-4 .sc-card-chart{height:52px;margin:0 0 8px;border-radius:6px;}
+.sc-cards-4 .sc-card-name{font-size:14px;margin-bottom:4px;}
+.sc-cards-4 .sc-card-desc{font-size:12px;margin-bottom:8px;line-height:1.45;}
+.sc-cards-4 .sc-card-ico-wrap{width:26px;height:26px;border-radius:7px;}
+.sc-cards-4 .sc-card-ico{font-size:14px;}
+.sc-cards-4 .sc-card-top{margin-bottom:7px;gap:6px;}
+.sc-cards-4 .sc-card-label{font-size:10px;padding:1px 5px;letter-spacing:1px;}
+.sc-cards-4 .sc-card-tag{font-size:10px;padding:1px 5px;letter-spacing:1px;}
+.sc-cards-4 .sc-card-btn{font-size:11px;padding:4px 10px 4px 11px;}
+.sc-cards-4 .sc-card-footer{padding-top:7px;}
+@media(max-width:1500px){.sc-cards-4{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:900px){.sc-cards-4{grid-template-columns:repeat(2,1fr);}}
 .sc-cards-5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:12px;}
 .sc-cards-5 .sc-card-inner{padding:13px 13px 12px;}
 .sc-cards-5 .sc-card-topbar{margin:-13px -13px 11px;}
@@ -685,7 +687,7 @@ function doLogout() {
         <a class="sc-card" href="https://krishnateja08.github.io/Nifty_Indices_scanner/" onclick="go(event,'Nifty Indices Scanner')" style="--cc:#60a5fa;">
           <div class="corner-tl"></div><div class="corner-br"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
+            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:44px!important;height:44px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🔍<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">SCANNER</div>
@@ -726,7 +728,7 @@ function doLogout() {
         <a class="sc-card" href="https://krishnateja08.github.io/FII-DII_Pulse/" onclick="go(event,'FII/DII Pulse')" style="--cc:#f472b6;">
           <div class="corner-tl" style="border-color:#4d9fff;"></div><div class="corner-br" style="border-color:#4d9fff;"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
+            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:44px!important;height:44px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🏛️<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">INSTITUTIONAL</div>
@@ -793,7 +795,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:44px!important;height:44px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🧮<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">STRATEGY</div>
@@ -863,7 +865,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#ffd080;"></div><div class="corner-br" style="border-color:#ffd080;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#ffd080,transparent);box-shadow:0 0 10px #ffd080;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(255,208,128,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(255,208,128,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:44px!important;height:44px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🌍<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">INTELLIGENCE</div>
@@ -947,7 +949,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#fbbf24;"></div><div class="corner-br" style="border-color:#fbbf24;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#fbbf24,transparent);box-shadow:0 0 10px #fbbf24;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:44px!important;height:44px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap" style="border-color:rgba(251,191,36,.35);"><div class="sc-card-ico">📊<div class="sc-card-pulse" style="background:#fbbf24;"></div></div></div>
               <div class="sc-card-label" style="border-color:rgba(251,191,36,.25);color:rgba(251,191,36,.85);">PRICE ACTION · GUIDE</div>
@@ -1010,7 +1012,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#fbbf24;"></div><div class="corner-br" style="border-color:#fbbf24;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#fbbf24,transparent);box-shadow:0 0 10px #fbbf24;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:44px!important;height:44px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap" style="border-color:rgba(251,191,36,.35);"><div class="sc-card-ico">📈<div class="sc-card-pulse" style="background:#fbbf24;"></div></div></div>
               <div class="sc-card-label" style="border-color:rgba(251,191,36,.25);color:rgba(251,191,36,.85);">OI · TECHNICAL · GUIDE</div>
