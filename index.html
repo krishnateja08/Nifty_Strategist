@@ -243,7 +243,20 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .sc-head-nodes{font-size:13px;color:rgba(180,215,255,.95);margin-top:2px;font-family:'Space Mono',monospace;letter-spacing:1px;}
 
 /* ══ CARDS ══ */
-.sc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:14px;}
+.sc-cards{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:10px;}
+.sc-cards .sc-card-inner{padding:10px 10px 9px;}
+.sc-cards .sc-card-topbar{margin:-10px -10px 8px;}
+.sc-cards .sc-card-chart{height:52px;margin:0 0 8px;border-radius:6px;}
+.sc-cards .sc-card-name{font-size:14px;margin-bottom:4px;}
+.sc-cards .sc-card-desc{font-size:12px;margin-bottom:8px;line-height:1.45;}
+.sc-cards .sc-card-ico-wrap{width:26px;height:26px;border-radius:7px;}
+.sc-cards .sc-card-ico{font-size:14px;}
+.sc-cards .sc-card-top{margin-bottom:7px;gap:6px;}
+.sc-cards .sc-card-label{font-size:10px;padding:1px 5px;letter-spacing:1px;}
+.sc-cards .sc-card-tag{font-size:10px;padding:1px 5px;letter-spacing:1px;}
+.sc-cards .sc-card-btn{font-size:11px;padding:4px 10px 4px 11px;}
+.sc-cards .sc-card-footer{padding-top:7px;}
+@media(max-width:1500px){.sc-cards{grid-template-columns:repeat(4,1fr);}}
 .sc-cards-4{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:10px;}
 .sc-cards-4 .sc-card-inner{padding:10px 10px 9px;}
 .sc-cards-4 .sc-card-topbar{margin:-10px -10px 8px;}
