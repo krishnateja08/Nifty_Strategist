@@ -134,7 +134,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .mbar{
   background:linear-gradient(180deg,rgba(8,15,38,.97) 0%,rgba(6,12,30,.96) 100%);
   border-bottom:1px solid rgba(96,165,250,.1);
-  padding:4px 14px 5px;
+  padding:3px 14px 3px;
   display:flex;flex-direction:column;gap:0;position:relative;
   box-shadow:0 2px 12px rgba(0,0,20,.6);
 }
@@ -160,23 +160,23 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .mbar-items{display:flex;overflow-x:visible;overflow-y:hidden;scrollbar-width:none;gap:10px;padding:3px 0;min-width:0;flex-shrink:0;}
 .mbar-items::-webkit-scrollbar{display:none;}
 .mbar-item{
-  position:relative;flex-shrink:0;display:flex;flex-direction:column;gap:2px;
+  position:relative;flex-shrink:0;display:flex;flex-direction:column;gap:1px;
   background:linear-gradient(135deg,rgba(10,20,50,.7),rgba(5,10,25,.8));
   border-left:2px solid var(--ic,var(--cyan));
-  padding:5px 12px;min-width:155px;
+  padding:3px 8px;min-width:96px;
   border-radius:2px;box-shadow:inset 0 0 8px rgba(0,0,10,.3);
   transition:transform .15s,box-shadow .15s;
 }
 .mbar-item:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,20,.5),inset 0 0 12px rgba(0,0,20,.2);}
-.mbar-name{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;color:rgba(160,200,255,.65);font-weight:700;}
-.mbar-val{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:#e8f4ff;letter-spacing:.3px;transition:color .2s;}
+.mbar-name{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:rgba(160,200,255,.65);font-weight:700;}
+.mbar-val{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:#e8f4ff;letter-spacing:.2px;transition:color .2s;}
 @keyframes valUpdate{0%{color:var(--cyan);transform:scale(1.04)}100%{color:#e8f4ff;transform:scale(1)}}
 .val-updated{animation:valUpdate .3s ease-out;}
-.mbar-chg{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.5px;font-weight:700;}
+.mbar-chg{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.3px;font-weight:700;}
 .mbar-chg.up{color:#4ade80;}
 .mbar-chg.dn{color:#f87171;}
 .mbar-chg.vix{color:#ffd080;}
-.mbar-src{font-family:'Space Mono',monospace;font-size:11px;color:rgba(96,165,250,.35);position:absolute;bottom:2px;right:4px;letter-spacing:1px;}
+.mbar-src{font-family:'Space Mono',monospace;font-size:9px;color:rgba(96,165,250,.35);position:absolute;bottom:1px;right:3px;letter-spacing:.5px;}
 .mbar-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(96,165,250,.08),transparent);margin:2px 0;}
 
 /* ══ TICKER ══ */
@@ -193,24 +193,24 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .ti .dn{color:#f87171;}
 
 /* ══ STATS ══ */
-.stats{display:flex;flex-wrap:wrap;gap:12px;padding:12px 14px;background:rgba(8,15,38,.4);}
+.stats{display:flex;flex-wrap:wrap;gap:8px;padding:8px 14px;background:rgba(8,15,38,.4);}
 .sb{
-  flex:1;min-width:180px;
+  flex:1;min-width:120px;
   background:linear-gradient(135deg,rgba(13,25,56,.95),rgba(8,16,40,.97));
-  border:1px solid rgba(96,165,250,.12);border-radius:6px;
-  padding:10px 14px;position:relative;overflow:hidden;
+  border:1px solid rgba(96,165,250,.12);border-radius:5px;
+  padding:6px 10px;position:relative;overflow:hidden;
   transition:transform .2s,box-shadow .2s;
 }
 .sb:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,20,.5),0 0 0 1px rgba(96,165,250,.15);}
 .sb::before{
-  content:var(--sg);position:absolute;top:8px;right:8px;
-  font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:900;
+  content:var(--sg);position:absolute;top:4px;right:6px;
+  font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:900;
   color:var(--sc,var(--cyan));opacity:.06;z-index:0;pointer-events:none;
   line-height:1;
 }
-.sb .l{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:rgba(160,200,255,.6);margin-bottom:5px;position:relative;z-index:1;font-weight:700;}
-.sb .v{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#e8f4ff;margin-bottom:3px;position:relative;z-index:1;letter-spacing:.5px;}
-.sb .s{font-family:'Space Mono',monospace;font-size:11px;color:rgba(148,186,255,.5);position:relative;z-index:1;letter-spacing:1px;}
+.sb .l{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1.2px;color:rgba(160,200,255,.6);margin-bottom:2px;position:relative;z-index:1;font-weight:700;}
+.sb .v{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#e8f4ff;margin-bottom:1px;position:relative;z-index:1;letter-spacing:.3px;}
+.sb .s{font-family:'Space Mono',monospace;font-size:9px;color:rgba(148,186,255,.5);position:relative;z-index:1;letter-spacing:.5px;}
 
 /* ══ GROUP TABS ══ */
 .tabbar{display:flex;align-items:center;gap:10px;margin:12px 14px 0;flex-wrap:wrap;}
@@ -401,9 +401,9 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
   .pill{font-size:11px;padding:4px 8px;}
   .mbar{padding:4px 10px;}
   .mbar-items{gap:8px;}
-  .mbar-item{min-width:120px;padding:3px 8px;}
+  .mbar-item{min-width:80px;padding:3px 7px;}
   .stats{gap:10px;padding:10px;}
-  .sb{min-width:150px;padding:8px 12px;}
+  .sb{min-width:100px;padding:6px 9px;}
   .sec{padding:6px 10px;margin:10px 10px 0;}
   .groups{margin:10px 10px 12px;}
   .tabbar{margin:10px 10px 0;gap:8px;}
@@ -424,12 +424,12 @@ footer{background:rgba(8,15,40,.95);border-top:1px solid var(--bc);padding:0;fon
   .mbar-row{gap:0;}
   .mbar-label{min-width:70px;font-size:11px;}
   .mbar-items{gap:6px;}
-  .mbar-item{min-width:110px;padding:3px 7px;}
-  .mbar-name{font-size:11px;}
-  .mbar-val{font-size:14px;}
-  .mbar-chg{font-size:11px;}
+  .mbar-item{min-width:70px;padding:2px 6px;}
+  .mbar-name{font-size:8px;}
+  .mbar-val{font-size:11px;}
+  .mbar-chg{font-size:9px;}
   .stats{flex-direction:column;gap:8px;padding:8px;}
-  .sb{min-width:0;padding:8px 10px;}
+  .sb{min-width:0;padding:6px 8px;}
   .sec{margin:8px 8px 0;padding:6px 8px;}
   .groups{margin:8px 8px 10px;}
   .tabbar{margin:8px 8px 0;gap:6px;}
