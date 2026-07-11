@@ -15,7 +15,6 @@
   --bc:rgba(96,165,250,.15);--bp:rgba(96,165,250,.08);
   --b1:rgba(96,165,250,.07);--b2:rgba(96,165,250,.12);
   --tx:#cce0ff;--t2:rgba(96,165,250,.75);--t3:rgba(96,165,250,.45);
-  --chart-svg:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 82'><path d='M0 62 L18 54 L34 60 L50 40 L66 46 L84 24 L100 30 L118 14 L134 20 L150 6 L150 82 L0 82 Z'/></svg>");
 }
 
 html,body{
@@ -279,7 +278,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .sc-card:hover .sc-card-topbar{opacity:1;}
 .sc-card-glow{position:absolute;top:-20px;right:-20px;width:90px;height:90px;border-radius:50%;background:radial-gradient(rgba(77,159,255,.04),transparent 70%);pointer-events:none;z-index:1;opacity:.5;}
 .sc-card-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.sc-card-ico-wrap{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.03);border:1px solid var(--cc,rgba(77,159,255,.28));border-radius:7px;box-shadow:0 0 12px rgba(96,165,250,.05),inset 0 0 8px rgba(96,165,250,.03);position:relative;overflow:hidden;}
+.sc-card-ico-wrap{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cc,#60a5fa) 0%,rgba(10,20,50,.9) 130%);border:1px solid var(--cc,rgba(77,159,255,.45));border-radius:9px;box-shadow:0 3px 10px -2px var(--cc,rgba(96,165,250,.5)),inset 0 0 8px rgba(255,255,255,.08);position:relative;overflow:hidden;}
 .sc-card-ico-wrap::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.06),transparent 60%);}
 .sc-card-ico{font-size:21px;position:relative;z-index:1;}
 .sc-card-ring{display:none;}
@@ -299,10 +298,12 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .sc-card-btn-line{display:none;}
 .sc-card:hover .sc-card-btn{transform:translateY(-1px);box-shadow:0 8px 20px -3px var(--cc,var(--cyan)),inset 0 1px 0 rgba(255,255,255,.35);}
 .sc-card:hover .sc-card-btn::after{transform:translateX(3px);}
-.sc-card-chart{position:absolute;right:-8px;bottom:-6px;width:150px;height:82px;z-index:0;pointer-events:none;
-  background:var(--cc,var(--cyan));opacity:.16;
-  -webkit-mask:var(--chart-svg) no-repeat right bottom/contain;mask:var(--chart-svg) no-repeat right bottom/contain;}
-.sc-card-inner>*{position:relative;}
+.sc-card-chart{width:100%;height:96px;margin:0 0 12px;border-radius:8px;overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0)),rgba(6,14,36,.5);
+  border:1px solid rgba(96,165,250,.08);display:flex;align-items:center;justify-content:center;}
+.sc-card-chart svg{display:block;width:100%;height:100%;color:var(--cc,var(--cyan));}
+.sc-cards-5 .sc-card-chart{height:66px;margin-bottom:9px;}
+.sc-cards-4 .sc-card-chart{height:84px;}
 .new-badge{position:absolute;top:8px;right:8px;z-index:10;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.5px;color:#fff;background:var(--grn);padding:2px 6px;box-shadow:0 0 10px rgba(16,185,129,.6);border-radius:2px;animation:newbadge 2s ease-in-out infinite;}
 @keyframes newbadge{0%,100%{box-shadow:0 0 10px rgba(16,185,129,.6)}50%{box-shadow:0 0 20px rgba(16,185,129,.9),0 0 35px rgba(16,185,129,.4)}}
 @keyframes rpl{0%{transform:scale(0);opacity:.35}100%{transform:scale(4);opacity:0}}
@@ -644,7 +645,7 @@ function doLogout() {
         <a class="sc-card" href="https://krishnateja08.github.io/Nifty_50_Stock_Analyzer/" onclick="go(event,'Nifty Stocks Analyzer')" style="--cc:#60a5fa;">
           <div class="corner-tl"></div><div class="corner-br"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><defs><linearGradient id="ga0" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="currentColor" stop-opacity=".55"/><stop offset="100%" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18 L280,96 L0,96 Z" fill="url(#ga0)"/><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="245" cy="10" r="3.5" fill="currentColor"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">📈<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">ANALYSIS</div>
@@ -658,7 +659,7 @@ function doLogout() {
         <a class="sc-card" href="https://krishnateja08.github.io/BTST-Screener/" onclick="go(event,'BTST Screener')" style="--cc:#60a5fa;">
           <div class="corner-tl"></div><div class="corner-br"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><rect x="14" y="50" width="20" height="40" rx="3" fill="currentColor" opacity=".35"/><rect x="48" y="30" width="20" height="60" rx="3" fill="currentColor" opacity=".55"/><rect x="82" y="55" width="20" height="35" rx="3" fill="currentColor" opacity=".3"/><rect x="116" y="16" width="20" height="74" rx="3" fill="currentColor" opacity=".75"/><rect x="150" y="40" width="20" height="50" rx="3" fill="currentColor" opacity=".4"/><rect x="184" y="6" width="20" height="84" rx="3" fill="currentColor" opacity=".9"/><rect x="218" y="45" width="20" height="45" rx="3" fill="currentColor" opacity=".35"/><rect x="252" y="25" width="20" height="65" rx="3" fill="currentColor" opacity=".6"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🎯<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">BTST</div>
@@ -672,7 +673,7 @@ function doLogout() {
         <a class="sc-card" href="https://krishnateja08.github.io/Nifty_Indices_scanner/" onclick="go(event,'Nifty Indices Scanner')" style="--cc:#60a5fa;">
           <div class="corner-tl"></div><div class="corner-br"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🔍<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">SCANNER</div>
@@ -686,7 +687,7 @@ function doLogout() {
         <a class="sc-card" href="https://krishnateja08.github.io/Trendbreak/" onclick="go(event,'Trendbreak')" style="--cc:#60a5fa;">
           <div class="corner-tl"></div><div class="corner-br"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><defs><linearGradient id="ga3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="currentColor" stop-opacity=".55"/><stop offset="100%" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18 L280,96 L0,96 Z" fill="url(#ga3)"/><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="245" cy="10" r="3.5" fill="currentColor"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">⚡<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">TRENDBREAK</div>
@@ -700,7 +701,7 @@ function doLogout() {
         <a class="sc-card" href="https://krishnateja08.github.io/Alphascreener/" onclick="go(event,'AlphaScreener')" style="--cc:#60a5fa;">
           <div class="corner-tl" style="border-color:#4d9fff;"></div><div class="corner-br" style="border-color:#4d9fff;"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><rect x="14" y="50" width="20" height="40" rx="3" fill="currentColor" opacity=".35"/><rect x="48" y="30" width="20" height="60" rx="3" fill="currentColor" opacity=".55"/><rect x="82" y="55" width="20" height="35" rx="3" fill="currentColor" opacity=".3"/><rect x="116" y="16" width="20" height="74" rx="3" fill="currentColor" opacity=".75"/><rect x="150" y="40" width="20" height="50" rx="3" fill="currentColor" opacity=".4"/><rect x="184" y="6" width="20" height="84" rx="3" fill="currentColor" opacity=".9"/><rect x="218" y="45" width="20" height="45" rx="3" fill="currentColor" opacity=".35"/><rect x="252" y="25" width="20" height="65" rx="3" fill="currentColor" opacity=".6"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🎛️<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">SCREENER</div>
@@ -713,7 +714,7 @@ function doLogout() {
         <a class="sc-card" href="https://krishnateja08.github.io/FII-DII_Pulse/" onclick="go(event,'FII/DII Pulse')" style="--cc:#60a5fa;">
           <div class="corner-tl" style="border-color:#4d9fff;"></div><div class="corner-br" style="border-color:#4d9fff;"></div>
           <div class="sc-card-inner">
-            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-topbar"></div><div class="sc-card-glow"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🏛️<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">INSTITUTIONAL</div>
@@ -746,7 +747,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.08),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.08),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><defs><linearGradient id="ga6" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="currentColor" stop-opacity=".55"/><stop offset="100%" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18 L280,96 L0,96 Z" fill="url(#ga6)"/><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="245" cy="10" r="3.5" fill="currentColor"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">⛓️<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">OPTIONS</div>
@@ -763,7 +764,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.08),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.08),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><rect x="14" y="50" width="20" height="40" rx="3" fill="currentColor" opacity=".35"/><rect x="48" y="30" width="20" height="60" rx="3" fill="currentColor" opacity=".55"/><rect x="82" y="55" width="20" height="35" rx="3" fill="currentColor" opacity=".3"/><rect x="116" y="16" width="20" height="74" rx="3" fill="currentColor" opacity=".75"/><rect x="150" y="40" width="20" height="50" rx="3" fill="currentColor" opacity=".4"/><rect x="184" y="6" width="20" height="84" rx="3" fill="currentColor" opacity=".9"/><rect x="218" y="45" width="20" height="45" rx="3" fill="currentColor" opacity=".35"/><rect x="252" y="25" width="20" height="65" rx="3" fill="currentColor" opacity=".6"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🏦<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">BANK · FIN OPT</div>
@@ -780,7 +781,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🧮<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">STRATEGY</div>
@@ -797,7 +798,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#34d399;"></div><div class="corner-br" style="border-color:#34d399;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#34d399,transparent);box-shadow:0 0 10px #34d399;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(16,185,129,.06),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><defs><linearGradient id="ga9" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="currentColor" stop-opacity=".55"/><stop offset="100%" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18 L280,96 L0,96 Z" fill="url(#ga9)"/><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="245" cy="10" r="3.5" fill="currentColor"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🎯<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">S/R LEVELS</div>
@@ -833,7 +834,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#6688ff;"></div><div class="corner-br" style="border-color:#6688ff;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#6688ff,transparent);box-shadow:0 0 10px #6688ff;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(51,68,204,.08),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(51,68,204,.08),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><rect x="14" y="50" width="20" height="40" rx="3" fill="currentColor" opacity=".35"/><rect x="48" y="30" width="20" height="60" rx="3" fill="currentColor" opacity=".55"/><rect x="82" y="55" width="20" height="35" rx="3" fill="currentColor" opacity=".3"/><rect x="116" y="16" width="20" height="74" rx="3" fill="currentColor" opacity=".75"/><rect x="150" y="40" width="20" height="50" rx="3" fill="currentColor" opacity=".4"/><rect x="184" y="6" width="20" height="84" rx="3" fill="currentColor" opacity=".9"/><rect x="218" y="45" width="20" height="45" rx="3" fill="currentColor" opacity=".35"/><rect x="252" y="25" width="20" height="65" rx="3" fill="currentColor" opacity=".6"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🗽<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">GLOBAL</div>
@@ -850,7 +851,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#ffd080;"></div><div class="corner-br" style="border-color:#ffd080;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#ffd080,transparent);box-shadow:0 0 10px #ffd080;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(255,208,128,.07),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(255,208,128,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap"><div class="sc-card-ico">🌍<div class="sc-card-pulse"></div></div></div>
               <div class="sc-card-label">INTELLIGENCE</div>
@@ -867,7 +868,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#a78bfa;"></div><div class="corner-br" style="border-color:#a78bfa;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#a78bfa,transparent);box-shadow:0 0 10px #a78bfa;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(167,139,250,.08),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(167,139,250,.08),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><defs><linearGradient id="ga12" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="currentColor" stop-opacity=".55"/><stop offset="100%" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18 L280,96 L0,96 Z" fill="url(#ga12)"/><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="245" cy="10" r="3.5" fill="currentColor"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap" style="border-color:rgba(167,139,250,.35);"><div class="sc-card-ico">📰<div class="sc-card-pulse" style="background:#a78bfa;"></div></div></div>
               <div class="sc-card-label" style="border-color:rgba(167,139,250,.25);color:rgba(167,139,250,.85);">NEWS · AI</div>
@@ -913,7 +914,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#fbbf24;"></div><div class="corner-br" style="border-color:#fbbf24;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#fbbf24,transparent);box-shadow:0 0 10px #fbbf24;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><rect x="14" y="50" width="20" height="40" rx="3" fill="currentColor" opacity=".35"/><rect x="48" y="30" width="20" height="60" rx="3" fill="currentColor" opacity=".55"/><rect x="82" y="55" width="20" height="35" rx="3" fill="currentColor" opacity=".3"/><rect x="116" y="16" width="20" height="74" rx="3" fill="currentColor" opacity=".75"/><rect x="150" y="40" width="20" height="50" rx="3" fill="currentColor" opacity=".4"/><rect x="184" y="6" width="20" height="84" rx="3" fill="currentColor" opacity=".9"/><rect x="218" y="45" width="20" height="45" rx="3" fill="currentColor" opacity=".35"/><rect x="252" y="25" width="20" height="65" rx="3" fill="currentColor" opacity=".6"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap" style="border-color:rgba(251,191,36,.35);"><div class="sc-card-ico">📉<div class="sc-card-pulse" style="background:#fbbf24;"></div></div></div>
               <div class="sc-card-label" style="border-color:rgba(251,191,36,.25);color:rgba(251,191,36,.85);">TECHNICAL · GUIDE</div>
@@ -934,7 +935,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#fbbf24;"></div><div class="corner-br" style="border-color:#fbbf24;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#fbbf24,transparent);box-shadow:0 0 10px #fbbf24;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap" style="border-color:rgba(251,191,36,.35);"><div class="sc-card-ico">📊<div class="sc-card-pulse" style="background:#fbbf24;"></div></div></div>
               <div class="sc-card-label" style="border-color:rgba(251,191,36,.25);color:rgba(251,191,36,.85);">PRICE ACTION · GUIDE</div>
@@ -955,7 +956,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#fbbf24;"></div><div class="corner-br" style="border-color:#fbbf24;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#fbbf24,transparent);box-shadow:0 0 10px #fbbf24;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><defs><linearGradient id="ga15" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="currentColor" stop-opacity=".55"/><stop offset="100%" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18 L280,96 L0,96 Z" fill="url(#ga15)"/><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="245" cy="10" r="3.5" fill="currentColor"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap" style="border-color:rgba(251,191,36,.35);"><div class="sc-card-ico">🎯<div class="sc-card-pulse" style="background:#fbbf24;"></div></div></div>
               <div class="sc-card-label" style="border-color:rgba(251,191,36,.25);color:rgba(251,191,36,.85);">OPTIONS · GUIDE</div>
@@ -976,7 +977,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#fbbf24;"></div><div class="corner-br" style="border-color:#fbbf24;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#fbbf24,transparent);box-shadow:0 0 10px #fbbf24;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><rect x="14" y="50" width="20" height="40" rx="3" fill="currentColor" opacity=".35"/><rect x="48" y="30" width="20" height="60" rx="3" fill="currentColor" opacity=".55"/><rect x="82" y="55" width="20" height="35" rx="3" fill="currentColor" opacity=".3"/><rect x="116" y="16" width="20" height="74" rx="3" fill="currentColor" opacity=".75"/><rect x="150" y="40" width="20" height="50" rx="3" fill="currentColor" opacity=".4"/><rect x="184" y="6" width="20" height="84" rx="3" fill="currentColor" opacity=".9"/><rect x="218" y="45" width="20" height="45" rx="3" fill="currentColor" opacity=".35"/><rect x="252" y="25" width="20" height="65" rx="3" fill="currentColor" opacity=".6"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap" style="border-color:rgba(251,191,36,.35);"><div class="sc-card-ico">🔬<div class="sc-card-pulse" style="background:#fbbf24;"></div></div></div>
               <div class="sc-card-label" style="border-color:rgba(251,191,36,.25);color:rgba(251,191,36,.85);">GREEKS · GUIDE</div>
@@ -997,7 +998,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#fbbf24;"></div><div class="corner-br" style="border-color:#fbbf24;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#fbbf24,transparent);box-shadow:0 0 10px #fbbf24;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 96 96" style="width:76px!important;height:76px!important;"><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".9" stroke-dasharray="85 128" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".5" stroke-dasharray="60 153" stroke-dashoffset="-89" stroke-linecap="round" transform="rotate(-90 48 48)"/><circle cx="48" cy="48" r="34" fill="none" stroke="currentColor" stroke-width="13" opacity=".25" stroke-dasharray="48 165" stroke-dashoffset="-153" stroke-linecap="round" transform="rotate(-90 48 48)"/><text x="48" y="52" text-anchor="middle" font-family="Space Mono,monospace" font-size="13" font-weight="700" fill="currentColor" opacity=".85">62%</text></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap" style="border-color:rgba(251,191,36,.35);"><div class="sc-card-ico">📈<div class="sc-card-pulse" style="background:#fbbf24;"></div></div></div>
               <div class="sc-card-label" style="border-color:rgba(251,191,36,.25);color:rgba(251,191,36,.85);">OI · TECHNICAL · GUIDE</div>
@@ -1018,7 +1019,7 @@ function doLogout() {
           <div class="corner-tl" style="border-color:#fbbf24;"></div><div class="corner-br" style="border-color:#fbbf24;"></div>
           <div class="sc-card-inner">
             <div class="sc-card-topbar" style="background:linear-gradient(90deg,#fbbf24,transparent);box-shadow:0 0 10px #fbbf24;"></div>
-            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"></div>
+            <div class="sc-card-glow" style="background:radial-gradient(rgba(251,191,36,.07),transparent 70%);"></div><div class="sc-card-chart"><svg viewBox="0 0 280 96" preserveAspectRatio="none"><defs><linearGradient id="ga18" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="currentColor" stop-opacity=".55"/><stop offset="100%" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18 L280,96 L0,96 Z" fill="url(#ga18)"/><path d="M0,72 L35,58 L70,64 L105,36 L140,46 L175,20 L210,30 L245,10 L280,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="245" cy="10" r="3.5" fill="currentColor"/></svg></div>
             <div class="sc-card-top">
               <div class="sc-card-ico-wrap" style="border-color:rgba(251,191,36,.35);"><div class="sc-card-ico">🏆<div class="sc-card-pulse" style="background:#fbbf24;"></div></div></div>
               <div class="sc-card-label" style="border-color:rgba(251,191,36,.25);color:rgba(251,191,36,.85);">ADVANCED · GUIDE</div>
