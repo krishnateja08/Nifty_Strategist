@@ -212,6 +212,25 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
 .sb .v{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#e8f4ff;margin-bottom:3px;position:relative;z-index:1;letter-spacing:.5px;}
 .sb .s{font-family:'Space Mono',monospace;font-size:11px;color:rgba(148,186,255,.5);position:relative;z-index:1;letter-spacing:1px;}
 
+/* ══ GROUP TABS ══ */
+.tabbar{display:flex;align-items:center;gap:10px;margin:12px 14px 0;flex-wrap:wrap;}
+.tab-btn{
+  font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;letter-spacing:.5px;
+  color:rgba(180,215,255,.65);background:rgba(10,20,50,.7);
+  border:1px solid rgba(96,165,250,.15);border-radius:8px;padding:9px 18px;
+  display:flex;align-items:center;gap:8px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
+}
+.tab-btn .tab-dot{width:7px;height:7px;border-radius:50%;background:var(--tc,var(--cyan));box-shadow:0 0 6px var(--tc,var(--cyan));flex-shrink:0;}
+.tab-btn:hover{border-color:rgba(96,165,250,.35);color:rgba(220,235,255,.9);}
+.tab-btn.active{
+  color:#fff;border-color:var(--tc,var(--cyan));background:rgba(10,20,50,.95);
+  box-shadow:0 0 0 1px var(--tc,var(--cyan)),0 6px 20px -6px var(--tc,var(--cyan));
+}
+.tab-btn.active::after{content:'';position:absolute;left:12px;right:12px;bottom:0;height:2px;
+  background:var(--tc,var(--cyan));box-shadow:0 0 8px var(--tc,var(--cyan));}
+.sc-group{display:none;}
+.sc-group.active{display:block;}
+
 /* ══ SECTION ══ */
 .sec{
   background:linear-gradient(90deg,rgba(8,15,38,.9),rgba(10,20,50,.8));
@@ -651,11 +670,19 @@ function doLogout() {
   <div class="sec-bdg">14/14 ONLINE</div>
 </div>
 
+<!-- ══ GROUP TABS ══ -->
+<div class="tabbar" id="tabbar">
+  <button class="tab-btn active" style="--tc:#60a5fa;" onclick="switchGroup('grp-1',this)"><span class="tab-dot"></span>NSE Analytics Suite</button>
+  <button class="tab-btn" style="--tc:#34d399;" onclick="switchGroup('grp-2',this)"><span class="tab-dot"></span>Options &amp; Derivatives</button>
+  <button class="tab-btn" style="--tc:#818cf8;" onclick="switchGroup('grp-3',this)"><span class="tab-dot"></span>Global Markets</button>
+  <button class="tab-btn" style="--tc:#fbbf24;" onclick="switchGroup('grp-4',this)"><span class="tab-dot"></span>Knowledge Base</button>
+</div>
+
 <!-- ══ GROUPED PODS ══ -->
 <div class="groups">
 
   <!-- GROUP 1 -->
-  <div class="sc-group" style="--ga:rgba(96,165,250,.18);--gb:rgba(96,165,250,.04);--gc:#60a5fa;">
+  <div class="sc-group active" id="grp-1" style="--ga:rgba(96,165,250,.18);--gb:rgba(96,165,250,.04);--gc:#60a5fa;">
     <div class="sc-inner">
       <div class="sc-head">
         <div class="sc-head-hex" style="border-color:#4d9fff;box-shadow:0 0 14px rgba(77,159,255,.25);">📊</div>
@@ -756,7 +783,7 @@ function doLogout() {
   </div>
 
   <!-- GROUP 2 — OPTIONS & DERIVATIVES DESK -->
-  <div class="sc-group" style="--ga:rgba(16,185,129,.2);--gb:rgba(16,185,129,.04);--gc:#10b981;">
+  <div class="sc-group" id="grp-2" style="--ga:rgba(16,185,129,.2);--gb:rgba(16,185,129,.04);--gc:#10b981;">
     <div class="sc-inner">
       <div class="sc-head" style="background:linear-gradient(90deg,rgba(6,13,30,.99),rgba(6,13,30,.85));">
         <div class="sc-head-hex" style="border-color:#10b981;box-shadow:0 0 14px rgba(16,185,129,.25);background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.04));">⛓️</div>
@@ -843,7 +870,7 @@ function doLogout() {
   </div>
 
   <!-- GROUP 3 -->
-  <div class="sc-group" style="--ga:rgba(102,136,255,.2);--gb:rgba(102,136,255,.04);--gc:#6688ff;">
+  <div class="sc-group" id="grp-3" style="--ga:rgba(102,136,255,.2);--gb:rgba(102,136,255,.04);--gc:#6688ff;">
     <div class="sc-inner">
       <div class="sc-head" style="background:linear-gradient(90deg,rgba(6,13,30,.99),rgba(6,13,30,.85));">
         <div class="sc-head-hex" style="border-color:#6688ff;box-shadow:0 0 14px rgba(102,136,255,.2);background:linear-gradient(135deg,rgba(102,136,255,.1),rgba(102,136,255,.04));">🌐</div>
@@ -920,7 +947,7 @@ function doLogout() {
        bump the "X GUIDE(S) ONLINE" count in sc-head-status,
        and switch .sc-cards → .sc-cards-4 when you have 4+ guides.
   ══════════════════════════════════════════════════════════ -->
-  <div class="sc-group" style="--ga:rgba(251,191,36,.18);--gb:rgba(251,191,36,.04);--gc:#fbbf24;">
+  <div class="sc-group" id="grp-4" style="--ga:rgba(251,191,36,.18);--gb:rgba(251,191,36,.04);--gc:#fbbf24;">
     <div class="sc-inner">
       <div class="sc-head" style="background:linear-gradient(90deg,rgba(6,13,30,.99),rgba(6,13,30,.85));">
         <div class="sc-head-hex" style="border-color:#fbbf24;box-shadow:0 0 14px rgba(251,191,36,.25);background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(251,191,36,.04));">📚</div>
@@ -1239,6 +1266,12 @@ function closeViewer(fromPopState){viewer.classList.remove('open');document.body
 window.addEventListener('popstate',function(){if(viewer.classList.contains('open'))closeViewer(true);});
 if(location.hash==='#node'){history.replaceState(null,'',location.pathname);}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&viewer.classList.contains('open'))closeViewer(false);});
+function switchGroup(id,btn){
+  document.querySelectorAll('.sc-group').forEach(function(g){g.classList.toggle('active',g.id===id);});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  window.scrollTo({top:document.getElementById('tabbar').getBoundingClientRect().top+window.scrollY-8,behavior:'smooth'});
+}
 function go(e,name){
   e.preventDefault();var card=e.currentTarget,url=card.href;
   sessionStorage.setItem('lo',name);document.getElementById('lc').textContent=name;
