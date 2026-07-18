@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trader's Playbook — Enhanced</title>
+<style>
+  :root {
+    --bg: #0d0f12;
+    --bg2: #13161b;
+    --bg3: #1a1e25;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #e8eaf0;
+    --muted: #7a8090;
+    --dim: #4a5060;
+    --green: #26d97f;
+    --green-dim: rgba(38,217,127,0.12);
+    --green-border: rgba(38,217,127,0.25);
+    --red: #f0504a;
+    --red-dim: rgba(240,80,74,0.12);
+    --red-border: rgba(240,80,74,0.25);
+    --amber: #f5a623;
+    --amber-dim: rgba(245,166,35,0.12);
+    --amber-border: rgba(245,166,35,0.25);
+    --blue: #4d9cf6;
+    --blue-dim: rgba(77,156,246,0.12);
+    --blue-border: rgba(77,156,246,0.25);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.6; min-height: 100vh; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(13,15,18,0.92); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 0; height: 52px; }
+  .nav-logo { font-size: 15px; font-weight: 600; color: var(--text); margin-right: 28px; white-space: nowrap; letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--green); }
+  .nav-tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab { padding: 6px 14px; border-radius: var(--radius-sm); font-size: 13px; color: var(--muted); cursor: pointer; white-space: nowrap; border: none; background: none; transition: color 0.15s, background 0.15s; }
+  .nav-tab:hover, .nav-tab.active { color: var(--text); background: var(--bg3); }
+
+  .hero { padding: 48px 24px 32px; max-width: 960px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
+  .hero h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--text); margin-bottom: 14px; }
+  .hero h1 em { color: var(--green); font-style: normal; }
+  .hero-sub { font-size: 15px; color: var(--muted); max-width: 560px; line-height: 1.7; }
+  .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--border); color: var(--muted); background: var(--bg3); }
+
+  .section { max-width: 960px; margin: 0 auto; padding: 0 24px 48px; }
+  .section-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; padding-top: 16px; border-top: 0.5px solid var(--border); }
+  .section-title { font-size: 16px; font-weight: 600; color: var(--text); }
+  .section-count { font-size: 12px; color: var(--dim); }
+
+  .grid { display: grid; gap: 14px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); }
+
+  .card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--border-hover); }
+  .card-top { padding: 18px 20px 14px; }
+  .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .card-meta { display: flex; flex-direction: column; gap: 6px; }
+  .card-title { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; }
+  .badge-bull { background: var(--green-dim); color: var(--green); border: 0.5px solid var(--green-border); }
+  .badge-bear { background: var(--red-dim); color: var(--red); border: 0.5px solid var(--red-border); }
+  .badge-trap { background: var(--amber-dim); color: var(--amber); border: 0.5px solid var(--amber-border); }
+  .badge-neutral { background: rgba(122,128,144,0.12); color: var(--muted); border: 0.5px solid rgba(122,128,144,0.2); }
+  .card-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .icon-green { background: var(--green-dim); color: var(--green); }
+  .icon-red { background: var(--red-dim); color: var(--red); }
+  .icon-amber { background: var(--amber-dim); color: var(--amber); }
+  .icon-blue { background: var(--blue-dim); color: var(--blue); }
+
+  /* PLAIN ENGLISH BOX */
+  .biz-box { background: rgba(77,156,246,0.06); border: 0.5px solid var(--blue-border); border-left: 3px solid var(--blue); border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 14px; }
+  .biz-box-label { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
+  .biz-box-text { font-size: 12px; color: var(--muted); line-height: 1.55; }
+  .biz-box-text strong { color: var(--text); font-weight: 500; }
+
+  .chart-wrap { background: var(--bg3); border-radius: var(--radius-sm); padding: 10px 12px 6px; margin-bottom: 14px; }
+  .chart-wrap svg { display: block; width: 100%; height: 68px; }
+
+  .rules { display: flex; flex-direction: column; gap: 8px; }
+  .rule { display: flex; gap: 10px; align-items: flex-start; }
+  .rule-dot { width: 5px; height: 5px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+  .dot-g { background: var(--green); } .dot-r { background: var(--red); } .dot-a { background: var(--amber); } .dot-b { background: var(--blue); }
+  .rule-text { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .rule-text strong { color: var(--text); font-weight: 500; }
+
+  .card-footer { padding: 12px 20px; border-top: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .card-footer-label { font-size: 11px; color: var(--dim); }
+
+  .card-featured { border-color: var(--green-border); background: linear-gradient(160deg, #13161b 70%, rgba(38,217,127,0.04)); }
+  .card-trap { border-color: var(--amber-border); background: linear-gradient(160deg, #13161b 70%, rgba(245,166,35,0.04)); }
+
+  .phases { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 14px; }
+  .phase { background: var(--bg3); padding: 10px 12px; }
+  .phase-num { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .phase-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .phase-desc { font-size: 11px; color: var(--muted); line-height: 1.45; }
+  .phase-green .phase-num { color: var(--green); }
+  .phase-red .phase-num { color: var(--red); }
+  .phase-blue .phase-num { color: var(--blue); }
+
+  /* FALSE BREAKOUT TYPES */
+  .fb-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .fb-type { background: var(--bg3); border-radius: var(--radius-sm); padding: 12px 14px; border-left: 2px solid var(--amber); }
+  .fb-type-num { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
+  .fb-type-name { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .fb-type-desc { font-size: 11px; color: var(--muted); line-height: 1.45; }
+
+  .checklist { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .check-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--muted); }
+  .check-icon { font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+  .check-row strong { color: var(--text); font-weight: 500; }
+
+  .session-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 14px; }
+  .session { background: var(--bg3); padding: 10px; }
+  .session-time { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .session-label { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .session-note { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .risk-stat { background: var(--bg3); border-radius: var(--radius-sm); padding: 12px 14px; }
+  .risk-label { font-size: 11px; color: var(--dim); margin-bottom: 4px; }
+  .risk-value { font-size: 20px; font-weight: 700; letter-spacing: -0.03em; }
+  .risk-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .rv-green { color: var(--green); } .rv-red { color: var(--red); } .rv-amber { color: var(--amber); } .rv-blue { color: var(--blue); }
+
+  .candle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+  .candle-item { background: var(--bg3); border-radius: var(--radius-sm); padding: 12px 10px; text-align: center; }
+  .candle-svg { display: block; margin: 0 auto 8px; }
+  .candle-name { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .candle-meaning { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  /* CALCULATOR */
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
+  .calc-field { display: flex; flex-direction: column; gap: 5px; }
+  .calc-field label { font-size: 11px; color: var(--dim); }
+  .calc-field input { background: var(--bg3); border: 0.5px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; color: var(--text); font-size: 13px; font-family: inherit; outline: none; transition: border-color 0.15s; width: 100%; }
+  .calc-field input:focus { border-color: var(--blue-border); }
+  .calc-results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+  .calc-warn { font-size: 12px; color: var(--amber); margin-top: 10px; display: none; align-items: flex-start; gap: 6px; }
+  .calc-warn.show { display: flex; }
+
+  footer { border-top: 0.5px solid var(--border); padding: 24px; text-align: center; color: var(--dim); font-size: 12px; max-width: 960px; margin: 0 auto; }
+
+  .side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  @media (max-width: 640px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .session-grid { grid-template-columns: 1fr 1fr; }
+    .phases { grid-template-columns: 1fr; }
+    .risk-grid { grid-template-columns: 1fr 1fr; }
+    .fb-types { grid-template-columns: 1fr; }
+    .side-by-side { grid-template-columns: 1fr; }
+    .calc-grid { grid-template-columns: 1fr; }
+    .calc-results { grid-template-columns: 1fr 1fr; }
+    nav { padding: 0 14px; }
+    .hero, .section { padding-left: 14px; padding-right: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Trader's <span>Playbook</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="navScrollTo('structure', this)">Structure</button>
+    <button class="nav-tab" onclick="navScrollTo('setups', this)">Setups</button>
+    <button class="nav-tab" onclick="navScrollTo('false-breakouts', this)">False Breakouts</button>
+    <button class="nav-tab" onclick="navScrollTo('liquidity', this)">Liquidity</button>
+    <button class="nav-tab" onclick="navScrollTo('sessions', this)">Sessions</button>
+    <button class="nav-tab" onclick="navScrollTo('risk', this)">Risk</button>
+    <button class="nav-tab" onclick="navScrollTo('candles', this)">Candles</button>
+    <button class="nav-tab" onclick="navScrollTo('psychology', this)">Psychology</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Complete reference guide — with plain English business logic</div>
+  <h1>Everything retail traders<br>get <em>wrong</em> — and how to fix it</h1>
+  <p class="hero-sub">From stop hunts to session timing, this is the playbook for reading what the market is actually doing — not what it looks like it's doing. Every concept explained in plain business terms, plus a full false breakout guide.</p>
+  <div class="hero-pills">
+    <span class="pill">Market structure</span>
+    <span class="pill">Price action</span>
+    <span class="pill">Liquidity traps</span>
+    <span class="pill">False breakouts</span>
+    <span class="pill">Risk management</span>
+    <span class="pill">Candlestick reading</span>
+    <span class="pill">Trading psychology</span>
+  </div>
+</div>
+
+<!-- MARKET STRUCTURE -->
+<div class="section" id="structure">
+  <div class="section-header">
+    <span class="section-title">Market structure</span>
+    <span class="section-count">The foundation everything else is built on</span>
+  </div>
+  <div class="grid grid-2">
+
+    <!-- TREND STRUCTURE -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">Reading trend structure</div>
+            <span class="badge badge-neutral">Foundation</span>
+          </div>
+          <div class="card-icon icon-blue">&#128200;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">Think of price like a company's <strong>quarter-over-quarter results</strong>. If every quarter beats the last one's high point and never falls below the last low, that's a company (and a stock) trending up — an <strong>uptrend</strong>. The moment a "quarter" fails to beat the prior high, or breaks below the prior low, something has changed. Structure is just this idea drawn on a chart.</div>
+        </div>
+        <div class="side-by-side">
+          <div>
+            <div style="font-size:11px; font-weight:600; color:var(--green); margin-bottom:8px; letter-spacing:0.06em; text-transform:uppercase;">&#8599; Uptrend (HH / HL)</div>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 160 68" role="img" aria-label="Uptrend higher highs higher lows">
+                <polyline points="8,58 30,26 46,40 68,12 84,30 106,6" fill="none" stroke="#26d97f" stroke-width="1.4"/>
+                <circle cx="30" cy="26" r="2" fill="#26d97f"/><text x="24" y="19" font-size="6" fill="rgba(38,217,127,0.8)" font-family="sans-serif">HH</text>
+                <circle cx="46" cy="40" r="2" fill="#26d97f"/><text x="40" y="52" font-size="6" fill="rgba(38,217,127,0.8)" font-family="sans-serif">HL</text>
+                <circle cx="68" cy="12" r="2" fill="#26d97f"/><text x="62" y="8" font-size="6" fill="rgba(38,217,127,0.8)" font-family="sans-serif">HH</text>
+                <circle cx="84" cy="30" r="2" fill="#26d97f"/><text x="80" y="42" font-size="6" fill="rgba(38,217,127,0.8)" font-family="sans-serif">HL</text>
+                <circle cx="106" cy="6" r="2" fill="#26d97f"/><text x="98" y="4" font-size="6" fill="rgba(38,217,127,0.8)" font-family="sans-serif">HH</text>
+              </svg>
+            </div>
+            <div class="rules" style="margin-top:8px;">
+              <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text" style="font-size:12px;">Each swing high is <strong>higher</strong> than the last (HH)</span></div>
+              <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text" style="font-size:12px;">Each swing low is <strong>higher</strong> than the last (HL)</span></div>
+              <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text" style="font-size:12px;">Bias: look for longs on pullbacks to the HL</span></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px; font-weight:600; color:var(--red); margin-bottom:8px; letter-spacing:0.06em; text-transform:uppercase;">&#8600; Downtrend (LH / LL)</div>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 160 68" role="img" aria-label="Downtrend lower highs lower lows">
+                <polyline points="8,10 30,36 46,24 68,50 84,38 106,60" fill="none" stroke="#f0504a" stroke-width="1.4"/>
+                <circle cx="30" cy="36" r="2" fill="#f0504a"/><text x="24" y="48" font-size="6" fill="rgba(240,80,74,0.8)" font-family="sans-serif">LL</text>
+                <circle cx="46" cy="24" r="2" fill="#f0504a"/><text x="40" y="20" font-size="6" fill="rgba(240,80,74,0.8)" font-family="sans-serif">LH</text>
+                <circle cx="68" cy="50" r="2" fill="#f0504a"/><text x="62" y="62" font-size="6" fill="rgba(240,80,74,0.8)" font-family="sans-serif">LL</text>
+                <circle cx="84" cy="38" r="2" fill="#f0504a"/><text x="80" y="34" font-size="6" fill="rgba(240,80,74,0.8)" font-family="sans-serif">LH</text>
+                <circle cx="106" cy="60" r="2" fill="#f0504a"/><text x="98" y="67" font-size="6" fill="rgba(240,80,74,0.8)" font-family="sans-serif">LL</text>
+              </svg>
+            </div>
+            <div class="rules" style="margin-top:8px;">
+              <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text" style="font-size:12px;">Each swing high is <strong>lower</strong> than the last (LH)</span></div>
+              <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text" style="font-size:12px;">Each swing low is <strong>lower</strong> than the last (LL)</span></div>
+              <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text" style="font-size:12px;">Bias: look for shorts on pullbacks to the LH</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer"><span class="card-footer-label">Every setup elsewhere in this guide assumes you already know which of these two you're in</span></div>
+    </div>
+
+    <!-- BOS / CHoCH -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">Break of structure &amp; change of character</div>
+            <span class="badge badge-neutral">Foundation</span>
+          </div>
+          <div class="card-icon icon-blue">&#8646;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">A <strong>break of structure (BOS)</strong> is the trend doing more of the same thing — like a company posting another record quarter, confirming the story hasn't changed. A <strong>change of character (CHoCH)</strong> is the first quarter that misses — it doesn't prove the trend is over, but it's the first crack, and it's your cue to stop assuming the old trend is still in control.</div>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text"><strong>BOS (continuation):</strong> in an uptrend, price breaks above the last swing high — the trend confirms itself, existing longs are validated</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text"><strong>CHoCH (warning):</strong> in an uptrend, price fails to make a new high and instead breaks below the last swing low — the first sign of a possible reversal</span></div>
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text"><strong>Trendlines:</strong> connect swing lows (uptrend) or swing highs (downtrend) — a clean break of the trendline often shows up before the CHoCH confirms on structure</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text">One CHoCH isn't proof of a reversal — wait for the new structure to actually print a lower high (or higher low) before flipping your bias</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">Trade in the direction of structure until it breaks — fighting a clean BOS is the same mistake as fading a real breakout</span></div>
+        </div>
+      </div>
+      <div class="card-footer"><span class="card-footer-label">Structure is the map — the setups in the next section are how you enter it</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SETUPS -->
+<div class="section" id="setups">
+  <div class="section-header">
+    <span class="section-title">Price action setups</span>
+    <span class="section-count">4 patterns — with plain English logic</span>
+  </div>
+  <div class="grid grid-2">
+
+    <!-- PUMP STOP HUNT -->
+    <div class="card card-featured">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">Pump, stop hunt &amp; V-reversal</div>
+            <span class="badge badge-trap">Liquidity trap</span>
+          </div>
+          <div class="card-icon icon-amber">&#9651;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">Think of this like a store putting up a <strong>"Going Out of Business" sign</strong> to create panic, then quietly restocking once people sell cheap. Big money forces the price down sharply to trigger everyone's automatic sell orders (stop-losses), buys cheaply from panicking sellers, then shoots price back up. <strong>Retail traders panic-sell right at the bottom.</strong> The red candle is not the signal — the snap back above support is.</div>
+        </div>
+        <div class="chart-wrap">
+          <svg viewBox="0 0 340 68" role="img" aria-label="Pump stop hunt V-reversal chart">
+            <!-- Left axis labels -->
+            <text x="1" y="13" font-size="6.5" fill="rgba(122,128,144,0.6)" font-family="sans-serif">resistance</text>
+            <text x="1" y="39" font-size="6.5" fill="rgba(38,217,127,0.6)" font-family="sans-serif">support</text>
+            <text x="1" y="60" font-size="6.5" fill="rgba(240,80,74,0.5)" font-family="sans-serif">sweep low</text>
+            <!-- Lines -->
+            <line x1="58" y1="38" x2="340" y2="38" stroke="rgba(38,217,127,0.4)" stroke-width="1"/>
+            <line x1="0" y1="14" x2="175" y2="14" stroke="rgba(122,128,144,0.3)" stroke-width="0.7" stroke-dasharray="4 3"/>
+            <!-- Pump candles -->
+            <rect x="66" y="30" width="10" height="14" rx="1" fill="#26d97f" opacity="0.9"/>
+            <line x1="71" y1="28" x2="71" y2="30" stroke="#26d97f" stroke-width="1"/>
+            <rect x="82" y="24" width="10" height="16" rx="1" fill="#26d97f" opacity="0.9"/>
+            <rect x="98" y="18" width="10" height="20" rx="1" fill="#26d97f" opacity="0.9"/>
+            <rect x="114" y="14" width="10" height="24" rx="1" fill="#26d97f" opacity="0.9"/>
+            <line x1="119" y1="12" x2="119" y2="14" stroke="#26d97f" stroke-width="1"/>
+            <!-- Pause -->
+            <rect x="130" y="16" width="8" height="20" rx="1" fill="none" stroke="rgba(122,128,144,0.4)" stroke-width="0.7"/>
+            <rect x="144" y="20" width="8" height="16" rx="1" fill="none" stroke="rgba(122,128,144,0.4)" stroke-width="0.7"/>
+            <!-- Stop hunt -->
+            <rect x="158" y="14" width="14" height="54" rx="1" fill="#f0504a" opacity="0.95"/>
+            <text x="146" y="10" font-size="7" fill="#f0504a" font-family="sans-serif">stop hunt!</text>
+            <!-- V-reversal -->
+            <rect x="178" y="8" width="14" height="56" rx="1" fill="#26d97f" opacity="0.95"/>
+            <line x1="185" y1="64" x2="185" y2="66" stroke="#26d97f" stroke-width="1.5"/>
+            <line x1="185" y1="6" x2="185" y2="8" stroke="#26d97f" stroke-width="1"/>
+            <rect x="198" y="10" width="10" height="26" rx="1" fill="#26d97f" opacity="0.8"/>
+            <rect x="214" y="12" width="10" height="20" rx="1" fill="#26d97f" opacity="0.7"/>
+            <!-- Top labels -->
+            <text x="66" y="8" font-size="7" fill="rgba(38,217,127,0.6)" font-family="sans-serif">1. pump</text>
+            <text x="172" y="7" font-size="7" fill="rgba(38,217,127,0.6)" font-family="sans-serif">3. V-reversal</text>
+          </svg>
+        </div>
+        <div class="phases">
+          <div class="phase phase-green">
+            <div class="phase-num">01 PUMP</div>
+            <div class="phase-title">Buying frenzy</div>
+            <div class="phase-desc">Big green candles surge up. Retail buys the top, stops cluster just below support.</div>
+          </div>
+          <div class="phase phase-red">
+            <div class="phase-num">02 SWEEP</div>
+            <div class="phase-title">Liquidity grab</div>
+            <div class="phase-desc">Giant red candle smashes through support, triggering all those stop-losses.</div>
+          </div>
+          <div class="phase phase-blue">
+            <div class="phase-num">03 SNAP</div>
+            <div class="phase-title">V-reversal</div>
+            <div class="phase-desc">Price rockets back above support. Shorts trapped, stopped-out longs watch from the sidelines.</div>
+          </div>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text"><strong>The tell:</strong> close back above broken support is your buy signal — not the red candle itself</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text"><strong>Avoid:</strong> never short the big red candle in panic — that's exactly what the stop hunt wants you to do</span></div>
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text"><strong>Look for:</strong> "look below and fail" — breaks below the 2–3 min range that snap back instantly</span></div>
+        </div>
+      </div>
+      <div class="card-footer"><span class="card-footer-label">Most common retail trap at open</span></div>
+    </div>
+
+    <!-- BREAKOUT RETEST -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">Breakout &amp; retest</div>
+            <span class="badge badge-bull">Bullish</span>
+          </div>
+          <div class="card-icon icon-green">&#8599;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">Like a company <strong>breaking into a new market, then checking if its home base is solid</strong> before expanding further. The old ceiling (resistance) becomes the new floor (support). The retest dip back to that level is your <strong>safe, lower-risk entry</strong> — because if it fails the retest, you know you're wrong immediately and can exit with a small loss.</div>
+        </div>
+        <div class="chart-wrap">
+          <svg viewBox="0 0 340 68" role="img" aria-label="Breakout and retest chart">
+            <!-- Left labels -->
+            <text x="1" y="13" font-size="6.5" fill="rgba(122,128,144,0.5)" font-family="sans-serif">resistance</text>
+            <text x="1" y="48" font-size="6.5" fill="rgba(38,217,127,0.6)" font-family="sans-serif">now support</text>
+            <!-- Level line -->
+            <line x1="0" y1="36" x2="340" y2="36" stroke="rgba(38,217,127,0.35)" stroke-width="0.8" stroke-dasharray="5 3"/>
+            <!-- Consolidation below -->
+            <rect x="50" y="38" width="9" height="16" rx="1" fill="#26d97f" opacity="0.7"/>
+            <rect x="65" y="40" width="9" height="12" rx="1" fill="#f0504a" opacity="0.7"/>
+            <rect x="80" y="38" width="9" height="14" rx="1" fill="#26d97f" opacity="0.7"/>
+            <rect x="95" y="36" width="9" height="12" rx="1" fill="#f0504a" opacity="0.7"/>
+            <!-- Breakout candle -->
+            <rect x="116" y="16" width="11" height="24" rx="1" fill="#26d97f"/>
+            <line x1="121" y1="14" x2="121" y2="16" stroke="#26d97f" stroke-width="1"/>
+            <text x="110" y="11" font-size="7" fill="rgba(38,217,127,0.8)" font-family="sans-serif">breakout!</text>
+            <!-- Retest pullback -->
+            <rect x="134" y="28" width="9" height="14" rx="1" fill="#f0504a" opacity="0.8"/>
+            <line x1="138" y1="42" x2="138" y2="46" stroke="#f0504a" stroke-width="1"/>
+            <text x="128" y="13" font-size="7" fill="rgba(240,80,74,0.7)" font-family="sans-serif">retest</text>
+            <!-- Continue up -->
+            <rect x="150" y="22" width="9" height="18" rx="1" fill="#26d97f"/>
+            <rect x="165" y="16" width="9" height="20" rx="1" fill="#26d97f"/>
+            <rect x="180" y="10" width="9" height="18" rx="1" fill="#26d97f"/>
+            <rect x="195" y="6" width="9" height="16" rx="1" fill="#26d97f"/>
+            <text x="210" y="34" font-size="7" fill="rgba(38,217,127,0.6)" font-family="sans-serif">continued uptrend</text>
+          </svg>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text">Price consolidates below a level, then <strong>breaks above on volume</strong></span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">Pulls back to retest the breakout level — resistance flips to <strong>support</strong></span></div>
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text">Holds → <strong>long entry</strong> with tight stop just below the retest level</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text">Fails retest → <strong>false breakout</strong>, exit immediately, don't hope</span></div>
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text">Target: measure the range that broke out, project it above the breakout level</span></div>
+        </div>
+      </div>
+      <div class="card-footer"><span class="card-footer-label">Best entry: pullback to old resistance that holds as support</span></div>
+    </div>
+
+    <!-- BEAR FLAG -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">Bear flag</div>
+            <span class="badge badge-bear">Bearish</span>
+          </div>
+          <div class="card-icon icon-red">&#8600;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">Like a company with bad earnings — <strong>stock drops hard (the pole), then bounces slightly as hopeful buyers step in (the flag), then continues falling</strong> when reality sets back in. The bounce is not recovery; it's sellers pausing before the next leg down. <strong>Low volume on the bounce is your confirmation</strong> — sellers aren't genuinely retreating, they're just resting.</div>
+        </div>
+        <div class="chart-wrap">
+          <svg viewBox="0 0 340 68" role="img" aria-label="Bear flag pattern chart">
+            <!-- Left labels -->
+            <text x="1" y="8" font-size="6.5" fill="rgba(240,80,74,0.55)" font-family="sans-serif">start of drop</text>
+            <text x="1" y="38" font-size="6.5" fill="rgba(245,166,35,0.55)" font-family="sans-serif">flag zone</text>
+            <text x="1" y="62" font-size="6.5" fill="rgba(240,80,74,0.55)" font-family="sans-serif">target</text>
+            <!-- Pole -->
+            <rect x="56" y="5" width="11" height="34" rx="1" fill="#f0504a"/>
+            <rect x="73" y="9" width="11" height="30" rx="1" fill="#f0504a"/>
+            <rect x="90" y="15" width="11" height="24" rx="1" fill="#f0504a"/>
+            <!-- Flag channel lines -->
+            <line x1="88" y1="24" x2="175" y2="36" stroke="rgba(245,166,35,0.45)" stroke-width="0.8" stroke-dasharray="3 2"/>
+            <line x1="88" y1="34" x2="175" y2="46" stroke="rgba(245,166,35,0.45)" stroke-width="0.8" stroke-dasharray="3 2"/>
+            <!-- Flag candles (weak bounce) -->
+            <rect x="108" y="30" width="9" height="10" rx="1" fill="#26d97f" opacity="0.6"/>
+            <rect x="123" y="28" width="9" height="12" rx="1" fill="#f0504a" opacity="0.6"/>
+            <rect x="138" y="30" width="9" height="10" rx="1" fill="#26d97f" opacity="0.6"/>
+            <rect x="153" y="32" width="9" height="10" rx="1" fill="#f0504a" opacity="0.6"/>
+            <!-- Breakdown -->
+            <rect x="178" y="36" width="11" height="22" rx="1" fill="#f0504a"/>
+            <rect x="195" y="42" width="11" height="18" rx="1" fill="#f0504a"/>
+            <rect x="212" y="48" width="11" height="16" rx="1" fill="#f0504a"/>
+            <!-- Labels -->
+            <text x="56" y="4" font-size="7" fill="rgba(240,80,74,0.7)" font-family="sans-serif">pole (sharp drop)</text>
+            <text x="108" y="24" font-size="7" fill="rgba(245,166,35,0.7)" font-family="sans-serif">flag (weak relief bounce)</text>
+            <text x="176" y="67" font-size="7" fill="rgba(240,80,74,0.7)" font-family="sans-serif">short continuation</text>
+          </svg>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text"><strong>Pole:</strong> sharp, high-volume drop — selling pressure is dominant</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text"><strong>Flag:</strong> slow upward drift on low volume — a weak relief bounce, not a reversal</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text">Break below the flag's lower trendline = <strong>short entry signal</strong></span></div>
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text"><strong>Target:</strong> project the pole length downward from the breakdown point</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">Stop: above the flag's upper trendline — if it breaks up, the setup is invalid</span></div>
+        </div>
+      </div>
+      <div class="card-footer"><span class="card-footer-label">Low volume on the flag = setup strengthens; high volume = watch out for reversal</span></div>
+    </div>
+
+    <!-- RANGE & FALSE BREAKOUT -->
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">Range &amp; false breakout</div>
+            <span class="badge badge-trap">Retail trap</span>
+          </div>
+          <div class="card-icon icon-amber">&#8646;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">A stock stuck between a <strong>floor price (support) and ceiling price (resistance)</strong> — like a negotiation that keeps bouncing between two numbers. When it briefly pokes through the ceiling, eager buyers pile in thinking the deal is done. Then it falls right back. <strong>Those buyers are now stuck holding a losing position.</strong> The rule: wait for it to close outside AND hold for 2+ candles before trusting any breakout.</div>
+        </div>
+        <div class="chart-wrap">
+          <svg viewBox="0 0 340 68" role="img" aria-label="Range and false breakout pattern">
+            <!-- Left labels -->
+            <text x="1" y="14" font-size="6.5" fill="rgba(245,166,35,0.65)" font-family="sans-serif">resistance</text>
+            <text x="1" y="50" font-size="6.5" fill="rgba(77,156,246,0.65)" font-family="sans-serif">support</text>
+            <!-- Range lines -->
+            <line x1="0" y1="16" x2="340" y2="16" stroke="rgba(245,166,35,0.4)" stroke-width="0.8" stroke-dasharray="5 3"/>
+            <line x1="0" y1="46" x2="340" y2="46" stroke="rgba(77,156,246,0.4)" stroke-width="0.8" stroke-dasharray="5 3"/>
+            <!-- Range candles -->
+            <rect x="48" y="22" width="9" height="22" rx="1" fill="#26d97f" opacity="0.7"/>
+            <rect x="63" y="26" width="9" height="18" rx="1" fill="#f0504a" opacity="0.7"/>
+            <rect x="78" y="24" width="9" height="20" rx="1" fill="#26d97f" opacity="0.7"/>
+            <rect x="93" y="28" width="9" height="16" rx="1" fill="#f0504a" opacity="0.7"/>
+            <rect x="108" y="24" width="9" height="20" rx="1" fill="#26d97f" opacity="0.7"/>
+            <!-- Fakeout candle -->
+            <rect x="128" y="5" width="10" height="19" rx="1" fill="#26d97f"/>
+            <line x1="133" y1="24" x2="133" y2="26" stroke="#26d97f" stroke-width="1"/>
+            <text x="142" y="9" font-size="7.5" fill="rgba(240,80,74,0.9)" font-family="sans-serif">fakeout!</text>
+            <text x="142" y="19" font-size="6.5" fill="rgba(240,80,74,0.7)" font-family="sans-serif">buyers trapped here ↑</text>
+            <!-- Snap back -->
+            <rect x="144" y="18" width="9" height="26" rx="1" fill="#f0504a" opacity="0.9"/>
+            <line x1="148" y1="44" x2="148" y2="48" stroke="#f0504a" stroke-width="1"/>
+            <!-- Back in range -->
+            <rect x="159" y="24" width="9" height="20" rx="1" fill="#26d97f" opacity="0.7"/>
+            <rect x="174" y="26" width="9" height="18" rx="1" fill="#f0504a" opacity="0.7"/>
+            <rect x="189" y="22" width="9" height="22" rx="1" fill="#26d97f" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text">Price bounces between <strong>clear support and resistance</strong> on low volume</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">A candle breaks above resistance, triggering breakout buyers to chase</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text">Price snaps back inside the range — those buyers are now <strong>trapped long</strong></span></div>
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text">Trade ranges <strong>from the edges</strong> — buy near support, sell near resistance</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">Wait for a real breakout: close outside the range + volume surge + hold for 2+ candles</span></div>
+        </div>
+      </div>
+      <div class="card-footer"><span class="card-footer-label">Never chase a breakout on the first candle</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FALSE BREAKOUTS — NEW EXPANDED SECTION -->
+<div class="section" id="false-breakouts">
+  <div class="section-header">
+    <span class="section-title">False breakouts — all types explained</span>
+    <span class="section-count">The single biggest trap in trading</span>
+  </div>
+
+  <!-- What is a false breakout -->
+  <div class="card card-trap" style="margin-bottom:14px;">
+    <div class="card-top">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-title">What is a false breakout? (Plain English)</div>
+          <span class="badge badge-trap">Core concept</span>
+        </div>
+        <div class="card-icon icon-amber">&#9888;</div>
+      </div>
+      <div class="biz-box">
+        <div class="biz-box-label">&#128188; Business analogy</div>
+        <div class="biz-box-text">Imagine a retailer announces a <strong>new flagship store in an expensive location</strong> (price breaks above resistance). Investors rush to buy the stock. Then the lease deal falls through and the stock crashes back. Anyone who bought on the announcement is now trapped holding a loss. That is a false breakout. <strong>Price appeared to escape its range but didn't actually commit.</strong> It was a head-fake — intentional or not.</div>
+      </div>
+      <div class="rules">
+        <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">A false breakout (also called a "fakeout") is when price <strong>briefly moves beyond a key level</strong> — resistance, support, or a chart pattern — then reverses back inside</span></div>
+        <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text">They are not accidents. Large players often <strong>engineer them to collect stop-losses</strong> and trap breakout traders on the wrong side before reversing</span></div>
+        <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text"><strong>Core rule:</strong> a candle closing back inside the range after breaking out is the clearest signal the breakout was false</span></div>
+        <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text">False breakouts occur in <strong>both directions</strong> — upward (bull trap) and downward (bear trap)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 types grid -->
+  <div class="fb-types">
+    <div class="fb-type">
+      <div class="fb-type-num">Type 1</div>
+      <div class="fb-type-name">Bull Trap — fake break above resistance</div>
+      <div class="fb-type-desc">Price pushes above a ceiling everyone is watching. Buyers rush in. Then it collapses back below. Retail is left long at the worst price. Common at earnings spikes and news events.</div>
+    </div>
+    <div class="fb-type">
+      <div class="fb-type-num">Type 2</div>
+      <div class="fb-type-name">Bear Trap — fake break below support</div>
+      <div class="fb-type-desc">Price briefly dips below a key floor, triggering panic sells and short-sellers entering. Then it snaps violently upward. Short-sellers get squeezed, panicked sellers regret exiting. This is the stop hunt in the pump setup.</div>
+    </div>
+    <div class="fb-type">
+      <div class="fb-type-num">Type 3</div>
+      <div class="fb-type-name">Pattern Fakeout — triangle or channel break</div>
+      <div class="fb-type-desc">Price breaks out of a triangle or channel pattern but on low volume, triggering pattern-following traders. It then re-enters the pattern. Low volume on the breakout candle is the main warning sign.</div>
+    </div>
+    <div class="fb-type">
+      <div class="fb-type-num">Type 4</div>
+      <div class="fb-type-name">News Spike Fakeout</div>
+      <div class="fb-type-desc">A headline sends price spiking through a key level. Traders react instantly. Then price reverses as the news is "priced in" or misread. "Buy the rumor, sell the news" is exactly this pattern playing out.</div>
+    </div>
+    <div class="fb-type">
+      <div class="fb-type-num">Type 5</div>
+      <div class="fb-type-name">Opening Bell Fakeout</div>
+      <div class="fb-type-desc">At 9:30am, price gaps above or below a key level on thin liquidity. Feels like a strong move. Reverses as real volume comes in. The main reason beginners should never trade the first 15–30 minutes.</div>
+    </div>
+    <div class="fb-type">
+      <div class="fb-type-num">Type 6</div>
+      <div class="fb-type-name">Double Top / Bottom Fakeout</div>
+      <div class="fb-type-desc">Price hits a prior high (double top) or low (double bottom) and appears to break it. Traders assume continuation. Then reverses sharply — the second attempt was actually a distribution or accumulation point.</div>
+    </div>
+    <div class="fb-type">
+      <div class="fb-type-num">Type 7</div>
+      <div class="fb-type-name">Gap Fill Fakeout</div>
+      <div class="fb-type-desc">Stock gaps up at open, breaking above a key level. Looks powerful — but gaps on low pre-market volume often get "filled" (price returns to where it gapped from) within 30–60 min. Retail chases; professionals fade. <em>Never buy a gap up into resistance on weak volume.</em></div>
+    </div>
+    <div class="fb-type">
+      <div class="fb-type-num">Type 8</div>
+      <div class="fb-type-name">High-of-Day / Low-of-Day Fakeout</div>
+      <div class="fb-type-desc">Price breaks above the day's prior high (or below the low), triggering momentum traders. Then stalls and reverses as no new buyers follow through. Very common late in the day when volume drops off. <em>HOD/LOD break without a volume surge is one of the most repeated traps in day trading.</em></div>
+    </div>
+    <div class="fb-type">
+      <div class="fb-type-num">Type 9</div>
+      <div class="fb-type-name">Earnings Gap Reversal</div>
+      <div class="fb-type-desc">Company beats earnings, stock gaps up 8% breaking all key levels. Looks like a clear breakout. Then institutions who bought the rumor sell the news and price collapses back. <em>The good news was already priced in weeks before. The gap was the exit, not the entry.</em></div>
+    </div>
+  </div>
+
+  <!-- Why fakeouts happen — insight card -->
+  <div class="card card-trap" style="margin-bottom:14px;">
+    <div class="card-top">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-title">Why false breakouts are so common — the real reason</div>
+          <span class="badge badge-trap">Critical insight</span>
+        </div>
+        <div class="card-icon icon-amber">&#128161;</div>
+      </div>
+      <div class="biz-box">
+        <div class="biz-box-label">&#128188; Plain English — the uncomfortable truth</div>
+        <div class="biz-box-text">Most retail traders use the <strong>same textbook patterns, the same obvious levels, the same breakout rules</strong>. Institutions know this. When everyone's stop-loss is at the same obvious spot, that level becomes a target — not a safe zone. <strong>The more widely-watched a level is, the more likely it gets faked.</strong> This isn't conspiracy; it is simple market mechanics. Retail's predictability is institutional opportunity.</div>
+      </div>
+      <div class="rules">
+        <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text"><strong>The obvious trade is usually the wrong trade.</strong> If everyone sees the same breakout, ask who is on the other side of it</span></div>
+        <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">False breakouts are <strong>more common than real ones</strong> at widely-watched levels — especially round numbers and prior day highs/lows</span></div>
+        <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text">In choppy/low-volume markets (lunch hours, slow days) the fakeout rate can exceed <strong>70%</strong> — most "breakouts" fail</span></div>
+        <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text"><strong>Your edge:</strong> wait for 2–3 candle confirmation while others rush in — you enter safer, and they become your fuel when forced to exit</span></div>
+        <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">The best fakeout traders do not predict — they <strong>react to the failure</strong> and trade the trapped crowd's forced exit</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to spot + how to trade -->
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">How to spot a false breakout</div>
+            <span class="badge badge-trap">Warning checklist</span>
+          </div>
+          <div class="card-icon icon-amber">&#128269;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">Before trusting any breakout, <strong>run through all 4 questions</strong>. A real breakout usually passes 3 or 4. A fakeout usually fails most of them. The goal is not to predict — it is to <strong>wait for the market to prove itself.</strong></div>
+        </div>
+        <div class="checklist">
+          <div class="check-row"><span class="check-icon" style="color:var(--green)">&#10003;</span><span>Did it <strong>close</strong> beyond the level — or just wick through and reverse?</span></div>
+          <div class="check-row"><span class="check-icon" style="color:var(--green)">&#10003;</span><span>Is volume <strong>surging</strong> on the breakout candle? Low volume = likely fake</span></div>
+          <div class="check-row"><span class="check-icon" style="color:var(--green)">&#10003;</span><span>Did price <strong>hold outside the level for 2+ candles</strong>? One candle is not enough</span></div>
+          <div class="check-row"><span class="check-icon" style="color:var(--green)">&#10003;</span><span>Is it happening <strong>after 10am</strong>? Opening bell breakouts fail most often</span></div>
+          <div class="check-row"><span class="check-icon" style="color:var(--amber)">&#9888;</span><span>Is it at a <strong>round number</strong> ($50, $100)? These get hunted — extra caution required</span></div>
+          <div class="check-row"><span class="check-icon" style="color:var(--red)">&#10005;</span><span>If price snaps back inside within 1–2 candles → <strong>almost certainly a fakeout</strong></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">How to trade against false breakouts</div>
+            <span class="badge badge-bull">Strategy</span>
+          </div>
+          <div class="card-icon icon-green">&#127919;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">Instead of being the person who <strong>chases the breakout and gets trapped</strong>, become the person who <strong>fades the fakeout</strong> — trading the reversal back into the range. This is a professional-level move: you wait for others to get trapped, then trade in the direction they'll be forced to exit.</div>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text"><strong>Wait for confirmation:</strong> price breaks a level and then closes back inside the range on the next candle</span></div>
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text"><strong>Entry:</strong> enter in the direction of the reversal — e.g., short if it faked up and closed back below resistance</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text"><strong>Stop:</strong> just beyond the fakeout wick high or low — if price pushes further, you're wrong</span></div>
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text"><strong>Target:</strong> opposite side of the range — the trapped traders will fuel the move as their stops hit</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">The more obvious the level (more people watching), the <strong>more violent the reversal</strong> tends to be</span></div>
+        </div>
+      </div>
+      <div class="card-footer"><span class="card-footer-label">Fading fakeouts is how professionals exploit retail impatience</span></div>
+    </div>
+  </div>
+
+  <!-- Bull trap vs real breakout side-by-side chart -->
+  <div class="card" style="margin-top:14px;">
+    <div class="card-top">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-title">Bull trap vs. real breakout — visual comparison</div>
+          <span class="badge badge-trap">Side-by-side</span>
+        </div>
+      </div>
+      <div class="side-by-side">
+        <div>
+          <div style="font-size:11px; font-weight:600; color:var(--red); margin-bottom:8px; letter-spacing:0.06em; text-transform:uppercase;">&#10060; Bull Trap (False Breakout)</div>
+          <div class="chart-wrap">
+            <svg viewBox="0 0 160 68" role="img" aria-label="Bull trap false breakout comparison">
+              <text x="1" y="28" font-size="6" fill="rgba(245,166,35,0.7)" font-family="sans-serif">resistance</text>
+              <line x1="0" y1="30" x2="160" y2="30" stroke="rgba(245,166,35,0.5)" stroke-width="0.8" stroke-dasharray="4 3"/>
+              <rect x="10" y="32" width="7" height="18" rx="1" fill="#26d97f" opacity="0.7"/>
+              <rect x="22" y="34" width="7" height="14" rx="1" fill="#f0504a" opacity="0.7"/>
+              <rect x="34" y="32" width="7" height="16" rx="1" fill="#26d97f" opacity="0.7"/>
+              <!-- Fake break up -->
+              <rect x="50" y="14" width="8" height="20" rx="1" fill="#26d97f"/>
+              <line x1="54" y1="12" x2="54" y2="14" stroke="#26d97f" stroke-width="1"/>
+              <text x="62" y="11" font-size="6" fill="rgba(240,80,74,0.85)" font-family="sans-serif">buyers rush in</text>
+              <!-- Sharp reversal back -->
+              <rect x="64" y="18" width="8" height="42" rx="1" fill="#f0504a" opacity="0.95"/>
+              <rect x="78" y="30" width="7" height="26" rx="1" fill="#f0504a" opacity="0.8"/>
+              <rect x="90" y="34" width="7" height="20" rx="1" fill="#f0504a" opacity="0.7"/>
+              <text x="64" y="67" font-size="6" fill="rgba(240,80,74,0.8)" font-family="sans-serif">trapped longs forced to sell</text>
+            </svg>
+          </div>
+          <div class="rules" style="margin-top:8px;">
+            <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text" style="font-size:12px;">One green candle pushes above resistance</span></div>
+            <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text" style="font-size:12px;">Immediately reverses with large red candle</span></div>
+            <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text" style="font-size:12px;">Closes back <strong>inside</strong> range = confirmed fakeout</span></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px; font-weight:600; color:var(--green); margin-bottom:8px; letter-spacing:0.06em; text-transform:uppercase;">&#9989; Real Breakout</div>
+          <div class="chart-wrap">
+            <svg viewBox="0 0 160 68" role="img" aria-label="Real breakout comparison">
+              <text x="1" y="50" font-size="6" fill="rgba(38,217,127,0.7)" font-family="sans-serif">now support</text>
+              <line x1="0" y1="46" x2="160" y2="46" stroke="rgba(38,217,127,0.45)" stroke-width="0.8" stroke-dasharray="4 3"/>
+              <rect x="10" y="48" width="7" height="18" rx="1" fill="#26d97f" opacity="0.7"/>
+              <rect x="22" y="50" width="7" height="14" rx="1" fill="#f0504a" opacity="0.7"/>
+              <rect x="34" y="48" width="7" height="16" rx="1" fill="#26d97f" opacity="0.7"/>
+              <!-- Strong breakout on volume -->
+              <rect x="50" y="22" width="9" height="28" rx="1" fill="#26d97f"/>
+              <line x1="54" y1="20" x2="54" y2="22" stroke="#26d97f" stroke-width="1.2"/>
+              <text x="62" y="18" font-size="6" fill="rgba(38,217,127,0.85)" font-family="sans-serif">big volume surge</text>
+              <!-- Holds above, retest that bounces -->
+              <rect x="65" y="28" width="7" height="20" rx="1" fill="#26d97f" opacity="0.8"/>
+              <rect x="78" y="36" width="7" height="16" rx="1" fill="#f0504a" opacity="0.7"/>
+              <line x1="81" y1="52" x2="81" y2="56" stroke="#f0504a" stroke-width="1"/>
+              <text x="60" y="64" font-size="6" fill="rgba(38,217,127,0.7)" font-family="sans-serif">retest holds above level</text>
+              <!-- Continues up -->
+              <rect x="91" y="20" width="7" height="22" rx="1" fill="#26d97f"/>
+              <rect x="104" y="12" width="7" height="20" rx="1" fill="#26d97f"/>
+              <rect x="117" y="6" width="7" height="18" rx="1" fill="#26d97f"/>
+            </svg>
+          </div>
+          <div class="rules" style="margin-top:8px;">
+            <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text" style="font-size:12px;">Strong candle with clear volume surge</span></div>
+            <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text" style="font-size:12px;">Holds above the level for 2+ candles</span></div>
+            <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text" style="font-size:12px;">Retest holds old resistance as <strong>new support</strong></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer"><span class="card-footer-label">The only difference is close + hold — patience is the entire edge here</span></div>
+  </div>
+</div>
+
+<!-- LIQUIDITY -->
+<div class="section" id="liquidity">
+  <div class="section-header">
+    <span class="section-title">Liquidity &amp; order flow</span>
+    <span class="section-count">How the market really moves</span>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">Where stops cluster</div>
+            <span class="badge badge-neutral">Key concept</span>
+          </div>
+          <div class="card-icon icon-amber">&#9673;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">Big institutions need to buy or sell <strong>millions of shares</strong> without moving the market against themselves. They can't do that without people on the other side of the trade. So they push price to places where retail traders have automatic orders sitting — <strong>like a delivery truck driving to where the most packages are waiting to be picked up.</strong> Once they collect all those orders, price reverses.</div>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text"><strong>Round numbers</strong> ($50, $100, $200) attract massive stop clusters — institutions know this and hunt them</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text"><strong>Obvious swing highs/lows</strong> everyone can see are stop magnets — the more obvious, the more dangerous</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text"><strong>Pre-market highs/lows</strong> are key levels for the opening 30 minutes — watch for sweeps above/below them</span></div>
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text">Big players need retail's stop-loss orders to fill their own large buy/sell orders at good prices</span></div>
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text">After a sweep, ask: did price close back above/below the level? If yes — the sweep was the trap</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">Reading Level 2 &amp; tape</div>
+            <span class="badge badge-neutral">Key concept</span>
+          </div>
+          <div class="card-icon icon-blue">&#9776;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">Level 2 is like seeing <strong>all the open bids and asks on an auction listing</strong> — you can see exactly how many buyers and sellers are waiting at each price. The tape (Time &amp; Sales) shows you which actual trades are executing in real-time. Together they tell you <strong>who is aggressive and who is holding back.</strong></div>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text"><strong>Level 2</strong> shows the bid/ask order book — you can see where large orders are sitting before price gets there</span></div>
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text">A large <strong>bid wall</strong> (many orders at a price) often acts as a floor — institutions defend it</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text">A large <strong>ask wall</strong> that suddenly disappears = buyers absorbed it — often bullish short-term</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text"><strong>Time &amp; sales (tape)</strong>: watch for large lot prints at key levels — that's where big money is moving</span></div>
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text">Spoofing: large fake orders disappear as price approaches — never trade solely on L2 walls</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SESSIONS -->
+<div class="section" id="sessions">
+  <div class="section-header">
+    <span class="section-title">Time of day &amp; session structure</span>
+    <span class="section-count">When to trade and when to sit on your hands</span>
+  </div>
+  <div class="card">
+    <div class="card-top">
+      <div class="biz-box" style="margin-bottom:14px;">
+        <div class="biz-box-label">&#128188; Plain English</div>
+        <div class="biz-box-text">Think of the trading day like a <strong>restaurant shift</strong>. The opening rush (9:30–10am) is chaotic — everyone's orders come in at once, things get mixed up, prices whip around. The morning service (10–11:30am) is when the kitchen runs smoothly and you get reliable fills. Lunch is quiet and unpredictable. The dinner rush (3–4pm) brings big institutional orders back. <strong>Beginners should only cook during the smooth periods.</strong></div>
+      </div>
+      <div class="session-grid">
+        <div class="session">
+          <div class="session-time" style="color:var(--red)">9:30 – 10:00am</div>
+          <div class="session-label">Open — danger zone</div>
+          <div class="session-note">Widest spreads, most stop hunts, highest volatility. False breakouts most common here. Beginners: watch only.</div>
+        </div>
+        <div class="session">
+          <div class="session-time" style="color:var(--green)">10:00 – 11:30am</div>
+          <div class="session-label">Morning trend</div>
+          <div class="session-note">Trends establish, cleaner price action. Best window for setups. Most volume here. Patterns most reliable.</div>
+        </div>
+        <div class="session">
+          <div class="session-time" style="color:var(--amber)">12:00 – 2:00pm</div>
+          <div class="session-label">Lunch chop</div>
+          <div class="session-note">Low volume, choppy, random moves. High false signal rate. Experienced traders sit out entirely.</div>
+        </div>
+        <div class="session">
+          <div class="session-time" style="color:var(--blue)">3:00 – 4:00pm</div>
+          <div class="session-label">Power hour</div>
+          <div class="session-note">Institutional rebalancing. Strong directional moves return. Trends often extend or reverse hard on real volume.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer"><span class="card-footer-label">All times Eastern. Pre-market (4–9:30am) can set key levels but spreads are extreme.</span></div>
+  </div>
+</div>
+
+<!-- RISK -->
+<div class="section" id="risk">
+  <div class="section-header">
+    <span class="section-title">Risk management</span>
+    <span class="section-count">The only thing that keeps you in the game</span>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">The core numbers</div>
+            <span class="badge badge-neutral">Rules</span>
+          </div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">Think of your account as a <strong>business operating budget</strong>. You would never spend 30% of your annual budget on one untested campaign. Same rule in trading: only put 1–2% of capital at risk per trade. The 2:1 reward:risk ratio means <strong>you only need to be right 34% of the time to break even</strong> — giving you enormous room for error while still being profitable.</div>
+        </div>
+        <div class="risk-grid">
+          <div class="risk-stat">
+            <div class="risk-label">Max risk per trade</div>
+            <div class="risk-value rv-red">1–2%</div>
+            <div class="risk-sub">of total account size</div>
+          </div>
+          <div class="risk-stat">
+            <div class="risk-label">Min reward:risk ratio</div>
+            <div class="risk-value rv-green">2:1</div>
+            <div class="risk-sub">before entering any trade</div>
+          </div>
+          <div class="risk-stat">
+            <div class="risk-label">Daily loss limit</div>
+            <div class="risk-value rv-amber">3–5%</div>
+            <div class="risk-sub">stop trading if hit</div>
+          </div>
+          <div class="risk-stat">
+            <div class="risk-label">Max trades per day</div>
+            <div class="risk-value rv-blue">3–5</div>
+            <div class="risk-sub">quality over quantity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">Position sizing formula</div>
+            <span class="badge badge-neutral">How-to</span>
+          </div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">This is your <strong>automatic portion control</strong>. Instead of "feeling" how much to buy, the math tells you exactly — so even a completely wrong trade can never wipe you out. The formula converts a fixed dollar risk into the right number of shares. <strong>You control the loss before you enter the trade.</strong></div>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text"><strong>Step 1:</strong> Decide your stop distance in dollars (e.g. stock at $50, stop at $48.50 = $1.50 risk/share)</span></div>
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text"><strong>Step 2:</strong> Max dollar risk = account × 1% (e.g. $10,000 account = $100 max risk)</span></div>
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text"><strong>Step 3:</strong> Shares = max risk ÷ stop distance ($100 ÷ $1.50 = 66 shares)</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">A loss on that trade = exactly $100, never more — <strong>the math protects you</strong></span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text">Never move your stop wider to avoid being stopped out — that breaks the entire system</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POSITION SIZE CALCULATOR -->
+  <div class="card" style="margin-top:14px;">
+    <div class="card-top">
+      <div class="card-header">
+        <div class="card-meta">
+          <div class="card-title">Position size calculator</div>
+          <span class="badge badge-neutral">Interactive</span>
+        </div>
+        <div class="card-icon icon-blue">&#128202;</div>
+      </div>
+      <div class="biz-box">
+        <div class="biz-box-label">&#128188; Plain English</div>
+        <div class="biz-box-text">Plug in your numbers and let the math decide your share size — <strong>the same formula from the card above, live</strong>. No more guessing or "feel" — if the risk is too large or the stop is on the wrong side, the calculator flags it before you're ever in the trade.</div>
+      </div>
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label for="calcAccount">Account size ($)</label>
+          <input type="number" id="calcAccount" value="10000" min="0" oninput="calcPositionSize()">
+        </div>
+        <div class="calc-field">
+          <label for="calcRisk">Risk per trade (%)</label>
+          <input type="number" id="calcRisk" value="1" min="0" step="0.1" oninput="calcPositionSize()">
+        </div>
+        <div class="calc-field">
+          <label for="calcEntry">Entry price ($)</label>
+          <input type="number" id="calcEntry" value="50" min="0" step="0.01" oninput="calcPositionSize()">
+        </div>
+        <div class="calc-field">
+          <label for="calcStop">Stop price ($)</label>
+          <input type="number" id="calcStop" value="48.50" min="0" step="0.01" oninput="calcPositionSize()">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="risk-stat">
+          <div class="risk-label">Max dollar risk</div>
+          <div class="risk-value rv-red" id="calcOutRisk">$100</div>
+          <div class="risk-sub">account × risk %</div>
+        </div>
+        <div class="risk-stat">
+          <div class="risk-label">Risk per share</div>
+          <div class="risk-value rv-amber" id="calcOutPerShare">$1.50</div>
+          <div class="risk-sub">entry − stop</div>
+        </div>
+        <div class="risk-stat">
+          <div class="risk-label">Shares to buy</div>
+          <div class="risk-value rv-green" id="calcOutShares">66</div>
+          <div class="risk-sub">max risk ÷ risk per share</div>
+        </div>
+        <div class="risk-stat">
+          <div class="risk-label">Position value</div>
+          <div class="risk-value rv-blue" id="calcOutValue">$3,300</div>
+          <div class="risk-sub">shares × entry price</div>
+        </div>
+      </div>
+      <div class="calc-warn" id="calcWarn"><span>&#9888;</span><span id="calcWarnText"></span></div>
+    </div>
+    <div class="card-footer"><span class="card-footer-label">This never places a trade — it only does the math. Always double-check before entering.</span></div>
+  </div>
+</div>
+
+<!-- CANDLES -->
+<div class="section" id="candles">
+  <div class="section-header">
+    <span class="section-title">Candlestick reading</span>
+    <span class="section-count">What wicks and bodies actually tell you</span>
+  </div>
+  <div class="card">
+    <div class="card-top">
+      <div class="biz-box" style="margin-bottom:16px;">
+        <div class="biz-box-label">&#128188; What a candle actually is — Plain English</div>
+        <div class="biz-box-text">Each candle is like a <strong>company's earnings report compressed into one time period</strong>. The body shows where the stock opened and closed (the net result). The wicks show the extremes the price was pushed to (the intraday fight). A long upper wick = "tried to go higher but got rejected by sellers." A long lower wick = "tried to go lower but bounced back by buyers." <strong>The body is the verdict. The wicks are the battle.</strong></div>
+      </div>
+      <div class="candle-grid">
+        <div class="candle-item">
+          <svg class="candle-svg" width="32" height="52" viewBox="0 0 32 52">
+            <line x1="16" y1="2" x2="16" y2="8" stroke="#26d97f" stroke-width="1.5"/>
+            <rect x="9" y="8" width="14" height="36" rx="1" fill="#26d97f"/>
+            <line x1="16" y1="44" x2="16" y2="50" stroke="#26d97f" stroke-width="1.5"/>
+          </svg>
+          <div class="candle-name">Bullish engulfing</div>
+          <div class="candle-meaning">Large green body engulfs prior red candle. Buyers took full control. Strong reversal signal.</div>
+        </div>
+        <div class="candle-item">
+          <svg class="candle-svg" width="32" height="52" viewBox="0 0 32 52">
+            <line x1="16" y1="2" x2="16" y2="8" stroke="#f0504a" stroke-width="1.5"/>
+            <rect x="9" y="8" width="14" height="36" rx="1" fill="#f0504a"/>
+            <line x1="16" y1="44" x2="16" y2="50" stroke="#f0504a" stroke-width="1.5"/>
+          </svg>
+          <div class="candle-name">Bearish engulfing</div>
+          <div class="candle-meaning">Large red body engulfs prior green candle. Sellers overwhelmed buyers. Strong reversal signal.</div>
+        </div>
+        <div class="candle-item">
+          <svg class="candle-svg" width="32" height="52" viewBox="0 0 32 52">
+            <line x1="16" y1="4" x2="16" y2="16" stroke="#26d97f" stroke-width="1.5"/>
+            <rect x="11" y="16" width="10" height="10" rx="1" fill="#26d97f"/>
+            <line x1="16" y1="26" x2="16" y2="50" stroke="#26d97f" stroke-width="1.5"/>
+          </svg>
+          <div class="candle-name">Hammer</div>
+          <div class="candle-meaning">Long lower wick, small body at top. Buyers rejected lower prices hard — bullish reversal at support.</div>
+        </div>
+        <div class="candle-item">
+          <svg class="candle-svg" width="32" height="52" viewBox="0 0 32 52">
+            <line x1="16" y1="2" x2="16" y2="26" stroke="#f0504a" stroke-width="1.5"/>
+            <rect x="11" y="26" width="10" height="10" rx="1" fill="#f0504a"/>
+            <line x1="16" y1="36" x2="16" y2="50" stroke="#f0504a" stroke-width="1.5"/>
+          </svg>
+          <div class="candle-name">Shooting star</div>
+          <div class="candle-meaning">Long upper wick, small body at bottom. Sellers rejected higher prices — bearish reversal signal.</div>
+        </div>
+        <div class="candle-item">
+          <svg class="candle-svg" width="32" height="52" viewBox="0 0 32 52">
+            <line x1="16" y1="4" x2="16" y2="24" stroke="rgba(122,128,144,0.8)" stroke-width="1.5"/>
+            <rect x="8" y="24" width="16" height="4" rx="1" fill="rgba(122,128,144,0.8)"/>
+            <line x1="16" y1="28" x2="16" y2="48" stroke="rgba(122,128,144,0.8)" stroke-width="1.5"/>
+          </svg>
+          <div class="candle-name">Doji</div>
+          <div class="candle-meaning">Open and close nearly equal. Perfect indecision. At key levels, wait for the next candle to decide direction.</div>
+        </div>
+        <div class="candle-item">
+          <svg class="candle-svg" width="32" height="52" viewBox="0 0 32 52">
+            <line x1="16" y1="2" x2="16" y2="10" stroke="#26d97f" stroke-width="1.5"/>
+            <rect x="11" y="10" width="10" height="8" rx="1" fill="#26d97f"/>
+            <line x1="16" y1="18" x2="16" y2="50" stroke="#26d97f" stroke-width="2"/>
+          </svg>
+          <div class="candle-name">Pin bar / Wick</div>
+          <div class="candle-meaning">Rejection wick. The longer the wick relative to body, the stronger the rejection of that price level.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer"><span class="card-footer-label">Context is everything — a hammer at support means far more than one in the middle of a range</span></div>
+  </div>
+</div>
+
+<!-- PSYCHOLOGY -->
+<div class="section" id="psychology">
+  <div class="section-header">
+    <span class="section-title">Trading psychology</span>
+    <span class="section-count">Why smart people lose money</span>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">The traps every trader falls into</div>
+            <span class="badge badge-bear">Danger</span>
+          </div>
+          <div class="card-icon icon-red">&#9888;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">These are not character flaws — they are <strong>normal human instincts that evolved for survival</strong>, not investing. Fear of missing out, loss aversion, and sunk-cost thinking kept our ancestors alive but <strong>reliably destroy trading accounts.</strong> Recognising the pattern the moment it appears is the only defense.</div>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text"><strong>FOMO:</strong> chasing a stock that's already moved 20% because you don't want to miss more — this is how you buy the top</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text"><strong>Revenge trading:</strong> doubling down after a loss to "make it back quickly" — the fastest way to blow an account</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text"><strong>Hoping instead of exiting:</strong> holding a losing trade "hoping" it comes back — the plan said stop at $X, honor the plan</span></div>
+          <div class="rule"><span class="rule-dot dot-r"></span><span class="rule-text"><strong>Overtrading:</strong> taking 15 mediocre trades instead of 3 great ones — more trades = more losses, more fees</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">If you're emotional — angry, euphoric, anxious — step away from the screen. Emotional trades are losing trades.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-top">
+        <div class="card-header">
+          <div class="card-meta">
+            <div class="card-title">Building real discipline</div>
+            <span class="badge badge-bull">Habits</span>
+          </div>
+          <div class="card-icon icon-green">&#10003;</div>
+        </div>
+        <div class="biz-box">
+          <div class="biz-box-label">&#128188; Plain English</div>
+          <div class="biz-box-text">Trading discipline is like <strong>running a franchise</strong>: you follow the proven system, you do not improvise, and you track your numbers obsessively. The playbook exists so you never have to make a decision under pressure. <strong>All good decisions are made before the trade opens.</strong> In-trade decisions are almost always emotional.</div>
+        </div>
+        <div class="rules">
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text"><strong>Journal every trade:</strong> what you saw, your entry reason, what happened, what you'd do differently. This compounds your learning.</span></div>
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text"><strong>Pre-define everything:</strong> entry, stop, target — before the trade. Never make decisions while in a position.</span></div>
+          <div class="rule"><span class="rule-dot dot-b"></span><span class="rule-text"><strong>Think in probabilities:</strong> your edge works over 100 trades, not 1. A losing trade with good process is still a good trade.</span></div>
+          <div class="rule"><span class="rule-dot dot-g"></span><span class="rule-text"><strong>Grade your process, not your PnL:</strong> did you follow your rules? That's the only thing you can control.</span></div>
+          <div class="rule"><span class="rule-dot dot-a"></span><span class="rule-text">Set a hard rule: after 3 losses in a day, you're done. No exceptions. Come back tomorrow with a clear head.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Trader's Playbook — enhanced with plain English logic &amp; full false breakout guide. A reference, not financial advice. Always manage your risk.
+</footer>
+
+<script>
+function navScrollTo(id, btn) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function calcPositionSize() {
+  const account = parseFloat(document.getElementById('calcAccount').value) || 0;
+  const riskPct = parseFloat(document.getElementById('calcRisk').value) || 0;
+  const entry = parseFloat(document.getElementById('calcEntry').value) || 0;
+  const stop = parseFloat(document.getElementById('calcStop').value) || 0;
+
+  const maxRisk = account * (riskPct / 100);
+  const perShare = Math.abs(entry - stop);
+  const shares = perShare > 0 ? Math.floor(maxRisk / perShare) : 0;
+  const posValue = shares * entry;
+
+  document.getElementById('calcOutRisk').textContent = '$' + maxRisk.toLocaleString(undefined, {maximumFractionDigits: 2});
+  document.getElementById('calcOutPerShare').textContent = '$' + perShare.toLocaleString(undefined, {maximumFractionDigits: 2});
+  document.getElementById('calcOutShares').textContent = shares.toLocaleString();
+  document.getElementById('calcOutValue').textContent = '$' + posValue.toLocaleString(undefined, {maximumFractionDigits: 0});
+
+  const warnEl = document.getElementById('calcWarn');
+  const warnText = document.getElementById('calcWarnText');
+  if (entry > 0 && stop > 0 && entry === stop) {
+    warnText.textContent = 'Entry and stop are equal — set a real stop distance before sizing the trade.';
+    warnEl.classList.add('show');
+  } else if (posValue > account && account > 0) {
+    warnText.textContent = 'Position value exceeds account size — this trade needs margin, or your stop is too tight for this account.';
+    warnEl.classList.add('show');
+  } else {
+    warnEl.classList.remove('show');
+  }
+}
+document.addEventListener('DOMContentLoaded', calcPositionSize);
+</script>
+</body>
+</html>
