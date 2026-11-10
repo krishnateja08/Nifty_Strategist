@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-10T00:54:17Z",
+  "updated": "2026-11-10T07:49:59Z",
   "data": {
     "sp": {
       "price": 7549.94,
@@ -18,27 +18,32 @@
     },
     "inr": {
       "price": 93.92,
-      "chgPct": 0.03,
+      "chgPct": -0.0,
       "src": "GHA"
     },
     "crude": {
-      "price": 86.59,
-      "chgPct": -5.17,
+      "price": 85.18,
+      "chgPct": -0.69,
       "src": "GHA"
     },
     "gold": {
-      "price": 4135.3,
-      "chgPct": 0.05,
+      "price": 4125.5,
+      "chgPct": 0.07,
       "src": "GHA"
     },
     "silver": {
-      "price": 53.23,
-      "chgPct": 0.22,
+      "price": 52.79,
+      "chgPct": -0.48,
       "src": "GHA"
     },
     "n50": {
       "price": 25044.65,
       "chgPct": 0.06,
+      "src": "GHA"
+    },
+    "bn": {
+      "price": 59741.25,
+      "chgPct": 1.11,
       "src": "GHA"
     },
     "sx": {
@@ -157,7 +162,5 @@
       "src": "GHA"
     }
   },
-  "errors": [
-    "bn: Too Many Requests. Rate limited. Try after a while."
-  ]
+  "errors": []
 }
