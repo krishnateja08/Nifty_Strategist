@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13T23:58:07Z",
+  "updated": "2026-11-14T04:52:54Z",
   "data": {
     "sp": {
       "price": 7561.67,
@@ -12,13 +12,13 @@
       "src": "GHA"
     },
     "dji": {
-      "price": 52347.55,
+      "price": 52347.6,
       "chgPct": 0.1,
       "src": "GHA"
     },
     "inr": {
-      "price": 94.23,
-      "chgPct": 0.2,
+      "price": 94.24,
+      "chgPct": 0.21,
       "src": "GHA"
     },
     "crude": {
@@ -57,8 +57,8 @@
       "src": "GHA"
     },
     "vix": {
-      "price": 15.49,
-      "chgPct": -6.59,
+      "price": 15.5,
+      "chgPct": -6.56,
       "src": "GHA"
     },
     "t_RELIANCE": {
